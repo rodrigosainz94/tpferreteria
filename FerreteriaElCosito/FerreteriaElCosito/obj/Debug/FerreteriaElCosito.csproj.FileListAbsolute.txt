@@ -1,0 +1,12 @@
+C:\Users\roros\source\repos\FerreteriaElCosito\FerreteriaElCosito\bin\Debug\FerreteriaElCosito.exe.config
+C:\Users\roros\source\repos\FerreteriaElCosito\FerreteriaElCosito\bin\Debug\FerreteriaElCosito.exe
+C:\Users\roros\source\repos\FerreteriaElCosito\FerreteriaElCosito\bin\Debug\FerreteriaElCosito.pdb
+C:\Users\roros\source\repos\FerreteriaElCosito\FerreteriaElCosito\obj\Debug\FerreteriaElCosito.csproj.AssemblyReference.cache
+C:\Users\roros\source\repos\FerreteriaElCosito\FerreteriaElCosito\obj\Debug\FerreteriaElCosito.Properties.Resources.resources
+C:\Users\roros\source\repos\FerreteriaElCosito\FerreteriaElCosito\obj\Debug\FerreteriaElCosito.csproj.GenerateResource.cache
+C:\Users\roros\source\repos\FerreteriaElCosito\FerreteriaElCosito\obj\Debug\FerreteriaElCosito.csproj.CoreCompileInputs.cache
+C:\Users\roros\source\repos\FerreteriaElCosito\FerreteriaElCosito\obj\Debug\FerreteriaElCosito.exe
+C:\Users\roros\source\repos\FerreteriaElCosito\FerreteriaElCosito\obj\Debug\FerreteriaElCosito.pdb
+C:\Users\roros\source\repos\FerreteriaElCosito\FerreteriaElCosito\obj\Debug\FerreteriaElCosito.Facturar.resources
+C:\Users\roros\source\repos\FerreteriaElCosito\FerreteriaElCosito\obj\Debug\FerreteriaElCosito.Inicio.resources
+C:\Users\roros\source\repos\FerreteriaElCosito\FerreteriaElCosito\obj\Debug\FerreteriaElCosito.Menuprincipal.resources
