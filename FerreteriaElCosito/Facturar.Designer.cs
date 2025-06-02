@@ -45,6 +45,7 @@
             this.lbldni = new System.Windows.Forms.Label();
             this.txtdni = new System.Windows.Forms.TextBox();
             this.cbconsumidorfinal = new System.Windows.Forms.CheckBox();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.dgvfacturacion)).BeginInit();
             this.SuspendLayout();
             // 
@@ -238,5 +239,6 @@
         private System.Windows.Forms.Label lbldni;
         private System.Windows.Forms.TextBox txtdni;
         private System.Windows.Forms.CheckBox cbconsumidorfinal;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
