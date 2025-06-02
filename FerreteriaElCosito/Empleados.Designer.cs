@@ -106,7 +106,7 @@
             // 
             // txttelefono
             // 
-            this.txttelefono.Location = new System.Drawing.Point(438, 82);
+            this.txttelefono.Location = new System.Drawing.Point(368, 137);
             this.txttelefono.Name = "txttelefono";
             this.txttelefono.Size = new System.Drawing.Size(279, 22);
             this.txttelefono.TabIndex = 7;
