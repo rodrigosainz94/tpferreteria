@@ -28,5 +28,12 @@ namespace FerreteriaElCosito
         {
 
         }
+
+        private void btncompras_Click(object sender, EventArgs e)
+        {
+            Compras nuevoFormulario = new Compras();
+            nuevoFormulario.Show();
+            this.Hide();
+        }
     }
 }
