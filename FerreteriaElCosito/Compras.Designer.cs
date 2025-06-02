@@ -130,7 +130,7 @@
             // 
             // btnatras
             // 
-            this.btnatras.Location = new System.Drawing.Point(12, 318);
+            this.btnatras.Location = new System.Drawing.Point(15, 318);
             this.btnatras.Name = "btnatras";
             this.btnatras.Size = new System.Drawing.Size(75, 23);
             this.btnatras.TabIndex = 13;
