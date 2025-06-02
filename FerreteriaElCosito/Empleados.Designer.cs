@@ -38,6 +38,28 @@
             this.lblmail = new System.Windows.Forms.Label();
             this.txttelefono = new System.Windows.Forms.TextBox();
             this.lbltelefono = new System.Windows.Forms.Label();
+            this.txtcuil = new System.Windows.Forms.TextBox();
+            this.lblcuit = new System.Windows.Forms.Label();
+            this.txtcallenro = new System.Windows.Forms.TextBox();
+            this.lblcallenro = new System.Windows.Forms.Label();
+            this.lbllocalidad = new System.Windows.Forms.Label();
+            this.cblocalidad = new System.Windows.Forms.ComboBox();
+            this.cbprovincia = new System.Windows.Forms.ComboBox();
+            this.lblprovincia = new System.Windows.Forms.Label();
+            this.lblcategoria = new System.Windows.Forms.Label();
+            this.lblfechaalta = new System.Windows.Forms.Label();
+            this.cbcategoria = new System.Windows.Forms.ComboBox();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.cbidrol = new System.Windows.Forms.ComboBox();
+            this.lbliderol = new System.Windows.Forms.Label();
+            this.cbiddeposito = new System.Windows.Forms.ComboBox();
+            this.lbliddeposito = new System.Windows.Forms.Label();
+            this.lblconsulta = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblmodificacion = new System.Windows.Forms.Label();
+            this.lblbaja = new System.Windows.Forms.Label();
+            this.lblalta = new System.Windows.Forms.Label();
+            this.lblhistorialaboral = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblidempleado
@@ -106,7 +128,7 @@
             // 
             // txttelefono
             // 
-            this.txttelefono.Location = new System.Drawing.Point(368, 137);
+            this.txttelefono.Location = new System.Drawing.Point(438, 85);
             this.txttelefono.Name = "txttelefono";
             this.txttelefono.Size = new System.Drawing.Size(279, 22);
             this.txttelefono.TabIndex = 7;
@@ -120,11 +142,230 @@
             this.lbltelefono.TabIndex = 6;
             this.lbltelefono.Text = "Telefono";
             // 
+            // txtcuil
+            // 
+            this.txtcuil.Location = new System.Drawing.Point(75, 123);
+            this.txtcuil.Name = "txtcuil";
+            this.txtcuil.Size = new System.Drawing.Size(250, 22);
+            this.txtcuil.TabIndex = 13;
+            // 
+            // lblcuit
+            // 
+            this.lblcuit.AutoSize = true;
+            this.lblcuit.Location = new System.Drawing.Point(13, 129);
+            this.lblcuit.Name = "lblcuit";
+            this.lblcuit.Size = new System.Drawing.Size(38, 16);
+            this.lblcuit.TabIndex = 12;
+            this.lblcuit.Text = "CUIT";
+            // 
+            // txtcallenro
+            // 
+            this.txtcallenro.Location = new System.Drawing.Point(438, 129);
+            this.txtcallenro.Name = "txtcallenro";
+            this.txtcallenro.Size = new System.Drawing.Size(279, 22);
+            this.txtcallenro.TabIndex = 11;
+            // 
+            // lblcallenro
+            // 
+            this.lblcallenro.AutoSize = true;
+            this.lblcallenro.Location = new System.Drawing.Point(365, 129);
+            this.lblcallenro.Name = "lblcallenro";
+            this.lblcallenro.Size = new System.Drawing.Size(63, 16);
+            this.lblcallenro.TabIndex = 10;
+            this.lblcallenro.Text = "Calle Nro";
+            this.lblcallenro.Click += new System.EventHandler(this.label2_Click);
+            // 
+            // lbllocalidad
+            // 
+            this.lbllocalidad.AutoSize = true;
+            this.lbllocalidad.Location = new System.Drawing.Point(13, 167);
+            this.lbllocalidad.Name = "lbllocalidad";
+            this.lbllocalidad.Size = new System.Drawing.Size(67, 16);
+            this.lbllocalidad.TabIndex = 14;
+            this.lbllocalidad.Text = "Localidad";
+            // 
+            // cblocalidad
+            // 
+            this.cblocalidad.FormattingEnabled = true;
+            this.cblocalidad.Location = new System.Drawing.Point(85, 165);
+            this.cblocalidad.Name = "cblocalidad";
+            this.cblocalidad.Size = new System.Drawing.Size(239, 24);
+            this.cblocalidad.TabIndex = 15;
+            // 
+            // cbprovincia
+            // 
+            this.cbprovincia.FormattingEnabled = true;
+            this.cbprovincia.Location = new System.Drawing.Point(438, 164);
+            this.cbprovincia.Name = "cbprovincia";
+            this.cbprovincia.Size = new System.Drawing.Size(239, 24);
+            this.cbprovincia.TabIndex = 17;
+            this.cbprovincia.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // lblprovincia
+            // 
+            this.lblprovincia.AutoSize = true;
+            this.lblprovincia.Location = new System.Drawing.Point(364, 173);
+            this.lblprovincia.Name = "lblprovincia";
+            this.lblprovincia.Size = new System.Drawing.Size(63, 16);
+            this.lblprovincia.TabIndex = 16;
+            this.lblprovincia.Text = "Provincia";
+            this.lblprovincia.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // lblcategoria
+            // 
+            this.lblcategoria.AutoSize = true;
+            this.lblcategoria.Location = new System.Drawing.Point(367, 217);
+            this.lblcategoria.Name = "lblcategoria";
+            this.lblcategoria.Size = new System.Drawing.Size(66, 16);
+            this.lblcategoria.TabIndex = 18;
+            this.lblcategoria.Text = "Categoria";
+            this.lblcategoria.Click += new System.EventHandler(this.label1_Click_1);
+            // 
+            // lblfechaalta
+            // 
+            this.lblfechaalta.AutoSize = true;
+            this.lblfechaalta.Location = new System.Drawing.Point(12, 214);
+            this.lblfechaalta.Name = "lblfechaalta";
+            this.lblfechaalta.Size = new System.Drawing.Size(90, 16);
+            this.lblfechaalta.TabIndex = 19;
+            this.lblfechaalta.Text = "Fecha de Alta";
+            // 
+            // cbcategoria
+            // 
+            this.cbcategoria.FormattingEnabled = true;
+            this.cbcategoria.Location = new System.Drawing.Point(438, 214);
+            this.cbcategoria.Name = "cbcategoria";
+            this.cbcategoria.Size = new System.Drawing.Size(239, 24);
+            this.cbcategoria.TabIndex = 20;
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(108, 208);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 22);
+            this.dateTimePicker1.TabIndex = 21;
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            // 
+            // cbidrol
+            // 
+            this.cbidrol.FormattingEnabled = true;
+            this.cbidrol.Location = new System.Drawing.Point(439, 260);
+            this.cbidrol.Name = "cbidrol";
+            this.cbidrol.Size = new System.Drawing.Size(239, 24);
+            this.cbidrol.TabIndex = 25;
+            this.cbidrol.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged_1);
+            // 
+            // lbliderol
+            // 
+            this.lbliderol.AutoSize = true;
+            this.lbliderol.Location = new System.Drawing.Point(365, 269);
+            this.lbliderol.Name = "lbliderol";
+            this.lbliderol.Size = new System.Drawing.Size(42, 16);
+            this.lbliderol.TabIndex = 24;
+            this.lbliderol.Text = "Id Rol";
+            this.lbliderol.Click += new System.EventHandler(this.label1_Click_2);
+            // 
+            // cbiddeposito
+            // 
+            this.cbiddeposito.FormattingEnabled = true;
+            this.cbiddeposito.Location = new System.Drawing.Point(86, 261);
+            this.cbiddeposito.Name = "cbiddeposito";
+            this.cbiddeposito.Size = new System.Drawing.Size(239, 24);
+            this.cbiddeposito.TabIndex = 23;
+            this.cbiddeposito.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+            // 
+            // lbliddeposito
+            // 
+            this.lbliddeposito.AutoSize = true;
+            this.lbliddeposito.Location = new System.Drawing.Point(14, 263);
+            this.lbliddeposito.Name = "lbliddeposito";
+            this.lbliddeposito.Size = new System.Drawing.Size(76, 16);
+            this.lbliddeposito.TabIndex = 22;
+            this.lbliddeposito.Text = "Id Deposito";
+            this.lbliddeposito.Click += new System.EventHandler(this.label2_Click_1);
+            // 
+            // lblconsulta
+            // 
+            this.lblconsulta.AutoSize = true;
+            this.lblconsulta.Location = new System.Drawing.Point(25, 362);
+            this.lblconsulta.Name = "lblconsulta";
+            this.lblconsulta.Size = new System.Drawing.Size(59, 16);
+            this.lblconsulta.TabIndex = 26;
+            this.lblconsulta.Text = "Consulta";
+            this.lblconsulta.Click += new System.EventHandler(this.lblconsulta_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(378, 217);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(44, 16);
+            this.label2.TabIndex = 27;
+            this.label2.Text = "label2";
+            // 
+            // lblmodificacion
+            // 
+            this.lblmodificacion.AutoSize = true;
+            this.lblmodificacion.Location = new System.Drawing.Point(317, 362);
+            this.lblmodificacion.Name = "lblmodificacion";
+            this.lblmodificacion.Size = new System.Drawing.Size(83, 16);
+            this.lblmodificacion.TabIndex = 28;
+            this.lblmodificacion.Text = "Modificacion";
+            // 
+            // lblbaja
+            // 
+            this.lblbaja.AutoSize = true;
+            this.lblbaja.Location = new System.Drawing.Point(220, 362);
+            this.lblbaja.Name = "lblbaja";
+            this.lblbaja.Size = new System.Drawing.Size(35, 16);
+            this.lblbaja.TabIndex = 29;
+            this.lblbaja.Text = "Baja";
+            // 
+            // lblalta
+            // 
+            this.lblalta.AutoSize = true;
+            this.lblalta.Location = new System.Drawing.Point(135, 362);
+            this.lblalta.Name = "lblalta";
+            this.lblalta.Size = new System.Drawing.Size(30, 16);
+            this.lblalta.TabIndex = 30;
+            this.lblalta.Text = "Alta";
+            // 
+            // lblhistorialaboral
+            // 
+            this.lblhistorialaboral.AutoSize = true;
+            this.lblhistorialaboral.Location = new System.Drawing.Point(634, 395);
+            this.lblhistorialaboral.Name = "lblhistorialaboral";
+            this.lblhistorialaboral.Size = new System.Drawing.Size(102, 16);
+            this.lblhistorialaboral.TabIndex = 31;
+            this.lblhistorialaboral.Text = "Historia Laboral";
+            // 
             // Empleados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lblhistorialaboral);
+            this.Controls.Add(this.lblalta);
+            this.Controls.Add(this.lblbaja);
+            this.Controls.Add(this.lblmodificacion);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblconsulta);
+            this.Controls.Add(this.cbidrol);
+            this.Controls.Add(this.lbliderol);
+            this.Controls.Add(this.cbiddeposito);
+            this.Controls.Add(this.lbliddeposito);
+            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.cbcategoria);
+            this.Controls.Add(this.lblfechaalta);
+            this.Controls.Add(this.lblcategoria);
+            this.Controls.Add(this.cbprovincia);
+            this.Controls.Add(this.lblprovincia);
+            this.Controls.Add(this.cblocalidad);
+            this.Controls.Add(this.lbllocalidad);
+            this.Controls.Add(this.txtcuil);
+            this.Controls.Add(this.lblcuit);
+            this.Controls.Add(this.txtcallenro);
+            this.Controls.Add(this.lblcallenro);
             this.Controls.Add(this.txtmail);
             this.Controls.Add(this.lblmail);
             this.Controls.Add(this.txttelefono);
@@ -154,5 +395,27 @@
         private System.Windows.Forms.Label lblmail;
         private System.Windows.Forms.TextBox txttelefono;
         private System.Windows.Forms.Label lbltelefono;
+        private System.Windows.Forms.TextBox txtcuil;
+        private System.Windows.Forms.Label lblcuit;
+        private System.Windows.Forms.TextBox txtcallenro;
+        private System.Windows.Forms.Label lblcallenro;
+        private System.Windows.Forms.Label lbllocalidad;
+        private System.Windows.Forms.ComboBox cblocalidad;
+        private System.Windows.Forms.ComboBox cbprovincia;
+        private System.Windows.Forms.Label lblprovincia;
+        private System.Windows.Forms.Label lblcategoria;
+        private System.Windows.Forms.Label lblfechaalta;
+        private System.Windows.Forms.ComboBox cbcategoria;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.ComboBox cbidrol;
+        private System.Windows.Forms.Label lbliderol;
+        private System.Windows.Forms.ComboBox cbiddeposito;
+        private System.Windows.Forms.Label lbliddeposito;
+        private System.Windows.Forms.Label lblconsulta;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblmodificacion;
+        private System.Windows.Forms.Label lblbaja;
+        private System.Windows.Forms.Label lblalta;
+        private System.Windows.Forms.Label lblhistorialaboral;
     }
 }
