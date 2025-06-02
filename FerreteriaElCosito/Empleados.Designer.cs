@@ -55,7 +55,6 @@
             this.cbiddeposito = new System.Windows.Forms.ComboBox();
             this.lbliddeposito = new System.Windows.Forms.Label();
             this.lblconsulta = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.lblmodificacion = new System.Windows.Forms.Label();
             this.lblbaja = new System.Windows.Forms.Label();
             this.lblalta = new System.Windows.Forms.Label();
@@ -294,15 +293,6 @@
             this.lblconsulta.Text = "Consulta";
             this.lblconsulta.Click += new System.EventHandler(this.lblconsulta_Click);
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(378, 217);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 16);
-            this.label2.TabIndex = 27;
-            this.label2.Text = "label2";
-            // 
             // lblmodificacion
             // 
             this.lblmodificacion.AutoSize = true;
@@ -348,7 +338,6 @@
             this.Controls.Add(this.lblalta);
             this.Controls.Add(this.lblbaja);
             this.Controls.Add(this.lblmodificacion);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.lblconsulta);
             this.Controls.Add(this.cbidrol);
             this.Controls.Add(this.lbliderol);
@@ -412,7 +401,6 @@
         private System.Windows.Forms.ComboBox cbiddeposito;
         private System.Windows.Forms.Label lbliddeposito;
         private System.Windows.Forms.Label lblconsulta;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblmodificacion;
         private System.Windows.Forms.Label lblbaja;
         private System.Windows.Forms.Label lblalta;
