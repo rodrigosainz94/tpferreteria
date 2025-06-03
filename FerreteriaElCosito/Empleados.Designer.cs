@@ -385,6 +385,7 @@
             this.Controls.Add(this.lblidempleado);
             this.Name = "Empleados";
             this.Text = "Empleados";
+            this.Load += new System.EventHandler(this.Empleados_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

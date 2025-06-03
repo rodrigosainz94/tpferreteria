@@ -71,5 +71,10 @@ namespace FerreteriaElCosito
         {
 
         }
+
+        private void Empleados_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
