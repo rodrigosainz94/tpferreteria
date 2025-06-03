@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace FerreteriaElCosito
 {
-    public partial class frmprovincia : Form
+    public partial class Provincia : Form
     {
-        public frmprovincia()
+        public Provincia()
         {
             InitializeComponent();
+        }
+
+        private void frmprovincia_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace FerreteriaElCosito
 {
-    partial class frmprovincia
+    partial class Provincia
     {
         /// <summary>
         /// Required designer variable.
@@ -121,7 +121,7 @@
             this.lblconsulta.TabIndex = 33;
             this.lblconsulta.Text = "Consulta";
             // 
-            // frmprovincia
+            // Provincia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -135,8 +135,9 @@
             this.Controls.Add(this.lblNombre);
             this.Controls.Add(this.txtidprovincia);
             this.Controls.Add(this.lblidprovincia);
-            this.Name = "frmprovincia";
+            this.Name = "Provincia";
             this.Text = "Provincias";
+            this.Load += new System.EventHandler(this.frmprovincia_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
