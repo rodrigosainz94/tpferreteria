@@ -66,5 +66,10 @@ namespace FerreteriaElCosito
         {
 
         }
+
+        private void lblbaja_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

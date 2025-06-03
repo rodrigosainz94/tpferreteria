@@ -59,6 +59,7 @@
             this.lblbaja = new System.Windows.Forms.Label();
             this.lblalta = new System.Windows.Forms.Label();
             this.lblhistorialaboral = new System.Windows.Forms.Label();
+            this.lblvolveralinicio = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblidempleado
@@ -286,9 +287,10 @@
             // lblconsulta
             // 
             this.lblconsulta.AutoSize = true;
-            this.lblconsulta.Location = new System.Drawing.Point(25, 362);
+            this.lblconsulta.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblconsulta.Location = new System.Drawing.Point(21, 340);
             this.lblconsulta.Name = "lblconsulta";
-            this.lblconsulta.Size = new System.Drawing.Size(59, 16);
+            this.lblconsulta.Size = new System.Drawing.Size(81, 22);
             this.lblconsulta.TabIndex = 26;
             this.lblconsulta.Text = "Consulta";
             this.lblconsulta.Click += new System.EventHandler(this.lblconsulta_Click);
@@ -296,44 +298,60 @@
             // lblmodificacion
             // 
             this.lblmodificacion.AutoSize = true;
-            this.lblmodificacion.Location = new System.Drawing.Point(317, 362);
+            this.lblmodificacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblmodificacion.Location = new System.Drawing.Point(324, 340);
             this.lblmodificacion.Name = "lblmodificacion";
-            this.lblmodificacion.Size = new System.Drawing.Size(83, 16);
+            this.lblmodificacion.Size = new System.Drawing.Size(109, 22);
             this.lblmodificacion.TabIndex = 28;
             this.lblmodificacion.Text = "Modificacion";
             // 
             // lblbaja
             // 
             this.lblbaja.AutoSize = true;
-            this.lblbaja.Location = new System.Drawing.Point(220, 362);
+            this.lblbaja.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblbaja.Location = new System.Drawing.Point(216, 340);
             this.lblbaja.Name = "lblbaja";
-            this.lblbaja.Size = new System.Drawing.Size(35, 16);
+            this.lblbaja.Size = new System.Drawing.Size(46, 22);
             this.lblbaja.TabIndex = 29;
             this.lblbaja.Text = "Baja";
+            this.lblbaja.Click += new System.EventHandler(this.lblbaja_Click);
             // 
             // lblalta
             // 
             this.lblalta.AutoSize = true;
-            this.lblalta.Location = new System.Drawing.Point(135, 362);
+            this.lblalta.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblalta.Location = new System.Drawing.Point(135, 340);
             this.lblalta.Name = "lblalta";
-            this.lblalta.Size = new System.Drawing.Size(30, 16);
+            this.lblalta.Size = new System.Drawing.Size(41, 22);
             this.lblalta.TabIndex = 30;
             this.lblalta.Text = "Alta";
             // 
             // lblhistorialaboral
             // 
             this.lblhistorialaboral.AutoSize = true;
-            this.lblhistorialaboral.Location = new System.Drawing.Point(634, 395);
+            this.lblhistorialaboral.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblhistorialaboral.Location = new System.Drawing.Point(21, 397);
             this.lblhistorialaboral.Name = "lblhistorialaboral";
-            this.lblhistorialaboral.Size = new System.Drawing.Size(102, 16);
+            this.lblhistorialaboral.Size = new System.Drawing.Size(136, 22);
             this.lblhistorialaboral.TabIndex = 31;
             this.lblhistorialaboral.Text = "Historia Laboral";
+            // 
+            // lblvolveralinicio
+            // 
+            this.lblvolveralinicio.AutoSize = true;
+            this.lblvolveralinicio.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblvolveralinicio.Location = new System.Drawing.Point(627, 397);
+            this.lblvolveralinicio.Name = "lblvolveralinicio";
+            this.lblvolveralinicio.Size = new System.Drawing.Size(134, 25);
+            this.lblvolveralinicio.TabIndex = 32;
+            this.lblvolveralinicio.Text = "Volver a Inicio";
             // 
             // Empleados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lblvolveralinicio);
             this.Controls.Add(this.lblhistorialaboral);
             this.Controls.Add(this.lblalta);
             this.Controls.Add(this.lblbaja);
@@ -405,5 +423,6 @@
         private System.Windows.Forms.Label lblbaja;
         private System.Windows.Forms.Label lblalta;
         private System.Windows.Forms.Label lblhistorialaboral;
+        private System.Windows.Forms.Label lblvolveralinicio;
     }
 }
