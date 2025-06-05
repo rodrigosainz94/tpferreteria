@@ -33,5 +33,10 @@ namespace FerreteriaElCosito
             Empleados Empleados = new Empleados(); // Crea una instancia del formulario de empleados
             Empleados.Show(); // Muestra el formulario de empleados
         }
+
+        private void btnalta_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

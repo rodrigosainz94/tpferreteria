@@ -28,10 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblmodificacion = new System.Windows.Forms.Label();
-            this.lblbaja = new System.Windows.Forms.Label();
-            this.lblalta = new System.Windows.Forms.Label();
-            this.lblconsulta = new System.Windows.Forms.Label();
             this.lblNombre = new System.Windows.Forms.Label();
             this.lblidprovincia = new System.Windows.Forms.Label();
             this.txtlocalidad = new System.Windows.Forms.TextBox();
@@ -41,47 +37,11 @@
             this.cmbidprovincia = new System.Windows.Forms.ComboBox();
             this.cmbprovincia = new System.Windows.Forms.ComboBox();
             this.btnatras = new System.Windows.Forms.Button();
+            this.btnmodificacion = new System.Windows.Forms.Button();
+            this.btnbaja = new System.Windows.Forms.Button();
+            this.btnalta = new System.Windows.Forms.Button();
+            this.btnconsulta = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // lblmodificacion
-            // 
-            this.lblmodificacion.AutoSize = true;
-            this.lblmodificacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblmodificacion.Location = new System.Drawing.Point(325, 343);
-            this.lblmodificacion.Name = "lblmodificacion";
-            this.lblmodificacion.Size = new System.Drawing.Size(109, 22);
-            this.lblmodificacion.TabIndex = 34;
-            this.lblmodificacion.Text = "Modificacion";
-            // 
-            // lblbaja
-            // 
-            this.lblbaja.AutoSize = true;
-            this.lblbaja.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblbaja.Location = new System.Drawing.Point(217, 343);
-            this.lblbaja.Name = "lblbaja";
-            this.lblbaja.Size = new System.Drawing.Size(46, 22);
-            this.lblbaja.TabIndex = 35;
-            this.lblbaja.Text = "Baja";
-            // 
-            // lblalta
-            // 
-            this.lblalta.AutoSize = true;
-            this.lblalta.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblalta.Location = new System.Drawing.Point(136, 343);
-            this.lblalta.Name = "lblalta";
-            this.lblalta.Size = new System.Drawing.Size(41, 22);
-            this.lblalta.TabIndex = 36;
-            this.lblalta.Text = "Alta";
-            // 
-            // lblconsulta
-            // 
-            this.lblconsulta.AutoSize = true;
-            this.lblconsulta.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblconsulta.Location = new System.Drawing.Point(22, 343);
-            this.lblconsulta.Name = "lblconsulta";
-            this.lblconsulta.Size = new System.Drawing.Size(81, 22);
-            this.lblconsulta.TabIndex = 33;
-            this.lblconsulta.Text = "Consulta";
             // 
             // lblNombre
             // 
@@ -161,11 +121,55 @@
             this.btnatras.UseVisualStyleBackColor = true;
             this.btnatras.Click += new System.EventHandler(this.btnatras_Click);
             // 
+            // btnmodificacion
+            // 
+            this.btnmodificacion.Location = new System.Drawing.Point(363, 398);
+            this.btnmodificacion.Margin = new System.Windows.Forms.Padding(4);
+            this.btnmodificacion.Name = "btnmodificacion";
+            this.btnmodificacion.Size = new System.Drawing.Size(100, 28);
+            this.btnmodificacion.TabIndex = 67;
+            this.btnmodificacion.Text = "Modificacion";
+            this.btnmodificacion.UseVisualStyleBackColor = true;
+            // 
+            // btnbaja
+            // 
+            this.btnbaja.Location = new System.Drawing.Point(245, 398);
+            this.btnbaja.Margin = new System.Windows.Forms.Padding(4);
+            this.btnbaja.Name = "btnbaja";
+            this.btnbaja.Size = new System.Drawing.Size(100, 28);
+            this.btnbaja.TabIndex = 68;
+            this.btnbaja.Text = "Baja";
+            this.btnbaja.UseVisualStyleBackColor = true;
+            // 
+            // btnalta
+            // 
+            this.btnalta.Location = new System.Drawing.Point(128, 398);
+            this.btnalta.Margin = new System.Windows.Forms.Padding(4);
+            this.btnalta.Name = "btnalta";
+            this.btnalta.Size = new System.Drawing.Size(100, 28);
+            this.btnalta.TabIndex = 69;
+            this.btnalta.Text = "Alta";
+            this.btnalta.UseVisualStyleBackColor = true;
+            // 
+            // btnconsulta
+            // 
+            this.btnconsulta.Location = new System.Drawing.Point(20, 398);
+            this.btnconsulta.Margin = new System.Windows.Forms.Padding(4);
+            this.btnconsulta.Name = "btnconsulta";
+            this.btnconsulta.Size = new System.Drawing.Size(100, 28);
+            this.btnconsulta.TabIndex = 70;
+            this.btnconsulta.Text = "Consulta";
+            this.btnconsulta.UseVisualStyleBackColor = true;
+            // 
             // localidad
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnconsulta);
+            this.Controls.Add(this.btnalta);
+            this.Controls.Add(this.btnbaja);
+            this.Controls.Add(this.btnmodificacion);
             this.Controls.Add(this.btnatras);
             this.Controls.Add(this.cmbprovincia);
             this.Controls.Add(this.cmbidprovincia);
@@ -175,10 +179,6 @@
             this.Controls.Add(this.lbllocalidad);
             this.Controls.Add(this.lblNombre);
             this.Controls.Add(this.lblidprovincia);
-            this.Controls.Add(this.lblalta);
-            this.Controls.Add(this.lblbaja);
-            this.Controls.Add(this.lblmodificacion);
-            this.Controls.Add(this.lblconsulta);
             this.Name = "localidad";
             this.Text = "Localidad";
             this.Load += new System.EventHandler(this.localidad_Load);
@@ -188,10 +188,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label lblmodificacion;
-        private System.Windows.Forms.Label lblbaja;
-        private System.Windows.Forms.Label lblalta;
-        private System.Windows.Forms.Label lblconsulta;
         private System.Windows.Forms.Label lblNombre;
         private System.Windows.Forms.Label lblidprovincia;
         private System.Windows.Forms.TextBox txtlocalidad;
@@ -201,5 +197,9 @@
         private System.Windows.Forms.ComboBox cmbidprovincia;
         private System.Windows.Forms.ComboBox cmbprovincia;
         private System.Windows.Forms.Button btnatras;
+        private System.Windows.Forms.Button btnmodificacion;
+        private System.Windows.Forms.Button btnbaja;
+        private System.Windows.Forms.Button btnalta;
+        private System.Windows.Forms.Button btnconsulta;
     }
 }

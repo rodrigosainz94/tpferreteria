@@ -54,13 +54,13 @@
             this.lbliderol = new System.Windows.Forms.Label();
             this.cbiddeposito = new System.Windows.Forms.ComboBox();
             this.lbliddeposito = new System.Windows.Forms.Label();
-            this.lblconsulta = new System.Windows.Forms.Label();
-            this.lblmodificacion = new System.Windows.Forms.Label();
-            this.lblbaja = new System.Windows.Forms.Label();
-            this.lblalta = new System.Windows.Forms.Label();
             this.btnatras = new System.Windows.Forms.Button();
             this.btnrol = new System.Windows.Forms.Button();
             this.btnhistorialaboral = new System.Windows.Forms.Button();
+            this.btnconsulta = new System.Windows.Forms.Button();
+            this.btnalta = new System.Windows.Forms.Button();
+            this.btnbaja = new System.Windows.Forms.Button();
+            this.btnmodificacion = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblidempleado
@@ -285,48 +285,6 @@
             this.lbliddeposito.Text = "Id Deposito";
             this.lbliddeposito.Click += new System.EventHandler(this.label2_Click_1);
             // 
-            // lblconsulta
-            // 
-            this.lblconsulta.AutoSize = true;
-            this.lblconsulta.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblconsulta.Location = new System.Drawing.Point(6, 403);
-            this.lblconsulta.Name = "lblconsulta";
-            this.lblconsulta.Size = new System.Drawing.Size(81, 22);
-            this.lblconsulta.TabIndex = 26;
-            this.lblconsulta.Text = "Consulta";
-            this.lblconsulta.Click += new System.EventHandler(this.lblconsulta_Click);
-            // 
-            // lblmodificacion
-            // 
-            this.lblmodificacion.AutoSize = true;
-            this.lblmodificacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblmodificacion.Location = new System.Drawing.Point(309, 403);
-            this.lblmodificacion.Name = "lblmodificacion";
-            this.lblmodificacion.Size = new System.Drawing.Size(109, 22);
-            this.lblmodificacion.TabIndex = 28;
-            this.lblmodificacion.Text = "Modificacion";
-            // 
-            // lblbaja
-            // 
-            this.lblbaja.AutoSize = true;
-            this.lblbaja.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblbaja.Location = new System.Drawing.Point(201, 403);
-            this.lblbaja.Name = "lblbaja";
-            this.lblbaja.Size = new System.Drawing.Size(46, 22);
-            this.lblbaja.TabIndex = 29;
-            this.lblbaja.Text = "Baja";
-            this.lblbaja.Click += new System.EventHandler(this.lblbaja_Click);
-            // 
-            // lblalta
-            // 
-            this.lblalta.AutoSize = true;
-            this.lblalta.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblalta.Location = new System.Drawing.Point(120, 403);
-            this.lblalta.Name = "lblalta";
-            this.lblalta.Size = new System.Drawing.Size(41, 22);
-            this.lblalta.TabIndex = 30;
-            this.lblalta.Text = "Alta";
-            // 
             // btnatras
             // 
             this.btnatras.Location = new System.Drawing.Point(665, 397);
@@ -359,18 +317,58 @@
             this.btnhistorialaboral.Text = "Historia Laboral";
             this.btnhistorialaboral.UseVisualStyleBackColor = true;
             // 
+            // btnconsulta
+            // 
+            this.btnconsulta.Location = new System.Drawing.Point(13, 397);
+            this.btnconsulta.Margin = new System.Windows.Forms.Padding(4);
+            this.btnconsulta.Name = "btnconsulta";
+            this.btnconsulta.Size = new System.Drawing.Size(100, 28);
+            this.btnconsulta.TabIndex = 74;
+            this.btnconsulta.Text = "Consulta";
+            this.btnconsulta.UseVisualStyleBackColor = true;
+            // 
+            // btnalta
+            // 
+            this.btnalta.Location = new System.Drawing.Point(124, 397);
+            this.btnalta.Margin = new System.Windows.Forms.Padding(4);
+            this.btnalta.Name = "btnalta";
+            this.btnalta.Size = new System.Drawing.Size(100, 28);
+            this.btnalta.TabIndex = 73;
+            this.btnalta.Text = "Alta";
+            this.btnalta.UseVisualStyleBackColor = true;
+            // 
+            // btnbaja
+            // 
+            this.btnbaja.Location = new System.Drawing.Point(232, 397);
+            this.btnbaja.Margin = new System.Windows.Forms.Padding(4);
+            this.btnbaja.Name = "btnbaja";
+            this.btnbaja.Size = new System.Drawing.Size(100, 28);
+            this.btnbaja.TabIndex = 72;
+            this.btnbaja.Text = "Baja";
+            this.btnbaja.UseVisualStyleBackColor = true;
+            // 
+            // btnmodificacion
+            // 
+            this.btnmodificacion.Location = new System.Drawing.Point(349, 397);
+            this.btnmodificacion.Margin = new System.Windows.Forms.Padding(4);
+            this.btnmodificacion.Name = "btnmodificacion";
+            this.btnmodificacion.Size = new System.Drawing.Size(100, 28);
+            this.btnmodificacion.TabIndex = 71;
+            this.btnmodificacion.Text = "Modificacion";
+            this.btnmodificacion.UseVisualStyleBackColor = true;
+            // 
             // Empleados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnconsulta);
+            this.Controls.Add(this.btnalta);
+            this.Controls.Add(this.btnbaja);
+            this.Controls.Add(this.btnmodificacion);
             this.Controls.Add(this.btnhistorialaboral);
             this.Controls.Add(this.btnrol);
             this.Controls.Add(this.btnatras);
-            this.Controls.Add(this.lblalta);
-            this.Controls.Add(this.lblbaja);
-            this.Controls.Add(this.lblmodificacion);
-            this.Controls.Add(this.lblconsulta);
             this.Controls.Add(this.cbidrol);
             this.Controls.Add(this.lbliderol);
             this.Controls.Add(this.cbiddeposito);
@@ -433,12 +431,12 @@
         private System.Windows.Forms.Label lbliderol;
         private System.Windows.Forms.ComboBox cbiddeposito;
         private System.Windows.Forms.Label lbliddeposito;
-        private System.Windows.Forms.Label lblconsulta;
-        private System.Windows.Forms.Label lblmodificacion;
-        private System.Windows.Forms.Label lblbaja;
-        private System.Windows.Forms.Label lblalta;
         private System.Windows.Forms.Button btnatras;
         private System.Windows.Forms.Button btnrol;
         private System.Windows.Forms.Button btnhistorialaboral;
+        private System.Windows.Forms.Button btnconsulta;
+        private System.Windows.Forms.Button btnalta;
+        private System.Windows.Forms.Button btnbaja;
+        private System.Windows.Forms.Button btnmodificacion;
     }
 }
