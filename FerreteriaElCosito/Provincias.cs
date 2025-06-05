@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace FerreteriaElCosito
 {
-    public partial class Provincia : Form
+    public partial class Provincias : Form
     {
-        public Provincia()
+        public Provincias()
         {
             InitializeComponent();
         }

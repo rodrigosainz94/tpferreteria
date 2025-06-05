@@ -70,11 +70,11 @@
     <Compile Include="Categoria_IVA.Designer.cs">
       <DependentUpon>Categoria_IVA.cs</DependentUpon>
     </Compile>
-    <Compile Include="Provincia.cs">
+    <Compile Include="Provincias.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Provincia.Designer.cs">
-      <DependentUpon>Provincia.cs</DependentUpon>
+    <Compile Include="Provincias.Designer.cs">
+      <DependentUpon>Provincias.cs</DependentUpon>
     </Compile>
     <Compile Include="Localidad.cs">
       <SubType>Form</SubType>
@@ -132,8 +132,8 @@
     <EmbeddedResource Include="Categoria_IVA.resx">
       <DependentUpon>Categoria_IVA.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Provincia.resx">
-      <DependentUpon>Provincia.cs</DependentUpon>
+    <EmbeddedResource Include="Provincias.resx">
+      <DependentUpon>Provincias.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Localidad.resx">
       <DependentUpon>Localidad.cs</DependentUpon>

@@ -1,6 +1,6 @@
 ﻿namespace FerreteriaElCosito
 {
-    partial class Provincia
+    partial class Provincias
     {
         /// <summary>
         /// Required designer variable.
