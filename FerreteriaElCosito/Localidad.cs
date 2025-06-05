@@ -31,5 +31,12 @@ namespace FerreteriaElCosito
         {
 
         }
+
+        private void btnatras_Click(object sender, EventArgs e)
+        {
+            this.Hide(); // Oculta el formulario actual
+            Provincias Provincias = new Provincias(); // Crea una instancia del formulario de empleados
+            Provincias.Show(); // Muestra el formulario de empleados
+        }
     }
 }

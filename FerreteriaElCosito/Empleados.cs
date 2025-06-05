@@ -90,5 +90,10 @@ namespace FerreteriaElCosito
             formularioRoles.Show();              // Muestra el formulario de Roles
             this.Hide();
         }
+
+        private void lblhistorialaboral_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

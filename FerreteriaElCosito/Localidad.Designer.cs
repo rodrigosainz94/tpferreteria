@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblvolveralinicio = new System.Windows.Forms.Label();
             this.lblmodificacion = new System.Windows.Forms.Label();
             this.lblbaja = new System.Windows.Forms.Label();
             this.lblalta = new System.Windows.Forms.Label();
@@ -41,17 +40,8 @@
             this.lbllocalidad = new System.Windows.Forms.Label();
             this.cmbidprovincia = new System.Windows.Forms.ComboBox();
             this.cmbprovincia = new System.Windows.Forms.ComboBox();
+            this.btnatras = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // lblvolveralinicio
-            // 
-            this.lblvolveralinicio.AutoSize = true;
-            this.lblvolveralinicio.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblvolveralinicio.Location = new System.Drawing.Point(628, 400);
-            this.lblvolveralinicio.Name = "lblvolveralinicio";
-            this.lblvolveralinicio.Size = new System.Drawing.Size(134, 25);
-            this.lblvolveralinicio.TabIndex = 38;
-            this.lblvolveralinicio.Text = "Volver a Inicio";
             // 
             // lblmodificacion
             // 
@@ -160,11 +150,23 @@
             this.cmbprovincia.Size = new System.Drawing.Size(377, 24);
             this.cmbprovincia.TabIndex = 48;
             // 
+            // btnatras
+            // 
+            this.btnatras.Location = new System.Drawing.Point(687, 409);
+            this.btnatras.Margin = new System.Windows.Forms.Padding(4);
+            this.btnatras.Name = "btnatras";
+            this.btnatras.Size = new System.Drawing.Size(100, 28);
+            this.btnatras.TabIndex = 66;
+            this.btnatras.Text = "ATRAS";
+            this.btnatras.UseVisualStyleBackColor = true;
+            this.btnatras.Click += new System.EventHandler(this.btnatras_Click);
+            // 
             // localidad
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnatras);
             this.Controls.Add(this.cmbprovincia);
             this.Controls.Add(this.cmbidprovincia);
             this.Controls.Add(this.txtlocalidad);
@@ -173,7 +175,6 @@
             this.Controls.Add(this.lbllocalidad);
             this.Controls.Add(this.lblNombre);
             this.Controls.Add(this.lblidprovincia);
-            this.Controls.Add(this.lblvolveralinicio);
             this.Controls.Add(this.lblalta);
             this.Controls.Add(this.lblbaja);
             this.Controls.Add(this.lblmodificacion);
@@ -187,8 +188,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label lblvolveralinicio;
         private System.Windows.Forms.Label lblmodificacion;
         private System.Windows.Forms.Label lblbaja;
         private System.Windows.Forms.Label lblalta;
@@ -201,5 +200,6 @@
         private System.Windows.Forms.Label lbllocalidad;
         private System.Windows.Forms.ComboBox cmbidprovincia;
         private System.Windows.Forms.ComboBox cmbprovincia;
+        private System.Windows.Forms.Button btnatras;
     }
 }
