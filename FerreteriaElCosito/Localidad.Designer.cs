@@ -180,6 +180,7 @@
             this.Controls.Add(this.lblconsulta);
             this.Name = "localidad";
             this.Text = "Localidad";
+            this.Load += new System.EventHandler(this.localidad_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

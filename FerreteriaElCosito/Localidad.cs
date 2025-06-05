@@ -26,5 +26,10 @@ namespace FerreteriaElCosito
         {
 
         }
+
+        private void localidad_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
