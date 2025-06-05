@@ -59,7 +59,8 @@
             this.lblbaja = new System.Windows.Forms.Label();
             this.lblalta = new System.Windows.Forms.Label();
             this.lblhistorialaboral = new System.Windows.Forms.Label();
-            this.lblvolveralinicio = new System.Windows.Forms.Label();
+            this.btnatras = new System.Windows.Forms.Button();
+            this.btnrol = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblidempleado
@@ -336,22 +337,35 @@
             this.lblhistorialaboral.TabIndex = 31;
             this.lblhistorialaboral.Text = "Historia Laboral";
             // 
-            // lblvolveralinicio
+            // btnatras
             // 
-            this.lblvolveralinicio.AutoSize = true;
-            this.lblvolveralinicio.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblvolveralinicio.Location = new System.Drawing.Point(627, 397);
-            this.lblvolveralinicio.Name = "lblvolveralinicio";
-            this.lblvolveralinicio.Size = new System.Drawing.Size(134, 25);
-            this.lblvolveralinicio.TabIndex = 32;
-            this.lblvolveralinicio.Text = "Volver a Inicio";
+            this.btnatras.Location = new System.Drawing.Point(665, 397);
+            this.btnatras.Margin = new System.Windows.Forms.Padding(4);
+            this.btnatras.Name = "btnatras";
+            this.btnatras.Size = new System.Drawing.Size(100, 28);
+            this.btnatras.TabIndex = 65;
+            this.btnatras.Text = "ATRAS";
+            this.btnatras.UseVisualStyleBackColor = true;
+            this.btnatras.Click += new System.EventHandler(this.btnatras_Click);
+            // 
+            // btnrol
+            // 
+            this.btnrol.Location = new System.Drawing.Point(665, 340);
+            this.btnrol.Margin = new System.Windows.Forms.Padding(4);
+            this.btnrol.Name = "btnrol";
+            this.btnrol.Size = new System.Drawing.Size(100, 28);
+            this.btnrol.TabIndex = 66;
+            this.btnrol.Text = "Roles";
+            this.btnrol.UseVisualStyleBackColor = true;
+            this.btnrol.Click += new System.EventHandler(this.btnrol_Click);
             // 
             // Empleados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.lblvolveralinicio);
+            this.Controls.Add(this.btnrol);
+            this.Controls.Add(this.btnatras);
             this.Controls.Add(this.lblhistorialaboral);
             this.Controls.Add(this.lblalta);
             this.Controls.Add(this.lblbaja);
@@ -424,6 +438,7 @@
         private System.Windows.Forms.Label lblbaja;
         private System.Windows.Forms.Label lblalta;
         private System.Windows.Forms.Label lblhistorialaboral;
-        private System.Windows.Forms.Label lblvolveralinicio;
+        private System.Windows.Forms.Button btnatras;
+        private System.Windows.Forms.Button btnrol;
     }
 }

@@ -76,5 +76,19 @@ namespace FerreteriaElCosito
         {
 
         }
+
+        private void btnatras_Click(object sender, EventArgs e)
+        {
+            this.Hide(); // Oculta el formulario actual
+            Menuprincipal menu = new Menuprincipal(); // Crear instancia del menú
+            menu.Show(); // Mostrar el menú principal
+        }
+
+        private void btnrol_Click(object sender, EventArgs e)
+        {
+            Roles formularioRoles = new Roles(); // Crea una instancia del formulario Roles
+            formularioRoles.Show();              // Muestra el formulario de Roles
+            this.Hide();
+        }
     }
 }

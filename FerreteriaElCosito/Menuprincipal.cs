@@ -26,7 +26,9 @@ namespace FerreteriaElCosito
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            Empleados formularioEmpleados = new Empleados();
+            formularioEmpleados.Show();
+            this.Hide();
         }
 
         private void btncompras_Click(object sender, EventArgs e)

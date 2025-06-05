@@ -34,11 +34,11 @@
             this.lbldescripcionrol = new System.Windows.Forms.Label();
             this.txtidrol = new System.Windows.Forms.TextBox();
             this.lblidrol = new System.Windows.Forms.Label();
-            this.lblvolveralinicio = new System.Windows.Forms.Label();
             this.lblalta = new System.Windows.Forms.Label();
             this.lblbaja = new System.Windows.Forms.Label();
             this.lblmodificacion = new System.Windows.Forms.Label();
             this.lblconsulta = new System.Windows.Forms.Label();
+            this.btnatras = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtnombrerol
@@ -90,16 +90,6 @@
             this.lblidrol.TabIndex = 58;
             this.lblidrol.Text = "Id Rol";
             // 
-            // lblvolveralinicio
-            // 
-            this.lblvolveralinicio.AutoSize = true;
-            this.lblvolveralinicio.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblvolveralinicio.Location = new System.Drawing.Point(629, 407);
-            this.lblvolveralinicio.Name = "lblvolveralinicio";
-            this.lblvolveralinicio.Size = new System.Drawing.Size(134, 25);
-            this.lblvolveralinicio.TabIndex = 57;
-            this.lblvolveralinicio.Text = "Volver a Inicio";
-            // 
             // lblalta
             // 
             this.lblalta.AutoSize = true;
@@ -140,24 +130,36 @@
             this.lblconsulta.TabIndex = 53;
             this.lblconsulta.Text = "Consulta";
             // 
+            // btnatras
+            // 
+            this.btnatras.Location = new System.Drawing.Point(650, 397);
+            this.btnatras.Margin = new System.Windows.Forms.Padding(4);
+            this.btnatras.Name = "btnatras";
+            this.btnatras.Size = new System.Drawing.Size(100, 28);
+            this.btnatras.TabIndex = 64;
+            this.btnatras.Text = "ATRAS";
+            this.btnatras.UseVisualStyleBackColor = true;
+            this.btnatras.Click += new System.EventHandler(this.btnatras_Click);
+            // 
             // Roles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnatras);
             this.Controls.Add(this.txtnombrerol);
             this.Controls.Add(this.lblnombrerol);
             this.Controls.Add(this.txtdescripcioniva);
             this.Controls.Add(this.lbldescripcionrol);
             this.Controls.Add(this.txtidrol);
             this.Controls.Add(this.lblidrol);
-            this.Controls.Add(this.lblvolveralinicio);
             this.Controls.Add(this.lblalta);
             this.Controls.Add(this.lblbaja);
             this.Controls.Add(this.lblmodificacion);
             this.Controls.Add(this.lblconsulta);
             this.Name = "Roles";
             this.Text = "Roles";
+            this.Load += new System.EventHandler(this.Roles_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -171,10 +173,10 @@
         private System.Windows.Forms.Label lbldescripcionrol;
         private System.Windows.Forms.TextBox txtidrol;
         private System.Windows.Forms.Label lblidrol;
-        private System.Windows.Forms.Label lblvolveralinicio;
         private System.Windows.Forms.Label lblalta;
         private System.Windows.Forms.Label lblbaja;
         private System.Windows.Forms.Label lblmodificacion;
         private System.Windows.Forms.Label lblconsulta;
+        private System.Windows.Forms.Button btnatras;
     }
 }
