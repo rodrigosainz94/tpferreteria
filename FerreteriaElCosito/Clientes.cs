@@ -10,11 +10,18 @@ using System.Windows.Forms;
 
 namespace FerreteriaElCosito
 {
-    public partial class Proveedores : Form
+    public partial class Clientes : Form
     {
-        public Proveedores()
+        public Clientes()
         {
             InitializeComponent();
+        }
+
+        private void btnagregar_Click(object sender, EventArgs e)
+        {
+            ClientesAgregar nuevoFormulario = new ClientesAgregar();
+            nuevoFormulario.Show();
+            this.Hide();
         }
 
         private void btnatras_Click(object sender, EventArgs e)
@@ -26,7 +33,7 @@ namespace FerreteriaElCosito
 
         private void btneditar_Click(object sender, EventArgs e)
         {
-            ProveedoresEdicion nuevoFormulario = new ProveedoresEdicion();
+            ClientesAgregar nuevoFormulario = new ClientesAgregar();
             nuevoFormulario.Show();
             this.Hide();
         }

@@ -10,23 +10,30 @@ using System.Windows.Forms;
 
 namespace FerreteriaElCosito
 {
-    public partial class Proveedores : Form
+    public partial class Usuarios : Form
     {
-        public Proveedores()
+        public Usuarios()
         {
             InitializeComponent();
         }
 
-        private void btnatras_Click(object sender, EventArgs e)
+        private void btnagregar_Click(object sender, EventArgs e)
         {
-            Menuprincipal nuevoFormulario = new Menuprincipal();
+            UsuariosAgregar nuevoFormulario = new UsuariosAgregar();
             nuevoFormulario.Show();
             this.Hide();
         }
 
         private void btneditar_Click(object sender, EventArgs e)
         {
-            ProveedoresEdicion nuevoFormulario = new ProveedoresEdicion();
+            UsuariosAgregar nuevoFormulario = new UsuariosAgregar();
+            nuevoFormulario.Show();
+            this.Hide();
+        }
+
+        private void btnatras_Click(object sender, EventArgs e)
+        {
+            Menuprincipal nuevoFormulario = new Menuprincipal();
             nuevoFormulario.Show();
             this.Hide();
         }

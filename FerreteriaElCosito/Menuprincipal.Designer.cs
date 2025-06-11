@@ -75,6 +75,7 @@
             this.btnproductos.TabIndex = 8;
             this.btnproductos.Text = "PRODUCTOS";
             this.btnproductos.UseVisualStyleBackColor = false;
+            this.btnproductos.Click += new System.EventHandler(this.btnproductos_Click);
             // 
             // btncompras
             // 
@@ -98,6 +99,7 @@
             this.btnclientes.TabIndex = 10;
             this.btnclientes.Text = "CLIENTES";
             this.btnclientes.UseVisualStyleBackColor = false;
+            this.btnclientes.Click += new System.EventHandler(this.btnclientes_Click);
             // 
             // btnproveedores
             // 
@@ -109,6 +111,7 @@
             this.btnproveedores.TabIndex = 11;
             this.btnproveedores.Text = "PROVEEDORES";
             this.btnproveedores.UseVisualStyleBackColor = false;
+            this.btnproveedores.Click += new System.EventHandler(this.btnproveedores_Click);
             // 
             // btnusuarios
             // 
@@ -120,6 +123,7 @@
             this.btnusuarios.TabIndex = 12;
             this.btnusuarios.Text = "USUARIOS";
             this.btnusuarios.UseVisualStyleBackColor = false;
+            this.btnusuarios.Click += new System.EventHandler(this.btnusuarios_Click);
             // 
             // btncaja
             // 
@@ -131,6 +135,7 @@
             this.btncaja.TabIndex = 13;
             this.btncaja.Text = "CAJA";
             this.btncaja.UseVisualStyleBackColor = false;
+            this.btncaja.Click += new System.EventHandler(this.btncaja_Click);
             // 
             // label1
             // 
@@ -186,6 +191,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Menuprincipal";
             this.Text = "Form2";
+            this.Load += new System.EventHandler(this.Menuprincipal_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

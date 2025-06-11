@@ -42,6 +42,7 @@
             this.txtcodigobarra = new System.Windows.Forms.TextBox();
             this.btnguardar = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.btnatras = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -151,7 +152,7 @@
             // 
             // btnguardar
             // 
-            this.btnguardar.Location = new System.Drawing.Point(395, 167);
+            this.btnguardar.Location = new System.Drawing.Point(474, 314);
             this.btnguardar.Name = "btnguardar";
             this.btnguardar.Size = new System.Drawing.Size(75, 23);
             this.btnguardar.TabIndex = 13;
@@ -162,16 +163,27 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(84, 209);
+            this.dataGridView1.Location = new System.Drawing.Point(74, 200);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(475, 86);
             this.dataGridView1.TabIndex = 14;
+            // 
+            // btnatras
+            // 
+            this.btnatras.Location = new System.Drawing.Point(72, 314);
+            this.btnatras.Name = "btnatras";
+            this.btnatras.Size = new System.Drawing.Size(75, 23);
+            this.btnatras.TabIndex = 15;
+            this.btnatras.Text = "ATRÁS";
+            this.btnatras.UseVisualStyleBackColor = true;
+            this.btnatras.Click += new System.EventHandler(this.btnatras_Click);
             // 
             // Productos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(610, 317);
+            this.ClientSize = new System.Drawing.Size(610, 349);
+            this.Controls.Add(this.btnatras);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btnguardar);
             this.Controls.Add(this.txtcodigobarra);
@@ -211,5 +223,6 @@
         private System.Windows.Forms.TextBox txtcodigobarra;
         private System.Windows.Forms.Button btnguardar;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button btnatras;
     }
 }

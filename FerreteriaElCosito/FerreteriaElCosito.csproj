@@ -46,6 +46,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Caja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Caja.Designer.cs">
+      <DependentUpon>Caja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Clientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Clientes.Designer.cs">
+      <DependentUpon>Clientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ClientesAgregar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClientesAgregar.Designer.cs">
+      <DependentUpon>ClientesAgregar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Compras.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,6 +138,27 @@
     <Compile Include="Roles.Designer.cs">
       <DependentUpon>Roles.cs</DependentUpon>
     </Compile>
+    <Compile Include="Usuarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Usuarios.Designer.cs">
+      <DependentUpon>Usuarios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UsuariosAgregar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UsuariosAgregar.Designer.cs">
+      <DependentUpon>UsuariosAgregar.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Caja.resx">
+      <DependentUpon>Caja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Clientes.resx">
+      <DependentUpon>Clientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientesAgregar.resx">
+      <DependentUpon>ClientesAgregar.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Compras.resx">
       <DependentUpon>Compras.cs</DependentUpon>
     </EmbeddedResource>
@@ -165,6 +204,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Roles.resx">
       <DependentUpon>Roles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Usuarios.resx">
+      <DependentUpon>Usuarios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UsuariosAgregar.resx">
+      <DependentUpon>UsuariosAgregar.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
