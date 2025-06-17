@@ -52,6 +52,7 @@
             this.txtnombreproducto.Name = "txtnombreproducto";
             this.txtnombreproducto.Size = new System.Drawing.Size(157, 20);
             this.txtnombreproducto.TabIndex = 0;
+            this.txtnombreproducto.TextChanged += new System.EventHandler(this.txtnombreproducto_TextChanged);
             // 
             // label1
             // 
@@ -98,6 +99,7 @@
             this.cbcategoria.Name = "cbcategoria";
             this.cbcategoria.Size = new System.Drawing.Size(121, 21);
             this.cbcategoria.TabIndex = 6;
+            this.cbcategoria.SelectedIndexChanged += new System.EventHandler(this.cbcategoria_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -116,6 +118,7 @@
             this.cbproveedor.Name = "cbproveedor";
             this.cbproveedor.Size = new System.Drawing.Size(121, 21);
             this.cbproveedor.TabIndex = 8;
+            this.cbproveedor.SelectedIndexChanged += new System.EventHandler(this.cbproveedor_SelectedIndexChanged);
             // 
             // txtprecio
             // 
@@ -123,6 +126,7 @@
             this.txtprecio.Name = "txtprecio";
             this.txtprecio.Size = new System.Drawing.Size(157, 20);
             this.txtprecio.TabIndex = 9;
+            this.txtprecio.TextChanged += new System.EventHandler(this.txtprecio_TextChanged);
             // 
             // label5
             // 
@@ -149,6 +153,7 @@
             this.txtcodigobarra.Name = "txtcodigobarra";
             this.txtcodigobarra.Size = new System.Drawing.Size(157, 20);
             this.txtcodigobarra.TabIndex = 12;
+            this.txtcodigobarra.TextChanged += new System.EventHandler(this.txtcodigobarra_TextChanged);
             // 
             // btnguardar
             // 
@@ -167,6 +172,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(475, 86);
             this.dataGridView1.TabIndex = 14;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // btnatras
             // 
