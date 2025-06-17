@@ -77,5 +77,11 @@ namespace FerreteriaElCosito
             nuevoFormulario.Show();
             this.Hide();
         }
+
+        private void btnsalir_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+
+        }
     }
 }

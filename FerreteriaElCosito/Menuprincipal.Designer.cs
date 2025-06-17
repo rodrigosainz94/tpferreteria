@@ -64,6 +64,7 @@
             this.btnsalir.TabIndex = 6;
             this.btnsalir.Text = "SALIR";
             this.btnsalir.UseVisualStyleBackColor = false;
+            this.btnsalir.Click += new System.EventHandler(this.btnsalir_Click);
             // 
             // btnproductos
             // 
