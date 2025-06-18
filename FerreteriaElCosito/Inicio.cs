@@ -7,9 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
+
+
+
+
 
 namespace FerreteriaElCosito
 {
+    
+
     public partial class Inicio : Form
     {
         public Inicio()
@@ -19,7 +26,7 @@ namespace FerreteriaElCosito
 
         private void Inicio_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void button1_Click(object sender, EventArgs e)

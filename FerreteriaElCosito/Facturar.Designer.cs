@@ -56,6 +56,7 @@
             this.dgvfacturacion.Name = "dgvfacturacion";
             this.dgvfacturacion.Size = new System.Drawing.Size(456, 366);
             this.dgvfacturacion.TabIndex = 0;
+            this.dgvfacturacion.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvfacturacion_CellContentClick);
             // 
             // lblfecha
             // 
@@ -215,6 +216,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Facturar";
             this.Text = "Facturar";
+            this.Load += new System.EventHandler(this.Facturar_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvfacturacion)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
