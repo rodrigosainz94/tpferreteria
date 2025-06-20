@@ -20,6 +20,8 @@ namespace FerreteriaElCosito
             InitializeComponent();
         }
 
+
+
         private void Productos_Load(object sender, EventArgs e)
         {
             dataGridView1.AutoGenerateColumns = true;
