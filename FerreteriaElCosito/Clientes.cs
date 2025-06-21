@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace FerreteriaElCosito
 {
@@ -15,6 +16,35 @@ namespace FerreteriaElCosito
         public Clientes()
         {
             InitializeComponent();
+        }
+
+        ConexionBD miConexion = new ConexionBD();
+
+        private void Clientes_Load(object sender, EventArgs e)
+        {
+            CargarClientes();
+        }
+
+        private void CargarClientes()
+        {
+            try
+            {
+                MySqlConnection conn = miConexion.AbrirConexion();
+
+                string query = "SELECT * FROM clientes";
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                dgvClientes.DataSource = dt;
+
+                miConexion.CerrarConexion();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar los clientes: " + ex.Message);
+            }
         }
 
         private void btnagregar_Click(object sender, EventArgs e)
