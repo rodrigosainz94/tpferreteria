@@ -122,6 +122,7 @@
     <Compile Include="Compras.Designer.cs">
       <DependentUpon>Compras.cs</DependentUpon>
     </Compile>
+    <Compile Include="ConexionBD.cs" />
     <Compile Include="Empleados.cs">
       <SubType>Form</SubType>
     </Compile>

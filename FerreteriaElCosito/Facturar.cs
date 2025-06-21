@@ -9,10 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
 namespace FerreteriaElCosito
 {
-
     public partial class Facturar : Form
     {
         public Facturar()
@@ -22,35 +20,6 @@ namespace FerreteriaElCosito
 
         ConexionBD miConexion = new ConexionBD();
 
-        public class ConexionBD
-        {
-
-
-            private string cadenaConexion = "server=bkqymy1borojhlsillq3-mysql.services.clever-cloud.com;port=3306;user=uuoe1ny0zqkumerf;password=dTZa3XPyebjXff9xkfmj;database=bkqymy1borojhlsillq3;SslMode=none;";
-            private MySqlConnection conexion;
-
-            public ConexionBD()
-            {
-                conexion = new MySqlConnection(cadenaConexion);
-            }
-
-            public MySqlConnection AbrirConexion()
-            {
-                if (conexion.State == System.Data.ConnectionState.Closed)
-                {
-                    conexion.Open();
-                }
-                return conexion;
-            }
-
-            public void CerrarConexion()
-            {
-                if (conexion.State == System.Data.ConnectionState.Open)
-                {
-                    conexion.Close();
-                }
-            }
-        }
         private void CargarDatos()
         {
             try
@@ -73,9 +42,6 @@ namespace FerreteriaElCosito
             }
         }
 
-
-
-
         private void btnatras_Click(object sender, EventArgs e)
         {
             Menuprincipal nuevoFormulario = new Menuprincipal();
@@ -85,7 +51,7 @@ namespace FerreteriaElCosito
 
         private void dgvfacturacion_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+            // Opcional: código si querés hacer algo al hacer clic en una celda
         }
 
         private void Facturar_Load(object sender, EventArgs e)
