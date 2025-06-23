@@ -29,10 +29,7 @@
         private void InitializeComponent()
         {
             this.lblidempleado = new System.Windows.Forms.Label();
-            this.txtidempleado = new System.Windows.Forms.TextBox();
-            this.txtapellido = new System.Windows.Forms.TextBox();
             this.lblapellido = new System.Windows.Forms.Label();
-            this.txtnombre = new System.Windows.Forms.TextBox();
             this.lblnombre = new System.Windows.Forms.Label();
             this.txtmail = new System.Windows.Forms.TextBox();
             this.lblmail = new System.Windows.Forms.Label();
@@ -49,7 +46,7 @@
             this.lblcategoria = new System.Windows.Forms.Label();
             this.lblfechaalta = new System.Windows.Forms.Label();
             this.cbcategoria = new System.Windows.Forms.ComboBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dtalta = new System.Windows.Forms.DateTimePicker();
             this.cbidrol = new System.Windows.Forms.ComboBox();
             this.lbliderol = new System.Windows.Forms.Label();
             this.cbiddeposito = new System.Windows.Forms.ComboBox();
@@ -61,6 +58,10 @@
             this.btnalta = new System.Windows.Forms.Button();
             this.btnbaja = new System.Windows.Forms.Button();
             this.btnmodificacion = new System.Windows.Forms.Button();
+            this.cbnombre = new System.Windows.Forms.ComboBox();
+            this.cbapellido = new System.Windows.Forms.ComboBox();
+            this.cbidempleado = new System.Windows.Forms.ComboBox();
+            this.btnlimpiar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblidempleado
@@ -72,20 +73,6 @@
             this.lblidempleado.TabIndex = 0;
             this.lblidempleado.Text = "Id Empleado";
             // 
-            // txtidempleado
-            // 
-            this.txtidempleado.Location = new System.Drawing.Point(124, 6);
-            this.txtidempleado.Name = "txtidempleado";
-            this.txtidempleado.Size = new System.Drawing.Size(100, 22);
-            this.txtidempleado.TabIndex = 1;
-            // 
-            // txtapellido
-            // 
-            this.txtapellido.Location = new System.Drawing.Point(438, 42);
-            this.txtapellido.Name = "txtapellido";
-            this.txtapellido.Size = new System.Drawing.Size(279, 22);
-            this.txtapellido.TabIndex = 3;
-            // 
             // lblapellido
             // 
             this.lblapellido.AutoSize = true;
@@ -94,13 +81,6 @@
             this.lblapellido.Size = new System.Drawing.Size(57, 16);
             this.lblapellido.TabIndex = 2;
             this.lblapellido.Text = "Apellido";
-            // 
-            // txtnombre
-            // 
-            this.txtnombre.Location = new System.Drawing.Point(75, 39);
-            this.txtnombre.Name = "txtnombre";
-            this.txtnombre.Size = new System.Drawing.Size(250, 22);
-            this.txtnombre.TabIndex = 5;
             // 
             // lblnombre
             // 
@@ -239,13 +219,13 @@
             this.cbcategoria.Size = new System.Drawing.Size(239, 24);
             this.cbcategoria.TabIndex = 20;
             // 
-            // dateTimePicker1
+            // dtalta
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(108, 208);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 22);
-            this.dateTimePicker1.TabIndex = 21;
-            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            this.dtalta.Location = new System.Drawing.Point(108, 208);
+            this.dtalta.Name = "dtalta";
+            this.dtalta.Size = new System.Drawing.Size(200, 22);
+            this.dtalta.TabIndex = 21;
+            this.dtalta.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // cbidrol
             // 
@@ -326,6 +306,7 @@
             this.btnconsulta.TabIndex = 74;
             this.btnconsulta.Text = "Consulta";
             this.btnconsulta.UseVisualStyleBackColor = true;
+            this.btnconsulta.Click += new System.EventHandler(this.btnconsulta_Click);
             // 
             // btnalta
             // 
@@ -357,11 +338,50 @@
             this.btnmodificacion.Text = "Modificacion";
             this.btnmodificacion.UseVisualStyleBackColor = true;
             // 
+            // cbnombre
+            // 
+            this.cbnombre.FormattingEnabled = true;
+            this.cbnombre.Location = new System.Drawing.Point(74, 42);
+            this.cbnombre.Name = "cbnombre";
+            this.cbnombre.Size = new System.Drawing.Size(250, 24);
+            this.cbnombre.TabIndex = 75;
+            // 
+            // cbapellido
+            // 
+            this.cbapellido.FormattingEnabled = true;
+            this.cbapellido.Location = new System.Drawing.Point(439, 42);
+            this.cbapellido.Name = "cbapellido";
+            this.cbapellido.Size = new System.Drawing.Size(278, 24);
+            this.cbapellido.TabIndex = 76;
+            // 
+            // cbidempleado
+            // 
+            this.cbidempleado.FormattingEnabled = true;
+            this.cbidempleado.Location = new System.Drawing.Point(124, 5);
+            this.cbidempleado.Name = "cbidempleado";
+            this.cbidempleado.Size = new System.Drawing.Size(200, 24);
+            this.cbidempleado.TabIndex = 77;
+            this.cbidempleado.SelectedIndexChanged += new System.EventHandler(this.cbidempleado_SelectedIndexChanged);
+            // 
+            // btnlimpiar
+            // 
+            this.btnlimpiar.Location = new System.Drawing.Point(665, 354);
+            this.btnlimpiar.Name = "btnlimpiar";
+            this.btnlimpiar.Size = new System.Drawing.Size(100, 27);
+            this.btnlimpiar.TabIndex = 78;
+            this.btnlimpiar.Text = "Limpiar";
+            this.btnlimpiar.UseVisualStyleBackColor = true;
+            this.btnlimpiar.Click += new System.EventHandler(this.btnlimpiar_Click);
+            // 
             // Empleados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnlimpiar);
+            this.Controls.Add(this.cbidempleado);
+            this.Controls.Add(this.cbapellido);
+            this.Controls.Add(this.cbnombre);
             this.Controls.Add(this.btnconsulta);
             this.Controls.Add(this.btnalta);
             this.Controls.Add(this.btnbaja);
@@ -373,7 +393,7 @@
             this.Controls.Add(this.lbliderol);
             this.Controls.Add(this.cbiddeposito);
             this.Controls.Add(this.lbliddeposito);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.dtalta);
             this.Controls.Add(this.cbcategoria);
             this.Controls.Add(this.lblfechaalta);
             this.Controls.Add(this.lblcategoria);
@@ -389,11 +409,8 @@
             this.Controls.Add(this.lblmail);
             this.Controls.Add(this.txttelefono);
             this.Controls.Add(this.lbltelefono);
-            this.Controls.Add(this.txtnombre);
             this.Controls.Add(this.lblnombre);
-            this.Controls.Add(this.txtapellido);
             this.Controls.Add(this.lblapellido);
-            this.Controls.Add(this.txtidempleado);
             this.Controls.Add(this.lblidempleado);
             this.Name = "Empleados";
             this.Text = "Empleados";
@@ -406,10 +423,7 @@
         #endregion
 
         private System.Windows.Forms.Label lblidempleado;
-        private System.Windows.Forms.TextBox txtidempleado;
-        private System.Windows.Forms.TextBox txtapellido;
         private System.Windows.Forms.Label lblapellido;
-        private System.Windows.Forms.TextBox txtnombre;
         private System.Windows.Forms.Label lblnombre;
         private System.Windows.Forms.TextBox txtmail;
         private System.Windows.Forms.Label lblmail;
@@ -426,7 +440,7 @@
         private System.Windows.Forms.Label lblcategoria;
         private System.Windows.Forms.Label lblfechaalta;
         private System.Windows.Forms.ComboBox cbcategoria;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dtalta;
         private System.Windows.Forms.ComboBox cbidrol;
         private System.Windows.Forms.Label lbliderol;
         private System.Windows.Forms.ComboBox cbiddeposito;
@@ -438,5 +452,9 @@
         private System.Windows.Forms.Button btnalta;
         private System.Windows.Forms.Button btnbaja;
         private System.Windows.Forms.Button btnmodificacion;
+        private System.Windows.Forms.ComboBox cbnombre;
+        private System.Windows.Forms.ComboBox cbapellido;
+        private System.Windows.Forms.ComboBox cbidempleado;
+        private System.Windows.Forms.Button btnlimpiar;
     }
 }
