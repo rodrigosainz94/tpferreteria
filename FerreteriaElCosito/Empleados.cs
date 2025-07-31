@@ -502,53 +502,44 @@ namespace FerreteriaElCosito
 
             return nombre;
         }
-
         private void btnconsulta_Click(object sender, EventArgs e)
         {
+            using (var selector = new SeleccionarEmpleado())
+            {
+                if (selector.ShowDialog() == DialogResult.OK)
+                {
+                    int idSeleccionado = selector.IdSeleccionado;
+
+                    // Cargar los datos del empleado con ese ID
+                    cbidempleado.SelectedValue = idSeleccionado;
+
+                    // Esto dispara cbidempleado_SelectedIndexChanged automáticamente
+                }
+            }
         }
-        private void btnConsulta_Click(object sender, EventArgs e)
-        {
-            cargandoCombos = true;
 
-            if (int.TryParse(cbidempleado.Text, out int idEmpleado))
-            {
-                CargarDatosEmpleado(idEmpleado);
-                string nombre = ObtenerNombrePorId(idEmpleado);
-                string apellido = ObtenerApellidoPorId(idEmpleado);
-
-                CargarNombres(apellido);
-                CargarApellidos(nombre);
-
-                cbnombre.SelectedIndex = cbnombre.FindStringExact(nombre);
-                cbapellido.SelectedIndex = cbapellido.FindStringExact(apellido);
-
-                cbidempleado.SelectedValue = idEmpleado;
-
-                cargandoCombos = false;
-                return;
-            }
-
-            if (!string.IsNullOrWhiteSpace(cbnombre.Text))
-            {
-                CargarApellidos(cbnombre.Text);
-            }
-
-            if (!string.IsNullOrWhiteSpace(cbapellido.Text))
-            {
-                CargarNombres(cbapellido.Text);
-            }
-
-            cargandoCombos = false;
-        }
 
         private void btnlimpiar_Click(object sender, EventArgs e)
         {
             cargandoCombos = true;
 
+            // Desconectar eventos temporalmente para evitar recargas involuntarias
+            cbidempleado.SelectedIndexChanged -= cbidempleado_SelectedIndexChanged;
+            cbnombre.SelectedIndexChanged -= cbnombre_SelectedIndexChanged;
+            cbapellido.SelectedIndexChanged -= cbapellido_SelectedIndexChanged;
+
             // Limpiar combos
-            cbidempleado.SelectedIndex = -1;
-            cbnombre.SelectedIndex = -1;
-            cbapellido.SelectedIndex = -1;
+            cbidempleado.DataSource = null;
+            cbidempleado.Items.Clear();
+            cbidempleado.Text = "";
+
+            cbnombre.DataSource = null;
+            cbnombre.Items.Clear();
+            cbnombre.Text = "";
+
+            cbapellido.DataSource = null;
+            cbapellido.Items.Clear();
+            cbapellido.Text = "";
 
             // Limpiar campos de texto
             txtmail.Clear();
@@ -563,15 +554,89 @@ namespace FerreteriaElCosito
             cbiddeposito.SelectedIndex = -1;
             cbidrol.SelectedIndex = -1;
 
-            // Resetear fecha
-            dtalta.Value = DateTime.Today;
+            // Simular fecha "vacía"
+            dtalta.Format = DateTimePickerFormat.Custom;
+            dtalta.CustomFormat = " ";
 
-            // Recargar combos con todos los datos
+            // Recargar combos con datos
             CargarIds();
             CargarNombres();
             CargarApellidos();
 
+            // Forzar que queden en blanco tras la recarga
+            cbidempleado.SelectedIndex = -1;
+            cbidempleado.Text = "";
+
+            cbnombre.SelectedIndex = -1;
+            cbnombre.Text = "";
+
+            cbapellido.SelectedIndex = -1;
+            cbapellido.Text = "";
+
+            // Reconectar eventos
+            cbidempleado.SelectedIndexChanged += cbidempleado_SelectedIndexChanged;
+            cbnombre.SelectedIndexChanged += cbnombre_SelectedIndexChanged;
+            cbapellido.SelectedIndexChanged += cbapellido_SelectedIndexChanged;
+
             cargandoCombos = false;
+        }
+
+        private void dtalta_ValueChanged(object sender, EventArgs e)
+        {
+            dtalta.Format = DateTimePickerFormat.Short; // Restaura formato si el usuario elige fecha
+        }
+
+        private void btnalta_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ConexionBD conexionBD = new ConexionBD();
+                using (MySqlConnection conn = conexionBD.AbrirConexion())
+                {
+                    string query = @"INSERT INTO empleado 
+                             (nombre, apellido, email, telefono, cuit_cuil, callenumero, idlocalidad, idprovincia, fechaalta, categoria, idDeposito, idRol) 
+                             VALUES 
+                             (@Nombre, @Apellido, @Email, @Telefono, @CUIL, @CalleNro, @Localidad, @Provincia, @FechaAlta, @Categoria, @Deposito, @Rol)";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@Nombre", cbnombre.Text.Trim());
+                        cmd.Parameters.AddWithValue("@Apellido", cbapellido.Text.Trim());
+                        cmd.Parameters.AddWithValue("@Email", txtmail.Text.Trim());
+                        cmd.Parameters.AddWithValue("@Telefono", txttelefono.Text.Trim());
+                        cmd.Parameters.AddWithValue("@CUIL", txtcuil.Text.Trim());
+                        cmd.Parameters.AddWithValue("@CalleNro", txtcallenro.Text.Trim());
+                        cmd.Parameters.AddWithValue("@Localidad", cblocalidad.SelectedValue ?? DBNull.Value);
+                        cmd.Parameters.AddWithValue("@Provincia", cbprovincia.SelectedValue ?? DBNull.Value);
+
+                        if (dtalta.Format == DateTimePickerFormat.Custom)
+                            cmd.Parameters.AddWithValue("@FechaAlta", DBNull.Value);
+                        else
+                            cmd.Parameters.AddWithValue("@FechaAlta", dtalta.Value);
+
+                        cmd.Parameters.AddWithValue("@Categoria", cbcategoria.SelectedValue ?? DBNull.Value);
+                        cmd.Parameters.AddWithValue("@Deposito", cbiddeposito.SelectedValue ?? DBNull.Value);
+                        cmd.Parameters.AddWithValue("@Rol", cbidrol.SelectedValue ?? DBNull.Value);
+
+                        int result = cmd.ExecuteNonQuery();
+
+                        if (result > 0)
+                        {
+                            MessageBox.Show("Empleado agregado correctamente.");
+                            btnlimpiar_Click(null, null);
+                            CargarIds();
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se pudo agregar el empleado.");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al agregar empleado: " + ex.Message);
+            }
         }
     }
 }

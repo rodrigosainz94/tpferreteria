@@ -317,6 +317,7 @@
             this.btnalta.TabIndex = 73;
             this.btnalta.Text = "Alta";
             this.btnalta.UseVisualStyleBackColor = true;
+            this.btnalta.Click += new System.EventHandler(this.btnalta_Click);
             // 
             // btnbaja
             // 

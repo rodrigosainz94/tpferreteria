@@ -28,25 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtnombrerol = new System.Windows.Forms.TextBox();
             this.lblnombrerol = new System.Windows.Forms.Label();
-            this.txtdescripcioniva = new System.Windows.Forms.TextBox();
+            this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.lbldescripcionrol = new System.Windows.Forms.Label();
-            this.txtidrol = new System.Windows.Forms.TextBox();
             this.lblidrol = new System.Windows.Forms.Label();
             this.btnatras = new System.Windows.Forms.Button();
             this.btnconsulta = new System.Windows.Forms.Button();
             this.btnalta = new System.Windows.Forms.Button();
             this.btnbaja = new System.Windows.Forms.Button();
             this.btnmodificacion = new System.Windows.Forms.Button();
+            this.cbidrol = new System.Windows.Forms.ComboBox();
+            this.cbnombrerol = new System.Windows.Forms.ComboBox();
+            this.btnlimpiar = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // txtnombrerol
-            // 
-            this.txtnombrerol.Location = new System.Drawing.Point(203, 109);
-            this.txtnombrerol.Name = "txtnombrerol";
-            this.txtnombrerol.Size = new System.Drawing.Size(128, 22);
-            this.txtnombrerol.TabIndex = 63;
             // 
             // lblnombrerol
             // 
@@ -57,13 +51,13 @@
             this.lblnombrerol.TabIndex = 62;
             this.lblnombrerol.Text = "Nombre Rol";
             // 
-            // txtdescripcioniva
+            // txtDescripcion
             // 
-            this.txtdescripcioniva.Location = new System.Drawing.Point(198, 158);
-            this.txtdescripcioniva.Multiline = true;
-            this.txtdescripcioniva.Name = "txtdescripcioniva";
-            this.txtdescripcioniva.Size = new System.Drawing.Size(315, 144);
-            this.txtdescripcioniva.TabIndex = 61;
+            this.txtDescripcion.Location = new System.Drawing.Point(198, 158);
+            this.txtDescripcion.Multiline = true;
+            this.txtDescripcion.Name = "txtDescripcion";
+            this.txtDescripcion.Size = new System.Drawing.Size(315, 144);
+            this.txtDescripcion.TabIndex = 61;
             // 
             // lbldescripcionrol
             // 
@@ -73,13 +67,6 @@
             this.lbldescripcionrol.Size = new System.Drawing.Size(103, 16);
             this.lbldescripcionrol.TabIndex = 60;
             this.lbldescripcionrol.Text = "Descripcion Rol";
-            // 
-            // txtidrol
-            // 
-            this.txtidrol.Location = new System.Drawing.Point(203, 59);
-            this.txtidrol.Name = "txtidrol";
-            this.txtidrol.Size = new System.Drawing.Size(128, 22);
-            this.txtidrol.TabIndex = 59;
             // 
             // lblidrol
             // 
@@ -131,6 +118,7 @@
             this.btnbaja.TabIndex = 72;
             this.btnbaja.Text = "Baja";
             this.btnbaja.UseVisualStyleBackColor = true;
+            this.btnbaja.Click += new System.EventHandler(this.btnbaja_Click);
             // 
             // btnmodificacion
             // 
@@ -139,24 +127,53 @@
             this.btnmodificacion.Name = "btnmodificacion";
             this.btnmodificacion.Size = new System.Drawing.Size(100, 28);
             this.btnmodificacion.TabIndex = 71;
-            this.btnmodificacion.Text = "Modificacion";
+            this.btnmodificacion.Text = "Modificar";
             this.btnmodificacion.UseVisualStyleBackColor = true;
+            this.btnmodificacion.Click += new System.EventHandler(this.btnmodificacion_Click_1);
+            // 
+            // cbidrol
+            // 
+            this.cbidrol.FormattingEnabled = true;
+            this.cbidrol.Location = new System.Drawing.Point(198, 57);
+            this.cbidrol.Name = "cbidrol";
+            this.cbidrol.Size = new System.Drawing.Size(121, 24);
+            this.cbidrol.TabIndex = 75;
+            // 
+            // cbnombrerol
+            // 
+            this.cbnombrerol.FormattingEnabled = true;
+            this.cbnombrerol.Location = new System.Drawing.Point(198, 108);
+            this.cbnombrerol.Name = "cbnombrerol";
+            this.cbnombrerol.Size = new System.Drawing.Size(121, 24);
+            this.cbnombrerol.TabIndex = 76;
+            // 
+            // btnlimpiar
+            // 
+            this.btnlimpiar.Location = new System.Drawing.Point(650, 361);
+            this.btnlimpiar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnlimpiar.Name = "btnlimpiar";
+            this.btnlimpiar.Size = new System.Drawing.Size(100, 28);
+            this.btnlimpiar.TabIndex = 77;
+            this.btnlimpiar.Text = "Limpiar";
+            this.btnlimpiar.UseVisualStyleBackColor = true;
+            this.btnlimpiar.Click += new System.EventHandler(this.btnlimpiar_Click);
             // 
             // Roles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnlimpiar);
+            this.Controls.Add(this.cbnombrerol);
+            this.Controls.Add(this.cbidrol);
             this.Controls.Add(this.btnconsulta);
             this.Controls.Add(this.btnalta);
             this.Controls.Add(this.btnbaja);
             this.Controls.Add(this.btnmodificacion);
             this.Controls.Add(this.btnatras);
-            this.Controls.Add(this.txtnombrerol);
             this.Controls.Add(this.lblnombrerol);
-            this.Controls.Add(this.txtdescripcioniva);
+            this.Controls.Add(this.txtDescripcion);
             this.Controls.Add(this.lbldescripcionrol);
-            this.Controls.Add(this.txtidrol);
             this.Controls.Add(this.lblidrol);
             this.Name = "Roles";
             this.Text = "Roles";
@@ -167,17 +184,17 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox txtnombrerol;
         private System.Windows.Forms.Label lblnombrerol;
-        private System.Windows.Forms.TextBox txtdescripcioniva;
+        private System.Windows.Forms.TextBox txtDescripcion;
         private System.Windows.Forms.Label lbldescripcionrol;
-        private System.Windows.Forms.TextBox txtidrol;
         private System.Windows.Forms.Label lblidrol;
         private System.Windows.Forms.Button btnatras;
         private System.Windows.Forms.Button btnconsulta;
         private System.Windows.Forms.Button btnalta;
         private System.Windows.Forms.Button btnbaja;
         private System.Windows.Forms.Button btnmodificacion;
+        private System.Windows.Forms.ComboBox cbidrol;
+        private System.Windows.Forms.ComboBox cbnombrerol;
+        private System.Windows.Forms.Button btnlimpiar;
     }
 }

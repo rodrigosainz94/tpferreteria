@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FerreteriaElCosito;
+using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,31 +14,367 @@ namespace FerreteriaElCosito
 {
     public partial class Roles : Form
     {
+        private ConexionBD conexionBD = new ConexionBD();
+
+        public class Rol
+        {
+            public int IdRol { get; set; }
+            public string NombreRol { get; set; }
+            public override string ToString() => NombreRol;
+        }
+
+        private List<Rol> roles = new List<Rol>();
+
         public Roles()
         {
             InitializeComponent();
+
+            cbidrol.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbnombrerol.DropDownStyle = ComboBoxStyle.DropDown; // ✅ Permite escribir
+
+            cbidrol.SelectedIndexChanged += Cbidrol_SelectedIndexChanged;
+            cbnombrerol.SelectedIndexChanged += Cbnombrerol_SelectedIndexChanged;
         }
 
         private void Roles_Load(object sender, EventArgs e)
         {
-
+            CargarRoles();
         }
 
-        private void lblvolveralinicio_Click(object sender, EventArgs e)
+        private void CargarRoles()
         {
+            MySqlConnection conn = conexionBD.AbrirConexion();
+            try
+            {
+                roles.Clear();
 
+                string query = "SELECT IdRol, NombreRol FROM roles ORDER BY IdRol";
+                using (var cmd = new MySqlCommand(query, conn))
+                {
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Rol rol = new Rol
+                            {
+                                IdRol = reader.GetInt32("IdRol"),
+                                NombreRol = reader.GetString("NombreRol")
+                            };
+                            roles.Add(rol);
+                        }
+                    }
+                }
+
+                // Limpiar y recargar ComboBoxes
+                cbidrol.Items.Clear();
+                cbnombrerol.Items.Clear();
+
+                foreach (var rol in roles)
+                {
+                    cbidrol.Items.Add(rol.IdRol);
+                    cbnombrerol.Items.Add(rol.NombreRol);
+                }
+
+                // Limpia los campos y NO selecciona nada automáticamente
+                cbidrol.SelectedIndex = -1;
+                cbnombrerol.SelectedIndex = -1;
+                txtDescripcion.Clear();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar roles: " + ex.Message);
+            }
+            finally
+            {
+                conexionBD.CerrarConexion();
+            }
         }
 
-        private void btnatras_Click(object sender, EventArgs e)
+        private void Cbidrol_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.Hide(); // Oculta el formulario actual
-            Empleados Empleados = new Empleados(); // Crea una instancia del formulario de empleados
-            Empleados.Show(); // Muestra el formulario de empleados
+            if (cbidrol.SelectedIndex >= 0 && cbidrol.SelectedIndex < cbnombrerol.Items.Count)
+            {
+                cbnombrerol.SelectedIndex = cbidrol.SelectedIndex;
+                int idSeleccionado = (int)cbidrol.SelectedItem;
+                CargarDescripcion(idSeleccionado);
+            }
+        }
+
+        private void Cbnombrerol_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbnombrerol.SelectedIndex >= 0 && cbnombrerol.SelectedIndex < cbidrol.Items.Count)
+            {
+                cbidrol.SelectedIndex = cbnombrerol.SelectedIndex;
+                int idSeleccionado = (int)cbidrol.SelectedItem;
+                CargarDescripcion(idSeleccionado);
+            }
+        }
+
+        private void CargarDescripcion(int idRol)
+        {
+            MySqlConnection conn = conexionBD.AbrirConexion();
+            try
+            {
+                string query = "SELECT Descripcion FROM roles WHERE IdRol = @id";
+                using (var cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", idRol);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            string descripcion = reader.IsDBNull(reader.GetOrdinal("Descripcion"))
+                                ? ""
+                                : reader.GetString("Descripcion");
+                            txtDescripcion.Text = descripcion;
+                        }
+                        else
+                        {
+                            txtDescripcion.Clear();
+                            MessageBox.Show("Rol no encontrado.");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar descripción: " + ex.Message);
+            }
+            finally
+            {
+                conexionBD.CerrarConexion();
+            }
+        }
+
+        private void btnconsulta_Click(object sender, EventArgs e)
+        {
+            if (cbidrol.SelectedIndex >= 0)
+            {
+                int idSeleccionado = (int)cbidrol.SelectedItem;
+                CargarDescripcion(idSeleccionado);
+            }
+            else
+            {
+                MessageBox.Show("Seleccioná un rol.");
+            }
         }
 
         private void btnalta_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(cbnombrerol.Text) || string.IsNullOrWhiteSpace(txtDescripcion.Text))
+            {
+                MessageBox.Show("Completá todos los campos para dar de alta un rol.");
+                return;
+            }
 
+            MySqlConnection con = conexionBD.AbrirConexion();
+
+            try
+            {
+                string query = "INSERT INTO roles (NombreRol, Descripcion) VALUES (@nombre, @descripcion)";
+                using (var cmd = new MySqlCommand(query, con))
+                {
+                    cmd.Parameters.AddWithValue("@nombre", cbnombrerol.Text);
+                    cmd.Parameters.AddWithValue("@descripcion", txtDescripcion.Text);
+
+                    int resultado = cmd.ExecuteNonQuery();
+
+                    if (resultado > 0)
+                    {
+                        MessageBox.Show("Rol registrado con éxito.");
+
+                        CargarRoles();
+
+                        cbnombrerol.SelectedIndex = -1;
+                        cbidrol.SelectedIndex = -1;
+                        txtDescripcion.Clear();
+                        cbnombrerol.Focus();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se pudo registrar el rol.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al registrar rol: " + ex.Message);
+            }
+            finally
+            {
+                conexionBD.CerrarConexion(); // 👈 cierre correcto
+            }
+        }
+
+        private void btnatras_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Empleados empleados = new Empleados();
+            empleados.FormClosed += (s, args) => this.Close();
+            empleados.Show();
+        }
+        private void btnlimpiar_Click(object sender, EventArgs e)
+        {
+            // Limpiar texto del ComboBox de nombre de rol (es editable)
+            cbnombrerol.Text = string.Empty;
+
+            // Deseleccionar cualquier ítem en los ComboBoxes
+            cbidrol.SelectedIndex = -1;
+            cbnombrerol.SelectedIndex = -1;
+
+            // Borrar el contenido del TextBox de descripción
+            txtDescripcion.Clear();
+
+            // (Opcional) Volver a cargar los roles por si hubo cambios
+            CargarRoles();
+
+            // Dejar el foco en el nombre del rol para empezar desde cero
+            cbnombrerol.Focus();
+        }
+
+        private void btnbaja_Click(object sender, EventArgs e)
+        {
+            if (cbidrol.SelectedItem == null)
+            {
+                MessageBox.Show("Seleccioná un rol a eliminar.");
+                return;
+            }
+
+            int idSeleccionado;
+            if (cbidrol.SelectedItem is int id)
+                idSeleccionado = id;
+            else if (!int.TryParse(cbidrol.SelectedItem.ToString(), out idSeleccionado))
+            {
+                MessageBox.Show("No se pudo obtener el ID del rol seleccionado.");
+                return;
+            }
+
+            DialogResult confirm = MessageBox.Show(
+                "¿Estás segura que querés eliminar este rol?",
+                "Confirmar",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (confirm != DialogResult.Yes)
+                return;
+
+            MySqlConnection conn = null;
+
+            try
+            {
+                conn = conexionBD.AbrirConexion();
+
+                // VERIFICACIÓN: mostrá en consola para ver si entra
+                Console.WriteLine("Conexión abierta para verificar uso.");
+
+                // Verificar si el rol está en uso
+                string verificarUso = "SELECT COUNT(*) FROM empleado WHERE IdRol = @id";
+                using (var cmdVerificar = new MySqlCommand(verificarUso, conn))
+                {
+                    cmdVerificar.Parameters.AddWithValue("@id", idSeleccionado);
+                    int enUso = Convert.ToInt32(cmdVerificar.ExecuteScalar());
+
+                    Console.WriteLine("Cantidad de empleados con ese rol: " + enUso);
+
+                    if (enUso > 0)
+                    {
+                        MessageBox.Show("No se puede eliminar el rol porque está asignado a empleados.");
+                        return;
+                    }
+                }
+
+                // ELIMINAR EL ROL
+                Console.WriteLine("Rol no está en uso. Se intentará eliminar.");
+
+                string query = "DELETE FROM roles WHERE IdRol = @id";
+                using (var cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", idSeleccionado);
+                    int resultado = cmd.ExecuteNonQuery();
+
+                    Console.WriteLine("Resultado de DELETE: " + resultado);
+
+                    if (resultado > 0)
+                    {
+                        MessageBox.Show("Rol eliminado exitosamente.");
+
+                        cbnombrerol.Text = "";
+                        txtDescripcion.Clear();
+                        cbidrol.SelectedIndex = -1;
+                        cbnombrerol.SelectedIndex = -1;
+
+                        CargarRoles();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se pudo eliminar el rol.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al eliminar el rol:\n" + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Console.WriteLine("Cerrando conexión...");
+                conexionBD.CerrarConexion();
+            }
+        }
+
+        private void btnmodificacion_Click_1(object sender, EventArgs e)
+        {
+            if (cbidrol.SelectedIndex < 0
+                || string.IsNullOrWhiteSpace(cbnombrerol.Text)
+                || string.IsNullOrWhiteSpace(txtDescripcion.Text))
+            {
+                MessageBox.Show("Completá todos los campos para modificar un rol.");
+                return;
+            }
+
+            int idSeleccionado = (int)cbidrol.SelectedItem;
+            MySqlConnection conn = conexionBD.AbrirConexion();
+
+            try
+            {
+                string query = "UPDATE roles SET NombreRol = @nombre, Descripcion = @desc WHERE IdRol = @id";
+                using (var cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@nombre", cbnombrerol.Text);
+                    cmd.Parameters.AddWithValue("@desc", txtDescripcion.Text);
+                    cmd.Parameters.AddWithValue("@id", idSeleccionado);
+
+                    int resultado = cmd.ExecuteNonQuery();
+
+                    if (resultado > 0)
+                    {
+                        MessageBox.Show("Rol modificado.");
+                        CargarRoles();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se pudo modificar el rol.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al modificar: " + ex.Message);
+            }
+            finally
+            {
+                conexionBD.CerrarConexion(); // 👈 Cierre manual
+            }
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
