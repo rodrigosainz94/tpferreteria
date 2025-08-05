@@ -23,11 +23,9 @@ namespace FerreteriaElCosito
 
         private void CargarEmpleados()
         {
-            ConexionBD conexionBD = new ConexionBD();
-
             try
             {
-                using (MySqlConnection conn = conexionBD.AbrirConexion())
+                using (MySqlConnection conn = ConexionBD.ObtenerConexion())
                 {
                     string query = "SELECT idEmpleado AS 'ID', apellido AS 'Apellido', nombre AS 'Nombre' FROM empleado ORDER BY apellido, nombre";
                     MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn);
@@ -73,7 +71,7 @@ namespace FerreteriaElCosito
             }
         }
 
-        // (Opcional: podés eliminar si no lo usás)
+        // Este evento podés eliminarlo si no lo usás
         private void dgvEmpleados_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
         }

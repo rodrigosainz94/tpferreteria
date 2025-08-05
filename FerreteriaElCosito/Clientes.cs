@@ -18,8 +18,6 @@ namespace FerreteriaElCosito
             InitializeComponent();
         }
 
-        ConexionBD miConexion = new ConexionBD();
-
         private void Clientes_Load(object sender, EventArgs e)
         {
             CargarClientes();
@@ -29,17 +27,16 @@ namespace FerreteriaElCosito
         {
             try
             {
-                MySqlConnection conn = miConexion.AbrirConexion();
+                using (MySqlConnection conn = ConexionBD.ObtenerConexion())
+                {
+                    string query = "SELECT * FROM clientes";
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
 
-                string query = "SELECT * FROM clientes";
-                MySqlCommand cmd = new MySqlCommand(query, conn);
-                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-
-                dgvClientes.DataSource = dt;
-
-                miConexion.CerrarConexion();
+                    dgvClientes.DataSource = dt;
+                }
             }
             catch (Exception ex)
             {

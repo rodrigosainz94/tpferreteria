@@ -18,23 +18,25 @@ namespace FerreteriaElCosito
             InitializeComponent();
         }
 
-        ConexionBD miConexion = new ConexionBD();
+        private void Facturar_Load(object sender, EventArgs e)
+        {
+            CargarDatos();
+        }
 
         private void CargarDatos()
         {
             try
             {
-                MySqlConnection conn = miConexion.AbrirConexion();
+                using (MySqlConnection conn = ConexionBD.ObtenerConexion())
+                {
+                    string query = "SELECT * FROM clientes";
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
 
-                string query = "SELECT * FROM clientes";
-                MySqlCommand cmd = new MySqlCommand(query, conn);
-                MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-
-                dgvfacturacion.DataSource = dt;
-
-                miConexion.CerrarConexion();
+                    dgvfacturacion.DataSource = dt;
+                }
             }
             catch (Exception ex)
             {
@@ -52,11 +54,6 @@ namespace FerreteriaElCosito
         private void dgvfacturacion_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             // Opcional: código si querés hacer algo al hacer clic en una celda
-        }
-
-        private void Facturar_Load(object sender, EventArgs e)
-        {
-            CargarDatos();
         }
     }
 }

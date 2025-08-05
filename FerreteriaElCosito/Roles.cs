@@ -14,8 +14,6 @@ namespace FerreteriaElCosito
 {
     public partial class Roles : Form
     {
-        private ConexionBD conexionBD = new ConexionBD();
-
         public class Rol
         {
             public int IdRol { get; set; }
@@ -30,7 +28,7 @@ namespace FerreteriaElCosito
             InitializeComponent();
 
             cbidrol.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbnombrerol.DropDownStyle = ComboBoxStyle.DropDown; // ✅ Permite escribir
+            cbnombrerol.DropDownStyle = ComboBoxStyle.DropDown; // Permite escribir
 
             cbidrol.SelectedIndexChanged += Cbidrol_SelectedIndexChanged;
             cbnombrerol.SelectedIndexChanged += Cbnombrerol_SelectedIndexChanged;
@@ -43,14 +41,14 @@ namespace FerreteriaElCosito
 
         private void CargarRoles()
         {
-            MySqlConnection conn = conexionBD.AbrirConexion();
             try
             {
                 roles.Clear();
 
-                string query = "SELECT IdRol, NombreRol FROM roles ORDER BY IdRol";
-                using (var cmd = new MySqlCommand(query, conn))
+                using (var conn = ConexionBD.ObtenerConexion())
                 {
+                    string query = "SELECT IdRol, NombreRol FROM roles ORDER BY IdRol";
+                    using (var cmd = new MySqlCommand(query, conn))
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
@@ -65,7 +63,6 @@ namespace FerreteriaElCosito
                     }
                 }
 
-                // Limpiar y recargar ComboBoxes
                 cbidrol.Items.Clear();
                 cbnombrerol.Items.Clear();
 
@@ -75,7 +72,6 @@ namespace FerreteriaElCosito
                     cbnombrerol.Items.Add(rol.NombreRol);
                 }
 
-                // Limpia los campos y NO selecciona nada automáticamente
                 cbidrol.SelectedIndex = -1;
                 cbnombrerol.SelectedIndex = -1;
                 txtDescripcion.Clear();
@@ -83,10 +79,6 @@ namespace FerreteriaElCosito
             catch (Exception ex)
             {
                 MessageBox.Show("Error al cargar roles: " + ex.Message);
-            }
-            finally
-            {
-                conexionBD.CerrarConexion();
             }
         }
 
@@ -112,26 +104,28 @@ namespace FerreteriaElCosito
 
         private void CargarDescripcion(int idRol)
         {
-            MySqlConnection conn = conexionBD.AbrirConexion();
             try
             {
-                string query = "SELECT Descripcion FROM roles WHERE IdRol = @id";
-                using (var cmd = new MySqlCommand(query, conn))
+                using (var conn = ConexionBD.ObtenerConexion())
                 {
-                    cmd.Parameters.AddWithValue("@id", idRol);
-                    using (var reader = cmd.ExecuteReader())
+                    string query = "SELECT Descripcion FROM roles WHERE IdRol = @id";
+                    using (var cmd = new MySqlCommand(query, conn))
                     {
-                        if (reader.Read())
+                        cmd.Parameters.AddWithValue("@id", idRol);
+                        using (var reader = cmd.ExecuteReader())
                         {
-                            string descripcion = reader.IsDBNull(reader.GetOrdinal("Descripcion"))
-                                ? ""
-                                : reader.GetString("Descripcion");
-                            txtDescripcion.Text = descripcion;
-                        }
-                        else
-                        {
-                            txtDescripcion.Clear();
-                            MessageBox.Show("Rol no encontrado.");
+                            if (reader.Read())
+                            {
+                                string descripcion = reader.IsDBNull(reader.GetOrdinal("Descripcion"))
+                                    ? ""
+                                    : reader.GetString("Descripcion");
+                                txtDescripcion.Text = descripcion;
+                            }
+                            else
+                            {
+                                txtDescripcion.Clear();
+                                MessageBox.Show("Rol no encontrado.");
+                            }
                         }
                     }
                 }
@@ -139,10 +133,6 @@ namespace FerreteriaElCosito
             catch (Exception ex)
             {
                 MessageBox.Show("Error al cargar descripción: " + ex.Message);
-            }
-            finally
-            {
-                conexionBD.CerrarConexion();
             }
         }
 
@@ -167,42 +157,37 @@ namespace FerreteriaElCosito
                 return;
             }
 
-            MySqlConnection con = conexionBD.AbrirConexion();
-
             try
             {
-                string query = "INSERT INTO roles (NombreRol, Descripcion) VALUES (@nombre, @descripcion)";
-                using (var cmd = new MySqlCommand(query, con))
+                using (var conn = ConexionBD.ObtenerConexion())
                 {
-                    cmd.Parameters.AddWithValue("@nombre", cbnombrerol.Text);
-                    cmd.Parameters.AddWithValue("@descripcion", txtDescripcion.Text);
-
-                    int resultado = cmd.ExecuteNonQuery();
-
-                    if (resultado > 0)
+                    string query = "INSERT INTO roles (NombreRol, Descripcion) VALUES (@nombre, @descripcion)";
+                    using (var cmd = new MySqlCommand(query, conn))
                     {
-                        MessageBox.Show("Rol registrado con éxito.");
+                        cmd.Parameters.AddWithValue("@nombre", cbnombrerol.Text);
+                        cmd.Parameters.AddWithValue("@descripcion", txtDescripcion.Text);
 
-                        CargarRoles();
+                        int resultado = cmd.ExecuteNonQuery();
 
-                        cbnombrerol.SelectedIndex = -1;
-                        cbidrol.SelectedIndex = -1;
-                        txtDescripcion.Clear();
-                        cbnombrerol.Focus();
-                    }
-                    else
-                    {
-                        MessageBox.Show("No se pudo registrar el rol.");
+                        if (resultado > 0)
+                        {
+                            MessageBox.Show("Rol registrado con éxito.");
+                            CargarRoles();
+                            cbnombrerol.SelectedIndex = -1;
+                            cbidrol.SelectedIndex = -1;
+                            txtDescripcion.Clear();
+                            cbnombrerol.Focus();
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se pudo registrar el rol.");
+                        }
                     }
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al registrar rol: " + ex.Message);
-            }
-            finally
-            {
-                conexionBD.CerrarConexion(); // 👈 cierre correcto
             }
         }
 
@@ -213,22 +198,14 @@ namespace FerreteriaElCosito
             empleados.FormClosed += (s, args) => this.Close();
             empleados.Show();
         }
+
         private void btnlimpiar_Click(object sender, EventArgs e)
         {
-            // Limpiar texto del ComboBox de nombre de rol (es editable)
             cbnombrerol.Text = string.Empty;
-
-            // Deseleccionar cualquier ítem en los ComboBoxes
             cbidrol.SelectedIndex = -1;
             cbnombrerol.SelectedIndex = -1;
-
-            // Borrar el contenido del TextBox de descripción
             txtDescripcion.Clear();
-
-            // (Opcional) Volver a cargar los roles por si hubo cambios
             CargarRoles();
-
-            // Dejar el foco en el nombre del rol para empezar desde cero
             cbnombrerol.Focus();
         }
 
@@ -258,67 +235,48 @@ namespace FerreteriaElCosito
             if (confirm != DialogResult.Yes)
                 return;
 
-            MySqlConnection conn = null;
-
             try
             {
-                conn = conexionBD.AbrirConexion();
-
-                // VERIFICACIÓN: mostrá en consola para ver si entra
-                Console.WriteLine("Conexión abierta para verificar uso.");
-
-                // Verificar si el rol está en uso
-                string verificarUso = "SELECT COUNT(*) FROM empleado WHERE IdRol = @id";
-                using (var cmdVerificar = new MySqlCommand(verificarUso, conn))
+                using (var conn = ConexionBD.ObtenerConexion())
                 {
-                    cmdVerificar.Parameters.AddWithValue("@id", idSeleccionado);
-                    int enUso = Convert.ToInt32(cmdVerificar.ExecuteScalar());
-
-                    Console.WriteLine("Cantidad de empleados con ese rol: " + enUso);
-
-                    if (enUso > 0)
+                    string verificarUso = "SELECT COUNT(*) FROM empleado WHERE IdRol = @id";
+                    using (var cmdVerificar = new MySqlCommand(verificarUso, conn))
                     {
-                        MessageBox.Show("No se puede eliminar el rol porque está asignado a empleados.");
-                        return;
+                        cmdVerificar.Parameters.AddWithValue("@id", idSeleccionado);
+                        int enUso = Convert.ToInt32(cmdVerificar.ExecuteScalar());
+
+                        if (enUso > 0)
+                        {
+                            MessageBox.Show("No se puede eliminar el rol porque está asignado a empleados.");
+                            return;
+                        }
                     }
-                }
 
-                // ELIMINAR EL ROL
-                Console.WriteLine("Rol no está en uso. Se intentará eliminar.");
-
-                string query = "DELETE FROM roles WHERE IdRol = @id";
-                using (var cmd = new MySqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@id", idSeleccionado);
-                    int resultado = cmd.ExecuteNonQuery();
-
-                    Console.WriteLine("Resultado de DELETE: " + resultado);
-
-                    if (resultado > 0)
+                    string query = "DELETE FROM roles WHERE IdRol = @id";
+                    using (var cmd = new MySqlCommand(query, conn))
                     {
-                        MessageBox.Show("Rol eliminado exitosamente.");
+                        cmd.Parameters.AddWithValue("@id", idSeleccionado);
+                        int resultado = cmd.ExecuteNonQuery();
 
-                        cbnombrerol.Text = "";
-                        txtDescripcion.Clear();
-                        cbidrol.SelectedIndex = -1;
-                        cbnombrerol.SelectedIndex = -1;
-
-                        CargarRoles();
-                    }
-                    else
-                    {
-                        MessageBox.Show("No se pudo eliminar el rol.");
+                        if (resultado > 0)
+                        {
+                            MessageBox.Show("Rol eliminado exitosamente.");
+                            cbnombrerol.Text = "";
+                            txtDescripcion.Clear();
+                            cbidrol.SelectedIndex = -1;
+                            cbnombrerol.SelectedIndex = -1;
+                            CargarRoles();
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se pudo eliminar el rol.");
+                        }
                     }
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al eliminar el rol:\n" + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                Console.WriteLine("Cerrando conexión...");
-                conexionBD.CerrarConexion();
             }
         }
 
@@ -333,37 +291,35 @@ namespace FerreteriaElCosito
             }
 
             int idSeleccionado = (int)cbidrol.SelectedItem;
-            MySqlConnection conn = conexionBD.AbrirConexion();
 
             try
             {
-                string query = "UPDATE roles SET NombreRol = @nombre, Descripcion = @desc WHERE IdRol = @id";
-                using (var cmd = new MySqlCommand(query, conn))
+                using (var conn = ConexionBD.ObtenerConexion())
                 {
-                    cmd.Parameters.AddWithValue("@nombre", cbnombrerol.Text);
-                    cmd.Parameters.AddWithValue("@desc", txtDescripcion.Text);
-                    cmd.Parameters.AddWithValue("@id", idSeleccionado);
-
-                    int resultado = cmd.ExecuteNonQuery();
-
-                    if (resultado > 0)
+                    string query = "UPDATE roles SET NombreRol = @nombre, Descripcion = @desc WHERE IdRol = @id";
+                    using (var cmd = new MySqlCommand(query, conn))
                     {
-                        MessageBox.Show("Rol modificado.");
-                        CargarRoles();
-                    }
-                    else
-                    {
-                        MessageBox.Show("No se pudo modificar el rol.");
+                        cmd.Parameters.AddWithValue("@nombre", cbnombrerol.Text);
+                        cmd.Parameters.AddWithValue("@desc", txtDescripcion.Text);
+                        cmd.Parameters.AddWithValue("@id", idSeleccionado);
+
+                        int resultado = cmd.ExecuteNonQuery();
+
+                        if (resultado > 0)
+                        {
+                            MessageBox.Show("Rol modificado.");
+                            CargarRoles();
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se pudo modificar el rol.");
+                        }
                     }
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al modificar: " + ex.Message);
-            }
-            finally
-            {
-                conexionBD.CerrarConexion(); // 👈 Cierre manual
             }
         }
     }

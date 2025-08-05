@@ -53,7 +53,6 @@
             this.lbliddeposito = new System.Windows.Forms.Label();
             this.btnatras = new System.Windows.Forms.Button();
             this.btnrol = new System.Windows.Forms.Button();
-            this.btnhistorialaboral = new System.Windows.Forms.Button();
             this.btnconsulta = new System.Windows.Forms.Button();
             this.btnalta = new System.Windows.Forms.Button();
             this.btnbaja = new System.Windows.Forms.Button();
@@ -62,6 +61,8 @@
             this.cbapellido = new System.Windows.Forms.ComboBox();
             this.cbidempleado = new System.Windows.Forms.ComboBox();
             this.btnlimpiar = new System.Windows.Forms.Button();
+            this.dtfechabaja = new System.Windows.Forms.DateTimePicker();
+            this.lblfechabaja = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblidempleado
@@ -249,7 +250,7 @@
             // cbiddeposito
             // 
             this.cbiddeposito.FormattingEnabled = true;
-            this.cbiddeposito.Location = new System.Drawing.Point(86, 261);
+            this.cbiddeposito.Location = new System.Drawing.Point(85, 297);
             this.cbiddeposito.Name = "cbiddeposito";
             this.cbiddeposito.Size = new System.Drawing.Size(239, 24);
             this.cbiddeposito.TabIndex = 23;
@@ -258,7 +259,7 @@
             // lbliddeposito
             // 
             this.lbliddeposito.AutoSize = true;
-            this.lbliddeposito.Location = new System.Drawing.Point(14, 263);
+            this.lbliddeposito.Location = new System.Drawing.Point(10, 305);
             this.lbliddeposito.Name = "lbliddeposito";
             this.lbliddeposito.Size = new System.Drawing.Size(76, 16);
             this.lbliddeposito.TabIndex = 22;
@@ -278,7 +279,7 @@
             // 
             // btnrol
             // 
-            this.btnrol.Location = new System.Drawing.Point(189, 340);
+            this.btnrol.Location = new System.Drawing.Point(665, 310);
             this.btnrol.Margin = new System.Windows.Forms.Padding(4);
             this.btnrol.Name = "btnrol";
             this.btnrol.Size = new System.Drawing.Size(100, 28);
@@ -286,16 +287,6 @@
             this.btnrol.Text = "Roles";
             this.btnrol.UseVisualStyleBackColor = true;
             this.btnrol.Click += new System.EventHandler(this.btnrol_Click);
-            // 
-            // btnhistorialaboral
-            // 
-            this.btnhistorialaboral.Location = new System.Drawing.Point(29, 340);
-            this.btnhistorialaboral.Margin = new System.Windows.Forms.Padding(4);
-            this.btnhistorialaboral.Name = "btnhistorialaboral";
-            this.btnhistorialaboral.Size = new System.Drawing.Size(152, 28);
-            this.btnhistorialaboral.TabIndex = 67;
-            this.btnhistorialaboral.Text = "Historia Laboral";
-            this.btnhistorialaboral.UseVisualStyleBackColor = true;
             // 
             // btnconsulta
             // 
@@ -328,6 +319,7 @@
             this.btnbaja.TabIndex = 72;
             this.btnbaja.Text = "Baja";
             this.btnbaja.UseVisualStyleBackColor = true;
+            this.btnbaja.Click += new System.EventHandler(this.btnbaja_Click);
             // 
             // btnmodificacion
             // 
@@ -338,6 +330,7 @@
             this.btnmodificacion.TabIndex = 71;
             this.btnmodificacion.Text = "Modificacion";
             this.btnmodificacion.UseVisualStyleBackColor = true;
+            this.btnmodificacion.Click += new System.EventHandler(this.btnmodificacion_Click);
             // 
             // cbnombre
             // 
@@ -374,11 +367,31 @@
             this.btnlimpiar.UseVisualStyleBackColor = true;
             this.btnlimpiar.Click += new System.EventHandler(this.btnlimpiar_Click);
             // 
+            // dtfechabaja
+            // 
+            this.dtfechabaja.Location = new System.Drawing.Point(108, 254);
+            this.dtfechabaja.Name = "dtfechabaja";
+            this.dtfechabaja.Size = new System.Drawing.Size(200, 22);
+            this.dtfechabaja.TabIndex = 80;
+            this.dtfechabaja.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged_1);
+            // 
+            // lblfechabaja
+            // 
+            this.lblfechabaja.AutoSize = true;
+            this.lblfechabaja.Location = new System.Drawing.Point(12, 260);
+            this.lblfechabaja.Name = "lblfechabaja";
+            this.lblfechabaja.Size = new System.Drawing.Size(95, 16);
+            this.lblfechabaja.TabIndex = 79;
+            this.lblfechabaja.Text = "Fecha de Baja";
+            this.lblfechabaja.Click += new System.EventHandler(this.label1_Click_3);
+            // 
             // Empleados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.dtfechabaja);
+            this.Controls.Add(this.lblfechabaja);
             this.Controls.Add(this.btnlimpiar);
             this.Controls.Add(this.cbidempleado);
             this.Controls.Add(this.cbapellido);
@@ -387,7 +400,6 @@
             this.Controls.Add(this.btnalta);
             this.Controls.Add(this.btnbaja);
             this.Controls.Add(this.btnmodificacion);
-            this.Controls.Add(this.btnhistorialaboral);
             this.Controls.Add(this.btnrol);
             this.Controls.Add(this.btnatras);
             this.Controls.Add(this.cbidrol);
@@ -448,7 +460,6 @@
         private System.Windows.Forms.Label lbliddeposito;
         private System.Windows.Forms.Button btnatras;
         private System.Windows.Forms.Button btnrol;
-        private System.Windows.Forms.Button btnhistorialaboral;
         private System.Windows.Forms.Button btnconsulta;
         private System.Windows.Forms.Button btnalta;
         private System.Windows.Forms.Button btnbaja;
@@ -457,5 +468,7 @@
         private System.Windows.Forms.ComboBox cbapellido;
         private System.Windows.Forms.ComboBox cbidempleado;
         private System.Windows.Forms.Button btnlimpiar;
+        private System.Windows.Forms.DateTimePicker dtfechabaja;
+        private System.Windows.Forms.Label lblfechabaja;
     }
 }
