@@ -521,36 +521,39 @@ namespace FerreteriaElCosito
             txtcuil.Clear();
             txtcallenro.Clear();
 
-            cbprovincia.SelectedIndex = -1;
-            cblocalidad.SelectedIndex = -1;
-            cbcategoria.SelectedIndex = -1;
-            cbiddeposito.SelectedIndex = -1;
-            cbidrol.SelectedIndex = -1;
+            // Limpiar combos y también su texto
+            cbidempleado.SelectedIndex = -1;
+            cbidempleado.Text = "";
 
+            cbnombre.SelectedIndex = -1;
+            cbnombre.Text = "";  // Limpiar texto editable
+
+            cbapellido.SelectedIndex = -1;
+            cbapellido.Text = ""; // Limpiar texto editable
+
+            cbprovincia.SelectedIndex = -1;
+            cbprovincia.Text = "";
+
+            cblocalidad.SelectedIndex = -1;
+            cblocalidad.Text = "";
+
+            cbcategoria.SelectedIndex = -1;
+            cbcategoria.Text = "";
+
+            cbiddeposito.SelectedIndex = -1;
+            cbiddeposito.Text = "";
+
+            cbidrol.SelectedIndex = -1;
+            cbidrol.Text = "";
+
+            // Fecha Alta: setear a hoy
             dtalta.Format = DateTimePickerFormat.Short;
             dtalta.Value = DateTime.Today;
 
-            dtfechabaja.Value = DateTime.Today;
+            // Fecha Baja: dejar vacía con formato personalizado
             dtfechabaja.Format = DateTimePickerFormat.Custom;
             dtfechabaja.CustomFormat = " ";
-            dtfechabaja.Enabled = true;
             fechaBajaSeleccionada = false;
-
-            cbidempleado.DataSource = null;
-            cbnombre.DataSource = null;
-            cbapellido.DataSource = null;
-
-            CargarIds();
-            CargarNombres();
-            CargarApellidos();
-
-            cbidempleado.SelectedIndex = -1;
-            cbnombre.SelectedIndex = -1;
-            cbapellido.SelectedIndex = -1;
-
-            cbidempleado.Text = "";
-            cbnombre.Text = "";
-            cbapellido.Text = "";
 
             cbidempleado.SelectedIndexChanged += cbidempleado_SelectedIndexChanged;
             cbnombre.SelectedIndexChanged += cbnombre_SelectedIndexChanged;
@@ -558,6 +561,8 @@ namespace FerreteriaElCosito
 
             cargandoCombos = false;
         }
+
+
 
         private void dtalta_ValueChanged(object sender, EventArgs e)
         {
@@ -568,18 +573,30 @@ namespace FerreteriaElCosito
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(cbnombre.Text) || string.IsNullOrWhiteSpace(cbapellido.Text))
+                // Validar que todos los campos estén completos
+                if (string.IsNullOrWhiteSpace(cbnombre.Text) ||
+                    string.IsNullOrWhiteSpace(cbapellido.Text) ||
+                    string.IsNullOrWhiteSpace(txtmail.Text) ||
+                    string.IsNullOrWhiteSpace(txttelefono.Text) ||
+                    string.IsNullOrWhiteSpace(txtcuil.Text) ||
+                    string.IsNullOrWhiteSpace(txtcallenro.Text) ||
+                    cbprovincia.SelectedIndex < 0 ||
+                    cblocalidad.SelectedIndex < 0 ||
+                    cbcategoria.SelectedIndex < 0 ||
+                    cbiddeposito.SelectedIndex < 0 ||
+                    cbidrol.SelectedIndex < 0)
                 {
-                    MessageBox.Show("Por favor, ingresá nombre y apellido.");
+                    MessageBox.Show("Todos los campos son obligatorios. Por favor, completalos antes de continuar.", "Faltan datos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 using (MySqlConnection conn = ConexionBD.ObtenerConexion())
                 {
                     string query = @"INSERT INTO empleado 
-                    (nombre, apellido, email, telefono, cuit_cuil, callenumero, idlocalidad, idprovincia, fechaalta, categoria, idDeposito, idRol) 
-                    VALUES 
-                    (@Nombre, @Apellido, @Email, @Telefono, @CUIL, @CalleNro, @Localidad, @Provincia, @FechaAlta, @Categoria, @Deposito, @Rol)";
+            (nombre, apellido, email, telefono, cuit_cuil, callenumero, idlocalidad, idprovincia, fechaalta, categoria, idDeposito, idRol) 
+            VALUES 
+            (@Nombre, @Apellido, @Email, @Telefono, @CUIL, @CalleNro, @Localidad, @Provincia, @FechaAlta, @Categoria, @Deposito, @Rol);
+            SELECT LAST_INSERT_ID();"; // Obtiene el ID generado
 
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
@@ -589,31 +606,35 @@ namespace FerreteriaElCosito
                         cmd.Parameters.AddWithValue("@Telefono", txttelefono.Text.Trim());
                         cmd.Parameters.AddWithValue("@CUIL", txtcuil.Text.Trim());
                         cmd.Parameters.AddWithValue("@CalleNro", txtcallenro.Text.Trim());
-                        cmd.Parameters.AddWithValue("@Localidad", cblocalidad.SelectedValue ?? DBNull.Value);
-                        cmd.Parameters.AddWithValue("@Provincia", cbprovincia.SelectedValue ?? DBNull.Value);
+                        cmd.Parameters.AddWithValue("@Localidad", cblocalidad.SelectedValue);
+                        cmd.Parameters.AddWithValue("@Provincia", cbprovincia.SelectedValue);
                         cmd.Parameters.AddWithValue("@FechaAlta", dtalta.Value.Date);
-                        cmd.Parameters.AddWithValue("@Categoria", cbcategoria.SelectedValue ?? DBNull.Value);
-                        cmd.Parameters.AddWithValue("@Deposito", cbiddeposito.SelectedValue ?? DBNull.Value);
-                        cmd.Parameters.AddWithValue("@Rol", cbidrol.SelectedValue ?? DBNull.Value);
+                        cmd.Parameters.AddWithValue("@Categoria", cbcategoria.SelectedValue);
+                        cmd.Parameters.AddWithValue("@Deposito", cbiddeposito.SelectedValue);
+                        cmd.Parameters.AddWithValue("@Rol", cbidrol.SelectedValue);
 
-                        int result = cmd.ExecuteNonQuery();
+                        object newId = cmd.ExecuteScalar();
 
-                        if (result > 0)
+                        if (newId != null)
                         {
-                            MessageBox.Show("Empleado agregado correctamente.");
-                            btnlimpiar_Click(null, null);
-                            CargarIds();
+                            MessageBox.Show("Empleado agregado correctamente. ID asignado: " + newId.ToString(), "Alta exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            cargandoCombos = true; // Evitar que se disparen eventos
+                            CargarIds();           // Refrescar lista de IDs
+                            cargandoCombos = false;
+
+                            btnlimpiar_Click(null, null); // Limpiar el formulario para nueva carga
                         }
                         else
                         {
-                            MessageBox.Show("No se pudo agregar el empleado.");
+                            MessageBox.Show("No se pudo agregar el empleado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al agregar empleado: " + ex.Message);
+                MessageBox.Show("Error al agregar empleado: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void btnatras_Click(object sender, EventArgs e)
@@ -637,24 +658,41 @@ namespace FerreteriaElCosito
                 return;
             }
 
+            // Validación: no dejar campos vacíos al modificar
+            if (string.IsNullOrWhiteSpace(cbnombre.Text) ||
+                string.IsNullOrWhiteSpace(cbapellido.Text) ||
+                string.IsNullOrWhiteSpace(txtmail.Text) ||
+                string.IsNullOrWhiteSpace(txttelefono.Text) ||
+                string.IsNullOrWhiteSpace(txtcuil.Text) ||
+                string.IsNullOrWhiteSpace(txtcallenro.Text) ||
+                cbprovincia.SelectedIndex < 0 ||
+                cblocalidad.SelectedIndex < 0 ||
+                cbcategoria.SelectedIndex < 0 ||
+                cbiddeposito.SelectedIndex < 0 ||
+                cbidrol.SelectedIndex < 0)
+            {
+                MessageBox.Show("Todos los campos son obligatorios para modificar un empleado.", "Faltan datos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             try
             {
                 using (MySqlConnection conn = ConexionBD.ObtenerConexion())
                 {
                     string query = @"UPDATE empleado SET 
-                                nombre = @Nombre,
-                                apellido = @Apellido,
-                                email = @Email,
-                                telefono = @Telefono,
-                                cuit_cuil = @CUIL,
-                                callenumero = @CalleNro,
-                                idlocalidad = @Localidad,
-                                idprovincia = @Provincia,
-                                fechaalta = @FechaAlta,
-                                categoria = @Categoria,
-                                idDeposito = @Deposito,
-                                idRol = @Rol
-                             WHERE idEmpleado = @IdEmpleado";
+                        nombre = @Nombre,
+                        apellido = @Apellido,
+                        email = @Email,
+                        telefono = @Telefono,
+                        cuit_cuil = @CUIL,
+                        callenumero = @CalleNro,
+                        idlocalidad = @Localidad,
+                        idprovincia = @Provincia,
+                        fechaalta = @FechaAlta,
+                        categoria = @Categoria,
+                        idDeposito = @Deposito,
+                        idRol = @Rol
+                     WHERE idEmpleado = @IdEmpleado";
 
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
@@ -664,12 +702,12 @@ namespace FerreteriaElCosito
                         cmd.Parameters.AddWithValue("@Telefono", txttelefono.Text.Trim());
                         cmd.Parameters.AddWithValue("@CUIL", txtcuil.Text.Trim());
                         cmd.Parameters.AddWithValue("@CalleNro", txtcallenro.Text.Trim());
-                        cmd.Parameters.AddWithValue("@Localidad", cblocalidad.SelectedValue ?? DBNull.Value);
-                        cmd.Parameters.AddWithValue("@Provincia", cbprovincia.SelectedValue ?? DBNull.Value);
+                        cmd.Parameters.AddWithValue("@Localidad", cblocalidad.SelectedValue);
+                        cmd.Parameters.AddWithValue("@Provincia", cbprovincia.SelectedValue);
                         cmd.Parameters.AddWithValue("@FechaAlta", dtalta.Value.Date);
-                        cmd.Parameters.AddWithValue("@Categoria", cbcategoria.SelectedValue ?? DBNull.Value);
-                        cmd.Parameters.AddWithValue("@Deposito", cbiddeposito.SelectedValue ?? DBNull.Value);
-                        cmd.Parameters.AddWithValue("@Rol", cbidrol.SelectedValue ?? DBNull.Value);
+                        cmd.Parameters.AddWithValue("@Categoria", cbcategoria.SelectedValue);
+                        cmd.Parameters.AddWithValue("@Deposito", cbiddeposito.SelectedValue);
+                        cmd.Parameters.AddWithValue("@Rol", cbidrol.SelectedValue);
                         cmd.Parameters.AddWithValue("@IdEmpleado", cbidempleado.SelectedValue);
 
                         int result = cmd.ExecuteNonQuery();
@@ -677,6 +715,7 @@ namespace FerreteriaElCosito
                         if (result > 0)
                         {
                             MessageBox.Show("Empleado modificado correctamente.");
+                            btnlimpiar_Click(null, null); // 👉 Esto limpia todo el formulario
                         }
                         else
                         {
@@ -745,10 +784,14 @@ namespace FerreteriaElCosito
                 MessageBox.Show("Error al dar de baja: " + ex.Message);
             }
         }
-private void dtfechabaja_ValueChanged(object sender, EventArgs e)
+        private void dtfechabaja_ValueChanged(object sender, EventArgs e)
         {
             dtfechabaja.Format = DateTimePickerFormat.Short;
             fechaBajaSeleccionada = true;
+        }
+        private void dateTimePicker1_ValueChanged_1(object sender, EventArgs e)
+        {
+
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -801,10 +844,7 @@ private void dtfechabaja_ValueChanged(object sender, EventArgs e)
 
         }
 
-        private void dateTimePicker1_ValueChanged_1(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }
 
