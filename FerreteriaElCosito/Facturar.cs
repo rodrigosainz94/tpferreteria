@@ -29,7 +29,7 @@ namespace FerreteriaElCosito
             {
                 using (MySqlConnection conn = ConexionBD.ObtenerConexion())
                 {
-                    string query = "SELECT * FROM clientes";
+                    string query = "SELECT * FROM productos";
                     MySqlCommand cmd = new MySqlCommand(query, conn);
                     MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                     DataTable dt = new DataTable();

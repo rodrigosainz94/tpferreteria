@@ -30,17 +30,17 @@
         {
             this.lblNombre = new System.Windows.Forms.Label();
             this.lblidprovincia = new System.Windows.Forms.Label();
-            this.txtlocalidad = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.lbllocalidad = new System.Windows.Forms.Label();
-            this.cmbidprovincia = new System.Windows.Forms.ComboBox();
-            this.cmbprovincia = new System.Windows.Forms.ComboBox();
+            this.cbidprovincia = new System.Windows.Forms.ComboBox();
+            this.cbprovincia = new System.Windows.Forms.ComboBox();
             this.btnatras = new System.Windows.Forms.Button();
             this.btnmodificacion = new System.Windows.Forms.Button();
             this.btnbaja = new System.Windows.Forms.Button();
             this.btnalta = new System.Windows.Forms.Button();
             this.btnconsulta = new System.Windows.Forms.Button();
+            this.cbnombrelocalidad = new System.Windows.Forms.ComboBox();
+            this.cbidlocalidad = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // lblNombre
@@ -57,16 +57,9 @@
             this.lblidprovincia.AutoSize = true;
             this.lblidprovincia.Location = new System.Drawing.Point(54, 187);
             this.lblidprovincia.Name = "lblidprovincia";
-            this.lblidprovincia.Size = new System.Drawing.Size(77, 16);
+            this.lblidprovincia.Size = new System.Drawing.Size(79, 16);
             this.lblidprovincia.TabIndex = 39;
-            this.lblidprovincia.Text = "Id Provincia";
-            // 
-            // txtlocalidad
-            // 
-            this.txtlocalidad.Location = new System.Drawing.Point(174, 86);
-            this.txtlocalidad.Name = "txtlocalidad";
-            this.txtlocalidad.Size = new System.Drawing.Size(435, 22);
-            this.txtlocalidad.TabIndex = 46;
+            this.lblidprovincia.Text = "ID Provincia";
             // 
             // label1
             // 
@@ -78,37 +71,30 @@
             this.label1.Text = "Nombre Localidad";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(174, 32);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(128, 22);
-            this.textBox2.TabIndex = 44;
-            // 
             // lbllocalidad
             // 
             this.lbllocalidad.AutoSize = true;
             this.lbllocalidad.Location = new System.Drawing.Point(54, 39);
             this.lbllocalidad.Name = "lbllocalidad";
-            this.lbllocalidad.Size = new System.Drawing.Size(81, 16);
+            this.lbllocalidad.Size = new System.Drawing.Size(83, 16);
             this.lbllocalidad.TabIndex = 43;
-            this.lbllocalidad.Text = "Id Localidad";
+            this.lbllocalidad.Text = "ID Localidad";
             // 
-            // cmbidprovincia
+            // cbidprovincia
             // 
-            this.cmbidprovincia.FormattingEnabled = true;
-            this.cmbidprovincia.Location = new System.Drawing.Point(174, 178);
-            this.cmbidprovincia.Name = "cmbidprovincia";
-            this.cmbidprovincia.Size = new System.Drawing.Size(121, 24);
-            this.cmbidprovincia.TabIndex = 47;
+            this.cbidprovincia.FormattingEnabled = true;
+            this.cbidprovincia.Location = new System.Drawing.Point(174, 178);
+            this.cbidprovincia.Name = "cbidprovincia";
+            this.cbidprovincia.Size = new System.Drawing.Size(121, 24);
+            this.cbidprovincia.TabIndex = 47;
             // 
-            // cmbprovincia
+            // cbprovincia
             // 
-            this.cmbprovincia.FormattingEnabled = true;
-            this.cmbprovincia.Location = new System.Drawing.Point(174, 227);
-            this.cmbprovincia.Name = "cmbprovincia";
-            this.cmbprovincia.Size = new System.Drawing.Size(377, 24);
-            this.cmbprovincia.TabIndex = 48;
+            this.cbprovincia.FormattingEnabled = true;
+            this.cbprovincia.Location = new System.Drawing.Point(174, 227);
+            this.cbprovincia.Name = "cbprovincia";
+            this.cbprovincia.Size = new System.Drawing.Size(377, 24);
+            this.cbprovincia.TabIndex = 48;
             // 
             // btnatras
             // 
@@ -161,21 +147,37 @@
             this.btnconsulta.Text = "Consulta";
             this.btnconsulta.UseVisualStyleBackColor = true;
             // 
+            // cbnombrelocalidad
+            // 
+            this.cbnombrelocalidad.FormattingEnabled = true;
+            this.cbnombrelocalidad.Location = new System.Drawing.Point(174, 85);
+            this.cbnombrelocalidad.Name = "cbnombrelocalidad";
+            this.cbnombrelocalidad.Size = new System.Drawing.Size(452, 24);
+            this.cbnombrelocalidad.TabIndex = 78;
+            // 
+            // cbidlocalidad
+            // 
+            this.cbidlocalidad.FormattingEnabled = true;
+            this.cbidlocalidad.Location = new System.Drawing.Point(174, 39);
+            this.cbidlocalidad.Name = "cbidlocalidad";
+            this.cbidlocalidad.Size = new System.Drawing.Size(121, 24);
+            this.cbidlocalidad.TabIndex = 77;
+            // 
             // localidad
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.cbnombrelocalidad);
+            this.Controls.Add(this.cbidlocalidad);
             this.Controls.Add(this.btnconsulta);
             this.Controls.Add(this.btnalta);
             this.Controls.Add(this.btnbaja);
             this.Controls.Add(this.btnmodificacion);
             this.Controls.Add(this.btnatras);
-            this.Controls.Add(this.cmbprovincia);
-            this.Controls.Add(this.cmbidprovincia);
-            this.Controls.Add(this.txtlocalidad);
+            this.Controls.Add(this.cbprovincia);
+            this.Controls.Add(this.cbidprovincia);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.lbllocalidad);
             this.Controls.Add(this.lblNombre);
             this.Controls.Add(this.lblidprovincia);
@@ -190,16 +192,16 @@
         #endregion
         private System.Windows.Forms.Label lblNombre;
         private System.Windows.Forms.Label lblidprovincia;
-        private System.Windows.Forms.TextBox txtlocalidad;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label lbllocalidad;
-        private System.Windows.Forms.ComboBox cmbidprovincia;
-        private System.Windows.Forms.ComboBox cmbprovincia;
+        private System.Windows.Forms.ComboBox cbidprovincia;
+        private System.Windows.Forms.ComboBox cbprovincia;
         private System.Windows.Forms.Button btnatras;
         private System.Windows.Forms.Button btnmodificacion;
         private System.Windows.Forms.Button btnbaja;
         private System.Windows.Forms.Button btnalta;
         private System.Windows.Forms.Button btnconsulta;
+        private System.Windows.Forms.ComboBox cbnombrelocalidad;
+        private System.Windows.Forms.ComboBox cbidlocalidad;
     }
 }

@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.lblidprovincia = new System.Windows.Forms.Label();
-            this.txtidprovincia = new System.Windows.Forms.TextBox();
-            this.txtnombre = new System.Windows.Forms.TextBox();
             this.lblNombre = new System.Windows.Forms.Label();
-            this.lblvolveralinicio = new System.Windows.Forms.Label();
+            this.btnatras = new System.Windows.Forms.Label();
             this.btnconsulta = new System.Windows.Forms.Button();
             this.btnalta = new System.Windows.Forms.Button();
             this.btnbaja = new System.Windows.Forms.Button();
             this.btnmodificacion = new System.Windows.Forms.Button();
+            this.cbidprovincia = new System.Windows.Forms.ComboBox();
+            this.cbnombreprovincia = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // lblidprovincia
@@ -44,23 +44,9 @@
             this.lblidprovincia.AutoSize = true;
             this.lblidprovincia.Location = new System.Drawing.Point(55, 31);
             this.lblidprovincia.Name = "lblidprovincia";
-            this.lblidprovincia.Size = new System.Drawing.Size(77, 16);
+            this.lblidprovincia.Size = new System.Drawing.Size(79, 16);
             this.lblidprovincia.TabIndex = 0;
-            this.lblidprovincia.Text = "Id Provincia";
-            // 
-            // txtidprovincia
-            // 
-            this.txtidprovincia.Location = new System.Drawing.Point(175, 24);
-            this.txtidprovincia.Name = "txtidprovincia";
-            this.txtidprovincia.Size = new System.Drawing.Size(128, 22);
-            this.txtidprovincia.TabIndex = 1;
-            // 
-            // txtnombre
-            // 
-            this.txtnombre.Location = new System.Drawing.Point(175, 78);
-            this.txtnombre.Name = "txtnombre";
-            this.txtnombre.Size = new System.Drawing.Size(435, 22);
-            this.txtnombre.TabIndex = 3;
+            this.lblidprovincia.Text = "ID Provincia";
             // 
             // lblNombre
             // 
@@ -71,15 +57,15 @@
             this.lblNombre.TabIndex = 2;
             this.lblNombre.Text = "Nombre";
             // 
-            // lblvolveralinicio
+            // btnatras
             // 
-            this.lblvolveralinicio.AutoSize = true;
-            this.lblvolveralinicio.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblvolveralinicio.Location = new System.Drawing.Point(641, 386);
-            this.lblvolveralinicio.Name = "lblvolveralinicio";
-            this.lblvolveralinicio.Size = new System.Drawing.Size(134, 25);
-            this.lblvolveralinicio.TabIndex = 38;
-            this.lblvolveralinicio.Text = "Volver a Inicio";
+            this.btnatras.AutoSize = true;
+            this.btnatras.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnatras.Location = new System.Drawing.Point(700, 400);
+            this.btnatras.Name = "btnatras";
+            this.btnatras.Size = new System.Drawing.Size(41, 17);
+            this.btnatras.TabIndex = 38;
+            this.btnatras.Text = "Atras";
             // 
             // btnconsulta
             // 
@@ -121,21 +107,37 @@
             this.btnmodificacion.Text = "Modificacion";
             this.btnmodificacion.UseVisualStyleBackColor = true;
             // 
-            // Provincia
+            // cbidprovincia
+            // 
+            this.cbidprovincia.FormattingEnabled = true;
+            this.cbidprovincia.Location = new System.Drawing.Point(175, 31);
+            this.cbidprovincia.Name = "cbidprovincia";
+            this.cbidprovincia.Size = new System.Drawing.Size(121, 24);
+            this.cbidprovincia.TabIndex = 75;
+            // 
+            // cbnombreprovincia
+            // 
+            this.cbnombreprovincia.FormattingEnabled = true;
+            this.cbnombreprovincia.Location = new System.Drawing.Point(175, 77);
+            this.cbnombreprovincia.Name = "cbnombreprovincia";
+            this.cbnombreprovincia.Size = new System.Drawing.Size(452, 24);
+            this.cbnombreprovincia.TabIndex = 76;
+            // 
+            // Provincias
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.cbnombreprovincia);
+            this.Controls.Add(this.cbidprovincia);
             this.Controls.Add(this.btnconsulta);
             this.Controls.Add(this.btnalta);
             this.Controls.Add(this.btnbaja);
             this.Controls.Add(this.btnmodificacion);
-            this.Controls.Add(this.lblvolveralinicio);
-            this.Controls.Add(this.txtnombre);
+            this.Controls.Add(this.btnatras);
             this.Controls.Add(this.lblNombre);
-            this.Controls.Add(this.txtidprovincia);
             this.Controls.Add(this.lblidprovincia);
-            this.Name = "Provincia";
+            this.Name = "Provincias";
             this.Text = "Provincias";
             this.Load += new System.EventHandler(this.frmprovincia_Load);
             this.ResumeLayout(false);
@@ -146,13 +148,13 @@
         #endregion
 
         private System.Windows.Forms.Label lblidprovincia;
-        private System.Windows.Forms.TextBox txtidprovincia;
-        private System.Windows.Forms.TextBox txtnombre;
         private System.Windows.Forms.Label lblNombre;
-        private System.Windows.Forms.Label lblvolveralinicio;
+        private System.Windows.Forms.Label btnatras;
         private System.Windows.Forms.Button btnconsulta;
         private System.Windows.Forms.Button btnalta;
         private System.Windows.Forms.Button btnbaja;
         private System.Windows.Forms.Button btnmodificacion;
+        private System.Windows.Forms.ComboBox cbidprovincia;
+        private System.Windows.Forms.ComboBox cbnombreprovincia;
     }
 }
