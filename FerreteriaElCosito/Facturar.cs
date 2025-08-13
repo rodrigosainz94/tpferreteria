@@ -18,9 +18,8 @@ namespace FerreteriaElCosito
         private void Facturar_Load(object sender, EventArgs e)
         {
             ConfigurarGrillaFactura();
-            CargarComboProductos(); // Cargamos el nuevo ComboBox
+            CargarComboProductos();
 
-            // Dejamos los campos de entrada listos
             lblfecha.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
             cmbnombre.SelectedIndex = -1;
             this.ActiveControl = txtcodigo;
@@ -53,9 +52,6 @@ namespace FerreteriaElCosito
             dgvfacturacion.AllowUserToAddRows = false;
         }
 
-        /// <summary>
-        /// NUEVO: Carga los productos en el ComboBox de nombres.
-        /// </summary>
         private void CargarComboProductos()
         {
             try
@@ -78,9 +74,6 @@ namespace FerreteriaElCosito
             }
         }
 
-        /// <summary>
-        /// MODIFICADO: Ahora maneja tanto el código como el ComboBox.
-        /// </summary>
         private void btnagregar_Click(object sender, EventArgs e)
         {
             int idProductoBuscado = 0;
@@ -142,7 +135,8 @@ namespace FerreteriaElCosito
             CalcularTotal();
             txtcodigo.Clear();
             cmbnombre.SelectedIndex = -1;
-            txtcodigo.Focus();
+            // Llamamos al método para mover el foco y editar
+            MoverFocoACantidad();
         }
 
         // --- MANEJO DE TECLADO ---
@@ -156,9 +150,6 @@ namespace FerreteriaElCosito
             }
         }
 
-        /// <summary>
-        /// NUEVO: Maneja la tecla Enter para el ComboBox.
-        /// </summary>
         private void cmbnombre_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -180,10 +171,29 @@ namespace FerreteriaElCosito
 
         private void dgvfacturacion_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            dgvfacturacion.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            dgvfacturacion.EndEdit();
+            dtFacturaItems.AcceptChanges();
             CalcularTotal();
+            txtcodigo.Focus();
         }
 
+
         // --- MÉTODOS AUXILIARES Y OTROS BOTONES ---
+
+        /// <summary>
+        /// MÉTODO REINCORPORADO: Mueve el foco a la celda de Cantidad de la última fila.
+        /// </summary>
+        private void MoverFocoACantidad()
+        {
+            int ultimaFila = dgvfacturacion.Rows.Count - 1;
+            if (ultimaFila >= 0)
+            {
+                var celdaCantidad = dgvfacturacion.Rows[ultimaFila].Cells["Cantidad"];
+                dgvfacturacion.CurrentCell = celdaCantidad;
+                dgvfacturacion.BeginEdit(true);
+            }
+        }
 
         private void CalcularTotal()
         {
