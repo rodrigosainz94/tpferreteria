@@ -1,16 +1,11 @@
-﻿namespace FerreteriaElCosito
+﻿using FerreteriaElCosito;
+
+namespace FerreteriaElCosito
 {
     partial class Provincias
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,90 +17,87 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-            this.lblidprovincia = new System.Windows.Forms.Label();
-            this.lblNombre = new System.Windows.Forms.Label();
-            this.btnatras = new System.Windows.Forms.Label();
-            this.btnconsulta = new System.Windows.Forms.Button();
-            this.btnalta = new System.Windows.Forms.Button();
-            this.btnbaja = new System.Windows.Forms.Button();
-            this.btnmodificacion = new System.Windows.Forms.Button();
+            this.lblIDProvincia = new System.Windows.Forms.Label();
+            this.lblNombrePcia = new System.Windows.Forms.Label();
+            this.btnAtras = new System.Windows.Forms.Label();
+            this.btnConsulta = new System.Windows.Forms.Button();
+            this.btnAlta = new System.Windows.Forms.Button();
+            this.btnBaja = new System.Windows.Forms.Button();
+            this.btnModificacion = new System.Windows.Forms.Button();
             this.cbidprovincia = new System.Windows.Forms.ComboBox();
             this.cbnombreprovincia = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
-            // lblidprovincia
+            // lblIDProvincia
             // 
-            this.lblidprovincia.AutoSize = true;
-            this.lblidprovincia.Location = new System.Drawing.Point(55, 31);
-            this.lblidprovincia.Name = "lblidprovincia";
-            this.lblidprovincia.Size = new System.Drawing.Size(79, 16);
-            this.lblidprovincia.TabIndex = 0;
-            this.lblidprovincia.Text = "ID Provincia";
+            this.lblIDProvincia.AutoSize = true;
+            this.lblIDProvincia.Location = new System.Drawing.Point(55, 31);
+            this.lblIDProvincia.Name = "lblIDProvincia";
+            this.lblIDProvincia.Size = new System.Drawing.Size(79, 16);
+            this.lblIDProvincia.TabIndex = 0;
+            this.lblIDProvincia.Text = "ID Provincia";
             // 
-            // lblNombre
+            // lblNombrePcia
             // 
-            this.lblNombre.AutoSize = true;
-            this.lblNombre.Location = new System.Drawing.Point(55, 85);
-            this.lblNombre.Name = "lblNombre";
-            this.lblNombre.Size = new System.Drawing.Size(56, 16);
-            this.lblNombre.TabIndex = 2;
-            this.lblNombre.Text = "Nombre";
+            this.lblNombrePcia.AutoSize = true;
+            this.lblNombrePcia.Location = new System.Drawing.Point(55, 85);
+            this.lblNombrePcia.Name = "lblNombrePcia";
+            this.lblNombrePcia.Size = new System.Drawing.Size(86, 16);
+            this.lblNombrePcia.TabIndex = 1;
+            this.lblNombrePcia.Text = "Nombre Pcia";
             // 
-            // btnatras
+            // btnAtras
             // 
-            this.btnatras.AutoSize = true;
-            this.btnatras.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnatras.Location = new System.Drawing.Point(700, 400);
-            this.btnatras.Name = "btnatras";
-            this.btnatras.Size = new System.Drawing.Size(41, 17);
-            this.btnatras.TabIndex = 38;
-            this.btnatras.Text = "Atras";
+            this.btnAtras.AutoSize = true;
+            this.btnAtras.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.btnAtras.Location = new System.Drawing.Point(700, 400);
+            this.btnAtras.Name = "btnAtras";
+            this.btnAtras.Size = new System.Drawing.Size(41, 17);
+            this.btnAtras.TabIndex = 2;
+            this.btnAtras.Text = "Atrás";
+            this.btnAtras.Click += new System.EventHandler(this.btnAtras_Click);
             // 
-            // btnconsulta
+            // btnConsulta
             // 
-            this.btnconsulta.Location = new System.Drawing.Point(26, 400);
-            this.btnconsulta.Margin = new System.Windows.Forms.Padding(4);
-            this.btnconsulta.Name = "btnconsulta";
-            this.btnconsulta.Size = new System.Drawing.Size(100, 28);
-            this.btnconsulta.TabIndex = 74;
-            this.btnconsulta.Text = "Consulta";
-            this.btnconsulta.UseVisualStyleBackColor = true;
+            this.btnConsulta.Location = new System.Drawing.Point(26, 400);
+            this.btnConsulta.Name = "btnConsulta";
+            this.btnConsulta.Size = new System.Drawing.Size(100, 28);
+            this.btnConsulta.TabIndex = 3;
+            this.btnConsulta.Text = "Consulta";
+            this.btnConsulta.UseVisualStyleBackColor = true;
+            this.btnConsulta.Click += new System.EventHandler(this.btnConsulta_Click);
             // 
-            // btnalta
+            // btnAlta
             // 
-            this.btnalta.Location = new System.Drawing.Point(134, 400);
-            this.btnalta.Margin = new System.Windows.Forms.Padding(4);
-            this.btnalta.Name = "btnalta";
-            this.btnalta.Size = new System.Drawing.Size(100, 28);
-            this.btnalta.TabIndex = 73;
-            this.btnalta.Text = "Alta";
-            this.btnalta.UseVisualStyleBackColor = true;
+            this.btnAlta.Location = new System.Drawing.Point(134, 400);
+            this.btnAlta.Name = "btnAlta";
+            this.btnAlta.Size = new System.Drawing.Size(100, 28);
+            this.btnAlta.TabIndex = 4;
+            this.btnAlta.Text = "Alta";
+            this.btnAlta.UseVisualStyleBackColor = true;
+            this.btnAlta.Click += new System.EventHandler(this.btnAlta_Click);
             // 
-            // btnbaja
+            // btnBaja
             // 
-            this.btnbaja.Location = new System.Drawing.Point(251, 400);
-            this.btnbaja.Margin = new System.Windows.Forms.Padding(4);
-            this.btnbaja.Name = "btnbaja";
-            this.btnbaja.Size = new System.Drawing.Size(100, 28);
-            this.btnbaja.TabIndex = 72;
-            this.btnbaja.Text = "Baja";
-            this.btnbaja.UseVisualStyleBackColor = true;
+            this.btnBaja.Location = new System.Drawing.Point(251, 400);
+            this.btnBaja.Name = "btnBaja";
+            this.btnBaja.Size = new System.Drawing.Size(100, 28);
+            this.btnBaja.TabIndex = 5;
+            this.btnBaja.Text = "Baja";
+            this.btnBaja.UseVisualStyleBackColor = true;
+            this.btnBaja.Click += new System.EventHandler(this.btnBaja_Click);
             // 
-            // btnmodificacion
+            // btnModificacion
             // 
-            this.btnmodificacion.Location = new System.Drawing.Point(369, 400);
-            this.btnmodificacion.Margin = new System.Windows.Forms.Padding(4);
-            this.btnmodificacion.Name = "btnmodificacion";
-            this.btnmodificacion.Size = new System.Drawing.Size(100, 28);
-            this.btnmodificacion.TabIndex = 71;
-            this.btnmodificacion.Text = "Modificacion";
-            this.btnmodificacion.UseVisualStyleBackColor = true;
+            this.btnModificacion.Location = new System.Drawing.Point(369, 400);
+            this.btnModificacion.Name = "btnModificacion";
+            this.btnModificacion.Size = new System.Drawing.Size(100, 28);
+            this.btnModificacion.TabIndex = 6;
+            this.btnModificacion.Text = "Modifica";
+            this.btnModificacion.UseVisualStyleBackColor = true;
+            this.btnModificacion.Click += new System.EventHandler(this.btnModificacion_Click);
             // 
             // cbidprovincia
             // 
@@ -113,7 +105,7 @@
             this.cbidprovincia.Location = new System.Drawing.Point(175, 31);
             this.cbidprovincia.Name = "cbidprovincia";
             this.cbidprovincia.Size = new System.Drawing.Size(121, 24);
-            this.cbidprovincia.TabIndex = 75;
+            this.cbidprovincia.TabIndex = 7;
             // 
             // cbnombreprovincia
             // 
@@ -121,22 +113,20 @@
             this.cbnombreprovincia.Location = new System.Drawing.Point(175, 77);
             this.cbnombreprovincia.Name = "cbnombreprovincia";
             this.cbnombreprovincia.Size = new System.Drawing.Size(452, 24);
-            this.cbnombreprovincia.TabIndex = 76;
+            this.cbnombreprovincia.TabIndex = 8;
             // 
             // Provincias
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.cbnombreprovincia);
             this.Controls.Add(this.cbidprovincia);
-            this.Controls.Add(this.btnconsulta);
-            this.Controls.Add(this.btnalta);
-            this.Controls.Add(this.btnbaja);
-            this.Controls.Add(this.btnmodificacion);
-            this.Controls.Add(this.btnatras);
-            this.Controls.Add(this.lblNombre);
-            this.Controls.Add(this.lblidprovincia);
+            this.Controls.Add(this.btnConsulta);
+            this.Controls.Add(this.btnAlta);
+            this.Controls.Add(this.btnBaja);
+            this.Controls.Add(this.btnModificacion);
+            this.Controls.Add(this.btnAtras);
+            this.Controls.Add(this.lblNombrePcia);
+            this.Controls.Add(this.lblIDProvincia);
             this.Name = "Provincias";
             this.Text = "Provincias";
             this.Load += new System.EventHandler(this.frmprovincia_Load);
@@ -147,13 +137,13 @@
 
         #endregion
 
-        private System.Windows.Forms.Label lblidprovincia;
-        private System.Windows.Forms.Label lblNombre;
-        private System.Windows.Forms.Label btnatras;
-        private System.Windows.Forms.Button btnconsulta;
-        private System.Windows.Forms.Button btnalta;
-        private System.Windows.Forms.Button btnbaja;
-        private System.Windows.Forms.Button btnmodificacion;
+        private System.Windows.Forms.Label lblIDProvincia;
+        private System.Windows.Forms.Label lblNombrePcia;
+        private System.Windows.Forms.Label btnAtras;
+        private System.Windows.Forms.Button btnConsulta;
+        private System.Windows.Forms.Button btnAlta;
+        private System.Windows.Forms.Button btnBaja;
+        private System.Windows.Forms.Button btnModificacion;
         private System.Windows.Forms.ComboBox cbidprovincia;
         private System.Windows.Forms.ComboBox cbnombreprovincia;
     }

@@ -102,15 +102,15 @@ namespace FerreteriaElCosito
             {
                 using (MySqlConnection conn = ConexionBD.ObtenerConexion())
                 {
-                    string query = "SELECT idProvincia, nombreProvincia FROM provincias";
+                    string query = "SELECT idProvincia, nombreProvincia FROM provincias ORDER BY nombreProvincia";
                     MySqlDataAdapter da = new MySqlDataAdapter(query, conn);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
 
-                    dt.Columns.Add("Display", typeof(string), "Convert(idProvincia, 'System.String') + ' - ' + nombreProvincia");
                     cbprovincia.DataSource = dt;
-                    cbprovincia.DisplayMember = "Display";
+                    cbprovincia.DisplayMember = "nombreProvincia";
                     cbprovincia.ValueMember = "idProvincia";
+                    cbprovincia.SelectedIndex = -1; // Sin selección inicial
                 }
             }
             catch (Exception ex)
@@ -118,19 +118,24 @@ namespace FerreteriaElCosito
                 MessageBox.Show("Error al cargar provincias: " + ex.Message);
             }
         }
-
+        private void btneditarprov_Click(object sender, EventArgs e)
+        {
+            Provincias frm = new Provincias();
+            frm.ShowDialog();
+            CargarProvincias(); // recarga el combo de provincias en Empleados
+        }
         private void CargarLocalidades()
         {
             try
             {
-                using (MySqlConnection conn = ConexionBD.ObtenerConexion())
+                using (var conn = ConexionBD.ObtenerConexion())
                 {
                     string query = "SELECT idLocalidad, nombreLocalidad FROM localidades";
                     MySqlDataAdapter da = new MySqlDataAdapter(query, conn);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
 
-                    dt.Columns.Add("Display", typeof(string), "Convert(idLocalidad, 'System.String') + ' - ' + nombreLocalidad");
+                    dt.Columns.Add("Display", typeof(string), "Convert(idLocalidad,'System.String') + ' - ' + nombreLocalidad");
                     cblocalidad.DataSource = dt;
                     cblocalidad.DisplayMember = "Display";
                     cblocalidad.ValueMember = "idLocalidad";
@@ -140,6 +145,15 @@ namespace FerreteriaElCosito
             {
                 MessageBox.Show("Error al cargar localidades: " + ex.Message);
             }
+        }
+        private void btneditarloc_Click_1(object sender, EventArgs e)
+        {
+            // Instancia del formulario Localidad
+            Localidad frm = new Localidad();
+            frm.ShowDialog(); // abre como ventana modal
+
+            // Recarga el combo de localidades después de cerrar
+            CargarLocalidades();
         }
 
         private void CargarCategorias()
@@ -844,7 +858,7 @@ namespace FerreteriaElCosito
 
         }
 
-        
+       
     }
 }
 

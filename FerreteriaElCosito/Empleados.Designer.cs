@@ -63,6 +63,11 @@
             this.btnlimpiar = new System.Windows.Forms.Button();
             this.dtfechabaja = new System.Windows.Forms.DateTimePicker();
             this.lblfechabaja = new System.Windows.Forms.Label();
+            this.btneditarprov = new System.Windows.Forms.Button();
+            this.btneditarcat = new System.Windows.Forms.Button();
+            this.btneditarrol = new System.Windows.Forms.Button();
+            this.btneditarloc = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblidempleado
@@ -142,7 +147,7 @@
             // 
             // txtcallenro
             // 
-            this.txtcallenro.Location = new System.Drawing.Point(438, 129);
+            this.txtcallenro.Location = new System.Drawing.Point(438, 123);
             this.txtcallenro.Name = "txtcallenro";
             this.txtcallenro.Size = new System.Drawing.Size(279, 22);
             this.txtcallenro.TabIndex = 11;
@@ -169,15 +174,15 @@
             // cblocalidad
             // 
             this.cblocalidad.FormattingEnabled = true;
-            this.cblocalidad.Location = new System.Drawing.Point(85, 165);
+            this.cblocalidad.Location = new System.Drawing.Point(85, 159);
             this.cblocalidad.Name = "cblocalidad";
-            this.cblocalidad.Size = new System.Drawing.Size(239, 24);
+            this.cblocalidad.Size = new System.Drawing.Size(201, 24);
             this.cblocalidad.TabIndex = 15;
             // 
             // cbprovincia
             // 
             this.cbprovincia.FormattingEnabled = true;
-            this.cbprovincia.Location = new System.Drawing.Point(438, 164);
+            this.cbprovincia.Location = new System.Drawing.Point(468, 163);
             this.cbprovincia.Name = "cbprovincia";
             this.cbprovincia.Size = new System.Drawing.Size(239, 24);
             this.cbprovincia.TabIndex = 17;
@@ -186,7 +191,7 @@
             // lblprovincia
             // 
             this.lblprovincia.AutoSize = true;
-            this.lblprovincia.Location = new System.Drawing.Point(364, 173);
+            this.lblprovincia.Location = new System.Drawing.Point(386, 171);
             this.lblprovincia.Name = "lblprovincia";
             this.lblprovincia.Size = new System.Drawing.Size(63, 16);
             this.lblprovincia.TabIndex = 16;
@@ -196,7 +201,7 @@
             // lblcategoria
             // 
             this.lblcategoria.AutoSize = true;
-            this.lblcategoria.Location = new System.Drawing.Point(367, 217);
+            this.lblcategoria.Location = new System.Drawing.Point(10, 214);
             this.lblcategoria.Name = "lblcategoria";
             this.lblcategoria.Size = new System.Drawing.Size(66, 16);
             this.lblcategoria.TabIndex = 18;
@@ -206,7 +211,7 @@
             // lblfechaalta
             // 
             this.lblfechaalta.AutoSize = true;
-            this.lblfechaalta.Location = new System.Drawing.Point(12, 214);
+            this.lblfechaalta.Location = new System.Drawing.Point(7, 298);
             this.lblfechaalta.Name = "lblfechaalta";
             this.lblfechaalta.Size = new System.Drawing.Size(90, 16);
             this.lblfechaalta.TabIndex = 19;
@@ -215,14 +220,14 @@
             // cbcategoria
             // 
             this.cbcategoria.FormattingEnabled = true;
-            this.cbcategoria.Location = new System.Drawing.Point(438, 214);
+            this.cbcategoria.Location = new System.Drawing.Point(85, 205);
             this.cbcategoria.Name = "cbcategoria";
-            this.cbcategoria.Size = new System.Drawing.Size(239, 24);
+            this.cbcategoria.Size = new System.Drawing.Size(201, 24);
             this.cbcategoria.TabIndex = 20;
             // 
             // dtalta
             // 
-            this.dtalta.Location = new System.Drawing.Point(108, 208);
+            this.dtalta.Location = new System.Drawing.Point(108, 290);
             this.dtalta.Name = "dtalta";
             this.dtalta.Size = new System.Drawing.Size(200, 22);
             this.dtalta.TabIndex = 21;
@@ -231,7 +236,7 @@
             // cbidrol
             // 
             this.cbidrol.FormattingEnabled = true;
-            this.cbidrol.Location = new System.Drawing.Point(439, 260);
+            this.cbidrol.Location = new System.Drawing.Point(468, 210);
             this.cbidrol.Name = "cbidrol";
             this.cbidrol.Size = new System.Drawing.Size(239, 24);
             this.cbidrol.TabIndex = 25;
@@ -240,7 +245,7 @@
             // lbliderol
             // 
             this.lbliderol.AutoSize = true;
-            this.lbliderol.Location = new System.Drawing.Point(365, 269);
+            this.lbliderol.Location = new System.Drawing.Point(407, 213);
             this.lbliderol.Name = "lbliderol";
             this.lbliderol.Size = new System.Drawing.Size(42, 16);
             this.lbliderol.TabIndex = 24;
@@ -250,7 +255,7 @@
             // cbiddeposito
             // 
             this.cbiddeposito.FormattingEnabled = true;
-            this.cbiddeposito.Location = new System.Drawing.Point(85, 297);
+            this.cbiddeposito.Location = new System.Drawing.Point(85, 246);
             this.cbiddeposito.Name = "cbiddeposito";
             this.cbiddeposito.Size = new System.Drawing.Size(239, 24);
             this.cbiddeposito.TabIndex = 23;
@@ -259,7 +264,7 @@
             // lbliddeposito
             // 
             this.lbliddeposito.AutoSize = true;
-            this.lbliddeposito.Location = new System.Drawing.Point(10, 305);
+            this.lbliddeposito.Location = new System.Drawing.Point(10, 254);
             this.lbliddeposito.Name = "lbliddeposito";
             this.lbliddeposito.Size = new System.Drawing.Size(76, 16);
             this.lbliddeposito.TabIndex = 22;
@@ -279,7 +284,7 @@
             // 
             // btnrol
             // 
-            this.btnrol.Location = new System.Drawing.Point(665, 310);
+            this.btnrol.Location = new System.Drawing.Point(548, 354);
             this.btnrol.Margin = new System.Windows.Forms.Padding(4);
             this.btnrol.Name = "btnrol";
             this.btnrol.Size = new System.Drawing.Size(100, 28);
@@ -369,7 +374,7 @@
             // 
             // dtfechabaja
             // 
-            this.dtfechabaja.Location = new System.Drawing.Point(108, 254);
+            this.dtfechabaja.Location = new System.Drawing.Point(478, 298);
             this.dtfechabaja.Name = "dtfechabaja";
             this.dtfechabaja.Size = new System.Drawing.Size(200, 22);
             this.dtfechabaja.TabIndex = 80;
@@ -378,18 +383,70 @@
             // lblfechabaja
             // 
             this.lblfechabaja.AutoSize = true;
-            this.lblfechabaja.Location = new System.Drawing.Point(12, 260);
+            this.lblfechabaja.Location = new System.Drawing.Point(346, 304);
             this.lblfechabaja.Name = "lblfechabaja";
             this.lblfechabaja.Size = new System.Drawing.Size(95, 16);
             this.lblfechabaja.TabIndex = 79;
             this.lblfechabaja.Text = "Fecha de Baja";
             this.lblfechabaja.Click += new System.EventHandler(this.label1_Click_3);
             // 
+            // btneditarprov
+            // 
+            this.btneditarprov.Location = new System.Drawing.Point(713, 164);
+            this.btneditarprov.Name = "btneditarprov";
+            this.btneditarprov.Size = new System.Drawing.Size(75, 23);
+            this.btneditarprov.TabIndex = 81;
+            this.btneditarprov.Text = "Editar";
+            this.btneditarprov.UseVisualStyleBackColor = true;
+            this.btneditarprov.Click += new System.EventHandler(this.btneditarprov_Click);
+            // 
+            // btneditarcat
+            // 
+            this.btneditarcat.Location = new System.Drawing.Point(292, 205);
+            this.btneditarcat.Name = "btneditarcat";
+            this.btneditarcat.Size = new System.Drawing.Size(75, 23);
+            this.btneditarcat.TabIndex = 82;
+            this.btneditarcat.Text = "Editar";
+            this.btneditarcat.UseVisualStyleBackColor = true;
+            // 
+            // btneditarrol
+            // 
+            this.btneditarrol.Location = new System.Drawing.Point(713, 211);
+            this.btneditarrol.Name = "btneditarrol";
+            this.btneditarrol.Size = new System.Drawing.Size(75, 23);
+            this.btneditarrol.TabIndex = 83;
+            this.btneditarrol.Text = "Editar";
+            this.btneditarrol.UseVisualStyleBackColor = true;
+            // 
+            // btneditarloc
+            // 
+            this.btneditarloc.Location = new System.Drawing.Point(292, 159);
+            this.btneditarloc.Name = "btneditarloc";
+            this.btneditarloc.Size = new System.Drawing.Size(75, 23);
+            this.btneditarloc.TabIndex = 84;
+            this.btneditarloc.Text = "Editar";
+            this.btneditarloc.UseVisualStyleBackColor = true;
+            this.btneditarloc.Click += new System.EventHandler(this.btneditarloc_Click_1);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(330, 247);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 85;
+            this.button2.Text = "Editar";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
             // Empleados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btneditarloc);
+            this.Controls.Add(this.btneditarrol);
+            this.Controls.Add(this.btneditarcat);
+            this.Controls.Add(this.btneditarprov);
             this.Controls.Add(this.dtfechabaja);
             this.Controls.Add(this.lblfechabaja);
             this.Controls.Add(this.btnlimpiar);
@@ -470,5 +527,10 @@
         private System.Windows.Forms.Button btnlimpiar;
         private System.Windows.Forms.DateTimePicker dtfechabaja;
         private System.Windows.Forms.Label lblfechabaja;
+        private System.Windows.Forms.Button btneditarprov;
+        private System.Windows.Forms.Button btneditarcat;
+        private System.Windows.Forms.Button btneditarrol;
+        private System.Windows.Forms.Button btneditarloc;
+        private System.Windows.Forms.Button button2;
     }
 }
