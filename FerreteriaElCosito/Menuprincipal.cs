@@ -28,15 +28,48 @@ namespace FerreteriaElCosito
 
         private void Menuprincipal_Load(object sender, EventArgs e)
         {
-            // Ahora que el formulario "sabe" el rol del usuario,
-            // aquí es donde va la lógica para habilitar o deshabilitar botones.
-            // Ejemplo:
-            if (this.idRolUsuario == 2) // Asumiendo que el rol 2 es 'Vendedor'
+            // Habilitamos todos los botones por defecto al cargar el formulario
+            btnfacturar.Enabled = true;
+            btncompras.Enabled = true;
+            btnproveedores.Enabled = true;
+            btnproductos.Enabled = true;
+            btnclientes.Enabled = true;
+            btnusuarios.Enabled = true;
+            btncaja.Enabled = true;
+            btnempleados.Enabled = true;
+
+            // Ahora, deshabilitamos según el rol específico del usuario
+            switch (this.idRolUsuario)
             {
-                btnempleados.Enabled = false; // El vendedor no puede gestionar empleados
-                btnusuarios.Enabled = false;  // Tampoco puede gestionar usuarios
-                btnproveedores.Enabled = false; // Y tampoco proveedores
-                // ... y así con los demás botones que no le correspondan.
+                case 1: // Administrador
+                        // No hacemos nada, el admin puede ver todo.
+                    break;
+
+                case 2: // Vendedor
+                    btnempleados.Enabled = false;
+                    btnusuarios.Enabled = false;
+                    btnproveedores.Enabled = false;
+                    btncompras.Enabled = false;
+                    break;
+
+                case 3: // Depósito
+                    btnfacturar.Enabled = false;
+                    btnclientes.Enabled = false;
+                    btnusuarios.Enabled = false;
+                    btncaja.Enabled = false;
+                    break;
+
+                default:
+                    // Si el rol es desconocido, por seguridad deshabilitamos todo.
+                    btnfacturar.Enabled = false;
+                    btncompras.Enabled = false;
+                    btnproveedores.Enabled = false;
+                    btnproductos.Enabled = false;
+                    btnclientes.Enabled = false;
+                    btnusuarios.Enabled = false;
+                    btncaja.Enabled = false;
+                    btnempleados.Enabled = false;
+                    break;
             }
         }
 
