@@ -102,15 +102,15 @@ namespace FerreteriaElCosito
             {
                 using (MySqlConnection conn = ConexionBD.ObtenerConexion())
                 {
-                    string query = "SELECT idProvincia, nombreProvincia FROM provincias";
+                    string query = "SELECT idProvincia, nombreProvincia FROM provincias ORDER BY nombreProvincia";
                     MySqlDataAdapter da = new MySqlDataAdapter(query, conn);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
 
-                    dt.Columns.Add("Display", typeof(string), "Convert(idProvincia, 'System.String') + ' - ' + nombreProvincia");
                     cbprovincia.DataSource = dt;
-                    cbprovincia.DisplayMember = "Display";
+                    cbprovincia.DisplayMember = "nombreProvincia";
                     cbprovincia.ValueMember = "idProvincia";
+                    cbprovincia.SelectedIndex = -1; // Sin selección inicial
                 }
             }
             catch (Exception ex)
@@ -118,19 +118,24 @@ namespace FerreteriaElCosito
                 MessageBox.Show("Error al cargar provincias: " + ex.Message);
             }
         }
-
+        private void btneditarprov_Click(object sender, EventArgs e)
+        {
+            Provincias frm = new Provincias();
+            frm.ShowDialog();
+            CargarProvincias(); // recarga el combo de provincias en Empleados
+        }
         private void CargarLocalidades()
         {
             try
             {
-                using (MySqlConnection conn = ConexionBD.ObtenerConexion())
+                using (var conn = ConexionBD.ObtenerConexion())
                 {
                     string query = "SELECT idLocalidad, nombreLocalidad FROM localidades";
                     MySqlDataAdapter da = new MySqlDataAdapter(query, conn);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
 
-                    dt.Columns.Add("Display", typeof(string), "Convert(idLocalidad, 'System.String') + ' - ' + nombreLocalidad");
+                    dt.Columns.Add("Display", typeof(string), "Convert(idLocalidad,'System.String') + ' - ' + nombreLocalidad");
                     cblocalidad.DataSource = dt;
                     cblocalidad.DisplayMember = "Display";
                     cblocalidad.ValueMember = "idLocalidad";
@@ -140,6 +145,15 @@ namespace FerreteriaElCosito
             {
                 MessageBox.Show("Error al cargar localidades: " + ex.Message);
             }
+        }
+        private void btneditarloc_Click_1(object sender, EventArgs e)
+        {
+            // Instancia del formulario Localidad
+            Localidad frm = new Localidad();
+            frm.ShowDialog(); // abre como ventana modal
+
+            // Recarga el combo de localidades después de cerrar
+            CargarLocalidades();
         }
 
         private void CargarCategorias()
@@ -168,6 +182,16 @@ namespace FerreteriaElCosito
             {
                 MessageBox.Show("Error al cargar categorías: " + ex.Message);
             }
+        }
+
+        private void btneditarcat_Click(object sender, EventArgs e)
+        {
+            //// Instancia del formulario Localidad
+            //Categorias frmCategoria = new Categorias();
+            //formularioCategoria.Show();  // abre como ventana modal
+
+            //// Recarga el combo de localidades después de cerrar
+            //CargarCategorias();
         }
 
         private void CargarDepositos()
@@ -214,6 +238,16 @@ namespace FerreteriaElCosito
             {
                 MessageBox.Show("Error al cargar roles: " + ex.Message);
             }
+        }
+
+        private void btneditarrol_Click(object sender, EventArgs e)
+        {
+            // Instancia del formulario Localidad
+            Roles formularioRoles = new Roles();
+            formularioRoles.Show();  // abre como ventana modal
+
+            // Recarga el combo de localidades después de cerrar
+            CargarRoles();
         }
 
         private void cbidempleado_SelectedIndexChanged(object sender, EventArgs e)
@@ -641,12 +675,7 @@ namespace FerreteriaElCosito
         {
             this.Close();
         }
-        private void btnrol_Click(object sender, EventArgs e)
-        {
-            Roles formularioRoles = new Roles(); // Crea una instancia del formulario Roles
-            formularioRoles.Show();              // Muestra el formulario de Roles
-            this.Hide();
-        }
+       
 
         private void btnmodificacion_Click(object sender, EventArgs e)
         {
@@ -842,7 +871,7 @@ namespace FerreteriaElCosito
 
         }
 
-        
+       
     }
 }
 

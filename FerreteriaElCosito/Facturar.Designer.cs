@@ -78,6 +78,7 @@
             this.txtcodigo.Name = "txtcodigo";
             this.txtcodigo.Size = new System.Drawing.Size(183, 22);
             this.txtcodigo.TabIndex = 2;
+            this.txtcodigo.Text = "40";
             this.txtcodigo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtcodigo_KeyDown);
             // 
             // lblcodigo
