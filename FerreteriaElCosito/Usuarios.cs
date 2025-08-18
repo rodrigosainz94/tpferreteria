@@ -33,9 +33,7 @@ namespace FerreteriaElCosito
 
         private void btnatras_Click(object sender, EventArgs e)
         {
-            Menuprincipal nuevoFormulario = new Menuprincipal();
-            nuevoFormulario.Show();
-            this.Hide();
+            this.Close();
         }
     }
 }

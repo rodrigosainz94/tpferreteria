@@ -182,7 +182,6 @@
             this.btnempleados.TabIndex = 16;
             this.btnempleados.Text = "EMPLEADOS";
             this.btnempleados.UseVisualStyleBackColor = false;
-            this.btnempleados.Click += new System.EventHandler(this.button1_Click);
             // 
             // btnformvs
             // 
