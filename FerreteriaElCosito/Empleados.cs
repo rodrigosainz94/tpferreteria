@@ -184,6 +184,16 @@ namespace FerreteriaElCosito
             }
         }
 
+        private void btneditarcat_Click(object sender, EventArgs e)
+        {
+            //// Instancia del formulario Localidad
+            //Categorias frmCategoria = new Categorias();
+            //formularioCategoria.Show();  // abre como ventana modal
+
+            //// Recarga el combo de localidades después de cerrar
+            //CargarCategorias();
+        }
+
         private void CargarDepositos()
         {
             try
@@ -228,6 +238,16 @@ namespace FerreteriaElCosito
             {
                 MessageBox.Show("Error al cargar roles: " + ex.Message);
             }
+        }
+
+        private void btneditarrol_Click(object sender, EventArgs e)
+        {
+            // Instancia del formulario Localidad
+            Roles formularioRoles = new Roles();
+            formularioRoles.Show();  // abre como ventana modal
+
+            // Recarga el combo de localidades después de cerrar
+            CargarRoles();
         }
 
         private void cbidempleado_SelectedIndexChanged(object sender, EventArgs e)
@@ -657,12 +677,7 @@ namespace FerreteriaElCosito
             Menuprincipal menu = new Menuprincipal(); // Crear instancia del menú
             menu.Show(); // Mostrar el menú principal
         }
-        private void btnrol_Click(object sender, EventArgs e)
-        {
-            Roles formularioRoles = new Roles(); // Crea una instancia del formulario Roles
-            formularioRoles.Show();              // Muestra el formulario de Roles
-            this.Hide();
-        }
+       
 
         private void btnmodificacion_Click(object sender, EventArgs e)
         {

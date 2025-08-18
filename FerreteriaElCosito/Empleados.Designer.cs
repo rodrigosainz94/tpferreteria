@@ -52,7 +52,6 @@
             this.cbiddeposito = new System.Windows.Forms.ComboBox();
             this.lbliddeposito = new System.Windows.Forms.Label();
             this.btnatras = new System.Windows.Forms.Button();
-            this.btnrol = new System.Windows.Forms.Button();
             this.btnconsulta = new System.Windows.Forms.Button();
             this.btnalta = new System.Windows.Forms.Button();
             this.btnbaja = new System.Windows.Forms.Button();
@@ -282,17 +281,6 @@
             this.btnatras.UseVisualStyleBackColor = true;
             this.btnatras.Click += new System.EventHandler(this.btnatras_Click);
             // 
-            // btnrol
-            // 
-            this.btnrol.Location = new System.Drawing.Point(548, 354);
-            this.btnrol.Margin = new System.Windows.Forms.Padding(4);
-            this.btnrol.Name = "btnrol";
-            this.btnrol.Size = new System.Drawing.Size(100, 28);
-            this.btnrol.TabIndex = 66;
-            this.btnrol.Text = "Roles";
-            this.btnrol.UseVisualStyleBackColor = true;
-            this.btnrol.Click += new System.EventHandler(this.btnrol_Click);
-            // 
             // btnconsulta
             // 
             this.btnconsulta.Location = new System.Drawing.Point(13, 397);
@@ -408,6 +396,7 @@
             this.btneditarcat.TabIndex = 82;
             this.btneditarcat.Text = "Editar";
             this.btneditarcat.UseVisualStyleBackColor = true;
+            this.btneditarcat.Click += new System.EventHandler(this.btneditarcat_Click);
             // 
             // btneditarrol
             // 
@@ -417,6 +406,7 @@
             this.btneditarrol.TabIndex = 83;
             this.btneditarrol.Text = "Editar";
             this.btneditarrol.UseVisualStyleBackColor = true;
+            this.btneditarrol.Click += new System.EventHandler(this.btneditarrol_Click);
             // 
             // btneditarloc
             // 
@@ -457,7 +447,6 @@
             this.Controls.Add(this.btnalta);
             this.Controls.Add(this.btnbaja);
             this.Controls.Add(this.btnmodificacion);
-            this.Controls.Add(this.btnrol);
             this.Controls.Add(this.btnatras);
             this.Controls.Add(this.cbidrol);
             this.Controls.Add(this.lbliderol);
@@ -516,7 +505,6 @@
         private System.Windows.Forms.ComboBox cbiddeposito;
         private System.Windows.Forms.Label lbliddeposito;
         private System.Windows.Forms.Button btnatras;
-        private System.Windows.Forms.Button btnrol;
         private System.Windows.Forms.Button btnconsulta;
         private System.Windows.Forms.Button btnalta;
         private System.Windows.Forms.Button btnbaja;
