@@ -675,7 +675,7 @@ namespace FerreteriaElCosito
         {
             this.Close();
         }
-       
+
 
         private void btnmodificacion_Click(object sender, EventArgs e)
         {
@@ -871,8 +871,6 @@ namespace FerreteriaElCosito
 
         }
 
-       
+
     }
 }
-
-
