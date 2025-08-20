@@ -47,28 +47,46 @@ namespace FerreteriaElCosito
 
                 case 2: // Vendedor
                     btnempleados.Enabled = false;
+                    btnempleados.BackColor = Color.Gray;
                     btnusuarios.Enabled = false;
+                    btnusuarios.BackColor = Color.Gray;
                     btnproveedores.Enabled = false;
+                    btnproveedores.BackColor = Color.Gray;
                     btncompras.Enabled = false;
+                    btncompras.BackColor = Color.Gray;
                     break;
 
                 case 3: // Depósito
+                    btnempleados.Enabled = false;
+                    btnempleados.BackColor = Color.Gray;
                     btnfacturar.Enabled = false;
+                    btnfacturar.BackColor = Color.Gray;
                     btnclientes.Enabled = false;
+                    btnclientes.BackColor = Color.Gray;
                     btnusuarios.Enabled = false;
+                    btnusuarios.BackColor = Color.Gray;
                     btncaja.Enabled = false;
+                    btncaja.BackColor = Color.Gray;
                     break;
 
                 default:
                     // Si el rol es desconocido, por seguridad deshabilitamos todo.
                     btnfacturar.Enabled = false;
+                    btnfacturar.BackColor = Color.Gray;
                     btncompras.Enabled = false;
+                    btncompras.BackColor = Color.Gray;
                     btnproveedores.Enabled = false;
+                    btnproveedores.BackColor = Color.Gray;
                     btnproductos.Enabled = false;
+                    btnproductos.BackColor = Color.Gray;
                     btnclientes.Enabled = false;
+                    btnclientes.BackColor = Color.Gray;
                     btnusuarios.Enabled = false;
+                    btnusuarios.BackColor = Color.Gray;
                     btncaja.Enabled = false;
+                    btncaja.BackColor = Color.Gray;
                     btnempleados.Enabled = false;
+                    btnempleados.BackColor = Color.Gray;
                     break;
             }
         }
@@ -143,6 +161,18 @@ namespace FerreteriaElCosito
         private void btnsalir_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void btncs_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            // Mostramos nuevamente el formulario de login
+            Inicio formularioLogin = new Inicio();
+            formularioLogin.Show();
+
+            // Cuando se cierre el login, cerramos también el menú
+            formularioLogin.FormClosed += (s, args) => this.Close();
         }
     }
 }
