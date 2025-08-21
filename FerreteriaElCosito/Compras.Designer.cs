@@ -28,154 +28,284 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.dgvcompra = new System.Windows.Forms.DataGridView();
-            this.txtbuscar = new System.Windows.Forms.TextBox();
-            this.btnbuscar = new System.Windows.Forms.Button();
-            this.txtcodigo = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.dgvfiltro = new System.Windows.Forms.DataGridView();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnagregar = new System.Windows.Forms.Button();
+            this.lblproveedor = new System.Windows.Forms.Label();
+            this.lblfecha = new System.Windows.Forms.Label();
+            this.btnhacerpedido = new System.Windows.Forms.Button();
             this.btnquitar = new System.Windows.Forms.Button();
             this.btnatras = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvcompra)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvfiltro)).BeginInit();
+            this.cbproveedor = new System.Windows.Forms.ComboBox();
+            this.cbidproveedor = new System.Windows.Forms.ComboBox();
+            this.lblidproveedor = new System.Windows.Forms.Label();
+            this.dtpfecha = new System.Windows.Forms.DateTimePicker();
+            this.cbtcomprobante = new System.Windows.Forms.ComboBox();
+            this.lbltcomprobante = new System.Windows.Forms.Label();
+            this.lblnrocomprobante = new System.Windows.Forms.Label();
+            this.txtnrocomprobante = new System.Windows.Forms.TextBox();
+            this.cbempleado = new System.Windows.Forms.ComboBox();
+            this.lblempleado = new System.Windows.Forms.Label();
+            this.cbproducto = new System.Windows.Forms.ComboBox();
+            this.lblproducto = new System.Windows.Forms.Label();
+            this.cbidproducto = new System.Windows.Forms.ComboBox();
+            this.lblidproducto = new System.Windows.Forms.Label();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // btnagregar
             // 
-            this.button1.Location = new System.Drawing.Point(262, 141);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "AGREGAR";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnagregar.Location = new System.Drawing.Point(51, 255);
+            this.btnagregar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnagregar.Name = "btnagregar";
+            this.btnagregar.Size = new System.Drawing.Size(100, 28);
+            this.btnagregar.TabIndex = 1;
+            this.btnagregar.Text = "Agregar";
+            this.btnagregar.UseVisualStyleBackColor = true;
+            this.btnagregar.Click += new System.EventHandler(this.button1_Click);
             // 
-            // dgvcompra
+            // lblproveedor
             // 
-            this.dgvcompra.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvcompra.Location = new System.Drawing.Point(12, 170);
-            this.dgvcompra.Name = "dgvcompra";
-            this.dgvcompra.Size = new System.Drawing.Size(576, 93);
-            this.dgvcompra.TabIndex = 2;
+            this.lblproveedor.AutoSize = true;
+            this.lblproveedor.Location = new System.Drawing.Point(223, 25);
+            this.lblproveedor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblproveedor.Name = "lblproveedor";
+            this.lblproveedor.Size = new System.Drawing.Size(77, 16);
+            this.lblproveedor.TabIndex = 6;
+            this.lblproveedor.Text = "Proveedor :";
             // 
-            // txtbuscar
+            // lblfecha
             // 
-            this.txtbuscar.Location = new System.Drawing.Point(78, 16);
-            this.txtbuscar.Name = "txtbuscar";
-            this.txtbuscar.Size = new System.Drawing.Size(116, 20);
-            this.txtbuscar.TabIndex = 3;
+            this.lblfecha.AutoSize = true;
+            this.lblfecha.Location = new System.Drawing.Point(526, 25);
+            this.lblfecha.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblfecha.Name = "lblfecha";
+            this.lblfecha.Size = new System.Drawing.Size(51, 16);
+            this.lblfecha.TabIndex = 7;
+            this.lblfecha.Text = "Fecha: ";
             // 
-            // btnbuscar
+            // btnhacerpedido
             // 
-            this.btnbuscar.Location = new System.Drawing.Point(406, 16);
-            this.btnbuscar.Name = "btnbuscar";
-            this.btnbuscar.Size = new System.Drawing.Size(182, 19);
-            this.btnbuscar.TabIndex = 4;
-            this.btnbuscar.Text = "BUSCAR";
-            this.btnbuscar.UseVisualStyleBackColor = true;
-            // 
-            // txtcodigo
-            // 
-            this.txtcodigo.Location = new System.Drawing.Point(284, 16);
-            this.txtcodigo.Name = "txtcodigo";
-            this.txtcodigo.Size = new System.Drawing.Size(116, 20);
-            this.txtcodigo.TabIndex = 5;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 19);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(60, 13);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "NOMBRE :";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(220, 20);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(58, 13);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "CODIGO : ";
-            // 
-            // dgvfiltro
-            // 
-            this.dgvfiltro.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvfiltro.Location = new System.Drawing.Point(15, 66);
-            this.dgvfiltro.Name = "dgvfiltro";
-            this.dgvfiltro.Size = new System.Drawing.Size(573, 69);
-            this.dgvfiltro.TabIndex = 8;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(421, 318);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(167, 23);
-            this.button2.TabIndex = 9;
-            this.button2.Text = "HACER PEDIDO";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnhacerpedido.Location = new System.Drawing.Point(24, 354);
+            this.btnhacerpedido.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnhacerpedido.Name = "btnhacerpedido";
+            this.btnhacerpedido.Size = new System.Drawing.Size(155, 28);
+            this.btnhacerpedido.TabIndex = 9;
+            this.btnhacerpedido.Text = "HACER PEDIDO";
+            this.btnhacerpedido.UseVisualStyleBackColor = true;
             // 
             // btnquitar
             // 
-            this.btnquitar.Location = new System.Drawing.Point(262, 269);
+            this.btnquitar.Location = new System.Drawing.Point(51, 303);
+            this.btnquitar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnquitar.Name = "btnquitar";
-            this.btnquitar.Size = new System.Drawing.Size(75, 23);
+            this.btnquitar.Size = new System.Drawing.Size(100, 28);
             this.btnquitar.TabIndex = 10;
-            this.btnquitar.Text = "QUITAR";
+            this.btnquitar.Text = "Quitar";
             this.btnquitar.UseVisualStyleBackColor = true;
             // 
             // btnatras
             // 
-            this.btnatras.Location = new System.Drawing.Point(15, 318);
+            this.btnatras.Location = new System.Drawing.Point(665, 390);
+            this.btnatras.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnatras.Name = "btnatras";
-            this.btnatras.Size = new System.Drawing.Size(75, 23);
+            this.btnatras.Size = new System.Drawing.Size(100, 28);
             this.btnatras.TabIndex = 13;
-            this.btnatras.Text = "ATRAS";
+            this.btnatras.Text = "Atras";
             this.btnatras.UseVisualStyleBackColor = true;
             this.btnatras.Click += new System.EventHandler(this.btnatras_Click);
             // 
+            // cbproveedor
+            // 
+            this.cbproveedor.FormattingEnabled = true;
+            this.cbproveedor.Location = new System.Drawing.Point(308, 22);
+            this.cbproveedor.Name = "cbproveedor";
+            this.cbproveedor.Size = new System.Drawing.Size(200, 24);
+            this.cbproveedor.TabIndex = 14;
+            // 
+            // cbidproveedor
+            // 
+            this.cbidproveedor.FormattingEnabled = true;
+            this.cbidproveedor.Location = new System.Drawing.Point(106, 23);
+            this.cbidproveedor.Name = "cbidproveedor";
+            this.cbidproveedor.Size = new System.Drawing.Size(97, 24);
+            this.cbidproveedor.TabIndex = 16;
+            // 
+            // lblidproveedor
+            // 
+            this.lblidproveedor.AutoSize = true;
+            this.lblidproveedor.Location = new System.Drawing.Point(21, 26);
+            this.lblidproveedor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblidproveedor.Name = "lblidproveedor";
+            this.lblidproveedor.Size = new System.Drawing.Size(93, 16);
+            this.lblidproveedor.TabIndex = 15;
+            this.lblidproveedor.Text = "ID Proveedor :";
+            // 
+            // dtpfecha
+            // 
+            this.dtpfecha.Location = new System.Drawing.Point(584, 21);
+            this.dtpfecha.Name = "dtpfecha";
+            this.dtpfecha.Size = new System.Drawing.Size(200, 22);
+            this.dtpfecha.TabIndex = 17;
+            // 
+            // cbtcomprobante
+            // 
+            this.cbtcomprobante.FormattingEnabled = true;
+            this.cbtcomprobante.Location = new System.Drawing.Point(119, 78);
+            this.cbtcomprobante.Name = "cbtcomprobante";
+            this.cbtcomprobante.Size = new System.Drawing.Size(84, 24);
+            this.cbtcomprobante.TabIndex = 20;
+            // 
+            // lbltcomprobante
+            // 
+            this.lbltcomprobante.AutoSize = true;
+            this.lbltcomprobante.Location = new System.Drawing.Point(21, 82);
+            this.lbltcomprobante.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbltcomprobante.Name = "lbltcomprobante";
+            this.lbltcomprobante.Size = new System.Drawing.Size(100, 16);
+            this.lbltcomprobante.TabIndex = 19;
+            this.lbltcomprobante.Text = "Tipo Comprob :";
+            // 
+            // lblnrocomprobante
+            // 
+            this.lblnrocomprobante.AutoSize = true;
+            this.lblnrocomprobante.Location = new System.Drawing.Point(223, 81);
+            this.lblnrocomprobante.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblnrocomprobante.Name = "lblnrocomprobante";
+            this.lblnrocomprobante.Size = new System.Drawing.Size(114, 16);
+            this.lblnrocomprobante.TabIndex = 18;
+            this.lblnrocomprobante.Text = "Nro Comprobante";
+            // 
+            // txtnrocomprobante
+            // 
+            this.txtnrocomprobante.Location = new System.Drawing.Point(351, 75);
+            this.txtnrocomprobante.Name = "txtnrocomprobante";
+            this.txtnrocomprobante.Size = new System.Drawing.Size(157, 22);
+            this.txtnrocomprobante.TabIndex = 21;
+            // 
+            // cbempleado
+            // 
+            this.cbempleado.FormattingEnabled = true;
+            this.cbempleado.Location = new System.Drawing.Point(624, 74);
+            this.cbempleado.Name = "cbempleado";
+            this.cbempleado.Size = new System.Drawing.Size(160, 24);
+            this.cbempleado.TabIndex = 23;
+            this.cbempleado.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // lblempleado
+            // 
+            this.lblempleado.AutoSize = true;
+            this.lblempleado.Location = new System.Drawing.Point(526, 78);
+            this.lblempleado.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblempleado.Name = "lblempleado";
+            this.lblempleado.Size = new System.Drawing.Size(76, 16);
+            this.lblempleado.TabIndex = 22;
+            this.lblempleado.Text = "Empleado :";
+            // 
+            // cbproducto
+            // 
+            this.cbproducto.FormattingEnabled = true;
+            this.cbproducto.Location = new System.Drawing.Point(119, 183);
+            this.cbproducto.Name = "cbproducto";
+            this.cbproducto.Size = new System.Drawing.Size(84, 24);
+            this.cbproducto.TabIndex = 27;
+            // 
+            // lblproducto
+            // 
+            this.lblproducto.AutoSize = true;
+            this.lblproducto.Location = new System.Drawing.Point(21, 187);
+            this.lblproducto.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblproducto.Name = "lblproducto";
+            this.lblproducto.Size = new System.Drawing.Size(67, 16);
+            this.lblproducto.TabIndex = 26;
+            this.lblproducto.Text = "Producto :";
+            this.lblproducto.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // cbidproducto
+            // 
+            this.cbidproducto.FormattingEnabled = true;
+            this.cbidproducto.Location = new System.Drawing.Point(106, 128);
+            this.cbidproducto.Name = "cbidproducto";
+            this.cbidproducto.Size = new System.Drawing.Size(97, 24);
+            this.cbidproducto.TabIndex = 25;
+            // 
+            // lblidproducto
+            // 
+            this.lblidproducto.AutoSize = true;
+            this.lblidproducto.Location = new System.Drawing.Point(21, 131);
+            this.lblidproducto.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblidproducto.Name = "lblidproducto";
+            this.lblidproducto.Size = new System.Drawing.Size(83, 16);
+            this.lblidproducto.TabIndex = 24;
+            this.lblidproducto.Text = "ID Producto :";
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(268, 120);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 51;
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(497, 262);
+            this.dataGridView1.TabIndex = 28;
+            // 
             // Compras
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.ClientSize = new System.Drawing.Size(600, 366);
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.cbproducto);
+            this.Controls.Add(this.lblproducto);
+            this.Controls.Add(this.cbidproducto);
+            this.Controls.Add(this.lblidproducto);
+            this.Controls.Add(this.cbempleado);
+            this.Controls.Add(this.lblempleado);
+            this.Controls.Add(this.txtnrocomprobante);
+            this.Controls.Add(this.cbtcomprobante);
+            this.Controls.Add(this.lbltcomprobante);
+            this.Controls.Add(this.lblnrocomprobante);
+            this.Controls.Add(this.dtpfecha);
+            this.Controls.Add(this.cbidproveedor);
+            this.Controls.Add(this.lblidproveedor);
+            this.Controls.Add(this.cbproveedor);
             this.Controls.Add(this.btnatras);
             this.Controls.Add(this.btnquitar);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.dgvfiltro);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtcodigo);
-            this.Controls.Add(this.btnbuscar);
-            this.Controls.Add(this.txtbuscar);
-            this.Controls.Add(this.dgvcompra);
-            this.Controls.Add(this.button1);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Controls.Add(this.btnhacerpedido);
+            this.Controls.Add(this.lblfecha);
+            this.Controls.Add(this.lblproveedor);
+            this.Controls.Add(this.btnagregar);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Compras";
             this.Text = "Compras";
-            ((System.ComponentModel.ISupportInitialize)(this.dgvcompra)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvfiltro)).EndInit();
+            this.Load += new System.EventHandler(this.Compras_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataGridView dgvcompra;
-        private System.Windows.Forms.TextBox txtbuscar;
-        private System.Windows.Forms.Button btnbuscar;
-        private System.Windows.Forms.TextBox txtcodigo;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DataGridView dgvfiltro;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnagregar;
+        private System.Windows.Forms.Label lblproveedor;
+        private System.Windows.Forms.Label lblfecha;
+        private System.Windows.Forms.Button btnhacerpedido;
         private System.Windows.Forms.Button btnquitar;
         private System.Windows.Forms.Button btnatras;
+        private System.Windows.Forms.ComboBox cbproveedor;
+        private System.Windows.Forms.ComboBox cbidproveedor;
+        private System.Windows.Forms.Label lblidproveedor;
+        private System.Windows.Forms.DateTimePicker dtpfecha;
+        private System.Windows.Forms.ComboBox cbtcomprobante;
+        private System.Windows.Forms.Label lbltcomprobante;
+        private System.Windows.Forms.Label lblnrocomprobante;
+        private System.Windows.Forms.TextBox txtnrocomprobante;
+        private System.Windows.Forms.ComboBox cbempleado;
+        private System.Windows.Forms.Label lblempleado;
+        private System.Windows.Forms.ComboBox cbproducto;
+        private System.Windows.Forms.Label lblproducto;
+        private System.Windows.Forms.ComboBox cbidproducto;
+        private System.Windows.Forms.Label lblidproducto;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
