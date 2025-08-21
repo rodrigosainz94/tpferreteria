@@ -186,12 +186,29 @@ namespace FerreteriaElCosito
 
         private void btneditarcat_Click(object sender, EventArgs e)
         {
-            //// Instancia del formulario Localidad
-            //Categorias frmCategoria = new Categorias();
-            //formularioCategoria.Show();  // abre como ventana modal
+            try
+            {
+                if (cbcategoria.SelectedValue == null)
+                {
+                    MessageBox.Show("Seleccione una categoría primero.");
+                    return;
+                }
 
-            //// Recarga el combo de localidades después de cerrar
-            //CargarCategorias();
+                // Asegurarse que sea entero
+                if (!int.TryParse(cbcategoria.SelectedValue.ToString(), out int idCategoria))
+                {
+                    MessageBox.Show("El valor seleccionado no es válido.");
+                    return;
+                }
+
+                frmcategoria frmCat = new frmcategoria();
+                frmCat.SeleccionarCategoria(idCategoria);
+                frmCat.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al abrir Categorías: " + ex.Message);
+            }
         }
 
         private void CargarDepositos()
