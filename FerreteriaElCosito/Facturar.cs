@@ -3,12 +3,14 @@ using System;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace FerreteriaElCosito
 {
     public partial class Facturar : Form
     {
         private DataTable dtFacturaItems = new DataTable();
+        private int? idClienteSeleccionado = null;
 
         public Facturar()
         {
@@ -216,6 +218,111 @@ namespace FerreteriaElCosito
             {
                 MessageBox.Show("Seleccione un producto de la lista para eliminar.");
             }
+        }
+
+        private void txtdni_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Verificamos si se presionó Enter y si el campo está lleno
+            if (e.KeyCode == Keys.Enter && txtdni.MaskCompleted)
+            {
+                try
+                {
+                    using (MySqlConnection conn = ConexionBD.ObtenerConexion())
+                    {
+                        string query = "SELECT IdCliente, Nombre, Apellido FROM clientes WHERE CUIT_CUIL = @cuit";
+                        MySqlCommand cmd = new MySqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@cuit", txtdni.Text);
+
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                // Si encontramos al cliente, guardamos su ID y mostramos su nombre
+                                this.idClienteSeleccionado = Convert.ToInt32(reader["IdCliente"]);
+                                string nombreCompleto = $"{reader["Nombre"]} {reader["Apellido"]}";
+                                lblnombrecliente.Text = nombreCompleto;
+                            }
+                            else
+                            {
+                                // Si no se encuentra, lo indicamos y limpiamos los datos
+                                this.idClienteSeleccionado = null;
+                                lblnombrecliente.Text = "Cliente no encontrado";
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al buscar el cliente: " + ex.Message);
+                }
+            }
+        }
+
+        private void txtdni_Click(object sender, EventArgs e)
+        {
+            // Esta condición revisa si el campo todavía no tiene ningún número ingresado.
+            // Usamos .Any() de LINQ para verificar si existe al menos un dígito en el texto.
+            if (!txtdni.Text.Any(char.IsDigit))
+            {
+                // Si está "vacío" (solo tiene espacios y guiones), 
+                // movemos el cursor (el punto de inserción) al principio del control.
+                txtdni.SelectionStart = 0;
+            }
+        }
+
+        private void cbconsumidorfinal_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbconsumidorfinal.Checked)
+            {
+                // Si se marca "Consumidor Final"
+                txtdni.Enabled = false;
+                txtdni.Clear();
+                lblnombrecliente.Text = "Consumidor Final";
+                // Es una buena práctica tener un cliente genérico en la BD, por ejemplo con ID = 1
+                this.idClienteSeleccionado = 1;
+            }
+            else
+            {
+                // Si se desmarca
+                txtdni.Enabled = true;
+                lblnombrecliente.Text = "Nombre cliente"; // Volvemos al texto original
+                this.idClienteSeleccionado = null;
+                txtdni.Focus();
+            }
+        }
+
+        private void btnfacturar_Click(object sender, EventArgs e)
+        {
+            // --- VALIDACIONES ---
+            // 1. Validamos que haya productos en la grilla
+            if (dtFacturaItems.Rows.Count == 0)
+            {
+                MessageBox.Show("No se puede generar una factura sin productos.", "Factura Vacía", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 2. Validamos que se haya seleccionado un cliente
+            if (this.idClienteSeleccionado == null)
+            {
+                MessageBox.Show("Por favor, seleccione un cliente antes de facturar.", "Falta Cliente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // --- RECOLECCIÓN DE DATOS ---
+            string nombreCliente = lblnombrecliente.Text;
+            string cuitCliente = txtdni.Text;
+            decimal total = Convert.ToDecimal(dtFacturaItems.Compute("SUM([Precio cantidad])", string.Empty));
+
+            // --- LLAMADA A LA VISTA PREVIA ---
+            // Creamos una instancia del nuevo formulario y le pasamos todos los datos
+            FacturaPreview formularioPreview = new FacturaPreview(nombreCliente, cuitCliente, dtFacturaItems, total);
+
+            // Usamos ShowDialog() para que el formulario de facturación quede en espera
+            formularioPreview.ShowDialog();
+
+            // (Opcional) Una vez que se cierra la vista previa, podrías limpiar el formulario de facturación
+            // para empezar una nueva venta.
+            // LimpiarFactura();
         }
 
         private void btnatras_Click(object sender, EventArgs e)
