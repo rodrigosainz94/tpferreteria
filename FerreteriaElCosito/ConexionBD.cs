@@ -4,7 +4,7 @@ namespace FerreteriaElCosito
 {
     public static class ConexionBD
     {
-        private static readonly string cadenaConexion =
+        public static readonly string cadenaConexion =
             "server=bkqymy1borojhlsillq3-mysql.services.clever-cloud.com;" +
             "port=3306;" +
             "user=uuoe1ny0zqkumerf;" +
