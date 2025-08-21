@@ -329,5 +329,10 @@ namespace FerreteriaElCosito
         {
             this.Close();
         }
+
+        private void dgvfacturacion_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
