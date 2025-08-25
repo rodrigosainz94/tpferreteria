@@ -196,14 +196,6 @@
     <Compile Include="Proveedores.Designer.cs">
       <DependentUpon>Proveedores.cs</DependentUpon>
     </Compile>
-    <Compile Include="..\..\..\..\OneDrive\Escritorio\ProveedoresEdicion.cs">
-      <SubType>Form</SubType>
-      <Link>ProveedoresEdicion.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\..\OneDrive\Escritorio\ProveedoresEdicion.Designer.cs">
-      <DependentUpon>ProveedoresEdicion.cs</DependentUpon>
-      <Link>ProveedoresEdicion.Designer.cs</Link>
-    </Compile>
     <Compile Include="Roles.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -280,10 +272,6 @@
     </Compile>
     <EmbeddedResource Include="Proveedores.resx">
       <DependentUpon>Proveedores.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\..\..\..\OneDrive\Escritorio\ProveedoresEdicion.resx">
-      <DependentUpon>ProveedoresEdicion.cs</DependentUpon>
-      <Link>ProveedoresEdicion.resx</Link>
     </EmbeddedResource>
     <EmbeddedResource Include="Roles.resx">
       <DependentUpon>Roles.cs</DependentUpon>
