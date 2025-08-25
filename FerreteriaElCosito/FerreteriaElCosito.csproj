@@ -130,6 +130,12 @@
     <Compile Include="Empleados.Designer.cs">
       <DependentUpon>Empleados.cs</DependentUpon>
     </Compile>
+    <Compile Include="FacturaPreview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FacturaPreview.Designer.cs">
+      <DependentUpon>FacturaPreview.cs</DependentUpon>
+    </Compile>
     <Compile Include="Facturar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -186,17 +192,17 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Proveedores.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Proveedores.cs" />
     <Compile Include="Proveedores.Designer.cs">
       <DependentUpon>Proveedores.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProveedoresEdicion.cs">
+    <Compile Include="..\..\..\..\OneDrive\Escritorio\ProveedoresEdicion.cs">
       <SubType>Form</SubType>
+      <Link>ProveedoresEdicion.cs</Link>
     </Compile>
-    <Compile Include="ProveedoresEdicion.Designer.cs">
+    <Compile Include="..\..\..\..\OneDrive\Escritorio\ProveedoresEdicion.Designer.cs">
       <DependentUpon>ProveedoresEdicion.cs</DependentUpon>
+      <Link>ProveedoresEdicion.Designer.cs</Link>
     </Compile>
     <Compile Include="Roles.cs">
       <SubType>Form</SubType>
@@ -231,6 +237,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Empleados.resx">
       <DependentUpon>Empleados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FacturaPreview.resx">
+      <DependentUpon>FacturaPreview.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Facturar.resx">
       <DependentUpon>Facturar.cs</DependentUpon>
@@ -272,8 +281,9 @@
     <EmbeddedResource Include="Proveedores.resx">
       <DependentUpon>Proveedores.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ProveedoresEdicion.resx">
+    <EmbeddedResource Include="..\..\..\..\OneDrive\Escritorio\ProveedoresEdicion.resx">
       <DependentUpon>ProveedoresEdicion.cs</DependentUpon>
+      <Link>ProveedoresEdicion.resx</Link>
     </EmbeddedResource>
     <EmbeddedResource Include="Roles.resx">
       <DependentUpon>Roles.cs</DependentUpon>

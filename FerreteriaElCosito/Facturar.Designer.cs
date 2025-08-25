@@ -41,11 +41,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnatras = new System.Windows.Forms.Button();
-            this.lbldni = new System.Windows.Forms.Label();
-            this.txtdni = new System.Windows.Forms.TextBox();
+            this.lblcuilcuit = new System.Windows.Forms.Label();
             this.cbconsumidorfinal = new System.Windows.Forms.CheckBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.cmbnombre = new System.Windows.Forms.ComboBox();
+            this.btnfacturar = new System.Windows.Forms.Button();
+            this.lblcliente = new System.Windows.Forms.Label();
+            this.btncliente = new System.Windows.Forms.Button();
+            this.lblnombrecliente = new System.Windows.Forms.Label();
+            this.txtdni = new System.Windows.Forms.MaskedTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvfacturacion)).BeginInit();
             this.SuspendLayout();
             // 
@@ -78,7 +82,6 @@
             this.txtcodigo.Name = "txtcodigo";
             this.txtcodigo.Size = new System.Drawing.Size(183, 22);
             this.txtcodigo.TabIndex = 2;
-            this.txtcodigo.Text = "40";
             this.txtcodigo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtcodigo_KeyDown);
             // 
             // lblcodigo
@@ -176,34 +179,27 @@
             this.btnatras.UseVisualStyleBackColor = true;
             this.btnatras.Click += new System.EventHandler(this.btnatras_Click);
             // 
-            // lbldni
+            // lblcuilcuit
             // 
-            this.lbldni.AutoSize = true;
-            this.lbldni.Location = new System.Drawing.Point(89, 268);
-            this.lbldni.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbldni.Name = "lbldni";
-            this.lbldni.Size = new System.Drawing.Size(36, 16);
-            this.lbldni.TabIndex = 13;
-            this.lbldni.Text = "DNI :";
-            // 
-            // txtdni
-            // 
-            this.txtdni.Location = new System.Drawing.Point(171, 260);
-            this.txtdni.Margin = new System.Windows.Forms.Padding(4);
-            this.txtdni.Name = "txtdni";
-            this.txtdni.Size = new System.Drawing.Size(183, 22);
-            this.txtdni.TabIndex = 14;
+            this.lblcuilcuit.AutoSize = true;
+            this.lblcuilcuit.Location = new System.Drawing.Point(89, 304);
+            this.lblcuilcuit.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblcuilcuit.Name = "lblcuilcuit";
+            this.lblcuilcuit.Size = new System.Drawing.Size(80, 16);
+            this.lblcuilcuit.TabIndex = 13;
+            this.lblcuilcuit.Text = "CUIL / CUIT:";
             // 
             // cbconsumidorfinal
             // 
             this.cbconsumidorfinal.AutoSize = true;
-            this.cbconsumidorfinal.Location = new System.Drawing.Point(93, 292);
+            this.cbconsumidorfinal.Location = new System.Drawing.Point(93, 338);
             this.cbconsumidorfinal.Margin = new System.Windows.Forms.Padding(4);
             this.cbconsumidorfinal.Name = "cbconsumidorfinal";
             this.cbconsumidorfinal.Size = new System.Drawing.Size(161, 20);
             this.cbconsumidorfinal.TabIndex = 15;
             this.cbconsumidorfinal.Text = "CONSUMIDOR FINAL";
             this.cbconsumidorfinal.UseVisualStyleBackColor = true;
+            this.cbconsumidorfinal.CheckedChanged += new System.EventHandler(this.cbconsumidorfinal_CheckedChanged);
             // 
             // cmbnombre
             // 
@@ -214,16 +210,74 @@
             this.cmbnombre.TabIndex = 16;
             this.cmbnombre.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbnombre_KeyDown);
             // 
+            // btnfacturar
+            // 
+            this.btnfacturar.Location = new System.Drawing.Point(193, 511);
+            this.btnfacturar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnfacturar.Name = "btnfacturar";
+            this.btnfacturar.Size = new System.Drawing.Size(158, 28);
+            this.btnfacturar.TabIndex = 17;
+            this.btnfacturar.Text = "FACTURAR";
+            this.btnfacturar.UseVisualStyleBackColor = true;
+            this.btnfacturar.Click += new System.EventHandler(this.btnfacturar_Click);
+            // 
+            // lblcliente
+            // 
+            this.lblcliente.AutoSize = true;
+            this.lblcliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblcliente.Location = new System.Drawing.Point(90, 272);
+            this.lblcliente.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblcliente.Name = "lblcliente";
+            this.lblcliente.Size = new System.Drawing.Size(61, 20);
+            this.lblcliente.TabIndex = 18;
+            this.lblcliente.Text = "Cliente";
+            // 
+            // btncliente
+            // 
+            this.btncliente.Location = new System.Drawing.Point(93, 433);
+            this.btncliente.Margin = new System.Windows.Forms.Padding(4);
+            this.btncliente.Name = "btncliente";
+            this.btncliente.Size = new System.Drawing.Size(262, 28);
+            this.btncliente.TabIndex = 19;
+            this.btncliente.Text = "Nuevo cliente";
+            this.btncliente.UseVisualStyleBackColor = true;
+            // 
+            // lblnombrecliente
+            // 
+            this.lblnombrecliente.AutoSize = true;
+            this.lblnombrecliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblnombrecliente.Location = new System.Drawing.Point(90, 381);
+            this.lblnombrecliente.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblnombrecliente.Name = "lblnombrecliente";
+            this.lblnombrecliente.Size = new System.Drawing.Size(122, 20);
+            this.lblnombrecliente.TabIndex = 20;
+            this.lblnombrecliente.Text = "Nombre cliente";
+            // 
+            // txtdni
+            // 
+            this.txtdni.Location = new System.Drawing.Point(176, 300);
+            this.txtdni.Mask = "00-00000000-0";
+            this.txtdni.Name = "txtdni";
+            this.txtdni.PromptChar = ' ';
+            this.txtdni.Size = new System.Drawing.Size(184, 22);
+            this.txtdni.TabIndex = 21;
+            this.txtdni.Click += new System.EventHandler(this.txtdni_Click);
+            this.txtdni.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtdni_KeyDown);
+            // 
             // Facturar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.Controls.Add(this.txtdni);
+            this.Controls.Add(this.lblnombrecliente);
+            this.Controls.Add(this.btncliente);
+            this.Controls.Add(this.lblcliente);
+            this.Controls.Add(this.btnfacturar);
             this.Controls.Add(this.cmbnombre);
             this.Controls.Add(this.cbconsumidorfinal);
-            this.Controls.Add(this.txtdni);
-            this.Controls.Add(this.lbldni);
+            this.Controls.Add(this.lblcuilcuit);
             this.Controls.Add(this.btnatras);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -261,10 +315,14 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnatras;
-        private System.Windows.Forms.Label lbldni;
-        private System.Windows.Forms.TextBox txtdni;
+        private System.Windows.Forms.Label lblcuilcuit;
         private System.Windows.Forms.CheckBox cbconsumidorfinal;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.ComboBox cmbnombre;
+        private System.Windows.Forms.Button btnfacturar;
+        private System.Windows.Forms.Label lblcliente;
+        private System.Windows.Forms.Button btncliente;
+        private System.Windows.Forms.Label lblnombrecliente;
+        private System.Windows.Forms.MaskedTextBox txtdni;
     }
 }
