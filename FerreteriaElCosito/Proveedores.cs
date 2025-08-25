@@ -29,4 +29,4 @@ namespace FerreteriaElCosito
             this.Hide();
         }
     }
-}
+}//rodri puto
