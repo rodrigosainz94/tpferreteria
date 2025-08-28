@@ -154,6 +154,12 @@
     <Compile Include="Categoria.Designer.cs">
       <DependentUpon>Categoria.cs</DependentUpon>
     </Compile>
+    <Compile Include="Deposito.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Deposito.Designer.cs">
+      <DependentUpon>Deposito.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProveedoresEdicion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -247,6 +253,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Categoria.resx">
       <DependentUpon>Categoria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Deposito.resx">
+      <DependentUpon>Deposito.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="seleccionar empleado.resx">
       <DependentUpon>seleccionar empleado.cs</DependentUpon>

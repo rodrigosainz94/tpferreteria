@@ -233,6 +233,35 @@ namespace FerreteriaElCosito
                 MessageBox.Show("Error al cargar depósitos: " + ex.Message);
             }
         }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (cbiddeposito.SelectedValue == null)
+                {
+                    MessageBox.Show("Seleccione un depósito primero.");
+                    return;
+                }
+
+                if (!int.TryParse(cbiddeposito.SelectedValue.ToString(), out int iddeposito))
+                {
+                    MessageBox.Show("El valor seleccionado no es válido.");
+                    return;
+                }
+
+                frmdeposito frm = new frmdeposito();
+                frm.Seleccionardeposito(iddeposito); // 👈 acá entra el método nuevo
+                frm.ShowDialog();
+
+                // Refrescar la lista de depósitos en empleados después de editar
+                CargarDepositos();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al abrir Depósito: " + ex.Message);
+            }
+        }
+
 
         private void CargarRoles()
         {
