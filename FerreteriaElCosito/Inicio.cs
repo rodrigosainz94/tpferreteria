@@ -24,7 +24,8 @@ namespace FerreteriaElCosito
 
         private void Inicio_Load(object sender, EventArgs e)
         {
-            
+            // Aseguramos que el campo de contraseña comience oculto.
+            txtContraseña.UseSystemPasswordChar = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -103,6 +104,21 @@ namespace FerreteriaElCosito
             catch (Exception ex)
             {
                 MessageBox.Show("Error al conectar con la base de datos: " + ex.Message, "Error Crítico", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+        }
+
+        private void chkMostrarContraseña_CheckedChanged(object sender, EventArgs e)
+        {
+            // Si la casilla está marcada, mostramos la contraseña.
+            if (chkMostrarContraseña.Checked)
+            {
+                // Al poner UseSystemPasswordChar en false, el texto se vuelve visible.
+                txtContraseña.UseSystemPasswordChar = false;
+            }
+            else
+            {
+                // Si no está marcada, la ocultamos.
+                txtContraseña.UseSystemPasswordChar = true;
             }
         }
     }
