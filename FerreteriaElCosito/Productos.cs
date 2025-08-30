@@ -21,6 +21,9 @@ namespace FerreteriaElCosito
         private void Productos_Load(object sender, EventArgs e)
         {
             CargarProductos();
+            CargarCategorias();
+            CargarProveedores();
+            
         }
 
         private void CargarProductos()
@@ -40,6 +43,53 @@ namespace FerreteriaElCosito
             catch (Exception ex)
             {
                 MessageBox.Show("Error al cargar productos: " + ex.Message);
+            }
+        }
+
+        private void CargarCategorias()
+        {
+            try
+            {
+                using (var conn = ConexionBD.ObtenerConexion())
+                {
+                    string query = "SELECT idCategoria, Descripcion FROM categoriaproductos";
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn);
+                    DataTable dt = new DataTable();
+                    adapter.Fill(dt);
+
+                    cbcategoria.DataSource = dt;
+                    cbcategoria.DisplayMember = "Descripcion";  // Texto visible
+                    cbcategoria.ValueMember = "idCategoria";  // Valor real
+                    cbcategoria.SelectedIndex = -1; // No selecciona nada al inicio
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar categorías: " + ex.Message);
+            }
+        }
+
+        private void CargarProveedores()
+        {
+            try
+            {
+                using (var conn = ConexionBD.ObtenerConexion())
+                {
+                    // Concatenamos Nombre y Apellido en una columna llamada "ProveedorCompleto"
+                    string query = "SELECT idProveedor, CONCAT(Nombre, ' ', Apellido) AS ProveedorCompleto FROM proveedores";
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn);
+                    DataTable dt = new DataTable();
+                    adapter.Fill(dt);
+
+                    cbproveedor.DataSource = dt;
+                    cbproveedor.DisplayMember = "ProveedorCompleto";  // Mostramos Nombre + Apellido
+                    cbproveedor.ValueMember = "idProveedor";          // Valor real
+                    cbproveedor.SelectedIndex = -1;                   // No selecciona nada al inicio
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar proveedores: " + ex.Message);
             }
         }
 

@@ -43,7 +43,7 @@
             this.txtnombreproducto = new System.Windows.Forms.TextBox();
             this.btneditar = new System.Windows.Forms.Button();
             this.btneliminar = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cbUnidadMedida = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.SuspendLayout();
@@ -175,13 +175,13 @@
             this.btneliminar.UseVisualStyleBackColor = true;
             this.btneliminar.Click += new System.EventHandler(this.btneliminar_Click);
             // 
-            // comboBox1
+            // cbUnidadMedida
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(112, 141);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 34;
+            this.cbUnidadMedida.FormattingEnabled = true;
+            this.cbUnidadMedida.Location = new System.Drawing.Point(112, 141);
+            this.cbUnidadMedida.Name = "cbUnidadMedida";
+            this.cbUnidadMedida.Size = new System.Drawing.Size(121, 21);
+            this.cbUnidadMedida.TabIndex = 34;
             // 
             // label6
             // 
@@ -197,7 +197,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(720, 327);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cbUnidadMedida);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.btneliminar);
             this.Controls.Add(this.btneditar);
@@ -240,7 +240,7 @@
         private System.Windows.Forms.TextBox txtnombreproducto;
         private System.Windows.Forms.Button btneditar;
         private System.Windows.Forms.Button btneliminar;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbUnidadMedida;
         private System.Windows.Forms.Label label6;
     }
 }
