@@ -241,6 +241,7 @@
             this.btncliente.TabIndex = 19;
             this.btncliente.Text = "Nuevo cliente";
             this.btncliente.UseVisualStyleBackColor = true;
+            this.btncliente.Click += new System.EventHandler(this.btncliente_Click);
             // 
             // lblnombrecliente
             // 

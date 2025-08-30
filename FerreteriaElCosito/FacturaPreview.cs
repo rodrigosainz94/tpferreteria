@@ -1,5 +1,6 @@
 ﻿using iTextSharp.text;
 using iTextSharp.text.pdf;
+using MySql.Data.MySqlClient;
 using System;
 using System.Data;
 using System.Diagnostics;
@@ -45,6 +46,8 @@ namespace FerreteriaElCosito
             dgvItems.DataSource = this.itemsFactura;
             // Ajustamos el tamaño de las columnas para que se vea bien
             dgvItems.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            CargarMetodosDePago();
         }
 
         private void btnCerrar_Click(object sender, EventArgs e)
@@ -129,6 +132,47 @@ namespace FerreteriaElCosito
             {
                 MessageBox.Show("Error al generar el PDF: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void CargarMetodosDePago()
+        {
+            try
+            {
+                // No creamos una instancia. Llamamos al método directamente desde la clase.
+                using (MySqlConnection conn = ConexionBD.ObtenerConexion())
+                {
+                    string query = "SELECT IdFormaPago, Descripcion FROM formapago ORDER BY Descripcion";
+                    MySqlDataAdapter da = new MySqlDataAdapter(query, conn);
+                    DataTable dtFormasPago = new DataTable();
+                    da.Fill(dtFormasPago);
+
+                    cmbMetPago.DataSource = dtFormasPago;
+                    cmbMetPago.DisplayMember = "Descripcion";
+                    cmbMetPago.ValueMember = "IdFormaPago";
+                    cmbMetPago.SelectedIndex = -1; // Inicia sin selección
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar los métodos de pago: " + ex.Message);
+            }
+        }
+
+        private void btnPagar_Click(object sender, EventArgs e)
+        {
+            // Validamos que se haya seleccionado un método de pago
+            if (cmbMetPago.SelectedValue == null)
+            {
+                MessageBox.Show("Por favor, seleccione un método de pago.", "Falta Información", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Mostramos el mensaje de confirmación
+            MessageBox.Show("Pago confirmado.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            // Deshabilitamos los controles correspondientes
+            cmbMetPago.Enabled = false;
+            btnPagar.Enabled = false; // Deshabilitamos el propio botón para evitar un doble pago
         }
     }
 }

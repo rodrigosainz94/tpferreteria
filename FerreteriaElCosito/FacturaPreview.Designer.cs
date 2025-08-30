@@ -36,6 +36,9 @@
             this.lblTotal = new System.Windows.Forms.Label();
             this.btnCerrar = new System.Windows.Forms.Button();
             this.btnConfirmar = new System.Windows.Forms.Button();
+            this.lblMetPago = new System.Windows.Forms.Label();
+            this.cmbMetPago = new System.Windows.Forms.ComboBox();
+            this.btnPagar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
             this.SuspendLayout();
             // 
@@ -113,11 +116,42 @@
             this.btnConfirmar.UseVisualStyleBackColor = true;
             this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click_1);
             // 
+            // lblMetPago
+            // 
+            this.lblMetPago.AutoSize = true;
+            this.lblMetPago.Location = new System.Drawing.Point(16, 207);
+            this.lblMetPago.Name = "lblMetPago";
+            this.lblMetPago.Size = new System.Drawing.Size(107, 16);
+            this.lblMetPago.TabIndex = 8;
+            this.lblMetPago.Text = "Método de pago";
+            // 
+            // cmbMetPago
+            // 
+            this.cmbMetPago.FormattingEnabled = true;
+            this.cmbMetPago.Location = new System.Drawing.Point(19, 239);
+            this.cmbMetPago.Name = "cmbMetPago";
+            this.cmbMetPago.Size = new System.Drawing.Size(150, 24);
+            this.cmbMetPago.TabIndex = 9;
+            // 
+            // btnPagar
+            // 
+            this.btnPagar.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPagar.Location = new System.Drawing.Point(19, 291);
+            this.btnPagar.Name = "btnPagar";
+            this.btnPagar.Size = new System.Drawing.Size(150, 59);
+            this.btnPagar.TabIndex = 10;
+            this.btnPagar.Text = "PAGAR";
+            this.btnPagar.UseVisualStyleBackColor = true;
+            this.btnPagar.Click += new System.EventHandler(this.btnPagar_Click);
+            // 
             // FacturaPreview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(931, 450);
+            this.Controls.Add(this.btnPagar);
+            this.Controls.Add(this.cmbMetPago);
+            this.Controls.Add(this.lblMetPago);
             this.Controls.Add(this.btnConfirmar);
             this.Controls.Add(this.btnCerrar);
             this.Controls.Add(this.lblTotal);
@@ -145,5 +179,8 @@
         private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.Button btnCerrar;
         private System.Windows.Forms.Button btnConfirmar;
+        private System.Windows.Forms.Label lblMetPago;
+        private System.Windows.Forms.ComboBox cmbMetPago;
+        private System.Windows.Forms.Button btnPagar;
     }
 }
