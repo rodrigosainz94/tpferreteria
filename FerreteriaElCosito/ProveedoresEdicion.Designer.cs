@@ -28,17 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.txtNombre = new System.Windows.Forms.TextBox();
+            this.txtapellido = new System.Windows.Forms.TextBox();
+            this.txtemail = new System.Windows.Forms.TextBox();
+            this.txttelefono = new System.Windows.Forms.TextBox();
+            this.txtcallenum = new System.Windows.Forms.TextBox();
+            this.txtcuit = new System.Windows.Forms.TextBox();
+            this.dtpfechaalta = new System.Windows.Forms.DateTimePicker();
             this.btnguardar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -51,84 +47,60 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
+            this.txtidprov = new System.Windows.Forms.ComboBox();
+            this.txtidlocalidad = new System.Windows.Forms.ComboBox();
+            this.txtidprovincia = new System.Windows.Forms.ComboBox();
+            this.txtidcategoria = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
-            // textBox1
+            // txtNombre
             // 
-            this.textBox1.Location = new System.Drawing.Point(83, 12);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 0;
+            this.txtNombre.Location = new System.Drawing.Point(83, 48);
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.Size = new System.Drawing.Size(100, 20);
+            this.txtNombre.TabIndex = 1;
             // 
-            // textBox2
+            // txtapellido
             // 
-            this.textBox2.Location = new System.Drawing.Point(83, 48);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 1;
+            this.txtapellido.Location = new System.Drawing.Point(83, 89);
+            this.txtapellido.Name = "txtapellido";
+            this.txtapellido.Size = new System.Drawing.Size(100, 20);
+            this.txtapellido.TabIndex = 2;
             // 
-            // textBox3
+            // txtemail
             // 
-            this.textBox3.Location = new System.Drawing.Point(83, 89);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 2;
+            this.txtemail.Location = new System.Drawing.Point(83, 126);
+            this.txtemail.Name = "txtemail";
+            this.txtemail.Size = new System.Drawing.Size(100, 20);
+            this.txtemail.TabIndex = 3;
             // 
-            // textBox4
+            // txttelefono
             // 
-            this.textBox4.Location = new System.Drawing.Point(83, 126);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 3;
+            this.txttelefono.Location = new System.Drawing.Point(83, 163);
+            this.txttelefono.Name = "txttelefono";
+            this.txttelefono.Size = new System.Drawing.Size(100, 20);
+            this.txttelefono.TabIndex = 4;
             // 
-            // textBox5
+            // txtcallenum
             // 
-            this.textBox5.Location = new System.Drawing.Point(83, 163);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 20);
-            this.textBox5.TabIndex = 4;
+            this.txtcallenum.Location = new System.Drawing.Point(380, 12);
+            this.txtcallenum.Name = "txtcallenum";
+            this.txtcallenum.Size = new System.Drawing.Size(100, 20);
+            this.txtcallenum.TabIndex = 5;
             // 
-            // textBox6
+            // txtcuit
             // 
-            this.textBox6.Location = new System.Drawing.Point(380, 12);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 20);
-            this.textBox6.TabIndex = 5;
+            this.txtcuit.Location = new System.Drawing.Point(83, 202);
+            this.txtcuit.Name = "txtcuit";
+            this.txtcuit.Size = new System.Drawing.Size(100, 20);
+            this.txtcuit.TabIndex = 9;
             // 
-            // textBox7
+            // dtpfechaalta
             // 
-            this.textBox7.Location = new System.Drawing.Point(380, 48);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(100, 20);
-            this.textBox7.TabIndex = 6;
-            // 
-            // textBox8
-            // 
-            this.textBox8.Location = new System.Drawing.Point(380, 89);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(100, 20);
-            this.textBox8.TabIndex = 7;
-            // 
-            // textBox9
-            // 
-            this.textBox9.Location = new System.Drawing.Point(380, 126);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(100, 20);
-            this.textBox9.TabIndex = 8;
-            // 
-            // textBox10
-            // 
-            this.textBox10.Location = new System.Drawing.Point(83, 202);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(100, 20);
-            this.textBox10.TabIndex = 9;
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(380, 163);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker1.TabIndex = 10;
+            this.dtpfechaalta.Location = new System.Drawing.Point(380, 163);
+            this.dtpfechaalta.Name = "dtpfechaalta";
+            this.dtpfechaalta.Size = new System.Drawing.Size(200, 20);
+            this.dtpfechaalta.TabIndex = 10;
             // 
             // btnguardar
             // 
@@ -138,6 +110,7 @@
             this.btnguardar.TabIndex = 11;
             this.btnguardar.Text = "GUARDAR";
             this.btnguardar.UseVisualStyleBackColor = true;
+            this.btnguardar.Click += new System.EventHandler(this.btnguardar_Click);
             // 
             // label1
             // 
@@ -238,11 +211,47 @@
             this.label11.TabIndex = 22;
             this.label11.Text = "FechaAlta:";
             // 
+            // txtidprov
+            // 
+            this.txtidprov.FormattingEnabled = true;
+            this.txtidprov.Location = new System.Drawing.Point(83, 16);
+            this.txtidprov.Name = "txtidprov";
+            this.txtidprov.Size = new System.Drawing.Size(121, 21);
+            this.txtidprov.TabIndex = 23;
+            // 
+            // txtidlocalidad
+            // 
+            this.txtidlocalidad.FormattingEnabled = true;
+            this.txtidlocalidad.Location = new System.Drawing.Point(380, 52);
+            this.txtidlocalidad.Name = "txtidlocalidad";
+            this.txtidlocalidad.Size = new System.Drawing.Size(121, 21);
+            this.txtidlocalidad.TabIndex = 24;
+            // 
+            // txtidprovincia
+            // 
+            this.txtidprovincia.FormattingEnabled = true;
+            this.txtidprovincia.Location = new System.Drawing.Point(380, 88);
+            this.txtidprovincia.Name = "txtidprovincia";
+            this.txtidprovincia.Size = new System.Drawing.Size(121, 21);
+            this.txtidprovincia.TabIndex = 25;
+            // 
+            // txtidcategoria
+            // 
+            this.txtidcategoria.FormattingEnabled = true;
+            this.txtidcategoria.Location = new System.Drawing.Point(380, 126);
+            this.txtidcategoria.Name = "txtidcategoria";
+            this.txtidcategoria.Size = new System.Drawing.Size(121, 21);
+            this.txtidcategoria.TabIndex = 26;
+            // 
             // ProveedoresEdicion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(701, 282);
+            this.Controls.Add(this.txtidcategoria);
+            this.Controls.Add(this.txtidprovincia);
+            this.Controls.Add(this.txtidlocalidad);
+            this.Controls.Add(this.txtidprov);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
@@ -255,37 +264,29 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnguardar);
-            this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.textBox10);
-            this.Controls.Add(this.textBox9);
-            this.Controls.Add(this.textBox8);
-            this.Controls.Add(this.textBox7);
-            this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.dtpfechaalta);
+            this.Controls.Add(this.txtcuit);
+            this.Controls.Add(this.txtcallenum);
+            this.Controls.Add(this.txttelefono);
+            this.Controls.Add(this.txtemail);
+            this.Controls.Add(this.txtapellido);
+            this.Controls.Add(this.txtNombre);
             this.Name = "ProveedoresEdicion";
             this.Text = "ProveedoresEdicion";
+            this.Load += new System.EventHandler(this.ProveedoresEdicion_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.TextBox textBox10;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.TextBox txtNombre;
+        private System.Windows.Forms.TextBox txtapellido;
+        private System.Windows.Forms.TextBox txtemail;
+        private System.Windows.Forms.TextBox txttelefono;
+        private System.Windows.Forms.TextBox txtcallenum;
+        private System.Windows.Forms.TextBox txtcuit;
+        private System.Windows.Forms.DateTimePicker dtpfechaalta;
         private System.Windows.Forms.Button btnguardar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
@@ -298,5 +299,9 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox txtidprov;
+        private System.Windows.Forms.ComboBox txtidlocalidad;
+        private System.Windows.Forms.ComboBox txtidprovincia;
+        private System.Windows.Forms.ComboBox txtidcategoria;
     }
 }
