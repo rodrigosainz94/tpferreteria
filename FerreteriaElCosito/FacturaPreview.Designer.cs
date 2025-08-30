@@ -35,6 +35,7 @@
             this.dgvItems = new System.Windows.Forms.DataGridView();
             this.lblTotal = new System.Windows.Forms.Label();
             this.btnCerrar = new System.Windows.Forms.Button();
+            this.btnConfirmar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
             this.SuspendLayout();
             // 
@@ -102,11 +103,22 @@
             this.btnCerrar.Text = "Cerrar";
             this.btnCerrar.UseVisualStyleBackColor = true;
             // 
+            // btnConfirmar
+            // 
+            this.btnConfirmar.Location = new System.Drawing.Point(105, 415);
+            this.btnConfirmar.Name = "btnConfirmar";
+            this.btnConfirmar.Size = new System.Drawing.Size(158, 23);
+            this.btnConfirmar.TabIndex = 7;
+            this.btnConfirmar.Text = "Confirmar y Generar PDF";
+            this.btnConfirmar.UseVisualStyleBackColor = true;
+            this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click_1);
+            // 
             // FacturaPreview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(931, 450);
+            this.Controls.Add(this.btnConfirmar);
             this.Controls.Add(this.btnCerrar);
             this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.dgvItems);
@@ -132,5 +144,6 @@
         private System.Windows.Forms.DataGridView dgvItems;
         private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.Button btnCerrar;
+        private System.Windows.Forms.Button btnConfirmar;
     }
 }
