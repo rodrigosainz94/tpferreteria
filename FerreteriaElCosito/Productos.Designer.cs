@@ -43,6 +43,8 @@
             this.txtnombreproducto = new System.Windows.Forms.TextBox();
             this.btneditar = new System.Windows.Forms.Button();
             this.btneliminar = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -65,7 +67,7 @@
             // 
             // btnguardar
             // 
-            this.btnguardar.Location = new System.Drawing.Point(53, 183);
+            this.btnguardar.Location = new System.Drawing.Point(46, 209);
             this.btnguardar.Name = "btnguardar";
             this.btnguardar.Size = new System.Drawing.Size(75, 23);
             this.btnguardar.TabIndex = 28;
@@ -75,7 +77,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(66, 140);
+            this.label5.Location = new System.Drawing.Point(66, 178);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(40, 13);
             this.label5.TabIndex = 25;
@@ -83,7 +85,7 @@
             // 
             // txtprecio
             // 
-            this.txtprecio.Location = new System.Drawing.Point(112, 137);
+            this.txtprecio.Location = new System.Drawing.Point(112, 171);
             this.txtprecio.Name = "txtprecio";
             this.txtprecio.Size = new System.Drawing.Size(157, 20);
             this.txtprecio.TabIndex = 24;
@@ -91,7 +93,7 @@
             // cbproveedor
             // 
             this.cbproveedor.FormattingEnabled = true;
-            this.cbproveedor.Location = new System.Drawing.Point(112, 102);
+            this.cbproveedor.Location = new System.Drawing.Point(112, 109);
             this.cbproveedor.Name = "cbproveedor";
             this.cbproveedor.Size = new System.Drawing.Size(121, 21);
             this.cbproveedor.TabIndex = 23;
@@ -99,7 +101,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(50, 105);
+            this.label4.Location = new System.Drawing.Point(43, 117);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 13);
             this.label4.TabIndex = 22;
@@ -108,7 +110,7 @@
             // cbcategoria
             // 
             this.cbcategoria.FormattingEnabled = true;
-            this.cbcategoria.Location = new System.Drawing.Point(112, 66);
+            this.cbcategoria.Location = new System.Drawing.Point(112, 75);
             this.cbcategoria.Name = "cbcategoria";
             this.cbcategoria.Size = new System.Drawing.Size(121, 21);
             this.cbcategoria.TabIndex = 21;
@@ -116,7 +118,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(54, 69);
+            this.label3.Location = new System.Drawing.Point(47, 83);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(55, 13);
             this.label3.TabIndex = 20;
@@ -124,7 +126,7 @@
             // 
             // txtdescripcionprod
             // 
-            this.txtdescripcionprod.Location = new System.Drawing.Point(112, 34);
+            this.txtdescripcionprod.Location = new System.Drawing.Point(112, 40);
             this.txtdescripcionprod.Name = "txtdescripcionprod";
             this.txtdescripcionprod.Size = new System.Drawing.Size(157, 20);
             this.txtdescripcionprod.TabIndex = 19;
@@ -132,7 +134,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(43, 37);
+            this.label2.Location = new System.Drawing.Point(36, 47);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(66, 13);
             this.label2.TabIndex = 18;
@@ -141,7 +143,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 11);
+            this.label1.Location = new System.Drawing.Point(13, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(93, 13);
             this.label1.TabIndex = 17;
@@ -156,7 +158,7 @@
             // 
             // btneditar
             // 
-            this.btneditar.Location = new System.Drawing.Point(158, 183);
+            this.btneditar.Location = new System.Drawing.Point(151, 209);
             this.btneditar.Name = "btneditar";
             this.btneditar.Size = new System.Drawing.Size(75, 23);
             this.btneditar.TabIndex = 31;
@@ -165,18 +167,38 @@
             // 
             // btneliminar
             // 
-            this.btneliminar.Location = new System.Drawing.Point(53, 227);
+            this.btneliminar.Location = new System.Drawing.Point(46, 253);
             this.btneliminar.Name = "btneliminar";
             this.btneliminar.Size = new System.Drawing.Size(75, 23);
             this.btneliminar.TabIndex = 32;
             this.btneliminar.Text = "ELIMINAR";
             this.btneliminar.UseVisualStyleBackColor = true;
+            this.btneliminar.Click += new System.EventHandler(this.btneliminar_Click);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(112, 141);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 34;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(9, 149);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(97, 13);
+            this.label6.TabIndex = 33;
+            this.label6.Text = "Unidad de Medida:";
             // 
             // Productos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(720, 327);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.btneliminar);
             this.Controls.Add(this.btneditar);
             this.Controls.Add(this.btnatras);
@@ -218,5 +240,7 @@
         private System.Windows.Forms.TextBox txtnombreproducto;
         private System.Windows.Forms.Button btneditar;
         private System.Windows.Forms.Button btneliminar;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label6;
     }
 }

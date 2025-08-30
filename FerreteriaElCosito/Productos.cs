@@ -43,6 +43,50 @@ namespace FerreteriaElCosito
             }
         }
 
+        private void btneliminar_Click(object sender, EventArgs e)
+        {
+            if (dgvProductos.CurrentRow != null)
+            {
+                // Obtenemos los datos de la fila seleccionada
+                int idProducto = Convert.ToInt32(dgvProductos.CurrentRow.Cells["IdProducto"].Value);
+                string nombreProducto = dgvProductos.CurrentRow.Cells["NombreProducto"].Value.ToString();
 
+                // Confirmación
+                DialogResult resultado = MessageBox.Show(
+                    $"¿Está seguro que desea eliminar el producto \"{nombreProducto}\"?",
+                    "Confirmar eliminación",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+
+                if (resultado == DialogResult.Yes)
+                {
+                    try
+                    {
+                        using (var conexion = ConexionBD.ObtenerConexion())
+                        {
+                            string query = "DELETE FROM productos WHERE IdProducto = @IdProducto";
+                            using (var cmd = new MySqlCommand(query, conexion))
+                            {
+                                cmd.Parameters.AddWithValue("@IdProducto", idProducto);
+                                cmd.ExecuteNonQuery();
+                            }
+                        }
+
+                        MessageBox.Show($"Producto \"{nombreProducto}\" eliminado correctamente.");
+
+                        // Recargar DataGridView automáticamente
+                        CargarProductos();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error al eliminar: " + ex.Message);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Seleccione un producto para eliminar.");
+            }
+        }
     }
 }
