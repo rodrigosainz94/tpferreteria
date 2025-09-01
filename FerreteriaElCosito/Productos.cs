@@ -23,7 +23,7 @@ namespace FerreteriaElCosito
             CargarProductos();
             CargarCategorias();
             CargarProveedores();
-            
+
         }
 
         private void CargarProductos()
@@ -151,15 +151,8 @@ namespace FerreteriaElCosito
                 int idProducto = Convert.ToInt32(dgvProductos.CurrentRow.Cells["idProducto"].Value);
 
                 // Abrimos el form de edición, pasando el ID del producto seleccionado
-                ProductosEdicion frm = new ProductosEdicion(idProducto);
-                if (frm.ShowDialog() == DialogResult.OK)
-                {
-                    CargarProductos(); // método que vuelve a llenar el DataGridView
-                }
-            }
-            else
-            {
-                MessageBox.Show("Seleccione una fila para editar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+
             }
         }
     }
