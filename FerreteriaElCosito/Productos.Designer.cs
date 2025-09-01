@@ -56,6 +56,7 @@
             this.btnatras.TabIndex = 30;
             this.btnatras.Text = "ATRÁS";
             this.btnatras.UseVisualStyleBackColor = true;
+            this.btnatras.Click += new System.EventHandler(this.btnatras_Click);
             // 
             // dgvProductos
             // 
@@ -164,6 +165,7 @@
             this.btneditar.TabIndex = 31;
             this.btneditar.Text = "EDITAR";
             this.btneditar.UseVisualStyleBackColor = true;
+            this.btneditar.Click += new System.EventHandler(this.btneditar_Click);
             // 
             // btneliminar
             // 
