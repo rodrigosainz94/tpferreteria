@@ -148,12 +148,20 @@ namespace FerreteriaElCosito
         {
             if (dgvProductos.CurrentRow != null)
             {
-                int idProducto = Convert.ToInt32(dgvProductos.CurrentRow.Cells["idProducto"].Value);
+                int idProducto = Convert.ToInt32(dgvProductos.CurrentRow.Cells["IdProducto"].Value);
 
-                // Abrimos el form de edición, pasando el ID del producto seleccionado
-
-
+                // Abrimos el form de edición pasando el ID
+                ProductosEdicion frm = new ProductosEdicion(idProducto);
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    CargarProductos(); // refresca el grid después de guardar
+                }
+            }
+            else
+            {
+                MessageBox.Show("Seleccione un producto para editar.");
             }
         }
+
     }
 }
