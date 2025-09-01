@@ -38,56 +38,49 @@
             // 
             // dgvproveedores
             // 
-            this.dgvproveedores.ColumnHeadersHeight = 29;
-            this.dgvproveedores.Location = new System.Drawing.Point(12, 14);
-            this.dgvproveedores.Margin = new System.Windows.Forms.Padding(2);
+            this.dgvproveedores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvproveedores.Location = new System.Drawing.Point(12, 12);
             this.dgvproveedores.Name = "dgvproveedores";
-            this.dgvproveedores.RowHeadersWidth = 51;
-            this.dgvproveedores.Size = new System.Drawing.Size(485, 332);
+            this.dgvproveedores.Size = new System.Drawing.Size(551, 268);
             this.dgvproveedores.TabIndex = 0;
-            this.dgvproveedores.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvproveedores_CellContentClick);
             // 
             // btnagregar
             // 
-            this.btnagregar.Location = new System.Drawing.Point(512, 14);
-            this.btnagregar.Margin = new System.Windows.Forms.Padding(2);
+            this.btnagregar.Location = new System.Drawing.Point(594, 12);
             this.btnagregar.Name = "btnagregar";
-            this.btnagregar.Size = new System.Drawing.Size(77, 22);
+            this.btnagregar.Size = new System.Drawing.Size(75, 23);
             this.btnagregar.TabIndex = 1;
-            this.btnagregar.Text = "Agregar";
+            this.btnagregar.Text = "AGREGAR";
             this.btnagregar.UseVisualStyleBackColor = true;
             this.btnagregar.Click += new System.EventHandler(this.btnagregar_Click);
             // 
             // btneditar
             // 
-            this.btneditar.Location = new System.Drawing.Point(512, 49);
-            this.btneditar.Margin = new System.Windows.Forms.Padding(2);
+            this.btneditar.Location = new System.Drawing.Point(594, 54);
             this.btneditar.Name = "btneditar";
-            this.btneditar.Size = new System.Drawing.Size(77, 22);
+            this.btneditar.Size = new System.Drawing.Size(75, 23);
             this.btneditar.TabIndex = 2;
-            this.btneditar.Text = "Editar";
+            this.btneditar.Text = "EDITAR";
             this.btneditar.UseVisualStyleBackColor = true;
             this.btneditar.Click += new System.EventHandler(this.btneditar_Click);
             // 
             // btneliminar
             // 
-            this.btneliminar.Location = new System.Drawing.Point(512, 84);
-            this.btneliminar.Margin = new System.Windows.Forms.Padding(2);
+            this.btneliminar.Location = new System.Drawing.Point(594, 96);
             this.btneliminar.Name = "btneliminar";
-            this.btneliminar.Size = new System.Drawing.Size(77, 22);
+            this.btneliminar.Size = new System.Drawing.Size(75, 23);
             this.btneliminar.TabIndex = 3;
-            this.btneliminar.Text = "Eliminar";
+            this.btneliminar.Text = "ELIMINAR";
             this.btneliminar.UseVisualStyleBackColor = true;
-            this.btneliminar.Click += new System.EventHandler(this.btneliminar_Click);
+            this.btneliminar.Click += new System.EventHandler(this.button3_Click);
             // 
             // btnatras
             // 
-            this.btnatras.Location = new System.Drawing.Point(512, 323);
-            this.btnatras.Margin = new System.Windows.Forms.Padding(2);
+            this.btnatras.Location = new System.Drawing.Point(594, 257);
             this.btnatras.Name = "btnatras";
-            this.btnatras.Size = new System.Drawing.Size(77, 22);
+            this.btnatras.Size = new System.Drawing.Size(75, 23);
             this.btnatras.TabIndex = 4;
-            this.btnatras.Text = "Atras";
+            this.btnatras.Text = "ATRAS";
             this.btnatras.UseVisualStyleBackColor = true;
             this.btnatras.Click += new System.EventHandler(this.btnatras_Click);
             // 
@@ -95,13 +88,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 366);
+            this.ClientSize = new System.Drawing.Size(692, 304);
             this.Controls.Add(this.btnatras);
             this.Controls.Add(this.btneliminar);
             this.Controls.Add(this.btneditar);
             this.Controls.Add(this.btnagregar);
             this.Controls.Add(this.dgvproveedores);
-            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Proveedores";
             this.Text = "Proveedores";
             this.Load += new System.EventHandler(this.Proveedores_Load);

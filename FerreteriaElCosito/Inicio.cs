@@ -9,12 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
-
-
 namespace FerreteriaElCosito
 {
-    
-
     public partial class Inicio : Form
     {
         public Inicio()
@@ -24,7 +20,8 @@ namespace FerreteriaElCosito
 
         private void Inicio_Load(object sender, EventArgs e)
         {
-            
+            // Aseguramos que el campo de contraseña comience oculto.
+            txtContraseña.UseSystemPasswordChar = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -58,7 +55,8 @@ namespace FerreteriaElCosito
                         int idEmpleado = Convert.ToInt32(readerUsuario["IdEmpleado"]);
 
                         // --- Paso 2: Verificamos la contraseña ---
-                        if (claveGuardada != txtContraseña.Text) // <-- Ver nota de seguridad abajo
+                        // Recordá usar la comparación con HASH para mayor seguridad
+                        if (claveGuardada != txtContraseña.Text)
                         {
                             MessageBox.Show("La contraseña es incorrecta.", "Error de Autenticación", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
@@ -103,6 +101,37 @@ namespace FerreteriaElCosito
             catch (Exception ex)
             {
                 MessageBox.Show("Error al conectar con la base de datos: " + ex.Message, "Error Crítico", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+        }
+
+        private void chkMostrarContraseña_CheckedChanged(object sender, EventArgs e)
+        {
+            // Si la casilla está marcada, mostramos la contraseña.
+            if (chkMostrarContraseña.Checked)
+            {
+                // Al poner UseSystemPasswordChar en false, el texto se vuelve visible.
+                txtContraseña.UseSystemPasswordChar = false;
+            }
+            else
+            {
+                // Si no está marcada, la ocultamos.
+                txtContraseña.UseSystemPasswordChar = true;
+            }
+        }
+
+        /// <summary>
+        /// NUEVO: Maneja el evento de presionar una tecla en el campo de contraseña.
+        /// </summary>
+        private void txtContraseña_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Verificamos si la tecla presionada fue "Enter"
+            if (e.KeyCode == Keys.Enter)
+            {
+                // Esta línea evita el sonido "ding" de Windows al presionar Enter
+                e.SuppressKeyPress = true;
+
+                // Simulamos un clic en el botón de ingresar (asumiendo que se llama button1)
+                button1.PerformClick();
             }
         }
     }

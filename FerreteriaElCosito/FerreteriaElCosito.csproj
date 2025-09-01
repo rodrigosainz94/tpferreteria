@@ -166,11 +166,17 @@
     <Compile Include="Deposito.Designer.cs">
       <DependentUpon>Deposito.cs</DependentUpon>
     </Compile>
-    <Compile Include="NotadePedido.cs">
+    <Compile Include="Productos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NotadePedido.Designer.cs">
-      <DependentUpon>NotadePedido.cs</DependentUpon>
+    <Compile Include="Productos.Designer.cs">
+      <DependentUpon>Productos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Proveedores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Proveedores.Designer.cs">
+      <DependentUpon>Proveedores.cs</DependentUpon>
     </Compile>
     <Compile Include="ProveedoresEdicion.cs">
       <SubType>Form</SubType>
@@ -208,18 +214,8 @@
     <Compile Include="Menuprincipal.Designer.cs">
       <DependentUpon>Menuprincipal.cs</DependentUpon>
     </Compile>
-    <Compile Include="Productos.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Productos.Designer.cs">
-      <DependentUpon>Productos.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Proveedores.cs" />
-    <Compile Include="Proveedores.Designer.cs">
-      <DependentUpon>Proveedores.cs</DependentUpon>
-    </Compile>
     <Compile Include="Roles.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -269,8 +265,14 @@
     <EmbeddedResource Include="Deposito.resx">
       <DependentUpon>Deposito.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NotadePedido.resx">
-      <DependentUpon>NotadePedido.cs</DependentUpon>
+    <EmbeddedResource Include="Productos.resx">
+      <DependentUpon>Productos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Proveedores.resx">
+      <DependentUpon>Proveedores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProveedoresEdicion.resx">
+      <DependentUpon>ProveedoresEdicion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="seleccionar empleado.resx">
       <DependentUpon>seleccionar empleado.cs</DependentUpon>
@@ -287,9 +289,6 @@
     <EmbeddedResource Include="Menuprincipal.resx">
       <DependentUpon>Menuprincipal.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Productos.resx">
-      <DependentUpon>Productos.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -300,9 +299,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Proveedores.resx">
-      <DependentUpon>Proveedores.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Roles.resx">
       <DependentUpon>Roles.cs</DependentUpon>
     </EmbeddedResource>

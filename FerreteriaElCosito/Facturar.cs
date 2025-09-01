@@ -334,5 +334,29 @@ namespace FerreteriaElCosito
         {
 
         }
+
+        private void btncliente_Click(object sender, EventArgs e)
+        {
+            // Usamos 'using' para asegurarnos de que el formulario se libere de la memoria
+            using (ClientesAgregar formAgregarCliente = new ClientesAgregar())
+            {
+                // Usamos ShowDialog() para que el formulario de Facturar espere
+                // a que se termine de agregar el nuevo cliente.
+
+                // Verificamos si el usuario cerró el formulario guardando los datos (DialogResult.OK)
+                if (formAgregarCliente.ShowDialog() == DialogResult.OK)
+                {
+                    // Si el alta fue exitosa, tomamos el CUIT de la propiedad pública que creamos
+                    string nuevoCuit = formAgregarCliente.CuitNuevoCliente;
+
+                    // Ponemos el CUIT en el MaskedTextBox
+                    txtdni.Text = nuevoCuit;
+
+                    // Para que también se cargue el nombre, simulamos que el usuario presionó Enter
+                    // en el campo del CUIT, disparando la búsqueda.
+                    txtdni_KeyDown(txtdni, new KeyEventArgs(Keys.Enter));
+                }
+            }
+        }
     }
 }
