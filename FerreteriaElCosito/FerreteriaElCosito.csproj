@@ -166,6 +166,12 @@
     <Compile Include="Deposito.Designer.cs">
       <DependentUpon>Deposito.cs</DependentUpon>
     </Compile>
+    <Compile Include="NotadePedido.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NotadePedido.Designer.cs">
+      <DependentUpon>NotadePedido.cs</DependentUpon>
+    </Compile>
     <Compile Include="Productos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -264,6 +270,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Deposito.resx">
       <DependentUpon>Deposito.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NotadePedido.resx">
+      <DependentUpon>NotadePedido.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Productos.resx">
       <DependentUpon>Productos.cs</DependentUpon>

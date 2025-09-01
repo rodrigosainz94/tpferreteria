@@ -437,7 +437,8 @@ namespace FerreteriaElCosito
 
                     MessageBox.Show("Nota de pedido generada correctamente con número: " + nuevoNumero, "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    
+                    frmnotadepedido frm = new frmnotadepedido(idCompra);
+                    frm.Show();
 
                     tablaDetalle.Clear();
                     txtnrocomprobante.Text = GenerarNumeroComprobante(idTipoComprobante).ToString();
