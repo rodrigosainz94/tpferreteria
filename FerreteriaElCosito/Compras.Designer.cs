@@ -78,9 +78,9 @@
             // 
             this.btnhacerpedido.Location = new System.Drawing.Point(619, 148);
             this.btnhacerpedido.Name = "btnhacerpedido";
-            this.btnhacerpedido.Size = new System.Drawing.Size(155, 28);
+            this.btnhacerpedido.Size = new System.Drawing.Size(187, 28);
             this.btnhacerpedido.TabIndex = 9;
-            this.btnhacerpedido.Text = "HACER PEDIDO";
+            this.btnhacerpedido.Text = "EMITIR NOTA DE PEDIDO";
             this.btnhacerpedido.UseVisualStyleBackColor = true;
             this.btnhacerpedido.Click += new System.EventHandler(this.btnhacerpedido_Click);
             // 
