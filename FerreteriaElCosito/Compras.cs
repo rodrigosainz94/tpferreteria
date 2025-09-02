@@ -533,5 +533,22 @@ namespace FerreteriaElCosito
             ConsultaNotadePedido frmConsulta = new ConsultaNotadePedido();
             frmConsulta.ShowDialog();
         }
+
+        private void btnconsultaproveedor_Click(object sender, EventArgs e)
+        {
+            // Instancia el formulario de consulta de proveedores
+            frmcosultaproveedor frmConsultaProv = new frmcosultaproveedor();
+
+            // Muestra el formulario como un diálogo modal
+            if (frmConsultaProv.ShowDialog() == DialogResult.OK)
+            {
+                // Si el usuario seleccionó un proveedor, actualiza los combos
+                int idSeleccionado = frmConsultaProv.IdProveedorSeleccionado;
+                string nombreSeleccionado = frmConsultaProv.NombreProveedorSeleccionado;
+
+                cbidproveedor.SelectedValue = idSeleccionado;
+                cbproveedor.SelectedValue = idSeleccionado;
+            }
+        }
     }
 }

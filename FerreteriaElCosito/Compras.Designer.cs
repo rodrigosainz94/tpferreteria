@@ -288,6 +288,7 @@
             this.btnconsultaproveedor.TabIndex = 33;
             this.btnconsultaproveedor.Text = "Consulta Prov.";
             this.btnconsultaproveedor.UseVisualStyleBackColor = true;
+            this.btnconsultaproveedor.Click += new System.EventHandler(this.btnconsultaproveedor_Click);
             // 
             // btnconsultaproducto
             // 
