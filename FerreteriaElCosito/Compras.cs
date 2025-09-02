@@ -522,5 +522,16 @@ namespace FerreteriaElCosito
         {
             // Captura clic en DataGridView si necesitas
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnconsultanp_Click(object sender, EventArgs e)
+        {
+            ConsultaNotadePedido frmConsulta = new ConsultaNotadePedido();
+            frmConsulta.ShowDialog();
+        }
     }
 }

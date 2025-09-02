@@ -123,12 +123,6 @@ namespace FerreteriaElCosito
             }
         }
 
-        // ================== BOTÓN ATRÁS ==================
-        private void btnatras_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         //================== BOTÓN IMPRIMIR PDF SEGURO CON VERIFICACIÓN ==================
         private void btnimprimirpedido_Click_1(object sender, EventArgs e)
         {
@@ -215,6 +209,11 @@ namespace FerreteriaElCosito
             {
                 MessageBox.Show("Error al generar PDF: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void btnatras_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -41,12 +41,15 @@
             this.cbidempleado = new System.Windows.Forms.ComboBox();
             this.lblidempl = new System.Windows.Forms.Label();
             this.btnlimpiar = new System.Windows.Forms.Button();
+            this.btnconsultanp = new System.Windows.Forms.Button();
+            this.btnconsultaproveedor = new System.Windows.Forms.Button();
+            this.btnconsultaproducto = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnagregar
             // 
-            this.btnagregar.Location = new System.Drawing.Point(600, 105);
+            this.btnagregar.Location = new System.Drawing.Point(787, 67);
             this.btnagregar.Name = "btnagregar";
             this.btnagregar.Size = new System.Drawing.Size(100, 28);
             this.btnagregar.TabIndex = 1;
@@ -57,7 +60,7 @@
             // lblproveedor
             // 
             this.lblproveedor.AutoSize = true;
-            this.lblproveedor.Location = new System.Drawing.Point(223, 73);
+            this.lblproveedor.Location = new System.Drawing.Point(223, 108);
             this.lblproveedor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblproveedor.Name = "lblproveedor";
             this.lblproveedor.Size = new System.Drawing.Size(77, 16);
@@ -67,7 +70,7 @@
             // lblfecha
             // 
             this.lblfecha.AutoSize = true;
-            this.lblfecha.Location = new System.Drawing.Point(526, 25);
+            this.lblfecha.Location = new System.Drawing.Point(629, 20);
             this.lblfecha.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblfecha.Name = "lblfecha";
             this.lblfecha.Size = new System.Drawing.Size(51, 16);
@@ -76,7 +79,7 @@
             // 
             // btnhacerpedido
             // 
-            this.btnhacerpedido.Location = new System.Drawing.Point(619, 148);
+            this.btnhacerpedido.Location = new System.Drawing.Point(712, 149);
             this.btnhacerpedido.Name = "btnhacerpedido";
             this.btnhacerpedido.Size = new System.Drawing.Size(187, 28);
             this.btnhacerpedido.TabIndex = 9;
@@ -86,7 +89,7 @@
             // 
             // btnquitar
             // 
-            this.btnquitar.Location = new System.Drawing.Point(706, 106);
+            this.btnquitar.Location = new System.Drawing.Point(787, 101);
             this.btnquitar.Name = "btnquitar";
             this.btnquitar.Size = new System.Drawing.Size(100, 28);
             this.btnquitar.TabIndex = 10;
@@ -96,7 +99,7 @@
             // 
             // btnatras
             // 
-            this.btnatras.Location = new System.Drawing.Point(706, 457);
+            this.btnatras.Location = new System.Drawing.Point(787, 508);
             this.btnatras.Name = "btnatras";
             this.btnatras.Size = new System.Drawing.Size(100, 28);
             this.btnatras.TabIndex = 13;
@@ -107,15 +110,15 @@
             // cbproveedor
             // 
             this.cbproveedor.FormattingEnabled = true;
-            this.cbproveedor.Location = new System.Drawing.Point(308, 70);
+            this.cbproveedor.Location = new System.Drawing.Point(308, 105);
             this.cbproveedor.Name = "cbproveedor";
-            this.cbproveedor.Size = new System.Drawing.Size(200, 24);
+            this.cbproveedor.Size = new System.Drawing.Size(267, 24);
             this.cbproveedor.TabIndex = 14;
             // 
             // cbidproveedor
             // 
             this.cbidproveedor.FormattingEnabled = true;
-            this.cbidproveedor.Location = new System.Drawing.Point(106, 71);
+            this.cbidproveedor.Location = new System.Drawing.Point(106, 106);
             this.cbidproveedor.Name = "cbidproveedor";
             this.cbidproveedor.Size = new System.Drawing.Size(97, 24);
             this.cbidproveedor.TabIndex = 16;
@@ -123,7 +126,7 @@
             // lblidproveedor
             // 
             this.lblidproveedor.AutoSize = true;
-            this.lblidproveedor.Location = new System.Drawing.Point(21, 74);
+            this.lblidproveedor.Location = new System.Drawing.Point(21, 109);
             this.lblidproveedor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblidproveedor.Name = "lblidproveedor";
             this.lblidproveedor.Size = new System.Drawing.Size(93, 16);
@@ -132,7 +135,7 @@
             // 
             // dtpfecha
             // 
-            this.dtpfecha.Location = new System.Drawing.Point(584, 21);
+            this.dtpfecha.Location = new System.Drawing.Point(687, 20);
             this.dtpfecha.Name = "dtpfecha";
             this.dtpfecha.Size = new System.Drawing.Size(200, 22);
             this.dtpfecha.TabIndex = 17;
@@ -169,22 +172,22 @@
             // 
             this.txtnrocomprobante.Location = new System.Drawing.Point(351, 23);
             this.txtnrocomprobante.Name = "txtnrocomprobante";
-            this.txtnrocomprobante.Size = new System.Drawing.Size(157, 22);
+            this.txtnrocomprobante.Size = new System.Drawing.Size(124, 22);
             this.txtnrocomprobante.TabIndex = 21;
             // 
             // cbempleado
             // 
             this.cbempleado.FormattingEnabled = true;
-            this.cbempleado.Location = new System.Drawing.Point(308, 113);
+            this.cbempleado.Location = new System.Drawing.Point(308, 67);
             this.cbempleado.Name = "cbempleado";
-            this.cbempleado.Size = new System.Drawing.Size(200, 24);
+            this.cbempleado.Size = new System.Drawing.Size(267, 24);
             this.cbempleado.TabIndex = 23;
             this.cbempleado.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // lblempleado
             // 
             this.lblempleado.AutoSize = true;
-            this.lblempleado.Location = new System.Drawing.Point(225, 113);
+            this.lblempleado.Location = new System.Drawing.Point(225, 67);
             this.lblempleado.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblempleado.Name = "lblempleado";
             this.lblempleado.Size = new System.Drawing.Size(76, 16);
@@ -196,7 +199,7 @@
             this.cbproducto.FormattingEnabled = true;
             this.cbproducto.Location = new System.Drawing.Point(308, 151);
             this.cbproducto.Name = "cbproducto";
-            this.cbproducto.Size = new System.Drawing.Size(269, 24);
+            this.cbproducto.Size = new System.Drawing.Size(267, 24);
             this.cbproducto.TabIndex = 27;
             // 
             // lblproducto
@@ -235,14 +238,14 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(821, 246);
+            this.dataGridView1.Size = new System.Drawing.Size(863, 309);
             this.dataGridView1.TabIndex = 28;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // cbidempleado
             // 
             this.cbidempleado.FormattingEnabled = true;
-            this.cbidempleado.Location = new System.Drawing.Point(106, 110);
+            this.cbidempleado.Location = new System.Drawing.Point(106, 64);
             this.cbidempleado.Name = "cbidempleado";
             this.cbidempleado.Size = new System.Drawing.Size(97, 24);
             this.cbidempleado.TabIndex = 30;
@@ -250,7 +253,7 @@
             // lblidempl
             // 
             this.lblidempl.AutoSize = true;
-            this.lblidempl.Location = new System.Drawing.Point(23, 117);
+            this.lblidempl.Location = new System.Drawing.Point(23, 71);
             this.lblidempl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblidempl.Name = "lblidempl";
             this.lblidempl.Size = new System.Drawing.Size(90, 16);
@@ -259,7 +262,7 @@
             // 
             // btnlimpiar
             // 
-            this.btnlimpiar.Location = new System.Drawing.Point(584, 457);
+            this.btnlimpiar.Location = new System.Drawing.Point(667, 508);
             this.btnlimpiar.Name = "btnlimpiar";
             this.btnlimpiar.Size = new System.Drawing.Size(100, 28);
             this.btnlimpiar.TabIndex = 31;
@@ -267,12 +270,44 @@
             this.btnlimpiar.UseVisualStyleBackColor = true;
             this.btnlimpiar.Click += new System.EventHandler(this.btnlimpiar_Click);
             // 
+            // btnconsultanp
+            // 
+            this.btnconsultanp.Location = new System.Drawing.Point(481, 23);
+            this.btnconsultanp.Name = "btnconsultanp";
+            this.btnconsultanp.Size = new System.Drawing.Size(141, 23);
+            this.btnconsultanp.TabIndex = 32;
+            this.btnconsultanp.Text = "Consulta NP";
+            this.btnconsultanp.UseVisualStyleBackColor = true;
+            this.btnconsultanp.Click += new System.EventHandler(this.btnconsultanp_Click);
+            // 
+            // btnconsultaproveedor
+            // 
+            this.btnconsultaproveedor.Location = new System.Drawing.Point(581, 109);
+            this.btnconsultaproveedor.Name = "btnconsultaproveedor";
+            this.btnconsultaproveedor.Size = new System.Drawing.Size(113, 23);
+            this.btnconsultaproveedor.TabIndex = 33;
+            this.btnconsultaproveedor.Text = "Consulta Prov.";
+            this.btnconsultaproveedor.UseVisualStyleBackColor = true;
+            // 
+            // btnconsultaproducto
+            // 
+            this.btnconsultaproducto.Location = new System.Drawing.Point(581, 152);
+            this.btnconsultaproducto.Name = "btnconsultaproducto";
+            this.btnconsultaproducto.Size = new System.Drawing.Size(113, 23);
+            this.btnconsultaproducto.TabIndex = 34;
+            this.btnconsultaproducto.Text = "Consulta Prod.";
+            this.btnconsultaproducto.UseVisualStyleBackColor = true;
+            this.btnconsultaproducto.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Compras
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.ClientSize = new System.Drawing.Size(857, 497);
+            this.ClientSize = new System.Drawing.Size(938, 562);
+            this.Controls.Add(this.btnconsultaproducto);
+            this.Controls.Add(this.btnconsultaproveedor);
+            this.Controls.Add(this.btnconsultanp);
             this.Controls.Add(this.btnlimpiar);
             this.Controls.Add(this.cbidempleado);
             this.Controls.Add(this.lblidempl);
@@ -333,5 +368,8 @@
         private System.Windows.Forms.ComboBox cbidempleado;
         private System.Windows.Forms.Label lblidempl;
         private System.Windows.Forms.Button btnlimpiar;
+        private System.Windows.Forms.Button btnconsultanp;
+        private System.Windows.Forms.Button btnconsultaproveedor;
+        private System.Windows.Forms.Button btnconsultaproducto;
     }
 }

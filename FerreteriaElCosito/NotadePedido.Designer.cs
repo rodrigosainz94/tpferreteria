@@ -124,6 +124,7 @@
             this.btnatras.TabIndex = 37;
             this.btnatras.Text = "Atras";
             this.btnatras.UseVisualStyleBackColor = true;
+            this.btnatras.Click += new System.EventHandler(this.btnatras_Click_1);
             // 
             // btnimprimirpedido
             // 
