@@ -99,13 +99,15 @@ namespace FerreteriaElCosito
             cargandoCombos = true;
             using (var conn = ConexionBD.ObtenerConexion())
             {
-                string query = "SELECT IdProveedor, Nombre FROM proveedores";
+                // Consulta modificada para concatenar Nombre y Apellido
+                string query = "SELECT IdProveedor, CONCAT(Nombre, ' ', Apellido) AS NombreCompleto FROM proveedores";
                 MySqlDataAdapter da = new MySqlDataAdapter(query, conn);
                 dtProveedores = new DataTable();
                 da.Fill(dtProveedores);
 
                 cbproveedor.DataSource = dtProveedores;
-                cbproveedor.DisplayMember = "Nombre";
+                // El campo a mostrar ahora es 'NombreCompleto'
+                cbproveedor.DisplayMember = "NombreCompleto";
                 cbproveedor.ValueMember = "IdProveedor";
                 cbproveedor.SelectedIndex = -1;
 
@@ -122,13 +124,15 @@ namespace FerreteriaElCosito
             cargandoCombos = true;
             using (var conn = ConexionBD.ObtenerConexion())
             {
-                string query = "SELECT IdEmpleado, Nombre FROM empleado";
+                // Consulta modificada para concatenar Nombre y Apellido
+                string query = "SELECT IdEmpleado, CONCAT(Nombre, ' ', Apellido) AS NombreCompleto FROM empleado";
                 MySqlDataAdapter da = new MySqlDataAdapter(query, conn);
                 dtEmpleados = new DataTable();
                 da.Fill(dtEmpleados);
 
                 cbempleado.DataSource = dtEmpleados;
-                cbempleado.DisplayMember = "Nombre";
+                // El campo a mostrar ahora es 'NombreCompleto'
+                cbempleado.DisplayMember = "NombreCompleto";
                 cbempleado.ValueMember = "IdEmpleado";
                 cbempleado.SelectedIndex = -1;
 
@@ -521,6 +525,64 @@ namespace FerreteriaElCosito
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             // Captura clic en DataGridView si necesitas
+        }
+
+
+        //private void button1_Click(object sender, EventArgs e)
+        //{
+        //    // Instancia el formulario de consulta de productos
+        //    ConsultaProducto frmConsultaProd = new ConsultaProducto();
+
+        //    // Muestra el formulario como un diálogo modal
+        //    if (frmConsultaProd.ShowDialog() == DialogResult.OK)
+        //    {
+        //        // Si el usuario seleccionó un producto, actualiza los combos
+        //        int idSeleccionado = frmConsultaProd.IdProductoSeleccionado;
+        //        string nombreSeleccionado = frmConsultaProd.NombreProductoSeleccionado;
+
+        //        cbidproducto.SelectedValue = idSeleccionado;
+        //        cbproducto.SelectedValue = idSeleccionado;
+        //    }
+        //}
+
+        private void btnconsultanp_Click(object sender, EventArgs e)
+        {
+            ConsultaNotadePedido frmConsulta = new ConsultaNotadePedido();
+            frmConsulta.ShowDialog();
+        }
+
+        private void btnconsultaproveedor_Click(object sender, EventArgs e)
+        {
+            // Instancia el formulario de consulta de proveedores
+            frmcosultaproveedor frmConsultaProv = new frmcosultaproveedor();
+
+            // Muestra el formulario como un diálogo modal
+            if (frmConsultaProv.ShowDialog() == DialogResult.OK)
+            {
+                // Si el usuario seleccionó un proveedor, actualiza los combos
+                int idSeleccionado = frmConsultaProv.IdProveedorSeleccionado;
+                string nombreSeleccionado = frmConsultaProv.NombreProveedorSeleccionado;
+
+                cbidproveedor.SelectedValue = idSeleccionado;
+                cbproveedor.SelectedValue = idSeleccionado;
+            }
+        }
+
+        private void btnconsultaproducto_Click(object sender, EventArgs e)
+        {
+            // Instancia el formulario de consulta de productos
+            ConsultaProducto frmConsultaProd = new ConsultaProducto();
+
+            // Muestra el formulario como un diálogo modal
+            if (frmConsultaProd.ShowDialog() == DialogResult.OK)
+            {
+                // Si el usuario seleccionó un producto, actualiza los combos
+                int idSeleccionado = frmConsultaProd.IdProductoSeleccionado;
+                string nombreSeleccionado = frmConsultaProd.NombreProductoSeleccionado;
+
+                cbidproducto.SelectedValue = idSeleccionado;
+                cbproducto.SelectedValue = idSeleccionado;
+            }
         }
     }
 }
