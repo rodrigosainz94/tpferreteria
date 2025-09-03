@@ -99,13 +99,15 @@ namespace FerreteriaElCosito
             cargandoCombos = true;
             using (var conn = ConexionBD.ObtenerConexion())
             {
-                string query = "SELECT IdProveedor, Nombre FROM proveedores";
+                // Consulta modificada para concatenar Nombre y Apellido
+                string query = "SELECT IdProveedor, CONCAT(Nombre, ' ', Apellido) AS NombreCompleto FROM proveedores";
                 MySqlDataAdapter da = new MySqlDataAdapter(query, conn);
                 dtProveedores = new DataTable();
                 da.Fill(dtProveedores);
 
                 cbproveedor.DataSource = dtProveedores;
-                cbproveedor.DisplayMember = "Nombre";
+                // El campo a mostrar ahora es 'NombreCompleto'
+                cbproveedor.DisplayMember = "NombreCompleto";
                 cbproveedor.ValueMember = "IdProveedor";
                 cbproveedor.SelectedIndex = -1;
 
