@@ -105,6 +105,7 @@
             this.btnCerrar.TabIndex = 6;
             this.btnCerrar.Text = "Cerrar";
             this.btnCerrar.UseVisualStyleBackColor = true;
+            this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
             // 
             // btnConfirmar
             // 
@@ -114,7 +115,7 @@
             this.btnConfirmar.TabIndex = 7;
             this.btnConfirmar.Text = "Confirmar y Generar PDF";
             this.btnConfirmar.UseVisualStyleBackColor = true;
-            this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click_1);
+            this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
             // 
             // lblMetPago
             // 

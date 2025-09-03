@@ -3,7 +3,6 @@ using System;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
-using System.Linq;
 
 namespace FerreteriaElCosito
 {
@@ -30,14 +29,12 @@ namespace FerreteriaElCosito
         private void ConfigurarGrillaFactura()
         {
             dgvfacturacion.AutoGenerateColumns = false;
-
             dtFacturaItems.Columns.Add("IdProducto", typeof(int));
             dtFacturaItems.Columns.Add("Nombre", typeof(string));
             dtFacturaItems.Columns.Add("Cantidad", typeof(int));
             dtFacturaItems.Columns.Add("Medida", typeof(string));
             dtFacturaItems.Columns.Add("Precio unidad", typeof(decimal));
             dtFacturaItems.Columns.Add("Precio cantidad", typeof(decimal), "[Precio unidad] * Cantidad");
-
             dgvfacturacion.DataSource = dtFacturaItems;
 
             if (dgvfacturacion.Columns.Count == 0)
@@ -47,10 +44,8 @@ namespace FerreteriaElCosito
                 var colMedida = new DataGridViewTextBoxColumn { Name = "Medida", HeaderText = "Medida", DataPropertyName = "Medida", ReadOnly = true, Width = 80 };
                 var colPrecioUnidad = new DataGridViewTextBoxColumn { Name = "PrecioUnidad", HeaderText = "Precio Unidad", DataPropertyName = "Precio unidad", ReadOnly = true, DefaultCellStyle = { Format = "C" } };
                 var colPrecioCantidad = new DataGridViewTextBoxColumn { Name = "PrecioCantidad", HeaderText = "Precio Cantidad", DataPropertyName = "Precio cantidad", ReadOnly = true, DefaultCellStyle = { Format = "C" } };
-
                 dgvfacturacion.Columns.AddRange(new DataGridViewColumn[] { colNombre, colCantidad, colMedida, colPrecioUnidad, colPrecioCantidad });
             }
-
             dgvfacturacion.AllowUserToAddRows = false;
         }
 
@@ -64,7 +59,6 @@ namespace FerreteriaElCosito
                     MySqlDataAdapter da = new MySqlDataAdapter(query, conn);
                     DataTable dtProductos = new DataTable();
                     da.Fill(dtProductos);
-
                     cmbnombre.DataSource = dtProductos;
                     cmbnombre.DisplayMember = "NombreProducto";
                     cmbnombre.ValueMember = "IdProducto";
@@ -79,7 +73,6 @@ namespace FerreteriaElCosito
         private void btnagregar_Click(object sender, EventArgs e)
         {
             int idProductoBuscado = 0;
-
             if (!string.IsNullOrWhiteSpace(txtcodigo.Text))
             {
                 if (!int.TryParse(txtcodigo.Text, out idProductoBuscado))
@@ -112,7 +105,6 @@ namespace FerreteriaElCosito
                         string query = "SELECT NombreProducto, UnidadMedida, PrecioUnitario FROM productos WHERE IdProducto = @id";
                         MySqlCommand cmd = new MySqlCommand(query, conn);
                         cmd.Parameters.AddWithValue("@id", idProductoBuscado);
-
                         using (MySqlDataReader reader = cmd.ExecuteReader())
                         {
                             if (reader.Read())
@@ -133,15 +125,52 @@ namespace FerreteriaElCosito
                     return;
                 }
             }
-
             CalcularTotal();
             txtcodigo.Clear();
             cmbnombre.SelectedIndex = -1;
-            // Llamamos al método para mover el foco y editar
             MoverFocoACantidad();
         }
 
-        // --- MANEJO DE TECLADO ---
+        private void btnfacturar_Click(object sender, EventArgs e)
+        {
+            if (dtFacturaItems.Rows.Count == 0)
+            {
+                MessageBox.Show("No se puede generar una factura sin productos.", "Factura Vacía", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (this.idClienteSeleccionado == null)
+            {
+                MessageBox.Show("Por favor, seleccione un cliente antes de facturar.", "Falta Cliente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            decimal total = Convert.ToDecimal(dtFacturaItems.Compute("SUM([Precio cantidad])", string.Empty));
+            FacturaPreview formularioPreview = new FacturaPreview(this.idClienteSeleccionado, dtFacturaItems, total);
+
+            if (formularioPreview.ShowDialog() == DialogResult.OK)
+            {
+                dtFacturaItems.Clear();
+                CalcularTotal();
+                txtdni.Clear();
+                lblnombrecliente.Text = "Nombre cliente";
+                this.idClienteSeleccionado = null;
+                cbconsumidorfinal.Checked = false;
+                txtcodigo.Focus();
+            }
+        }
+
+        private void btncliente_Click(object sender, EventArgs e)
+        {
+            using (ClientesAgregar formAgregarCliente = new ClientesAgregar())
+            {
+                if (formAgregarCliente.ShowDialog() == DialogResult.OK)
+                {
+                    string nuevoCuit = formAgregarCliente.CuitNuevoCliente;
+                    txtdni.Text = nuevoCuit;
+                    txtdni_KeyDown(txtdni, new KeyEventArgs(Keys.Enter));
+                }
+            }
+        }
 
         private void txtcodigo_KeyDown(object sender, KeyEventArgs e)
         {
@@ -173,19 +202,69 @@ namespace FerreteriaElCosito
 
         private void dgvfacturacion_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            dgvfacturacion.CommitEdit(DataGridViewDataErrorContexts.Commit);
-            dgvfacturacion.EndEdit();
-            dtFacturaItems.AcceptChanges();
             CalcularTotal();
-            txtcodigo.Focus();
         }
 
+        private void txtdni_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && txtdni.MaskCompleted)
+            {
+                try
+                {
+                    using (MySqlConnection conn = ConexionBD.ObtenerConexion())
+                    {
+                        string query = "SELECT IdCliente, Nombre, Apellido FROM clientes WHERE CUIT_CUIL = @cuit";
+                        MySqlCommand cmd = new MySqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@cuit", txtdni.Text);
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                this.idClienteSeleccionado = Convert.ToInt32(reader["IdCliente"]);
+                                string nombreCompleto = $"{reader["Nombre"]} {reader["Apellido"]}";
+                                lblnombrecliente.Text = nombreCompleto;
+                            }
+                            else
+                            {
+                                this.idClienteSeleccionado = null;
+                                lblnombrecliente.Text = "Cliente no encontrado";
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al buscar el cliente: " + ex.Message);
+                }
+            }
+        }
 
-        // --- MÉTODOS AUXILIARES Y OTROS BOTONES ---
+        private void txtdni_Click(object sender, EventArgs e)
+        {
+            if (!txtdni.Text.Any(char.IsDigit))
+            {
+                txtdni.SelectionStart = 0;
+            }
+        }
 
-        /// <summary>
-        /// MÉTODO REINCORPORADO: Mueve el foco a la celda de Cantidad de la última fila.
-        /// </summary>
+        private void cbconsumidorfinal_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbconsumidorfinal.Checked)
+            {
+                txtdni.Enabled = false;
+                txtdni.Clear();
+                lblnombrecliente.Text = "Consumidor Final";
+                this.idClienteSeleccionado = 76; // ID de Consumidor Final
+            }
+            else
+            {
+                txtdni.Enabled = true;
+                lblnombrecliente.Text = "Nombre cliente";
+                this.idClienteSeleccionado = null;
+                txtdni.Focus();
+            }
+        }
+
         private void MoverFocoACantidad()
         {
             int ultimaFila = dgvfacturacion.Rows.Count - 1;
@@ -220,143 +299,9 @@ namespace FerreteriaElCosito
             }
         }
 
-        private void txtdni_KeyDown(object sender, KeyEventArgs e)
-        {
-            // Verificamos si se presionó Enter y si el campo está lleno
-            if (e.KeyCode == Keys.Enter && txtdni.MaskCompleted)
-            {
-                try
-                {
-                    using (MySqlConnection conn = ConexionBD.ObtenerConexion())
-                    {
-                        string query = "SELECT IdCliente, Nombre, Apellido FROM clientes WHERE CUIT_CUIL = @cuit";
-                        MySqlCommand cmd = new MySqlCommand(query, conn);
-                        cmd.Parameters.AddWithValue("@cuit", txtdni.Text);
-
-                        using (MySqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            if (reader.Read())
-                            {
-                                // Si encontramos al cliente, guardamos su ID y mostramos su nombre
-                                this.idClienteSeleccionado = Convert.ToInt32(reader["IdCliente"]);
-                                string nombreCompleto = $"{reader["Nombre"]} {reader["Apellido"]}";
-                                lblnombrecliente.Text = nombreCompleto;
-                            }
-                            else
-                            {
-                                // Si no se encuentra, lo indicamos y limpiamos los datos
-                                this.idClienteSeleccionado = null;
-                                lblnombrecliente.Text = "Cliente no encontrado";
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al buscar el cliente: " + ex.Message);
-                }
-            }
-        }
-
-        private void txtdni_Click(object sender, EventArgs e)
-        {
-            // Esta condición revisa si el campo todavía no tiene ningún número ingresado.
-            // Usamos .Any() de LINQ para verificar si existe al menos un dígito en el texto.
-            if (!txtdni.Text.Any(char.IsDigit))
-            {
-                // Si está "vacío" (solo tiene espacios y guiones), 
-                // movemos el cursor (el punto de inserción) al principio del control.
-                txtdni.SelectionStart = 0;
-            }
-        }
-
-        private void cbconsumidorfinal_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cbconsumidorfinal.Checked)
-            {
-                // Si se marca "Consumidor Final"
-                txtdni.Enabled = false;
-                txtdni.Clear();
-                lblnombrecliente.Text = "Consumidor Final";
-                // Es una buena práctica tener un cliente genérico en la BD, por ejemplo con ID = 1
-                this.idClienteSeleccionado = 1;
-            }
-            else
-            {
-                // Si se desmarca
-                txtdni.Enabled = true;
-                lblnombrecliente.Text = "Nombre cliente"; // Volvemos al texto original
-                this.idClienteSeleccionado = null;
-                txtdni.Focus();
-            }
-        }
-
-        private void btnfacturar_Click(object sender, EventArgs e)
-        {
-            // --- VALIDACIONES ---
-            // 1. Validamos que haya productos en la grilla
-            if (dtFacturaItems.Rows.Count == 0)
-            {
-                MessageBox.Show("No se puede generar una factura sin productos.", "Factura Vacía", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            // 2. Validamos que se haya seleccionado un cliente
-            if (this.idClienteSeleccionado == null)
-            {
-                MessageBox.Show("Por favor, seleccione un cliente antes de facturar.", "Falta Cliente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            // --- RECOLECCIÓN DE DATOS ---
-            string nombreCliente = lblnombrecliente.Text;
-            string cuitCliente = txtdni.Text;
-            decimal total = Convert.ToDecimal(dtFacturaItems.Compute("SUM([Precio cantidad])", string.Empty));
-
-            // --- LLAMADA A LA VISTA PREVIA ---
-            // Creamos una instancia del nuevo formulario y le pasamos todos los datos
-            FacturaPreview formularioPreview = new FacturaPreview(nombreCliente, cuitCliente, dtFacturaItems, total);
-
-            // Usamos ShowDialog() para que el formulario de facturación quede en espera
-            formularioPreview.ShowDialog();
-
-            // (Opcional) Una vez que se cierra la vista previa, podrías limpiar el formulario de facturación
-            // para empezar una nueva venta.
-            // LimpiarFactura();
-        }
-
         private void btnatras_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void dgvfacturacion_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void btncliente_Click(object sender, EventArgs e)
-        {
-            // Usamos 'using' para asegurarnos de que el formulario se libere de la memoria
-            using (ClientesAgregar formAgregarCliente = new ClientesAgregar())
-            {
-                // Usamos ShowDialog() para que el formulario de Facturar espere
-                // a que se termine de agregar el nuevo cliente.
-
-                // Verificamos si el usuario cerró el formulario guardando los datos (DialogResult.OK)
-                if (formAgregarCliente.ShowDialog() == DialogResult.OK)
-                {
-                    // Si el alta fue exitosa, tomamos el CUIT de la propiedad pública que creamos
-                    string nuevoCuit = formAgregarCliente.CuitNuevoCliente;
-
-                    // Ponemos el CUIT en el MaskedTextBox
-                    txtdni.Text = nuevoCuit;
-
-                    // Para que también se cargue el nombre, simulamos que el usuario presionó Enter
-                    // en el campo del CUIT, disparando la búsqueda.
-                    txtdni_KeyDown(txtdni, new KeyEventArgs(Keys.Enter));
-                }
-            }
         }
     }
 }
