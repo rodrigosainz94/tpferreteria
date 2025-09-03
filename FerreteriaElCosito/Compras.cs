@@ -523,10 +523,23 @@ namespace FerreteriaElCosito
             // Captura clic en DataGridView si necesitas
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
 
-        }
+        //private void button1_Click(object sender, EventArgs e)
+        //{
+        //    // Instancia el formulario de consulta de productos
+        //    ConsultaProducto frmConsultaProd = new ConsultaProducto();
+
+        //    // Muestra el formulario como un diálogo modal
+        //    if (frmConsultaProd.ShowDialog() == DialogResult.OK)
+        //    {
+        //        // Si el usuario seleccionó un producto, actualiza los combos
+        //        int idSeleccionado = frmConsultaProd.IdProductoSeleccionado;
+        //        string nombreSeleccionado = frmConsultaProd.NombreProductoSeleccionado;
+
+        //        cbidproducto.SelectedValue = idSeleccionado;
+        //        cbproducto.SelectedValue = idSeleccionado;
+        //    }
+        //}
 
         private void btnconsultanp_Click(object sender, EventArgs e)
         {
@@ -548,6 +561,23 @@ namespace FerreteriaElCosito
 
                 cbidproveedor.SelectedValue = idSeleccionado;
                 cbproveedor.SelectedValue = idSeleccionado;
+            }
+        }
+
+        private void btnconsultaproducto_Click(object sender, EventArgs e)
+        {
+            // Instancia el formulario de consulta de productos
+            ConsultaProducto frmConsultaProd = new ConsultaProducto();
+
+            // Muestra el formulario como un diálogo modal
+            if (frmConsultaProd.ShowDialog() == DialogResult.OK)
+            {
+                // Si el usuario seleccionó un producto, actualiza los combos
+                int idSeleccionado = frmConsultaProd.IdProductoSeleccionado;
+                string nombreSeleccionado = frmConsultaProd.NombreProductoSeleccionado;
+
+                cbidproducto.SelectedValue = idSeleccionado;
+                cbproducto.SelectedValue = idSeleccionado;
             }
         }
     }

@@ -292,13 +292,13 @@
             // 
             // btnconsultaproducto
             // 
-            this.btnconsultaproducto.Location = new System.Drawing.Point(581, 152);
+            this.btnconsultaproducto.Location = new System.Drawing.Point(581, 156);
             this.btnconsultaproducto.Name = "btnconsultaproducto";
             this.btnconsultaproducto.Size = new System.Drawing.Size(113, 23);
             this.btnconsultaproducto.TabIndex = 34;
             this.btnconsultaproducto.Text = "Consulta Prod.";
             this.btnconsultaproducto.UseVisualStyleBackColor = true;
-            this.btnconsultaproducto.Click += new System.EventHandler(this.button1_Click);
+            this.btnconsultaproducto.Click += new System.EventHandler(this.btnconsultaproducto_Click);
             // 
             // Compras
             // 
