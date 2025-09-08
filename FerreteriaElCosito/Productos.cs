@@ -23,6 +23,7 @@ namespace FerreteriaElCosito
             CargarProductos();
             CargarCategorias();
             CargarProveedores();
+            CargarUnidadMedida();
 
         }
 
@@ -45,6 +46,31 @@ namespace FerreteriaElCosito
                 MessageBox.Show("Error al cargar productos: " + ex.Message);
             }
         }
+
+        private void CargarUnidadMedida()
+        {
+            try
+            {
+                using (var conn = ConexionBD.ObtenerConexion())
+                {
+                    string query = "SELECT DISTINCT UnidadMedida FROM productos";
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn);
+                    DataTable dt = new DataTable();
+                    adapter.Fill(dt);
+
+                    cbUnidadMedida.DataSource = dt;
+                    cbUnidadMedida.DisplayMember = "UnidadMedida"; // se muestra en el combo
+                    cbUnidadMedida.ValueMember = "UnidadMedida";   // también se usa como valor
+                    cbUnidadMedida.SelectedIndex = -1;             // sin selección inicial
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar unidades de medida: " + ex.Message);
+            }
+        }
+
+
 
         private void CargarCategorias()
         {
@@ -163,5 +189,12 @@ namespace FerreteriaElCosito
             }
         }
 
+        private void btnguardar_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+
     }
 }
+
