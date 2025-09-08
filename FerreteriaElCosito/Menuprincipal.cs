@@ -174,5 +174,13 @@ namespace FerreteriaElCosito
             // Cuando se cierre el login, cerramos también el menú
             formularioLogin.FormClosed += (s, args) => this.Close();
         }
+
+        private void btnfacturaproveedor_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            frmfacturaproveedor nuevoFormulario = new frmfacturaproveedor();
+            nuevoFormulario.Show();
+            nuevoFormulario.FormClosed += (s, args) => this.Show();
+        }
     }
 }
