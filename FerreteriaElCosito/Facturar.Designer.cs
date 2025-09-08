@@ -228,9 +228,9 @@
             this.lblcliente.Location = new System.Drawing.Point(90, 272);
             this.lblcliente.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblcliente.Name = "lblcliente";
-            this.lblcliente.Size = new System.Drawing.Size(61, 20);
+            this.lblcliente.Size = new System.Drawing.Size(66, 20);
             this.lblcliente.TabIndex = 18;
-            this.lblcliente.Text = "Cliente";
+            this.lblcliente.Text = "Cliente:";
             // 
             // btncliente
             // 
@@ -247,7 +247,7 @@
             // 
             this.lblnombrecliente.AutoSize = true;
             this.lblnombrecliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblnombrecliente.Location = new System.Drawing.Point(90, 381);
+            this.lblnombrecliente.Location = new System.Drawing.Point(172, 272);
             this.lblnombrecliente.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblnombrecliente.Name = "lblnombrecliente";
             this.lblnombrecliente.Size = new System.Drawing.Size(122, 20);
@@ -263,6 +263,7 @@
             this.txtdni.Size = new System.Drawing.Size(184, 22);
             this.txtdni.TabIndex = 21;
             this.txtdni.Click += new System.EventHandler(this.txtdni_Click);
+            this.txtdni.TextChanged += new System.EventHandler(this.txtdni_TextChanged);
             this.txtdni.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtdni_KeyDown);
             // 
             // Facturar

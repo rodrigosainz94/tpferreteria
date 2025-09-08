@@ -55,13 +55,27 @@ namespace FerreteriaElCosito
             {
                 using (MySqlConnection conn = ConexionBD.ObtenerConexion())
                 {
-                    string query = "SELECT IdProducto, NombreProducto FROM productos ORDER BY NombreProducto";
+                    // --- CONSULTA SQL MODIFICADA ---
+                    // 1. Usamos CONCAT() para unir el nombre y la cantidad en un nuevo campo llamado 'DisplayNombre'.
+                    // 2. Usamos WHERE para traer solo productos con cantidad mayor a 0.
+                    string query = @"SELECT 
+                                IdProducto, 
+                                CONCAT(NombreProducto, ' - Stock: ', Cantidad) AS DisplayNombre 
+                             FROM productos 
+                             WHERE Cantidad > 0 
+                             ORDER BY NombreProducto";
+
                     MySqlDataAdapter da = new MySqlDataAdapter(query, conn);
                     DataTable dtProductos = new DataTable();
                     da.Fill(dtProductos);
+
                     cmbnombre.DataSource = dtProductos;
-                    cmbnombre.DisplayMember = "NombreProducto";
-                    cmbnombre.ValueMember = "IdProducto";
+                    // --- DISPLAYMEMBER MODIFICADO ---
+                    // Ahora le decimos que muestre nuestro nuevo campo concatenado.
+                    cmbnombre.DisplayMember = "DisplayNombre";
+                    cmbnombre.ValueMember = "IdProducto"; // El valor interno sigue siendo el ID.
+
+                    cmbnombre.DropDownWidth = 400;
                 }
             }
             catch (Exception ex)
@@ -155,6 +169,7 @@ namespace FerreteriaElCosito
                 lblnombrecliente.Text = "Nombre cliente";
                 this.idClienteSeleccionado = null;
                 cbconsumidorfinal.Checked = false;
+                CargarComboProductos();
                 txtcodigo.Focus();
             }
         }
@@ -169,6 +184,50 @@ namespace FerreteriaElCosito
                     txtdni.Text = nuevoCuit;
                     txtdni_KeyDown(txtdni, new KeyEventArgs(Keys.Enter));
                 }
+            }
+        }
+
+        private void BuscarClientePorCuit()
+        {
+            // Verificamos que el campo CUIT esté completo
+            if (!txtdni.MaskCompleted) return;
+
+            try
+            {
+                using (MySqlConnection conn = ConexionBD.ObtenerConexion())
+                {
+                    string query = "SELECT IdCliente, Nombre, Apellido FROM clientes WHERE CUIT_CUIL = @cuit";
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@cuit", txtdni.Text);
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            this.idClienteSeleccionado = Convert.ToInt32(reader["IdCliente"]);
+                            string nombreCompleto = $"{reader["Nombre"]} {reader["Apellido"]}";
+                            lblnombrecliente.Text = nombreCompleto;
+                        }
+                        else
+                        {
+                            this.idClienteSeleccionado = null;
+                            lblnombrecliente.Text = "Cliente no encontrado";
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al buscar el cliente: " + ex.Message);
+            }
+        }
+
+        private void txtdni_TextChanged(object sender, EventArgs e)
+        {
+            // Si el CUIT/CUIL está completo, busca automáticamente al cliente.
+            if (txtdni.MaskCompleted)
+            {
+                BuscarClientePorCuit();
             }
         }
 
@@ -207,35 +266,9 @@ namespace FerreteriaElCosito
 
         private void txtdni_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter && txtdni.MaskCompleted)
+            if (e.KeyCode == Keys.Enter)
             {
-                try
-                {
-                    using (MySqlConnection conn = ConexionBD.ObtenerConexion())
-                    {
-                        string query = "SELECT IdCliente, Nombre, Apellido FROM clientes WHERE CUIT_CUIL = @cuit";
-                        MySqlCommand cmd = new MySqlCommand(query, conn);
-                        cmd.Parameters.AddWithValue("@cuit", txtdni.Text);
-                        using (MySqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            if (reader.Read())
-                            {
-                                this.idClienteSeleccionado = Convert.ToInt32(reader["IdCliente"]);
-                                string nombreCompleto = $"{reader["Nombre"]} {reader["Apellido"]}";
-                                lblnombrecliente.Text = nombreCompleto;
-                            }
-                            else
-                            {
-                                this.idClienteSeleccionado = null;
-                                lblnombrecliente.Text = "Cliente no encontrado";
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al buscar el cliente: " + ex.Message);
-                }
+                BuscarClientePorCuit();
             }
         }
 

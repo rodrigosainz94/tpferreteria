@@ -267,29 +267,42 @@ namespace FerreteriaElCosito
             {
                 conn = ConexionBD.ObtenerConexion();
                 transaction = conn.BeginTransaction();
-                string query = @"INSERT INTO movimientostock 
+
+                // Recorremos cada producto en la factura
+                foreach (DataRow fila in this.itemsFactura.Rows)
+                {
+                    // --- 1. INSERT en la tabla de movimientos (esto ya lo tenías) ---
+                    string queryMovimiento = @"INSERT INTO movimientostock 
                                (IdProducto, IdTipoMovimiento, Cantidad, FechaMovimiento, DetalleMovimiento, IdDeposito, IdEmpleado)
                                VALUES 
                                (@IdProducto, @IdTipoMovimiento, @Cantidad, @Fecha, @Detalle, @IdDeposito, @IdEmpleado)";
 
-                foreach (DataRow fila in this.itemsFactura.Rows)
-                {
-                    MySqlCommand cmd = new MySqlCommand(query, conn, transaction);
-                    cmd.Parameters.AddWithValue("@IdProducto", fila["IdProducto"]);
-                    cmd.Parameters.AddWithValue("@IdTipoMovimiento", 2); // 2 = Egreso
-                    cmd.Parameters.AddWithValue("@Cantidad", fila["Cantidad"]);
-                    cmd.Parameters.AddWithValue("@Fecha", DateTime.Now);
-                    cmd.Parameters.AddWithValue("@Detalle", "-");
-                    cmd.Parameters.AddWithValue("@IdDeposito", 1);
-                    cmd.Parameters.AddWithValue("@IdEmpleado", SesionUsuario.IdEmpleado);
-                    cmd.ExecuteNonQuery();
+                    MySqlCommand cmdMovimiento = new MySqlCommand(queryMovimiento, conn, transaction);
+                    cmdMovimiento.Parameters.AddWithValue("@IdProducto", fila["IdProducto"]);
+                    cmdMovimiento.Parameters.AddWithValue("@IdTipoMovimiento", 2); // 2 = Egreso
+                    cmdMovimiento.Parameters.AddWithValue("@Cantidad", fila["Cantidad"]);
+                    cmdMovimiento.Parameters.AddWithValue("@Fecha", DateTime.Now);
+                    cmdMovimiento.Parameters.AddWithValue("@Detalle", "-");
+                    cmdMovimiento.Parameters.AddWithValue("@IdDeposito", 1);
+                    cmdMovimiento.Parameters.AddWithValue("@IdEmpleado", SesionUsuario.IdEmpleado);
+                    cmdMovimiento.ExecuteNonQuery();
+
+                    // --- 2. NUEVO: UPDATE en la tabla de productos para restar el stock ---
+                    string queryUpdateStock = "UPDATE productos SET Cantidad = Cantidad - @Cantidad WHERE IdProducto = @IdProducto";
+
+                    MySqlCommand cmdUpdateStock = new MySqlCommand(queryUpdateStock, conn, transaction);
+                    cmdUpdateStock.Parameters.AddWithValue("@Cantidad", fila["Cantidad"]);
+                    cmdUpdateStock.Parameters.AddWithValue("@IdProducto", fila["IdProducto"]);
+                    cmdUpdateStock.ExecuteNonQuery();
                 }
 
+                // Si el bucle terminó sin errores, confirmamos todos los cambios
                 transaction.Commit();
                 return true;
             }
             catch (Exception ex)
             {
+                // Si algo falla, revertimos TODOS los cambios hechos en esta transacción
                 transaction?.Rollback();
                 MessageBox.Show("Error crítico al actualizar el stock: " + ex.Message, "Error de Stock", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
