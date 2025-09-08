@@ -49,7 +49,7 @@
             this.btnfacturar.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.btnfacturar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnfacturar.Location = new System.Drawing.Point(428, 14);
-            this.btnfacturar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnfacturar.Margin = new System.Windows.Forms.Padding(4);
             this.btnfacturar.Name = "btnfacturar";
             this.btnfacturar.Size = new System.Drawing.Size(231, 38);
             this.btnfacturar.TabIndex = 0;
@@ -62,7 +62,7 @@
             this.btnsalir.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.btnsalir.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnsalir.Location = new System.Drawing.Point(892, 369);
-            this.btnsalir.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnsalir.Margin = new System.Windows.Forms.Padding(4);
             this.btnsalir.Name = "btnsalir";
             this.btnsalir.Size = new System.Drawing.Size(100, 38);
             this.btnsalir.TabIndex = 6;
@@ -75,7 +75,7 @@
             this.btnproductos.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.btnproductos.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnproductos.Location = new System.Drawing.Point(428, 197);
-            this.btnproductos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnproductos.Margin = new System.Windows.Forms.Padding(4);
             this.btnproductos.Name = "btnproductos";
             this.btnproductos.Size = new System.Drawing.Size(231, 38);
             this.btnproductos.TabIndex = 8;
@@ -88,11 +88,11 @@
             this.btncompras.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.btncompras.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btncompras.Location = new System.Drawing.Point(428, 59);
-            this.btncompras.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btncompras.Margin = new System.Windows.Forms.Padding(4);
             this.btncompras.Name = "btncompras";
             this.btncompras.Size = new System.Drawing.Size(231, 38);
             this.btncompras.TabIndex = 9;
-            this.btncompras.Text = "COMPRAS";
+            this.btncompras.Text = "NOTA de PEDIDO";
             this.btncompras.UseVisualStyleBackColor = false;
             this.btncompras.Click += new System.EventHandler(this.btncompras_Click);
             // 
@@ -101,7 +101,7 @@
             this.btnclientes.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.btnclientes.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnclientes.Location = new System.Drawing.Point(428, 247);
-            this.btnclientes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnclientes.Margin = new System.Windows.Forms.Padding(4);
             this.btnclientes.Name = "btnclientes";
             this.btnclientes.Size = new System.Drawing.Size(231, 38);
             this.btnclientes.TabIndex = 10;
@@ -114,7 +114,7 @@
             this.btnproveedores.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.btnproveedores.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnproveedores.Location = new System.Drawing.Point(428, 105);
-            this.btnproveedores.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnproveedores.Margin = new System.Windows.Forms.Padding(4);
             this.btnproveedores.Name = "btnproveedores";
             this.btnproveedores.Size = new System.Drawing.Size(231, 38);
             this.btnproveedores.TabIndex = 11;
@@ -127,7 +127,7 @@
             this.btnusuarios.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.btnusuarios.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnusuarios.Location = new System.Drawing.Point(428, 293);
-            this.btnusuarios.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnusuarios.Margin = new System.Windows.Forms.Padding(4);
             this.btnusuarios.Name = "btnusuarios";
             this.btnusuarios.Size = new System.Drawing.Size(231, 38);
             this.btnusuarios.TabIndex = 12;
@@ -140,7 +140,7 @@
             this.btncaja.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.btncaja.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btncaja.Location = new System.Drawing.Point(428, 339);
-            this.btncaja.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btncaja.Margin = new System.Windows.Forms.Padding(4);
             this.btncaja.Name = "btncaja";
             this.btncaja.Size = new System.Drawing.Size(231, 38);
             this.btncaja.TabIndex = 13;
@@ -177,7 +177,7 @@
             this.btnempleados.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.btnempleados.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnempleados.Location = new System.Drawing.Point(428, 385);
-            this.btnempleados.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnempleados.Margin = new System.Windows.Forms.Padding(4);
             this.btnempleados.Name = "btnempleados";
             this.btnempleados.Size = new System.Drawing.Size(231, 38);
             this.btnempleados.TabIndex = 16;
@@ -190,7 +190,7 @@
             this.btncs.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.btncs.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btncs.Location = new System.Drawing.Point(77, 369);
-            this.btncs.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btncs.Margin = new System.Windows.Forms.Padding(4);
             this.btncs.Name = "btncs";
             this.btncs.Size = new System.Drawing.Size(241, 38);
             this.btncs.TabIndex = 17;
@@ -207,7 +207,7 @@
             this.btnfacturaproveedor.Name = "btnfacturaproveedor";
             this.btnfacturaproveedor.Size = new System.Drawing.Size(231, 38);
             this.btnfacturaproveedor.TabIndex = 18;
-            this.btnfacturaproveedor.Text = "FC. PROV.";
+            this.btnfacturaproveedor.Text = "COMPRAS";
             this.btnfacturaproveedor.UseVisualStyleBackColor = false;
             this.btnfacturaproveedor.Click += new System.EventHandler(this.btnfacturaproveedor_Click);
             // 
@@ -231,7 +231,7 @@
             this.Controls.Add(this.btnsalir);
             this.Controls.Add(this.btnfacturar);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Menuprincipal";
             this.Text = "Form2";
             this.Load += new System.EventHandler(this.Menuprincipal_Load);
