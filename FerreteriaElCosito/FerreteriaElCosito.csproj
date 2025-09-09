@@ -106,6 +106,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="buscarproducto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="buscarproducto.Designer.cs">
+      <DependentUpon>buscarproducto.cs</DependentUpon>
+    </Compile>
     <Compile Include="Caja.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,6 +136,8 @@
     <Compile Include="Compras.Designer.cs">
       <DependentUpon>Compras.cs</DependentUpon>
     </Compile>
+    <Compile Include="ComprasDAL.cs" />
+    <Compile Include="ComprasManager.cs" />
     <Compile Include="ConexionBD.cs" />
     <Compile Include="ConsultaNotadePedido.cs">
       <SubType>Form</SubType>
@@ -272,6 +280,9 @@
     <Compile Include="UsuariosAgregar.Designer.cs">
       <DependentUpon>UsuariosAgregar.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="buscarproducto.resx">
+      <DependentUpon>buscarproducto.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Caja.resx">
       <DependentUpon>Caja.cs</DependentUpon>
     </EmbeddedResource>

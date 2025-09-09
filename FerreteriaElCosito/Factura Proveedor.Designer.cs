@@ -54,27 +54,33 @@
             this.txtiva = new System.Windows.Forms.TextBox();
             this.cbnotadepedido = new System.Windows.Forms.ComboBox();
             this.lblnotadepedido = new System.Windows.Forms.Label();
+            this.lblformadepago = new System.Windows.Forms.Label();
+            this.cbformadepago = new System.Windows.Forms.ComboBox();
+            this.cbtipoegreso = new System.Windows.Forms.ComboBox();
+            this.lbltipodeegreso = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnlimpiar
             // 
-            this.btnlimpiar.Location = new System.Drawing.Point(699, 531);
+            this.btnlimpiar.Location = new System.Drawing.Point(721, 531);
             this.btnlimpiar.Name = "btnlimpiar";
-            this.btnlimpiar.Size = new System.Drawing.Size(100, 28);
+            this.btnlimpiar.Size = new System.Drawing.Size(86, 33);
             this.btnlimpiar.TabIndex = 58;
             this.btnlimpiar.Text = "Limpiar";
             this.btnlimpiar.UseVisualStyleBackColor = true;
+            this.btnlimpiar.Click += new System.EventHandler(this.btnlimpiar_Click);
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(56, 146);
+            this.dataGridView1.Location = new System.Drawing.Point(56, 112);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(863, 320);
+            this.dataGridView1.Size = new System.Drawing.Size(863, 274);
             this.dataGridView1.TabIndex = 55;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // txtnrocomprobante
             // 
@@ -82,6 +88,7 @@
             this.txtnrocomprobante.Name = "txtnrocomprobante";
             this.txtnrocomprobante.Size = new System.Drawing.Size(124, 22);
             this.txtnrocomprobante.TabIndex = 48;
+            this.txtnrocomprobante.TextChanged += new System.EventHandler(this.txtnrocomprobante_TextChanged);
             // 
             // cbtcomprobante
             // 
@@ -90,6 +97,7 @@
             this.cbtcomprobante.Name = "cbtcomprobante";
             this.cbtcomprobante.Size = new System.Drawing.Size(84, 24);
             this.cbtcomprobante.TabIndex = 47;
+            this.cbtcomprobante.SelectedIndexChanged += new System.EventHandler(this.cbtcomprobante_SelectedIndexChanged);
             // 
             // lbltcomprobante
             // 
@@ -117,19 +125,21 @@
             this.dtpfecha.Name = "dtpfecha";
             this.dtpfecha.Size = new System.Drawing.Size(200, 22);
             this.dtpfecha.TabIndex = 44;
+            this.dtpfecha.ValueChanged += new System.EventHandler(this.dtpfecha_ValueChanged);
             // 
             // cbidproveedor
             // 
             this.cbidproveedor.FormattingEnabled = true;
-            this.cbidproveedor.Location = new System.Drawing.Point(138, 97);
+            this.cbidproveedor.Location = new System.Drawing.Point(132, 75);
             this.cbidproveedor.Name = "cbidproveedor";
             this.cbidproveedor.Size = new System.Drawing.Size(97, 24);
             this.cbidproveedor.TabIndex = 43;
+            this.cbidproveedor.SelectedIndexChanged += new System.EventHandler(this.cbidproveedor_SelectedIndexChanged);
             // 
             // lblidproveedor
             // 
             this.lblidproveedor.AutoSize = true;
-            this.lblidproveedor.Location = new System.Drawing.Point(53, 100);
+            this.lblidproveedor.Location = new System.Drawing.Point(47, 78);
             this.lblidproveedor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblidproveedor.Name = "lblidproveedor";
             this.lblidproveedor.Size = new System.Drawing.Size(93, 16);
@@ -139,37 +149,41 @@
             // cbproveedor
             // 
             this.cbproveedor.FormattingEnabled = true;
-            this.cbproveedor.Location = new System.Drawing.Point(327, 96);
+            this.cbproveedor.Location = new System.Drawing.Point(321, 74);
             this.cbproveedor.Name = "cbproveedor";
             this.cbproveedor.Size = new System.Drawing.Size(267, 24);
             this.cbproveedor.TabIndex = 41;
+            this.cbproveedor.SelectedIndexChanged += new System.EventHandler(this.cbproveedor_SelectedIndexChanged);
             // 
             // btnatras
             // 
-            this.btnatras.Location = new System.Drawing.Point(819, 531);
+            this.btnatras.Location = new System.Drawing.Point(841, 531);
             this.btnatras.Name = "btnatras";
-            this.btnatras.Size = new System.Drawing.Size(100, 28);
+            this.btnatras.Size = new System.Drawing.Size(78, 33);
             this.btnatras.TabIndex = 40;
             this.btnatras.Text = "Atras";
             this.btnatras.UseVisualStyleBackColor = true;
+            this.btnatras.Click += new System.EventHandler(this.btnatras_Click);
             // 
             // btnquitar
             // 
-            this.btnquitar.Location = new System.Drawing.Point(819, 97);
+            this.btnquitar.Location = new System.Drawing.Point(810, 78);
             this.btnquitar.Name = "btnquitar";
             this.btnquitar.Size = new System.Drawing.Size(100, 28);
             this.btnquitar.TabIndex = 39;
             this.btnquitar.Text = "Quitar";
             this.btnquitar.UseVisualStyleBackColor = true;
+            this.btnquitar.Click += new System.EventHandler(this.btnquitar_Click);
             // 
             // btnregistrarfc
             // 
-            this.btnregistrarfc.Location = new System.Drawing.Point(56, 531);
+            this.btnregistrarfc.Location = new System.Drawing.Point(430, 485);
             this.btnregistrarfc.Name = "btnregistrarfc";
             this.btnregistrarfc.Size = new System.Drawing.Size(187, 28);
             this.btnregistrarfc.TabIndex = 38;
             this.btnregistrarfc.Text = "REGISTRAR FACTURA";
             this.btnregistrarfc.UseVisualStyleBackColor = true;
+            this.btnregistrarfc.Click += new System.EventHandler(this.btnregistrarfc_Click);
             // 
             // lblfecha
             // 
@@ -184,7 +198,7 @@
             // lblproveedor
             // 
             this.lblproveedor.AutoSize = true;
-            this.lblproveedor.Location = new System.Drawing.Point(242, 99);
+            this.lblproveedor.Location = new System.Drawing.Point(236, 77);
             this.lblproveedor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblproveedor.Name = "lblproveedor";
             this.lblproveedor.Size = new System.Drawing.Size(77, 16);
@@ -193,17 +207,18 @@
             // 
             // btnagregar
             // 
-            this.btnagregar.Location = new System.Drawing.Point(699, 97);
+            this.btnagregar.Location = new System.Drawing.Point(690, 78);
             this.btnagregar.Name = "btnagregar";
             this.btnagregar.Size = new System.Drawing.Size(100, 28);
             this.btnagregar.TabIndex = 35;
             this.btnagregar.Text = "Agregar";
             this.btnagregar.UseVisualStyleBackColor = true;
+            this.btnagregar.Click += new System.EventHandler(this.btnagregar_Click);
             // 
             // lblsubtotal
             // 
             this.lblsubtotal.AutoSize = true;
-            this.lblsubtotal.Location = new System.Drawing.Point(66, 491);
+            this.lblsubtotal.Location = new System.Drawing.Point(62, 463);
             this.lblsubtotal.Name = "lblsubtotal";
             this.lblsubtotal.Size = new System.Drawing.Size(56, 16);
             this.lblsubtotal.TabIndex = 60;
@@ -212,7 +227,7 @@
             // lbliva
             // 
             this.lbliva.AutoSize = true;
-            this.lbliva.Location = new System.Drawing.Point(282, 483);
+            this.lbliva.Location = new System.Drawing.Point(274, 419);
             this.lbliva.Name = "lbliva";
             this.lbliva.Size = new System.Drawing.Size(28, 16);
             this.lbliva.TabIndex = 61;
@@ -221,7 +236,7 @@
             // lbliibb
             // 
             this.lbliibb.AutoSize = true;
-            this.lbliibb.Location = new System.Drawing.Point(488, 484);
+            this.lbliibb.Location = new System.Drawing.Point(480, 420);
             this.lbliibb.Name = "lbliibb";
             this.lbliibb.Size = new System.Drawing.Size(31, 16);
             this.lbliibb.TabIndex = 62;
@@ -230,7 +245,7 @@
             // lbltotal
             // 
             this.lbltotal.AutoSize = true;
-            this.lbltotal.Location = new System.Drawing.Point(750, 490);
+            this.lbltotal.Location = new System.Drawing.Point(742, 426);
             this.lbltotal.Name = "lbltotal";
             this.lbltotal.Size = new System.Drawing.Size(51, 16);
             this.lbltotal.TabIndex = 63;
@@ -238,31 +253,35 @@
             // 
             // txtsubtotal
             // 
-            this.txtsubtotal.Location = new System.Drawing.Point(139, 484);
+            this.txtsubtotal.Location = new System.Drawing.Point(131, 420);
             this.txtsubtotal.Name = "txtsubtotal";
             this.txtsubtotal.Size = new System.Drawing.Size(100, 22);
             this.txtsubtotal.TabIndex = 64;
+            this.txtsubtotal.TextChanged += new System.EventHandler(this.txtsubtotal_TextChanged);
             // 
             // txttotal
             // 
-            this.txttotal.Location = new System.Drawing.Point(821, 484);
+            this.txttotal.Location = new System.Drawing.Point(813, 420);
             this.txttotal.Name = "txttotal";
             this.txttotal.Size = new System.Drawing.Size(100, 22);
             this.txttotal.TabIndex = 65;
+            this.txttotal.TextChanged += new System.EventHandler(this.txttotal_TextChanged);
             // 
             // txtiibb
             // 
-            this.txtiibb.Location = new System.Drawing.Point(525, 481);
+            this.txtiibb.Location = new System.Drawing.Point(517, 417);
             this.txtiibb.Name = "txtiibb";
             this.txtiibb.Size = new System.Drawing.Size(100, 22);
             this.txtiibb.TabIndex = 66;
+            this.txtiibb.TextChanged += new System.EventHandler(this.txtiibb_TextChanged);
             // 
             // txtiva
             // 
-            this.txtiva.Location = new System.Drawing.Point(352, 484);
+            this.txtiva.Location = new System.Drawing.Point(344, 420);
             this.txtiva.Name = "txtiva";
             this.txtiva.Size = new System.Drawing.Size(100, 22);
             this.txtiva.TabIndex = 67;
+            this.txtiva.TextChanged += new System.EventHandler(this.txtiva_TextChanged);
             // 
             // cbnotadepedido
             // 
@@ -271,6 +290,7 @@
             this.cbnotadepedido.Name = "cbnotadepedido";
             this.cbnotadepedido.Size = new System.Drawing.Size(82, 24);
             this.cbnotadepedido.TabIndex = 68;
+            this.cbnotadepedido.SelectedIndexChanged += new System.EventHandler(this.cbnotadepedido_SelectedIndexChanged);
             // 
             // lblnotadepedido
             // 
@@ -281,11 +301,49 @@
             this.lblnotadepedido.TabIndex = 69;
             this.lblnotadepedido.Text = "NP Nro:";
             // 
+            // lblformadepago
+            // 
+            this.lblformadepago.AutoSize = true;
+            this.lblformadepago.Location = new System.Drawing.Point(54, 464);
+            this.lblformadepago.Name = "lblformadepago";
+            this.lblformadepago.Size = new System.Drawing.Size(100, 16);
+            this.lblformadepago.TabIndex = 70;
+            this.lblformadepago.Text = "Forma de pago";
+            // 
+            // cbformadepago
+            // 
+            this.cbformadepago.FormattingEnabled = true;
+            this.cbformadepago.Location = new System.Drawing.Point(160, 464);
+            this.cbformadepago.Name = "cbformadepago";
+            this.cbformadepago.Size = new System.Drawing.Size(211, 24);
+            this.cbformadepago.TabIndex = 71;
+            // 
+            // cbtipoegreso
+            // 
+            this.cbtipoegreso.FormattingEnabled = true;
+            this.cbtipoegreso.Location = new System.Drawing.Point(160, 506);
+            this.cbtipoegreso.Name = "cbtipoegreso";
+            this.cbtipoegreso.Size = new System.Drawing.Size(211, 24);
+            this.cbtipoegreso.TabIndex = 73;
+            // 
+            // lbltipodeegreso
+            // 
+            this.lbltipodeegreso.AutoSize = true;
+            this.lbltipodeegreso.Location = new System.Drawing.Point(54, 506);
+            this.lbltipodeegreso.Name = "lbltipodeegreso";
+            this.lbltipodeegreso.Size = new System.Drawing.Size(103, 16);
+            this.lbltipodeegreso.TabIndex = 72;
+            this.lbltipodeegreso.Text = "Tipo  de egreso";
+            // 
             // frmfacturaproveedor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 571);
+            this.ClientSize = new System.Drawing.Size(1013, 594);
+            this.Controls.Add(this.cbtipoegreso);
+            this.Controls.Add(this.lbltipodeegreso);
+            this.Controls.Add(this.cbformadepago);
+            this.Controls.Add(this.lblformadepago);
             this.Controls.Add(this.lblnotadepedido);
             this.Controls.Add(this.cbnotadepedido);
             this.Controls.Add(this.txtiva);
@@ -348,5 +406,9 @@
         private System.Windows.Forms.TextBox txtiva;
         private System.Windows.Forms.ComboBox cbnotadepedido;
         private System.Windows.Forms.Label lblnotadepedido;
+        private System.Windows.Forms.Label lblformadepago;
+        private System.Windows.Forms.ComboBox cbformadepago;
+        private System.Windows.Forms.ComboBox cbtipoegreso;
+        private System.Windows.Forms.Label lbltipodeegreso;
     }
 }
