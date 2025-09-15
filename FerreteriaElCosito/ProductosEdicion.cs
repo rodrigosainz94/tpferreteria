@@ -31,8 +31,8 @@ namespace FerreteriaElCosito
             {
                 using (var conn = ConexionBD.ObtenerConexion())
                 {
-                    string query = @"SELECT NombreProducto, Descripcion, IdCategoria, IdProveedor, UnidadMedida, PrecioUnitario
-                                     FROM productos WHERE IdProducto = @id";
+                    string query = @"SELECT NombreProducto, Descripcion, IdCategoria, IdProveedor, UnidadMedida, Cantidad, PrecioUnitario
+                             FROM productos WHERE IdProducto = @id";
 
                     MySqlCommand cmd = new MySqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@id", _idProducto);
@@ -46,6 +46,7 @@ namespace FerreteriaElCosito
                             txtIdCategoria.Text = reader["IdCategoria"].ToString();
                             txtIdProveedor.Text = reader["IdProveedor"].ToString();
                             txtUnidadMedida.Text = reader["UnidadMedida"].ToString();
+                            txtCantidad.Text = reader["Cantidad"].ToString(); // 👈 Nuevo
                             txtPrecioUnitario.Text = reader["PrecioUnitario"].ToString();
                         }
                     }
@@ -57,6 +58,7 @@ namespace FerreteriaElCosito
             }
         }
 
+
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             try
@@ -64,20 +66,22 @@ namespace FerreteriaElCosito
                 using (var conn = ConexionBD.ObtenerConexion())
                 {
                     string query = @"UPDATE productos SET 
-                                        NombreProducto=@nombre, 
-                                        Descripcion=@desc, 
-                                        IdCategoria=@idCat, 
-                                        IdProveedor=@idProv,
-                                        UnidadMedida=@unidad,
-                                        PrecioUnitario=@precio
-                                     WHERE IdProducto=@id";
+                                NombreProducto=@nombre, 
+                                Descripcion=@desc, 
+                                IdCategoria=@idCat, 
+                                IdProveedor=@idProv,
+                                UnidadMedida=@unidadMedida,
+                                Cantidad=@cantidad,        -- 👈 Nuevo
+                                PrecioUnitario=@precio
+                             WHERE IdProducto=@id";
 
                     MySqlCommand cmd = new MySqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@nombre", txtNombre.Text);
                     cmd.Parameters.AddWithValue("@desc", txtDescripcion.Text);
                     cmd.Parameters.AddWithValue("@idCat", Convert.ToInt32(txtIdCategoria.Text));
                     cmd.Parameters.AddWithValue("@idProv", Convert.ToInt32(txtIdProveedor.Text));
-                    cmd.Parameters.AddWithValue("@unidad", txtUnidadMedida.Text);
+                    cmd.Parameters.AddWithValue("@unidadMedida", txtUnidadMedida.Text);
+                    cmd.Parameters.AddWithValue("@cantidad", Convert.ToInt32(txtCantidad.Text)); // 👈 Nuevo
                     cmd.Parameters.AddWithValue("@precio", Convert.ToDecimal(txtPrecioUnitario.Text));
                     cmd.Parameters.AddWithValue("@id", _idProducto);
 
@@ -87,7 +91,7 @@ namespace FerreteriaElCosito
                 MessageBox.Show("Producto actualizado correctamente.", "Éxito",
                                 MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                this.DialogResult = DialogResult.OK; // Para refrescar el DataGridView
+                this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             catch (Exception ex)
@@ -95,6 +99,7 @@ namespace FerreteriaElCosito
                 MessageBox.Show("Error al actualizar: " + ex.Message);
             }
         }
+
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
