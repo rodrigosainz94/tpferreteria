@@ -44,6 +44,8 @@
             this.txtPrecioUnitario = new System.Windows.Forms.TextBox();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btncancelar = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtCantidad = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // txtIdProducto
@@ -177,11 +179,29 @@
             this.btncancelar.Text = "CANCELAR";
             this.btncancelar.UseVisualStyleBackColor = true;
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(61, 299);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(52, 13);
+            this.label7.TabIndex = 17;
+            this.label7.Text = "Cantidad:";
+            // 
+            // txtCantidad
+            // 
+            this.txtCantidad.Location = new System.Drawing.Point(143, 292);
+            this.txtCantidad.Name = "txtCantidad";
+            this.txtCantidad.Size = new System.Drawing.Size(100, 20);
+            this.txtCantidad.TabIndex = 16;
+            // 
             // ProductosEdicion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(434, 313);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.txtCantidad);
             this.Controls.Add(this.btncancelar);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.label1);
@@ -224,5 +244,7 @@
         private System.Windows.Forms.TextBox txtPrecioUnitario;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Button btncancelar;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtCantidad;
     }
 }

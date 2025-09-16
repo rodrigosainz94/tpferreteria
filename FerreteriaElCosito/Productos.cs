@@ -167,7 +167,7 @@ namespace FerreteriaElCosito
 
         private void btnatras_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
 
         private void btneditar_Click(object sender, EventArgs e)
@@ -191,10 +191,61 @@ namespace FerreteriaElCosito
 
         private void btnguardar_Click(object sender, EventArgs e)
         {
-            
+            try
+            {
+                // Validar que todos los campos estén completos
+                if (string.IsNullOrWhiteSpace(txtnombreproducto.Text) ||
+                    string.IsNullOrWhiteSpace(txtdescripcionprod.Text) ||
+                    cbcategoria.SelectedIndex == -1 ||
+                    cbproveedor.SelectedIndex == -1 ||
+                    cbUnidadMedida.SelectedIndex == -1 ||
+                    string.IsNullOrWhiteSpace(txtprecio.Text) ||
+                    string.IsNullOrWhiteSpace(txtcantidad.Text))
+                {
+                    MessageBox.Show("⚠️ Complete todos los campos antes de guardar.");
+                    return;
+                }
+
+                using (var conexion = ConexionBD.ObtenerConexion())
+                {
+                    string query = @"INSERT INTO productos 
+                             (NombreProducto, Descripcion, idCategoria, idProveedor, UnidadMedida, PrecioUnitario, Cantidad)
+                             VALUES (@NombreProducto, @Descripcion, @idCategoria, @idProveedor, @UnidadMedida, @Precio, @Cantidad)";
+
+                    using (var cmd = new MySqlCommand(query, conexion))
+                    {
+                        cmd.Parameters.AddWithValue("@NombreProducto", txtnombreproducto.Text);
+                        cmd.Parameters.AddWithValue("@Descripcion", txtdescripcionprod.Text);
+                        cmd.Parameters.AddWithValue("@idCategoria", cbcategoria.SelectedValue);
+                        cmd.Parameters.AddWithValue("@idProveedor", cbproveedor.SelectedValue);
+                        cmd.Parameters.AddWithValue("@UnidadMedida", cbUnidadMedida.SelectedValue);
+                        cmd.Parameters.AddWithValue("@Precio", Convert.ToDecimal(txtprecio.Text));
+                        cmd.Parameters.AddWithValue("@Cantidad", Convert.ToInt32(txtcantidad.Text));
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                MessageBox.Show("✅ Producto guardado correctamente.");
+
+                // Refrescar el DataGridView
+                CargarProductos();
+
+                // Limpiar los campos
+                txtnombreproducto.Clear();
+                txtdescripcionprod.Clear();
+                txtprecio.Clear();
+                txtcantidad.Clear();
+                cbcategoria.SelectedIndex = -1;
+                cbproveedor.SelectedIndex = -1;
+                cbUnidadMedida.SelectedIndex = -1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al guardar: " + ex.Message);
+            }
         }
 
 
     }
 }
-

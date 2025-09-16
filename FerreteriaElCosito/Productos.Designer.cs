@@ -45,12 +45,14 @@
             this.btneliminar = new System.Windows.Forms.Button();
             this.cbUnidadMedida = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtcantidad = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.SuspendLayout();
             // 
             // btnatras
             // 
-            this.btnatras.Location = new System.Drawing.Point(112, 292);
+            this.btnatras.Location = new System.Drawing.Point(12, 292);
             this.btnatras.Name = "btnatras";
             this.btnatras.Size = new System.Drawing.Size(75, 23);
             this.btnatras.TabIndex = 30;
@@ -68,7 +70,7 @@
             // 
             // btnguardar
             // 
-            this.btnguardar.Location = new System.Drawing.Point(46, 209);
+            this.btnguardar.Location = new System.Drawing.Point(12, 254);
             this.btnguardar.Name = "btnguardar";
             this.btnguardar.Size = new System.Drawing.Size(75, 23);
             this.btnguardar.TabIndex = 28;
@@ -160,7 +162,7 @@
             // 
             // btneditar
             // 
-            this.btneditar.Location = new System.Drawing.Point(158, 209);
+            this.btneditar.Location = new System.Drawing.Point(102, 254);
             this.btneditar.Name = "btneditar";
             this.btneditar.Size = new System.Drawing.Size(75, 23);
             this.btneditar.TabIndex = 31;
@@ -170,7 +172,7 @@
             // 
             // btneliminar
             // 
-            this.btneliminar.Location = new System.Drawing.Point(46, 253);
+            this.btneliminar.Location = new System.Drawing.Point(194, 254);
             this.btneliminar.Name = "btneliminar";
             this.btneliminar.Size = new System.Drawing.Size(75, 23);
             this.btneliminar.TabIndex = 32;
@@ -195,11 +197,29 @@
             this.label6.TabIndex = 33;
             this.label6.Text = "Unidad de Medida:";
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(54, 214);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(52, 13);
+            this.label7.TabIndex = 36;
+            this.label7.Text = "Cantidad:";
+            // 
+            // txtcantidad
+            // 
+            this.txtcantidad.Location = new System.Drawing.Point(112, 207);
+            this.txtcantidad.Name = "txtcantidad";
+            this.txtcantidad.Size = new System.Drawing.Size(157, 20);
+            this.txtcantidad.TabIndex = 35;
+            // 
             // Productos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(720, 327);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.txtcantidad);
             this.Controls.Add(this.cbUnidadMedida);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.btneliminar);
@@ -245,5 +265,7 @@
         private System.Windows.Forms.Button btneliminar;
         private System.Windows.Forms.ComboBox cbUnidadMedida;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtcantidad;
     }
 }
