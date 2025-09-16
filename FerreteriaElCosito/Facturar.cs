@@ -182,7 +182,9 @@ namespace FerreteriaElCosito
                 {
                     string nuevoCuit = formAgregarCliente.CuitNuevoCliente;
                     txtdni.Text = nuevoCuit;
-                    txtdni_KeyDown(txtdni, new KeyEventArgs(Keys.Enter));
+
+                    // Llamamos directamente a la función de búsqueda. ¡Esto es más seguro!
+                    BuscarClientePorCuit();
                 }
             }
         }

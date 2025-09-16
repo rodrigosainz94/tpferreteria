@@ -45,12 +45,12 @@
             this.txtApellido = new System.Windows.Forms.TextBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.txtTelefono = new System.Windows.Forms.TextBox();
-            this.txtCuil = new System.Windows.Forms.TextBox();
             this.txtDireccion = new System.Windows.Forms.TextBox();
             this.dtpFechaAlta = new System.Windows.Forms.DateTimePicker();
             this.cbProvincia = new System.Windows.Forms.ComboBox();
             this.cbLocalidad = new System.Windows.Forms.ComboBox();
             this.cbCategoriaIva = new System.Windows.Forms.ComboBox();
+            this.txtCuil = new System.Windows.Forms.MaskedTextBox();
             this.SuspendLayout();
             // 
             // btnguardar
@@ -214,14 +214,6 @@
             this.txtTelefono.Size = new System.Drawing.Size(132, 22);
             this.txtTelefono.TabIndex = 16;
             // 
-            // txtCuil
-            // 
-            this.txtCuil.Location = new System.Drawing.Point(177, 198);
-            this.txtCuil.Margin = new System.Windows.Forms.Padding(4);
-            this.txtCuil.Name = "txtCuil";
-            this.txtCuil.Size = new System.Drawing.Size(132, 22);
-            this.txtCuil.TabIndex = 17;
-            // 
             // txtDireccion
             // 
             this.txtDireccion.Location = new System.Drawing.Point(177, 230);
@@ -262,17 +254,27 @@
             this.cbCategoriaIva.Size = new System.Drawing.Size(200, 24);
             this.cbCategoriaIva.TabIndex = 26;
             // 
+            // txtCuil
+            // 
+            this.txtCuil.Location = new System.Drawing.Point(177, 201);
+            this.txtCuil.Mask = "00-00000000-0";
+            this.txtCuil.Name = "txtCuil";
+            this.txtCuil.PromptChar = ' ';
+            this.txtCuil.Size = new System.Drawing.Size(200, 22);
+            this.txtCuil.TabIndex = 27;
+            this.txtCuil.Click += new System.EventHandler(this.txtCuil_Click);
+            // 
             // ClientesAgregar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(455, 437);
+            this.Controls.Add(this.txtCuil);
             this.Controls.Add(this.cbCategoriaIva);
             this.Controls.Add(this.cbLocalidad);
             this.Controls.Add(this.cbProvincia);
             this.Controls.Add(this.dtpFechaAlta);
             this.Controls.Add(this.txtDireccion);
-            this.Controls.Add(this.txtCuil);
             this.Controls.Add(this.txtTelefono);
             this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.txtApellido);
@@ -318,11 +320,11 @@
         private System.Windows.Forms.TextBox txtApellido;
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.TextBox txtTelefono;
-        private System.Windows.Forms.TextBox txtCuil;
         private System.Windows.Forms.TextBox txtDireccion;
         private System.Windows.Forms.DateTimePicker dtpFechaAlta;
         private System.Windows.Forms.ComboBox cbProvincia;
         private System.Windows.Forms.ComboBox cbLocalidad;
         private System.Windows.Forms.ComboBox cbCategoriaIva;
+        private System.Windows.Forms.MaskedTextBox txtCuil;
     }
 }

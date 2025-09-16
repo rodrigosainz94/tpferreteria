@@ -2,6 +2,7 @@
 using System;
 using System.Data;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace FerreteriaElCosito
 {
@@ -218,6 +219,16 @@ namespace FerreteriaElCosito
                 }
             }
             catch (Exception ex) { MessageBox.Show("Error al cargar categorías de IVA: " + ex.Message); }
+        }
+
+        private void txtCuil_Click(object sender, EventArgs e)
+        {
+            // Esta condición revisa si el campo todavía no tiene ningún número ingresado.
+            if (!txtCuil.Text.Any(char.IsDigit))
+            {
+                // Si está "vacío", movemos el cursor al principio del control.
+                txtCuil.SelectionStart = 0;
+            }
         }
     }
 }
