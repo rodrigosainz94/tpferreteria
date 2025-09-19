@@ -85,10 +85,11 @@ namespace FerreteriaElCosito
             return dt;
         }
 
+        // Método corregido para obtener la lista de las notas de pedido existentes que no han sido usadas
         public DataTable GetNotasDePedido()
         {
             DataTable dt = new DataTable();
-            string query = "SELECT c.IdCompra, c.NumeroComprobante, p.Nombre AS Proveedor FROM compras c JOIN proveedores p ON c.IdProveedor = p.IdProveedor WHERE c.IdTipoComprobante = 7";
+            string query = "SELECT c.IdCompra, c.NumeroComprobante, p.Nombre AS Proveedor FROM compras c JOIN proveedores p ON c.IdProveedor = p.IdProveedor WHERE c.IdTipoComprobante = 7 AND c.Estado = 'Pendiente'";
             using (MySqlConnection conn = ConexionBD.ObtenerConexion())
             {
                 using (MySqlCommand cmd = new MySqlCommand(query, conn))
@@ -140,7 +141,9 @@ namespace FerreteriaElCosito
                 MySqlTransaction transaction = conn.BeginTransaction();
                 try
                 {
-                    string compraQuery = "INSERT INTO compras (FechaCompra, IdTipoComprobante, NumeroComprobante, IdProveedor, IdEmpleado, Total) VALUES (@fecha, @idTipo, @nro, @idProveedor, @idEmpleado, @total); SELECT LAST_INSERT_ID();";
+                    // 1. Insertar en la tabla 'compras'
+                    // Se agrega el campo Estado al INSERT
+                    string compraQuery = "INSERT INTO compras (FechaCompra, IdTipoComprobante, NumeroComprobante, IdProveedor, IdEmpleado, Total, Estado) VALUES (@fecha, @idTipo, @nro, @idProveedor, @idEmpleado, @total, @estado); SELECT LAST_INSERT_ID();";
                     using (MySqlCommand cmdCompra = new MySqlCommand(compraQuery, conn, transaction))
                     {
                         cmdCompra.Parameters.AddWithValue("@fecha", compra.FechaCompra);
@@ -149,6 +152,7 @@ namespace FerreteriaElCosito
                         cmdCompra.Parameters.AddWithValue("@idProveedor", compra.IdProveedor);
                         cmdCompra.Parameters.AddWithValue("@idEmpleado", compra.IdEmpleado);
                         cmdCompra.Parameters.AddWithValue("@total", compra.Total);
+                        cmdCompra.Parameters.AddWithValue("@estado", compra.Estado);
                         idCompra = Convert.ToInt32(cmdCompra.ExecuteScalar());
                     }
 
@@ -205,6 +209,17 @@ namespace FerreteriaElCosito
                         cmdCaja.Parameters.AddWithValue("@concepto", concepto);
                         cmdCaja.Parameters.AddWithValue("@idCompra", idCompra);
                         cmdCaja.ExecuteNonQuery();
+                    }
+
+                    // Después de crear la factura, actualiza el estado de la nota de pedido original
+                    if (compra.IdNotaDePedidoOrigen.HasValue)
+                    {
+                        string updateNPQuery = "UPDATE compras SET Estado = 'Facturada' WHERE IdCompra = @idNotaDePedidoOrigen";
+                        using (MySqlCommand cmdUpdateNP = new MySqlCommand(updateNPQuery, conn, transaction))
+                        {
+                            cmdUpdateNP.Parameters.AddWithValue("@idNotaDePedidoOrigen", compra.IdNotaDePedidoOrigen.Value);
+                            cmdUpdateNP.ExecuteNonQuery();
+                        }
                     }
 
                     transaction.Commit();

@@ -65,6 +65,8 @@ namespace FerreteriaElCosito
         public int IdProveedor { get; set; }
         public int IdEmpleado { get; set; }
         public decimal Total { get; set; }
+        public int? IdNotaDePedidoOrigen { get; set; }
+        public string Estado { get; set; } // Nueva propiedad
     }
 
     public class DetalleCompra
