@@ -142,7 +142,7 @@
             this.btnPagar.Name = "btnPagar";
             this.btnPagar.Size = new System.Drawing.Size(150, 59);
             this.btnPagar.TabIndex = 10;
-            this.btnPagar.Text = "PAGAR";
+            this.btnPagar.Text = "COBRAR";
             this.btnPagar.UseVisualStyleBackColor = true;
             this.btnPagar.Click += new System.EventHandler(this.btnPagar_Click);
             // 

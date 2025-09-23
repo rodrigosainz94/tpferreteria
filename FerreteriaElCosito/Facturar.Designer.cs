@@ -50,6 +50,10 @@
             this.btncliente = new System.Windows.Forms.Button();
             this.lblnombrecliente = new System.Windows.Forms.Label();
             this.txtdni = new System.Windows.Forms.MaskedTextBox();
+            this.txtDescuento = new System.Windows.Forms.TextBox();
+            this.lblDescuento = new System.Windows.Forms.Label();
+            this.lblNuevoPrecio = new System.Windows.Forms.Label();
+            this.txtNuevoPrecio = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvfacturacion)).BeginInit();
             this.SuspendLayout();
             // 
@@ -170,7 +174,7 @@
             // 
             // btnatras
             // 
-            this.btnatras.Location = new System.Drawing.Point(32, 511);
+            this.btnatras.Location = new System.Drawing.Point(33, 511);
             this.btnatras.Margin = new System.Windows.Forms.Padding(4);
             this.btnatras.Name = "btnatras";
             this.btnatras.Size = new System.Drawing.Size(100, 28);
@@ -234,7 +238,7 @@
             // 
             // btncliente
             // 
-            this.btncliente.Location = new System.Drawing.Point(93, 433);
+            this.btncliente.Location = new System.Drawing.Point(92, 366);
             this.btncliente.Margin = new System.Windows.Forms.Padding(4);
             this.btncliente.Name = "btncliente";
             this.btncliente.Size = new System.Drawing.Size(262, 28);
@@ -260,11 +264,50 @@
             this.txtdni.Mask = "00-00000000-0";
             this.txtdni.Name = "txtdni";
             this.txtdni.PromptChar = ' ';
-            this.txtdni.Size = new System.Drawing.Size(184, 22);
+            this.txtdni.Size = new System.Drawing.Size(175, 22);
             this.txtdni.TabIndex = 21;
             this.txtdni.Click += new System.EventHandler(this.txtdni_Click);
             this.txtdni.TextChanged += new System.EventHandler(this.txtdni_TextChanged);
-            this.txtdni.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtdni_KeyDown);
+            // 
+            // txtDescuento
+            // 
+            this.txtDescuento.Location = new System.Drawing.Point(192, 428);
+            this.txtDescuento.Name = "txtDescuento";
+            this.txtDescuento.Size = new System.Drawing.Size(159, 22);
+            this.txtDescuento.TabIndex = 22;
+            this.txtDescuento.TextChanged += new System.EventHandler(this.txtDescuento_TextChanged);
+            this.txtDescuento.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDescuento_KeyDown);
+            // 
+            // lblDescuento
+            // 
+            this.lblDescuento.AutoSize = true;
+            this.lblDescuento.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDescuento.Location = new System.Drawing.Point(90, 428);
+            this.lblDescuento.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblDescuento.Name = "lblDescuento";
+            this.lblDescuento.Size = new System.Drawing.Size(95, 20);
+            this.lblDescuento.TabIndex = 23;
+            this.lblDescuento.Text = "Descuento:";
+            // 
+            // lblNuevoPrecio
+            // 
+            this.lblNuevoPrecio.AutoSize = true;
+            this.lblNuevoPrecio.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNuevoPrecio.Location = new System.Drawing.Point(91, 462);
+            this.lblNuevoPrecio.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblNuevoPrecio.Name = "lblNuevoPrecio";
+            this.lblNuevoPrecio.Size = new System.Drawing.Size(100, 18);
+            this.lblNuevoPrecio.TabIndex = 24;
+            this.lblNuevoPrecio.Text = "Nuevo precio:";
+            // 
+            // txtNuevoPrecio
+            // 
+            this.txtNuevoPrecio.Location = new System.Drawing.Point(193, 462);
+            this.txtNuevoPrecio.Name = "txtNuevoPrecio";
+            this.txtNuevoPrecio.Size = new System.Drawing.Size(158, 22);
+            this.txtNuevoPrecio.TabIndex = 25;
+            this.txtNuevoPrecio.TextChanged += new System.EventHandler(this.txtNuevoPrecio_TextChanged);
+            this.txtNuevoPrecio.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtNuevoPrecio_KeyDown);
             // 
             // Facturar
             // 
@@ -272,6 +315,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.Controls.Add(this.txtNuevoPrecio);
+            this.Controls.Add(this.lblNuevoPrecio);
+            this.Controls.Add(this.lblDescuento);
+            this.Controls.Add(this.txtDescuento);
             this.Controls.Add(this.txtdni);
             this.Controls.Add(this.lblnombrecliente);
             this.Controls.Add(this.btncliente);
@@ -326,5 +373,9 @@
         private System.Windows.Forms.Button btncliente;
         private System.Windows.Forms.Label lblnombrecliente;
         private System.Windows.Forms.MaskedTextBox txtdni;
+        private System.Windows.Forms.TextBox txtDescuento;
+        private System.Windows.Forms.Label lblDescuento;
+        private System.Windows.Forms.Label lblNuevoPrecio;
+        private System.Windows.Forms.TextBox txtNuevoPrecio;
     }
 }
