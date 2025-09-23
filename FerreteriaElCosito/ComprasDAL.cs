@@ -85,10 +85,56 @@ namespace FerreteriaElCosito
             return dt;
         }
 
+        // Método CORREGIDO para obtener los movimientos de caja del día
+        public DataTable GetMovimientosDeCajaDiarios()
+        {
+            DataTable dt = new DataTable();
+            string query = @"
+        SELECT 
+            mc.IdMovimientoCaja, 
+            DATE_FORMAT(mc.FechaHoraMovimiento, '%d/%m/%Y') AS Fecha, 
+            tmc.Descripcion, 
+            fp.Descripcion AS FormaDePago,
+            mc.Monto, 
+            mc.Concepto, 
+            mc.IdCompra
+        FROM movimientocaja mc
+        JOIN tipomovimientocaja tmc ON mc.IdTipoMovimientoCaja = tmc.IdTipoMovimientoCaja
+        LEFT JOIN pagocompra pc ON mc.IdCompra = pc.IdCompra
+        LEFT JOIN pagoventa pv ON mc.IdVenta = pv.IdVenta
+        LEFT JOIN formapago fp ON fp.IdFormaPago = COALESCE(pc.IdFormaPago, pv.IdFormaPago)
+        WHERE DATE(mc.FechaHoraMovimiento) = CURDATE()
+    ";
+            using (MySqlConnection conn = ConexionBD.ObtenerConexion())
+            {
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                {
+                    MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                    da.Fill(dt);
+                }
+            }
+            return dt;
+        }
+
+        public DataTable GetReporteStock()
+        {
+            DataTable dt = new DataTable();
+            string query = "SELECT IdProducto, NombreProducto, Cantidad FROM productos";
+            using (MySqlConnection conn = ConexionBD.ObtenerConexion())
+            {
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                {
+                    MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                    da.Fill(dt);
+                }
+            }
+            return dt;
+        }
+
         public DataTable GetNotasDePedido()
         {
             DataTable dt = new DataTable();
-            string query = "SELECT c.IdCompra, c.NumeroComprobante, p.Nombre AS Proveedor FROM compras c JOIN proveedores p ON c.IdProveedor = p.IdProveedor WHERE c.IdTipoComprobante = 7";
+            string query = "SELECT c.IdCompra, c.NumeroComprobante, p.Nombre AS Proveedor FROM compras c JOIN proveedores p ON c.IdProveedor = p.IdProveedor WHERE c.IdTipoComprobante = 7 AND c.Estado = 'Pendiente'";
             using (MySqlConnection conn = ConexionBD.ObtenerConexion())
             {
                 using (MySqlCommand cmd = new MySqlCommand(query, conn))
@@ -132,6 +178,24 @@ namespace FerreteriaElCosito
             return dt;
         }
 
+        public decimal GetSaldoInicialDelDia()
+        {
+            decimal saldoInicial = 0;
+            string query = "SELECT SaldoInicial FROM caja WHERE DATE(Fecha) = CURDATE() ORDER BY Fecha DESC LIMIT 1";
+            using (var conn = ConexionBD.ObtenerConexion())
+            {
+                using (var cmd = new MySqlCommand(query, conn))
+                {
+                    object result = cmd.ExecuteScalar();
+                    if (result != DBNull.Value && result != null)
+                    {
+                        saldoInicial = Convert.ToDecimal(result);
+                    }
+                }
+            }
+            return saldoInicial;
+        }
+
         public int InsertarCompra(Compra compra, List<DetalleCompra> detalles, int idFormaPago, decimal montoPagado, int idTipoEgreso, string concepto)
         {
             int idCompra = 0;
@@ -140,7 +204,7 @@ namespace FerreteriaElCosito
                 MySqlTransaction transaction = conn.BeginTransaction();
                 try
                 {
-                    string compraQuery = "INSERT INTO compras (FechaCompra, IdTipoComprobante, NumeroComprobante, IdProveedor, IdEmpleado, Total) VALUES (@fecha, @idTipo, @nro, @idProveedor, @idEmpleado, @total); SELECT LAST_INSERT_ID();";
+                    string compraQuery = "INSERT INTO compras (FechaCompra, IdTipoComprobante, NumeroComprobante, IdProveedor, IdEmpleado, Total, IdNotaDePedidoOrigen, Estado) VALUES (@fecha, @idTipo, @nro, @idProveedor, @idEmpleado, @total, @idNotaDePedidoOrigen, @estado); SELECT LAST_INSERT_ID();";
                     using (MySqlCommand cmdCompra = new MySqlCommand(compraQuery, conn, transaction))
                     {
                         cmdCompra.Parameters.AddWithValue("@fecha", compra.FechaCompra);
@@ -149,6 +213,8 @@ namespace FerreteriaElCosito
                         cmdCompra.Parameters.AddWithValue("@idProveedor", compra.IdProveedor);
                         cmdCompra.Parameters.AddWithValue("@idEmpleado", compra.IdEmpleado);
                         cmdCompra.Parameters.AddWithValue("@total", compra.Total);
+                        cmdCompra.Parameters.AddWithValue("@idNotaDePedidoOrigen", compra.IdNotaDePedidoOrigen ?? (object)DBNull.Value);
+                        cmdCompra.Parameters.AddWithValue("@estado", compra.Estado);
                         idCompra = Convert.ToInt32(cmdCompra.ExecuteScalar());
                     }
 
@@ -205,6 +271,16 @@ namespace FerreteriaElCosito
                         cmdCaja.Parameters.AddWithValue("@concepto", concepto);
                         cmdCaja.Parameters.AddWithValue("@idCompra", idCompra);
                         cmdCaja.ExecuteNonQuery();
+                    }
+
+                    if (compra.IdNotaDePedidoOrigen.HasValue)
+                    {
+                        string updateNPQuery = "UPDATE compras SET Estado = 'Facturada' WHERE IdCompra = @idNotaDePedidoOrigen";
+                        using (MySqlCommand cmdUpdateNP = new MySqlCommand(updateNPQuery, conn, transaction))
+                        {
+                            cmdUpdateNP.Parameters.AddWithValue("@idNotaDePedidoOrigen", compra.IdNotaDePedidoOrigen.Value);
+                            cmdUpdateNP.ExecuteNonQuery();
+                        }
                     }
 
                     transaction.Commit();

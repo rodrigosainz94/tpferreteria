@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System;
 
 namespace FerreteriaElCosito
 {
@@ -15,25 +10,45 @@ namespace FerreteriaElCosito
         private ComprasManager _comprasManager = new ComprasManager();
         private decimal subtotal = 0;
         private decimal iva = 0;
+        private decimal iibb = 0;
         private decimal total = 0;
 
         public frmfacturaproveedor()
         {
             InitializeComponent();
             dataGridView1.CellEndEdit += dgvProductos_CellEndEdit;
+            // ASUMIMOS que los nuevos textboxes se llaman txtivaPorcentaje y txtiibbPorcentaje
+            // La asignación de eventos se hace una sola vez aquí
+            if (txtivaporcentaje != null)
+                txtivaporcentaje.TextChanged += (sender, e) => CalcularTotales();
+            if (txtiibbporcentaje != null)
+                txtiibbporcentaje.TextChanged += (sender, e) => CalcularTotales();
         }
 
         private void frmfacturaproveedor_Load(object sender, EventArgs e)
         {
             dtpfecha.Value = DateTime.Now;
+            dtpfecha.Format = DateTimePickerFormat.Custom;
+            dtpfecha.CustomFormat = "dd/MM/yyyy";
+
             LlenarCombosIniciales();
             ConfigurarDataGridView();
+
+            // Establece valores por defecto para los porcentajes
+            txtivaporcentaje.Text = "21";
+            txtiibbporcentaje.Text = "0";
+
+            CalcularTotales();
         }
 
         private void LlenarCombosIniciales()
         {
             try
             {
+                // 1. Desactivar temporalmente los eventos de sincronización
+                cbidproveedor.SelectedIndexChanged -= cbidproveedor_SelectedIndexChanged;
+                cbproveedor.SelectedIndexChanged -= cbproveedor_SelectedIndexChanged;
+
                 // Llenar combo de tipos de comprobante
                 DataTable dtTiposComprobante = _comprasManager.ObtenerTiposComprobante();
                 cbtcomprobante.DataSource = dtTiposComprobante;
@@ -71,6 +86,7 @@ namespace FerreteriaElCosito
                 cbnotadepedido.DisplayMember = "NumeroComprobante";
                 cbnotadepedido.ValueMember = "IdCompra";
 
+                // Restablecer la selección inicial
                 cbidproveedor.SelectedIndex = -1;
                 cbproveedor.SelectedIndex = -1;
                 cbnotadepedido.SelectedIndex = -1;
@@ -80,6 +96,12 @@ namespace FerreteriaElCosito
             catch (Exception ex)
             {
                 MessageBox.Show("Error al cargar los datos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                // 2. Volver a activar los eventos de sincronización después de cargar todos los datos
+                cbidproveedor.SelectedIndexChanged += cbidproveedor_SelectedIndexChanged;
+                cbproveedor.SelectedIndexChanged += cbproveedor_SelectedIndexChanged;
             }
         }
 
@@ -189,12 +211,34 @@ namespace FerreteriaElCosito
                     subtotal += Convert.ToDecimal(row.Cells["Subtotal"].Value);
                 }
             }
-            iva = subtotal * 0.21m;
-            total = subtotal + iva;
+
+            decimal ivaporcentaje = 0;
+            decimal iibbporcentaje = 0;
+
+            if (decimal.TryParse(txtivaporcentaje.Text, out ivaporcentaje))
+            {
+                iva = subtotal * (ivaporcentaje / 100);
+            }
+            else
+            {
+                iva = 0;
+            }
+
+            if (decimal.TryParse(txtiibbporcentaje.Text, out iibbporcentaje))
+            {
+                iibb = subtotal * (iibbporcentaje / 100);
+            }
+            else
+            {
+                iibb = 0;
+            }
+
+            total = subtotal + iva + iibb;
+
             txtsubtotal.Text = subtotal.ToString("N2");
             txtiva.Text = iva.ToString("N2");
+            txtiibb.Text = iibb.ToString("N2");
             txttotal.Text = total.ToString("N2");
-            txtiibb.Text = "0.00";
         }
 
         private void btnregistrarfc_Click(object sender, EventArgs e)
@@ -247,7 +291,9 @@ namespace FerreteriaElCosito
                     NumeroComprobante = txtnrocomprobante.Text,
                     IdProveedor = (int)cbidproveedor.SelectedValue,
                     IdEmpleado = 1,
-                    Total = Convert.ToDecimal(txttotal.Text)
+                    Total = Convert.ToDecimal(txttotal.Text),
+                    IdNotaDePedidoOrigen = cbnotadepedido.SelectedValue is int ? (int?)cbnotadepedido.SelectedValue : null,
+                    Estado = "Facturada"
                 };
 
                 int idFormaPago = (int)cbformadepago.SelectedValue;
@@ -286,18 +332,45 @@ namespace FerreteriaElCosito
             txttotal.Clear();
             subtotal = 0;
             iva = 0;
+            iibb = 0; // Se agregó iibb
             total = 0;
             cbidproveedor.SelectedIndex = -1;
             cbproveedor.SelectedIndex = -1;
             cbnotadepedido.SelectedIndex = -1;
             cbformadepago.SelectedIndex = -1;
             cbtipoegreso.SelectedIndex = -1;
+
+            LlenarCombosIniciales();
+            // Lógica para resetear los porcentajes a valores por defecto
+            if (txtivaporcentaje != null)
+            {
+                txtivaporcentaje.Text = "21";
+            }
+            if (txtiibbporcentaje != null)
+            {
+                txtiibbporcentaje.Text = "0";
+            }
         }
 
         private void cbtcomprobante_SelectedIndexChanged(object sender, EventArgs e) { }
+
         private void txtnrocomprobante_TextChanged(object sender, EventArgs e) { }
-        private void cbidproveedor_SelectedIndexChanged(object sender, EventArgs e) { }
-        private void cbproveedor_SelectedIndexChanged(object sender, EventArgs e) { }
+
+        private void cbidproveedor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbidproveedor.SelectedIndex != -1)
+            {
+                cbproveedor.SelectedValue = cbidproveedor.SelectedValue;
+            }
+        }
+
+        private void cbproveedor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbproveedor.SelectedIndex != -1)
+            {
+                cbidproveedor.SelectedValue = cbproveedor.SelectedValue;
+            }
+        }
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
         private void txtsubtotal_TextChanged(object sender, EventArgs e) { }
         private void txtiva_TextChanged(object sender, EventArgs e) { }

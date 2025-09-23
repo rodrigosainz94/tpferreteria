@@ -58,6 +58,9 @@
             this.cbformadepago = new System.Windows.Forms.ComboBox();
             this.cbtipoegreso = new System.Windows.Forms.ComboBox();
             this.lbltipodeegreso = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtivaporcentaje = new System.Windows.Forms.TextBox();
+            this.txtiibbporcentaje = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -227,25 +230,25 @@
             // lbliva
             // 
             this.lbliva.AutoSize = true;
-            this.lbliva.Location = new System.Drawing.Point(274, 419);
+            this.lbliva.Location = new System.Drawing.Point(266, 426);
             this.lbliva.Name = "lbliva";
-            this.lbliva.Size = new System.Drawing.Size(28, 16);
+            this.lbliva.Size = new System.Drawing.Size(43, 16);
             this.lbliva.TabIndex = 61;
-            this.lbliva.Text = "IVA";
+            this.lbliva.Text = "IVA %";
             // 
             // lbliibb
             // 
             this.lbliibb.AutoSize = true;
-            this.lbliibb.Location = new System.Drawing.Point(480, 420);
+            this.lbliibb.Location = new System.Drawing.Point(488, 429);
             this.lbliibb.Name = "lbliibb";
-            this.lbliibb.Size = new System.Drawing.Size(31, 16);
+            this.lbliibb.Size = new System.Drawing.Size(46, 16);
             this.lbliibb.TabIndex = 62;
-            this.lbliibb.Text = "IIBB";
+            this.lbliibb.Text = "IIBB %";
             // 
             // lbltotal
             // 
             this.lbltotal.AutoSize = true;
-            this.lbltotal.Location = new System.Drawing.Point(742, 426);
+            this.lbltotal.Location = new System.Drawing.Point(756, 423);
             this.lbltotal.Name = "lbltotal";
             this.lbltotal.Size = new System.Drawing.Size(51, 16);
             this.lbltotal.TabIndex = 63;
@@ -253,7 +256,7 @@
             // 
             // txtsubtotal
             // 
-            this.txtsubtotal.Location = new System.Drawing.Point(131, 420);
+            this.txtsubtotal.Location = new System.Drawing.Point(160, 423);
             this.txtsubtotal.Name = "txtsubtotal";
             this.txtsubtotal.Size = new System.Drawing.Size(100, 22);
             this.txtsubtotal.TabIndex = 64;
@@ -269,7 +272,7 @@
             // 
             // txtiibb
             // 
-            this.txtiibb.Location = new System.Drawing.Point(517, 417);
+            this.txtiibb.Location = new System.Drawing.Point(571, 423);
             this.txtiibb.Name = "txtiibb";
             this.txtiibb.Size = new System.Drawing.Size(100, 22);
             this.txtiibb.TabIndex = 66;
@@ -277,7 +280,7 @@
             // 
             // txtiva
             // 
-            this.txtiva.Location = new System.Drawing.Point(344, 420);
+            this.txtiva.Location = new System.Drawing.Point(364, 423);
             this.txtiva.Name = "txtiva";
             this.txtiva.Size = new System.Drawing.Size(100, 22);
             this.txtiva.TabIndex = 67;
@@ -335,11 +338,37 @@
             this.lbltipodeegreso.TabIndex = 72;
             this.lbltipodeegreso.Text = "Tipo  de egreso";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(62, 426);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(79, 16);
+            this.label1.TabIndex = 74;
+            this.label1.Text = "SUBTOTAL";
+            // 
+            // txtivaporcentaje
+            // 
+            this.txtivaporcentaje.Location = new System.Drawing.Point(315, 423);
+            this.txtivaporcentaje.Name = "txtivaporcentaje";
+            this.txtivaporcentaje.Size = new System.Drawing.Size(40, 22);
+            this.txtivaporcentaje.TabIndex = 75;
+            // 
+            // txtiibbporcentaje
+            // 
+            this.txtiibbporcentaje.Location = new System.Drawing.Point(535, 423);
+            this.txtiibbporcentaje.Name = "txtiibbporcentaje";
+            this.txtiibbporcentaje.Size = new System.Drawing.Size(30, 22);
+            this.txtiibbporcentaje.TabIndex = 76;
+            // 
             // frmfacturaproveedor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1013, 594);
+            this.Controls.Add(this.txtiibbporcentaje);
+            this.Controls.Add(this.txtivaporcentaje);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.cbtipoegreso);
             this.Controls.Add(this.lbltipodeegreso);
             this.Controls.Add(this.cbformadepago);
@@ -410,5 +439,8 @@
         private System.Windows.Forms.ComboBox cbformadepago;
         private System.Windows.Forms.ComboBox cbtipoegreso;
         private System.Windows.Forms.Label lbltipodeegreso;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtivaporcentaje;
+        private System.Windows.Forms.TextBox txtiibbporcentaje;
     }
 }
