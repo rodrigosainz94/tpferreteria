@@ -51,6 +51,22 @@ namespace FerreteriaElCosito
             return _dal.GetProveedorPorNotaDePedido(idNotaDePedido);
         }
 
+        // Métodos para el nuevo formulario de caja
+        public decimal ObtenerSaldoInicialDelDia()
+        {
+            return _dal.GetSaldoInicialDelDia();
+        }
+
+        public DataTable ObtenerMovimientosDeCajaDiarios()
+        {
+            return _dal.GetMovimientosDeCajaDiarios();
+        }
+
+        public DataTable ObtenerReporteStock()
+        {
+            return _dal.GetReporteStock();
+        }
+
         public int GuardarFactura(Compra compra, List<DetalleCompra> detalles, int idFormaPago, decimal montoPagado, int idTipoEgreso, string concepto)
         {
             return _dal.InsertarCompra(compra, detalles, idFormaPago, montoPagado, idTipoEgreso, concepto);
@@ -66,7 +82,7 @@ namespace FerreteriaElCosito
         public int IdEmpleado { get; set; }
         public decimal Total { get; set; }
         public int? IdNotaDePedidoOrigen { get; set; }
-        public string Estado { get; set; } // Nueva propiedad
+        public string Estado { get; set; }
     }
 
     public class DetalleCompra

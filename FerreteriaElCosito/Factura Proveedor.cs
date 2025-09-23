@@ -10,7 +10,7 @@ namespace FerreteriaElCosito
         private ComprasManager _comprasManager = new ComprasManager();
         private decimal subtotal = 0;
         private decimal iva = 0;
-        private decimal iibb = 0; // Se agrega la variable para Ingresos Brutos
+        private decimal iibb = 0;
         private decimal total = 0;
 
         public frmfacturaproveedor()
@@ -18,26 +18,34 @@ namespace FerreteriaElCosito
             InitializeComponent();
             dataGridView1.CellEndEdit += dgvProductos_CellEndEdit;
             // ASUMIMOS que los nuevos textboxes se llaman txtivaPorcentaje y txtiibbPorcentaje
-            // Si el nombre es diferente, debes cambiarlo aquí y en el Designer
-            txtivaporcentaje.TextChanged += (sender, e) => CalcularTotales();
-            txtiibbporcentaje.TextChanged += (sender, e) => CalcularTotales();
+            // La asignación de eventos se hace una sola vez aquí
+            if (txtivaporcentaje != null)
+                txtivaporcentaje.TextChanged += (sender, e) => CalcularTotales();
+            if (txtiibbporcentaje != null)
+                txtiibbporcentaje.TextChanged += (sender, e) => CalcularTotales();
         }
 
         private void frmfacturaproveedor_Load(object sender, EventArgs e)
         {
             dtpfecha.Value = DateTime.Now;
+            dtpfecha.Format = DateTimePickerFormat.Custom;
+            dtpfecha.CustomFormat = "dd/MM/yyyy";
+
             LlenarCombosIniciales();
             ConfigurarDataGridView();
+
             // Establece valores por defecto para los porcentajes
             txtivaporcentaje.Text = "21";
             txtiibbporcentaje.Text = "0";
+
+            CalcularTotales();
         }
 
         private void LlenarCombosIniciales()
         {
             try
             {
-                // 1. Desactivar temporalmente los eventos de sincronización para evitar errores
+                // 1. Desactivar temporalmente los eventos de sincronización
                 cbidproveedor.SelectedIndexChanged -= cbidproveedor_SelectedIndexChanged;
                 cbproveedor.SelectedIndexChanged -= cbproveedor_SelectedIndexChanged;
 
@@ -78,6 +86,7 @@ namespace FerreteriaElCosito
                 cbnotadepedido.DisplayMember = "NumeroComprobante";
                 cbnotadepedido.ValueMember = "IdCompra";
 
+                // Restablecer la selección inicial
                 cbidproveedor.SelectedIndex = -1;
                 cbproveedor.SelectedIndex = -1;
                 cbnotadepedido.SelectedIndex = -1;
@@ -203,7 +212,6 @@ namespace FerreteriaElCosito
                 }
             }
 
-            // --- NUEVA LÓGICA DE CÁLCULO ---
             decimal ivaporcentaje = 0;
             decimal iibbporcentaje = 0;
 
@@ -324,6 +332,7 @@ namespace FerreteriaElCosito
             txttotal.Clear();
             subtotal = 0;
             iva = 0;
+            iibb = 0; // Se agregó iibb
             total = 0;
             cbidproveedor.SelectedIndex = -1;
             cbproveedor.SelectedIndex = -1;
@@ -332,6 +341,15 @@ namespace FerreteriaElCosito
             cbtipoegreso.SelectedIndex = -1;
 
             LlenarCombosIniciales();
+            // Lógica para resetear los porcentajes a valores por defecto
+            if (txtivaporcentaje != null)
+            {
+                txtivaporcentaje.Text = "21";
+            }
+            if (txtiibbporcentaje != null)
+            {
+                txtiibbporcentaje.Text = "0";
+            }
         }
 
         private void cbtcomprobante_SelectedIndexChanged(object sender, EventArgs e) { }
