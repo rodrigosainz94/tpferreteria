@@ -23,7 +23,9 @@ namespace FerreteriaElCosito
 
         private void Caja_Load(object sender, EventArgs e)
         {
-            CargarDatosDeCaja();
+            // Cargar los datos para la fecha inicial (la de hoy)
+            CargarDatosParaFecha(dtpfecha.Value);
+
             // Asumiendo que el campo de saldo contado es txtarqueo
             if (txtarqueo != null)
             {
@@ -36,16 +38,17 @@ namespace FerreteriaElCosito
             }
         }
 
-        private void CargarDatosDeCaja()
+        // Nuevo método para cargar datos de una fecha específica
+        private void CargarDatosParaFecha(DateTime fecha)
         {
             try
             {
                 // Cargar el saldo inicial de la caja y mostrarlo en el TextBox
-                _saldoInicial = _comprasManager.ObtenerSaldoInicialDelDia();
+                _saldoInicial = _comprasManager.ObtenerSaldoInicialDelDia(fecha);
                 txtsdoinicial.Text = _saldoInicial.ToString("N2");
 
                 // Cargar todos los movimientos del día en el DataGridView
-                _movimientosDiarios = _comprasManager.ObtenerMovimientosDeCajaDiarios();
+                _movimientosDiarios = _comprasManager.ObtenerMovimientosDeCajaDiarios(fecha);
                 dgvmovimientoscaja.DataSource = _movimientosDiarios;
 
                 CalcularArqueo();
@@ -128,10 +131,16 @@ namespace FerreteriaElCosito
             CalcularArqueo();
         }
 
+        // --- MÉTODO AGREGADO ---
+        private void dtpfecha_ValueChanged(object sender, EventArgs e)
+        {
+            // Cuando el usuario cambia la fecha, volvemos a cargar todos los datos
+            CargarDatosParaFecha(dtpfecha.Value);
+        }
+
         // Métodos de eventos que no necesitan código adicional
         private void lblsaldoinicial_Click(object sender, EventArgs e) { }
         private void textBox2_TextChanged(object sender, EventArgs e) { }
-        private void dtpfecha_ValueChanged(object sender, EventArgs e) { }
         private void cbsaldoinicial_SelectedIndexChanged(object sender, EventArgs e) { }
         private void cbtotalingresos_SelectedIndexChanged(object sender, EventArgs e) { }
         private void cbtotalegresos_SelectedIndexChanged(object sender, EventArgs e) { }

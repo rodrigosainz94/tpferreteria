@@ -64,7 +64,7 @@
             this.dgvfacturacion.Margin = new System.Windows.Forms.Padding(4);
             this.dgvfacturacion.Name = "dgvfacturacion";
             this.dgvfacturacion.RowHeadersWidth = 51;
-            this.dgvfacturacion.Size = new System.Drawing.Size(608, 450);
+            this.dgvfacturacion.Size = new System.Drawing.Size(830, 450);
             this.dgvfacturacion.TabIndex = 0;
             this.dgvfacturacion.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvfacturacion_CellEndEdit);
             this.dgvfacturacion.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvfacturacion_KeyDown);
@@ -314,7 +314,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.ClientSize = new System.Drawing.Size(1253, 554);
             this.Controls.Add(this.txtNuevoPrecio);
             this.Controls.Add(this.lblNuevoPrecio);
             this.Controls.Add(this.lblDescuento);
