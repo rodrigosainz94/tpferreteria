@@ -32,10 +32,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.txtIdUsuario = new System.Windows.Forms.TextBox();
+            this.txtNombreUsuario = new System.Windows.Forms.TextBox();
+            this.txtContraseña = new System.Windows.Forms.TextBox();
+            this.txtEmpleado = new System.Windows.Forms.TextBox();
             this.btnguardar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -75,33 +75,33 @@
             this.label4.TabIndex = 3;
             this.label4.Text = "EMPLEADO:";
             // 
-            // textBox1
+            // txtIdUsuario
             // 
-            this.textBox1.Location = new System.Drawing.Point(182, 12);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 4;
+            this.txtIdUsuario.Location = new System.Drawing.Point(182, 12);
+            this.txtIdUsuario.Name = "txtIdUsuario";
+            this.txtIdUsuario.Size = new System.Drawing.Size(100, 20);
+            this.txtIdUsuario.TabIndex = 4;
             // 
-            // textBox2
+            // txtNombreUsuario
             // 
-            this.textBox2.Location = new System.Drawing.Point(182, 38);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 5;
+            this.txtNombreUsuario.Location = new System.Drawing.Point(182, 38);
+            this.txtNombreUsuario.Name = "txtNombreUsuario";
+            this.txtNombreUsuario.Size = new System.Drawing.Size(100, 20);
+            this.txtNombreUsuario.TabIndex = 5;
             // 
-            // textBox3
+            // txtContraseña
             // 
-            this.textBox3.Location = new System.Drawing.Point(182, 64);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 6;
+            this.txtContraseña.Location = new System.Drawing.Point(182, 64);
+            this.txtContraseña.Name = "txtContraseña";
+            this.txtContraseña.Size = new System.Drawing.Size(100, 20);
+            this.txtContraseña.TabIndex = 6;
             // 
-            // textBox4
+            // txtEmpleado
             // 
-            this.textBox4.Location = new System.Drawing.Point(182, 90);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 7;
+            this.txtEmpleado.Location = new System.Drawing.Point(182, 90);
+            this.txtEmpleado.Name = "txtEmpleado";
+            this.txtEmpleado.Size = new System.Drawing.Size(100, 20);
+            this.txtEmpleado.TabIndex = 7;
             // 
             // btnguardar
             // 
@@ -118,10 +118,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(366, 208);
             this.Controls.Add(this.btnguardar);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtEmpleado);
+            this.Controls.Add(this.txtContraseña);
+            this.Controls.Add(this.txtNombreUsuario);
+            this.Controls.Add(this.txtIdUsuario);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -139,10 +139,10 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox txtIdUsuario;
+        private System.Windows.Forms.TextBox txtNombreUsuario;
+        private System.Windows.Forms.TextBox txtContraseña;
+        private System.Windows.Forms.TextBox txtEmpleado;
         private System.Windows.Forms.Button btnguardar;
     }
 }
