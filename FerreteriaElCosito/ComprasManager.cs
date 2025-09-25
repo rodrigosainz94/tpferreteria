@@ -51,15 +51,15 @@ namespace FerreteriaElCosito
             return _dal.GetProveedorPorNotaDePedido(idNotaDePedido);
         }
 
-        // Métodos para el nuevo formulario de caja
-        public decimal ObtenerSaldoInicialDelDia()
+        // --- MÉTODOS MODIFICADOS PARA ACEPTAR FECHA ---
+        public decimal ObtenerSaldoInicialDelDia(DateTime fecha)
         {
-            return _dal.GetSaldoInicialDelDia();
+            return _dal.GetSaldoInicialDelDia(fecha);
         }
 
-        public DataTable ObtenerMovimientosDeCajaDiarios()
+        public DataTable ObtenerMovimientosDeCajaDiarios(DateTime fecha)
         {
-            return _dal.GetMovimientosDeCajaDiarios();
+            return _dal.GetMovimientosDeCajaDiarios(fecha);
         }
 
         public DataTable ObtenerReporteStock()

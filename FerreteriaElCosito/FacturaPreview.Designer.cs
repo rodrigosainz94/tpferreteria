@@ -81,18 +81,18 @@
             // dgvItems
             // 
             this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvItems.Location = new System.Drawing.Point(284, 79);
+            this.dgvItems.Location = new System.Drawing.Point(307, 79);
             this.dgvItems.Name = "dgvItems";
             this.dgvItems.ReadOnly = true;
             this.dgvItems.RowHeadersWidth = 51;
             this.dgvItems.RowTemplate.Height = 24;
-            this.dgvItems.Size = new System.Drawing.Size(635, 328);
+            this.dgvItems.Size = new System.Drawing.Size(779, 328);
             this.dgvItems.TabIndex = 4;
             // 
             // lblTotal
             // 
             this.lblTotal.AutoSize = true;
-            this.lblTotal.Location = new System.Drawing.Point(720, 422);
+            this.lblTotal.Location = new System.Drawing.Point(925, 448);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(52, 16);
             this.lblTotal.TabIndex = 5;
@@ -132,7 +132,7 @@
             this.cmbMetPago.FormattingEnabled = true;
             this.cmbMetPago.Location = new System.Drawing.Point(19, 239);
             this.cmbMetPago.Name = "cmbMetPago";
-            this.cmbMetPago.Size = new System.Drawing.Size(150, 24);
+            this.cmbMetPago.Size = new System.Drawing.Size(172, 24);
             this.cmbMetPago.TabIndex = 9;
             // 
             // btnPagar
@@ -140,7 +140,7 @@
             this.btnPagar.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPagar.Location = new System.Drawing.Point(19, 291);
             this.btnPagar.Name = "btnPagar";
-            this.btnPagar.Size = new System.Drawing.Size(150, 59);
+            this.btnPagar.Size = new System.Drawing.Size(172, 59);
             this.btnPagar.TabIndex = 10;
             this.btnPagar.Text = "COBRAR";
             this.btnPagar.UseVisualStyleBackColor = true;
@@ -150,7 +150,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(931, 450);
+            this.ClientSize = new System.Drawing.Size(1120, 503);
             this.Controls.Add(this.btnPagar);
             this.Controls.Add(this.cmbMetPago);
             this.Controls.Add(this.lblMetPago);

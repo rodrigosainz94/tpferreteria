@@ -53,11 +53,11 @@
             // dgvmovimientoscaja
             // 
             this.dgvmovimientoscaja.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvmovimientoscaja.Location = new System.Drawing.Point(13, 56);
+            this.dgvmovimientoscaja.Location = new System.Drawing.Point(16, 46);
             this.dgvmovimientoscaja.Margin = new System.Windows.Forms.Padding(4);
             this.dgvmovimientoscaja.Name = "dgvmovimientoscaja";
             this.dgvmovimientoscaja.RowHeadersWidth = 51;
-            this.dgvmovimientoscaja.Size = new System.Drawing.Size(967, 298);
+            this.dgvmovimientoscaja.Size = new System.Drawing.Size(1107, 298);
             this.dgvmovimientoscaja.TabIndex = 0;
             this.dgvmovimientoscaja.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -74,7 +74,7 @@
             // 
             // btnimprimir
             // 
-            this.btnimprimir.Location = new System.Drawing.Point(844, 376);
+            this.btnimprimir.Location = new System.Drawing.Point(1023, 412);
             this.btnimprimir.Margin = new System.Windows.Forms.Padding(4);
             this.btnimprimir.Name = "btnimprimir";
             this.btnimprimir.Size = new System.Drawing.Size(100, 28);
@@ -233,7 +233,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1007, 453);
+            this.ClientSize = new System.Drawing.Size(1177, 453);
             this.Controls.Add(this.txtsdoinicial);
             this.Controls.Add(this.lblarqueo);
             this.Controls.Add(this.txtarqueo);

@@ -28,21 +28,38 @@ namespace FerreteriaElCosito
         {
             try
             {
-                using (var conexion = new MySqlConnection(ConexionBD.cadenaConexion))
+                using (var conn = ConexionBD.ObtenerConexion())
                 {
-                    conexion.Open();
-                    string query = "SELECT * FROM usuarios";
-                    MySqlDataAdapter da = new MySqlDataAdapter(query, conexion);
+                    string query = @"SELECT u.idUsuario,
+                                    CONCAT(e.Nombre, ' ', e.Apellido) AS Usuario,
+                                    u.Clave,
+                                    u.idEmpleado
+                             FROM usuarios u
+                             INNER JOIN empleado e ON u.idEmpleado = e.idEmpleado";
+
+                    MySqlDataAdapter da = new MySqlDataAdapter(query, conn);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
+
+                    // Asegurarse que idEmpleado quede al final (opcional, normalmente ya lo será si lo pediste al final en el SELECT)
+                    if (dt.Columns.Contains("idEmpleado"))
+                        dt.Columns["idEmpleado"].SetOrdinal(dt.Columns.Count - 1);
+
                     dataGridView1.DataSource = dt;
+
+                    // Opcional: ajustar encabezados legibles
+                    if (dataGridView1.Columns["Usuario"] != null)
+                        dataGridView1.Columns["Usuario"].HeaderText = "Nombre y Apellido";
+                    if (dataGridView1.Columns["idEmpleado"] != null)
+                        dataGridView1.Columns["idEmpleado"].HeaderText = "Id Empleado";
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error cargando proveedores: " + ex.Message);
+                MessageBox.Show("Error al cargar usuarios: " + ex.Message);
             }
         }
+
 
         private void btnagregar_Click(object sender, EventArgs e)
         {
@@ -51,16 +68,20 @@ namespace FerreteriaElCosito
             this.Hide();
         }
 
+
+
+
+
+        private void btnatras_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         private void btneditar_Click(object sender, EventArgs e)
         {
             UsuariosAgregar nuevoFormulario = new UsuariosAgregar();
             nuevoFormulario.Show();
             this.Hide();
-        }
-
-        private void btnatras_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
     }
 }

@@ -5,7 +5,6 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace FerreteriaElCosito
 {
     public class ComprasDAL
@@ -85,34 +84,47 @@ namespace FerreteriaElCosito
             return dt;
         }
 
-        // Método CORREGIDO para obtener los movimientos de caja del día
-        public DataTable GetMovimientosDeCajaDiarios()
+        // --- MÉTODO CORREGIDO ---
+        public DataTable GetMovimientosDeCajaDiarios(DateTime fecha)
         {
             DataTable dt = new DataTable();
             string query = @"
-        SELECT 
-            mc.IdMovimientoCaja, 
-            DATE_FORMAT(mc.FechaHoraMovimiento, '%d/%m/%Y') AS Fecha, 
-            tmc.Descripcion, 
-            fp.Descripcion AS FormaDePago,
-            mc.Monto, 
-            mc.Concepto, 
-            mc.IdCompra
-        FROM movimientocaja mc
-        JOIN tipomovimientocaja tmc ON mc.IdTipoMovimientoCaja = tmc.IdTipoMovimientoCaja
-        LEFT JOIN pagocompra pc ON mc.IdCompra = pc.IdCompra
-        LEFT JOIN pagoventa pv ON mc.IdVenta = pv.IdVenta
-        LEFT JOIN formapago fp ON fp.IdFormaPago = COALESCE(pc.IdFormaPago, pv.IdFormaPago)
-        WHERE DATE(mc.FechaHoraMovimiento) = CURDATE()
-    ";
-            using (MySqlConnection conn = ConexionBD.ObtenerConexion())
+            SELECT
+                mc.IdMovimientoCaja,
+                DATE_FORMAT(mc.FechaHoraMovimiento, '%d/%m/%Y') AS Fecha,
+                tmc.Descripcion,
+                -- Usamos un CASE para determinar la forma de pago
+                CASE
+                    WHEN mc.IdCompra IS NOT NULL THEN (SELECT fp.Descripcion FROM pagocompra pc JOIN formapago fp ON pc.IdFormaPago = fp.IdFormaPago WHERE pc.IdCompra = mc.IdCompra)
+                    WHEN mc.IdVenta IS NOT NULL THEN (SELECT fp.Descripcion FROM pagoventa pv JOIN formapago fp ON pv.IdFormaPago = fp.IdFormaPago WHERE pv.IdVenta = mc.IdVenta)
+                    ELSE 'Efectivo' -- O cualquier valor por defecto para otros movimientos
+                END AS FormaDePago,
+                mc.Monto,
+                mc.Concepto,
+                COALESCE(mc.IdCompra, mc.IdVenta) AS IdComprobante
+            FROM movimientocaja mc
+            JOIN tipomovimientocaja tmc ON mc.IdTipoMovimientoCaja = tmc.IdTipoMovimientoCaja
+            WHERE DATE(mc.FechaHoraMovimiento) = @Fecha
+            ORDER BY mc.FechaHoraMovimiento DESC";
+
+            try
             {
-                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                using (MySqlConnection conn = ConexionBD.ObtenerConexion())
                 {
-                    MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                    da.Fill(dt);
+                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@Fecha", fecha.Date);
+                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                        da.Fill(dt);
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                // Considera un manejo de errores más específico
+                throw new Exception("Error al obtener los movimientos de caja.", ex);
+            }
+
             return dt;
         }
 
@@ -178,14 +190,17 @@ namespace FerreteriaElCosito
             return dt;
         }
 
-        public decimal GetSaldoInicialDelDia()
+        // --- MÉTODO CORREGIDO ---
+        public decimal GetSaldoInicialDelDia(DateTime fecha)
         {
             decimal saldoInicial = 0;
-            string query = "SELECT SaldoInicial FROM caja WHERE DATE(Fecha) = CURDATE() ORDER BY Fecha DESC LIMIT 1";
+            // La consulta obtiene el último saldo final de la tabla 'caja' de un día anterior a la fecha seleccionada.
+            string query = "SELECT SaldoFinal FROM caja WHERE DATE(Fecha) < @Fecha ORDER BY Fecha DESC LIMIT 1";
             using (var conn = ConexionBD.ObtenerConexion())
             {
                 using (var cmd = new MySqlCommand(query, conn))
                 {
+                    cmd.Parameters.AddWithValue("@Fecha", fecha.Date); // Agregamos el parámetro
                     object result = cmd.ExecuteScalar();
                     if (result != DBNull.Value && result != null)
                     {
