@@ -231,6 +231,16 @@ namespace FerreteriaElCosito
                     cmdUpdateStock.ExecuteNonQuery();
                 }
 
+                // Guardar Pago de la Venta
+                string queryPago = @"INSERT INTO pagoventa (IdVenta, FechaPago, IdFormaPago, Monto)
+                                     VALUES (@IdVenta, @FechaPago, @IdFormaPago, @Monto)";
+                MySqlCommand cmdPago = new MySqlCommand(queryPago, conn, transaction);
+                cmdPago.Parameters.AddWithValue("@IdVenta", this.idVentaGenerada);
+                cmdPago.Parameters.AddWithValue("@FechaPago", DateTime.Now);
+                cmdPago.Parameters.AddWithValue("@IdFormaPago", cmbMetPago.SelectedValue);
+                cmdPago.Parameters.AddWithValue("@Monto", this.totalFactura);
+                cmdPago.ExecuteNonQuery();
+
                 // Actualizar NumeroComprobante
                 string queryUpdate = "UPDATE ventas SET NumeroComprobante = @num WHERE IdVenta = @id";
                 MySqlCommand cmdUpdate = new MySqlCommand(queryUpdate, conn, transaction);
