@@ -55,20 +55,6 @@ namespace FerreteriaElCosito
             }
         }
 
-        private void btnagregar_Click(object sender, EventArgs e)
-        {
-            // Abrimos el formulario en modo "Alta"
-            using (UsuariosAgregar formAgregar = new UsuariosAgregar())
-            {
-                // Usamos ShowDialog() para que el programa espere aquí.
-                // Si el formulario se cierra con éxito (DialogResult.OK), refrescamos la grilla.
-                if (formAgregar.ShowDialog() == DialogResult.OK)
-                {
-                    CargarUsuarios();
-                }
-            }
-        }
-
         private void btneditar_Click(object sender, EventArgs e)
         {
             if (dgvUsuarios.CurrentRow == null)

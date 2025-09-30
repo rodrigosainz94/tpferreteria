@@ -84,7 +84,7 @@
             this.txtIdUsuario.Location = new System.Drawing.Point(243, 15);
             this.txtIdUsuario.Margin = new System.Windows.Forms.Padding(4);
             this.txtIdUsuario.Name = "txtIdUsuario";
-            this.txtIdUsuario.Size = new System.Drawing.Size(132, 22);
+            this.txtIdUsuario.Size = new System.Drawing.Size(192, 22);
             this.txtIdUsuario.TabIndex = 4;
             // 
             // txtNombreUsuario
@@ -92,7 +92,7 @@
             this.txtNombreUsuario.Location = new System.Drawing.Point(243, 47);
             this.txtNombreUsuario.Margin = new System.Windows.Forms.Padding(4);
             this.txtNombreUsuario.Name = "txtNombreUsuario";
-            this.txtNombreUsuario.Size = new System.Drawing.Size(132, 22);
+            this.txtNombreUsuario.Size = new System.Drawing.Size(192, 22);
             this.txtNombreUsuario.TabIndex = 5;
             // 
             // txtContraseña
@@ -100,7 +100,7 @@
             this.txtContraseña.Location = new System.Drawing.Point(243, 79);
             this.txtContraseña.Margin = new System.Windows.Forms.Padding(4);
             this.txtContraseña.Name = "txtContraseña";
-            this.txtContraseña.Size = new System.Drawing.Size(132, 22);
+            this.txtContraseña.Size = new System.Drawing.Size(192, 22);
             this.txtContraseña.TabIndex = 6;
             // 
             // btnguardar
@@ -119,7 +119,7 @@
             this.cmbEmpleado.FormattingEnabled = true;
             this.cmbEmpleado.Location = new System.Drawing.Point(243, 115);
             this.cmbEmpleado.Name = "cmbEmpleado";
-            this.cmbEmpleado.Size = new System.Drawing.Size(121, 24);
+            this.cmbEmpleado.Size = new System.Drawing.Size(192, 24);
             this.cmbEmpleado.TabIndex = 9;
             // 
             // UsuariosAgregar
