@@ -30,7 +30,6 @@
         {
             this.btnatras = new System.Windows.Forms.Button();
             this.btneditar = new System.Windows.Forms.Button();
-            this.btnagregar = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -38,7 +37,7 @@
             // btnatras
             // 
             this.btnatras.Location = new System.Drawing.Point(16, 283);
-            this.btnatras.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnatras.Margin = new System.Windows.Forms.Padding(4);
             this.btnatras.Name = "btnatras";
             this.btnatras.Size = new System.Drawing.Size(100, 28);
             this.btnatras.TabIndex = 8;
@@ -48,8 +47,8 @@
             // 
             // btneditar
             // 
-            this.btneditar.Location = new System.Drawing.Point(509, 283);
-            this.btneditar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btneditar.Location = new System.Drawing.Point(792, 284);
+            this.btneditar.Margin = new System.Windows.Forms.Padding(4);
             this.btneditar.Name = "btneditar";
             this.btneditar.Size = new System.Drawing.Size(259, 28);
             this.btneditar.TabIndex = 7;
@@ -57,22 +56,11 @@
             this.btneditar.UseVisualStyleBackColor = true;
             this.btneditar.Click += new System.EventHandler(this.btneditar_Click);
             // 
-            // btnagregar
-            // 
-            this.btnagregar.Location = new System.Drawing.Point(792, 283);
-            this.btnagregar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btnagregar.Name = "btnagregar";
-            this.btnagregar.Size = new System.Drawing.Size(259, 28);
-            this.btnagregar.TabIndex = 6;
-            this.btnagregar.Text = "AGREGAR";
-            this.btnagregar.UseVisualStyleBackColor = true;
-            this.btnagregar.Click += new System.EventHandler(this.btnagregar_Click);
-            // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(16, 6);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.Size = new System.Drawing.Size(1035, 270);
@@ -85,9 +73,8 @@
             this.ClientSize = new System.Drawing.Size(1067, 324);
             this.Controls.Add(this.btnatras);
             this.Controls.Add(this.btneditar);
-            this.Controls.Add(this.btnagregar);
             this.Controls.Add(this.dataGridView1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Usuarios";
             this.Text = "Usuarios";
             this.Load += new System.EventHandler(this.Usuarios_Load);
@@ -100,7 +87,6 @@
 
         private System.Windows.Forms.Button btnatras;
         private System.Windows.Forms.Button btneditar;
-        private System.Windows.Forms.Button btnagregar;
         private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
