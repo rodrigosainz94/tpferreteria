@@ -9,7 +9,6 @@ namespace FerreteriaElCosito
     {
         private int? idUsuarioParaEditar = null;
 
-        // Constructor para MODO ALTA
         public UsuariosAgregar()
         {
             InitializeComponent();
@@ -17,7 +16,6 @@ namespace FerreteriaElCosito
             txtIdUsuario.Enabled = false;
         }
 
-        // Constructor para MODO EDICIÓN
         public UsuariosAgregar(int idUsuario)
         {
             InitializeComponent();
@@ -28,16 +26,30 @@ namespace FerreteriaElCosito
 
         private void UsuariosAgregar_Load(object sender, EventArgs e)
         {
+            // --- LÓGICA DE PERMISOS ---
+            // El empleado asociado a un usuario no se puede cambiar.
+            cmbEmpleado.Enabled = false;
+
+            // Si el usuario no es Administrador (rol != 1), no puede cambiar su nombre de usuario.
+            if (SesionUsuario.IdRol != 1)
+            {
+                txtNombreUsuario.Enabled = false;
+            }
+            // --- FIN LÓGICA DE PERMISOS ---
+
             if (idUsuarioParaEditar.HasValue)
             {
-                // Si estamos editando, cargamos todos los empleados para poder seleccionar
                 CargarTodosLosEmpleados();
                 CargarDatosDelUsuario();
             }
             else
             {
-                // Si estamos dando de alta, solo cargamos empleados que aún no tienen usuario
                 CargarEmpleadosSinUsuario();
+                // Si estamos creando un usuario, el admin sí puede elegir el empleado.
+                if (SesionUsuario.IdRol == 1)
+                {
+                    cmbEmpleado.Enabled = true;
+                }
             }
         }
 
@@ -47,16 +59,16 @@ namespace FerreteriaElCosito
             {
                 using (MySqlConnection conn = ConexionBD.ObtenerConexion())
                 {
-                    string query = "SELECT * FROM usuarios WHERE IdUsuario = @id";
+                    string query = "SELECT NombreUsuario, IdEmpleado FROM usuarios WHERE IdUsuario = @id";
                     MySqlCommand cmd = new MySqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@id", this.idUsuarioParaEditar);
                     using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader.Read())
                         {
-                            txtIdUsuario.Text = reader["IdUsuario"].ToString();
+                            txtIdUsuario.Text = this.idUsuarioParaEditar.ToString();
                             txtNombreUsuario.Text = reader["NombreUsuario"].ToString();
-                            txtContraseña.Text = ""; // La contraseña nunca se muestra, solo se puede cambiar
+                            txtContraseña.Text = "";
                             cmbEmpleado.SelectedValue = reader["IdEmpleado"];
                         }
                     }
@@ -75,14 +87,12 @@ namespace FerreteriaElCosito
             {
                 using (MySqlConnection conn = ConexionBD.ObtenerConexion())
                 {
-                    // Trae solo empleados que no están en la tabla de usuarios
                     string query = @"SELECT e.IdEmpleado, CONCAT(e.Nombre, ' ', e.Apellido) AS NombreCompleto
                                      FROM empleado e
                                      WHERE e.IdEmpleado NOT IN (SELECT u.IdEmpleado FROM usuarios u)";
                     MySqlDataAdapter da = new MySqlDataAdapter(query, conn);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
-
                     cmbEmpleado.DataSource = dt;
                     cmbEmpleado.DisplayMember = "NombreCompleto";
                     cmbEmpleado.ValueMember = "IdEmpleado";
@@ -98,11 +108,10 @@ namespace FerreteriaElCosito
             {
                 using (MySqlConnection conn = ConexionBD.ObtenerConexion())
                 {
-                    string query = "SELECT IdEmpleado, CONCAT(Nombre, ' ', Apellido) AS NombreCompleto FROM empleado";
+                    string query = "SELECT IdEmpleado, CONCAT(Nombre, ' ', Apellido) AS NombreCompleto FROM empleado ORDER BY Apellido, Nombre";
                     MySqlDataAdapter da = new MySqlDataAdapter(query, conn);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
-
                     cmbEmpleado.DataSource = dt;
                     cmbEmpleado.DisplayMember = "NombreCompleto";
                     cmbEmpleado.ValueMember = "IdEmpleado";
@@ -113,7 +122,6 @@ namespace FerreteriaElCosito
 
         private void btnguardar_Click(object sender, EventArgs e)
         {
-            // Validaciones básicas
             if (string.IsNullOrWhiteSpace(txtNombreUsuario.Text) || cmbEmpleado.SelectedValue == null)
             {
                 MessageBox.Show("El nombre de usuario y el empleado son obligatorios.", "Faltan Datos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -132,14 +140,24 @@ namespace FerreteriaElCosito
                     string query = "";
                     if (idUsuarioParaEditar.HasValue) // MODO EDICIÓN
                     {
-                        // Si el campo contraseña tiene texto, la actualizamos. Si no, la dejamos como estaba.
+                        // Construimos la consulta dinámicamente según los permisos y los campos llenos
+                        string setClause = "";
+                        if (txtNombreUsuario.Enabled)
+                            setClause += "NombreUsuario = @Nombre, ";
+                        if (cmbEmpleado.Enabled)
+                            setClause += "IdEmpleado = @IdEmpleado, ";
                         if (!string.IsNullOrWhiteSpace(txtContraseña.Text))
+                            setClause += "Clave = @Clave, ";
+
+                        if (!string.IsNullOrEmpty(setClause))
                         {
-                            query = "UPDATE usuarios SET NombreUsuario = @Nombre, Clave = @Clave, IdEmpleado = @IdEmpleado WHERE IdUsuario = @IdUsuario";
+                            setClause = setClause.TrimEnd(',', ' '); // Quitamos la última coma
+                            query = $"UPDATE usuarios SET {setClause} WHERE IdUsuario = @IdUsuario";
                         }
                         else
                         {
-                            query = "UPDATE usuarios SET NombreUsuario = @Nombre, IdEmpleado = @IdEmpleado WHERE IdUsuario = @IdUsuario";
+                            MessageBox.Show("No hay cambios para guardar.");
+                            return;
                         }
                     }
                     else // MODO ALTA
@@ -148,14 +166,14 @@ namespace FerreteriaElCosito
                     }
 
                     MySqlCommand cmd = new MySqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@Nombre", txtNombreUsuario.Text);
-                    cmd.Parameters.AddWithValue("@IdEmpleado", cmbEmpleado.SelectedValue);
+                    if (txtNombreUsuario.Enabled)
+                        cmd.Parameters.AddWithValue("@Nombre", txtNombreUsuario.Text);
+                    if (cmbEmpleado.Enabled)
+                        cmd.Parameters.AddWithValue("@IdEmpleado", cmbEmpleado.SelectedValue);
 
                     if (!string.IsNullOrWhiteSpace(txtContraseña.Text))
                     {
-                        // Aquí deberías usar el Hashing que implementamos antes
-                        // cmd.Parameters.AddWithValue("@Clave", PasswordHasher.HashPassword(txtContraseña.Text));
-                        cmd.Parameters.AddWithValue("@Clave", txtContraseña.Text); // Usando texto plano por ahora
+                        cmd.Parameters.AddWithValue("@Clave", txtContraseña.Text);
                     }
 
                     if (idUsuarioParaEditar.HasValue)
@@ -164,7 +182,6 @@ namespace FerreteriaElCosito
                     }
 
                     cmd.ExecuteNonQuery();
-
                     MessageBox.Show("Usuario guardado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.DialogResult = DialogResult.OK;
                     this.Close();
@@ -177,3 +194,4 @@ namespace FerreteriaElCosito
         }
     }
 }
+

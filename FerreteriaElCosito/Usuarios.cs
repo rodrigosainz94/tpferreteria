@@ -29,21 +29,34 @@ namespace FerreteriaElCosito
                 using (var conn = ConexionBD.ObtenerConexion())
                 {
                     string query = @"SELECT 
-                                        u.IdUsuario AS 'ID Usuario', 
-                                        u.NombreUsuario AS 'Nombre de Usuario', 
-                                        CONCAT(e.Nombre, ' ', e.Apellido) AS 'Empleado Asociado',
-                                        r.NombreRol AS 'Rol'
-                                     FROM usuarios u
-                                     INNER JOIN empleado e ON u.IdEmpleado = e.IdEmpleado
-                                     LEFT JOIN roles r ON e.IdRol = r.IdRol";
+                                u.IdUsuario AS 'ID Usuario', 
+                                u.NombreUsuario AS 'Nombre de Usuario', 
+                                CONCAT(e.Nombre, ' ', e.Apellido) AS 'Empleado Asociado',
+                                r.NombreRol AS 'Rol'
+                             FROM usuarios u
+                             INNER JOIN empleado e ON u.IdEmpleado = e.IdEmpleado
+                             LEFT JOIN roles r ON e.IdRol = r.IdRol";
 
-                    MySqlDataAdapter da = new MySqlDataAdapter(query, conn);
+                    MySqlCommand cmd = new MySqlCommand(); // Creamos el comando vacío
+
+                    // --- LÓGICA DE PERMISOS ---
+                    // Verificamos el rol del usuario que está logueado
+                    if (SesionUsuario.IdRol == 2 || SesionUsuario.IdRol == 3) // Si es Vendedor o Depósito
+                    {
+                        // Agregamos un filtro WHERE a la consulta para que traiga solo su propio usuario
+                        query += " WHERE u.IdEmpleado = @IdEmpleadoLogueado";
+                        cmd.Parameters.AddWithValue("@IdEmpleadoLogueado", SesionUsuario.IdEmpleado);
+                    }
+
+                    cmd.Connection = conn;
+                    cmd.CommandText = query;
+
+                    MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
 
                     dgvUsuarios.DataSource = dt;
 
-                    // Configuramos la grilla para una mejor experiencia de usuario
                     dgvUsuarios.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                     dgvUsuarios.ReadOnly = true;
                     dgvUsuarios.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
