@@ -159,7 +159,6 @@
             this.lblcallenro.Size = new System.Drawing.Size(63, 16);
             this.lblcallenro.TabIndex = 10;
             this.lblcallenro.Text = "Calle Nro";
-            this.lblcallenro.Click += new System.EventHandler(this.label2_Click);
             // 
             // lbllocalidad
             // 
@@ -185,7 +184,6 @@
             this.cbprovincia.Name = "cbprovincia";
             this.cbprovincia.Size = new System.Drawing.Size(239, 24);
             this.cbprovincia.TabIndex = 17;
-            this.cbprovincia.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // lblprovincia
             // 
@@ -195,7 +193,6 @@
             this.lblprovincia.Size = new System.Drawing.Size(63, 16);
             this.lblprovincia.TabIndex = 16;
             this.lblprovincia.Text = "Provincia";
-            this.lblprovincia.Click += new System.EventHandler(this.label1_Click);
             // 
             // lblcategoria
             // 
@@ -205,7 +202,6 @@
             this.lblcategoria.Size = new System.Drawing.Size(66, 16);
             this.lblcategoria.TabIndex = 18;
             this.lblcategoria.Text = "Categoria";
-            this.lblcategoria.Click += new System.EventHandler(this.label1_Click_1);
             // 
             // lblfechaalta
             // 
@@ -230,7 +226,7 @@
             this.dtalta.Name = "dtalta";
             this.dtalta.Size = new System.Drawing.Size(200, 22);
             this.dtalta.TabIndex = 21;
-            this.dtalta.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            this.dtalta.ValueChanged += new System.EventHandler(this.dtalta_ValueChanged);
             // 
             // cbidrol
             // 
@@ -239,7 +235,6 @@
             this.cbidrol.Name = "cbidrol";
             this.cbidrol.Size = new System.Drawing.Size(239, 24);
             this.cbidrol.TabIndex = 25;
-            this.cbidrol.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged_1);
             // 
             // lbliderol
             // 
@@ -249,7 +244,6 @@
             this.lbliderol.Size = new System.Drawing.Size(42, 16);
             this.lbliderol.TabIndex = 24;
             this.lbliderol.Text = "Id Rol";
-            this.lbliderol.Click += new System.EventHandler(this.label1_Click_2);
             // 
             // cbiddeposito
             // 
@@ -258,7 +252,6 @@
             this.cbiddeposito.Name = "cbiddeposito";
             this.cbiddeposito.Size = new System.Drawing.Size(239, 24);
             this.cbiddeposito.TabIndex = 23;
-            this.cbiddeposito.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // lbliddeposito
             // 
@@ -268,7 +261,6 @@
             this.lbliddeposito.Size = new System.Drawing.Size(76, 16);
             this.lbliddeposito.TabIndex = 22;
             this.lbliddeposito.Text = "Id Deposito";
-            this.lbliddeposito.Click += new System.EventHandler(this.label2_Click_1);
             // 
             // btnatras
             // 
@@ -366,7 +358,6 @@
             this.dtfechabaja.Name = "dtfechabaja";
             this.dtfechabaja.Size = new System.Drawing.Size(200, 22);
             this.dtfechabaja.TabIndex = 80;
-            this.dtfechabaja.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged_1);
             // 
             // lblfechabaja
             // 
@@ -376,7 +367,6 @@
             this.lblfechabaja.Size = new System.Drawing.Size(95, 16);
             this.lblfechabaja.TabIndex = 79;
             this.lblfechabaja.Text = "Fecha de Baja";
-            this.lblfechabaja.Click += new System.EventHandler(this.label1_Click_3);
             // 
             // btneditarprov
             // 
