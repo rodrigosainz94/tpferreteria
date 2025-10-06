@@ -215,5 +215,10 @@ namespace FerreteriaElCosito
         {
             this.Close();
         }
+
+        private void lblnrocomprobante_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

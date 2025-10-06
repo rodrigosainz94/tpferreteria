@@ -134,5 +134,10 @@ namespace FerreteriaElCosito
                 button1.PerformClick();
             }
         }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

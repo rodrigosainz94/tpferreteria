@@ -431,6 +431,31 @@ namespace FerreteriaElCosito
         {
             this.Close();
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblfecha_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtcodigo_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblcodigo_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

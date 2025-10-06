@@ -182,5 +182,10 @@ namespace FerreteriaElCosito
             nuevoFormulario.Show();
             nuevoFormulario.FormClosed += (s, args) => this.Show();
         }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
