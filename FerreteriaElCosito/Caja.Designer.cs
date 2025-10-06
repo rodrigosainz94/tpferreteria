@@ -47,6 +47,7 @@
             this.lblarqueo = new System.Windows.Forms.Label();
             this.txtarqueo = new System.Windows.Forms.TextBox();
             this.txtsdoinicial = new System.Windows.Forms.TextBox();
+            this.btnstock = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvmovimientoscaja)).BeginInit();
             this.SuspendLayout();
             // 
@@ -229,11 +230,23 @@
             this.txtsdoinicial.Size = new System.Drawing.Size(100, 22);
             this.txtsdoinicial.TabIndex = 52;
             // 
+            // btnstock
+            // 
+            this.btnstock.Location = new System.Drawing.Point(1023, 352);
+            this.btnstock.Margin = new System.Windows.Forms.Padding(4);
+            this.btnstock.Name = "btnstock";
+            this.btnstock.Size = new System.Drawing.Size(100, 28);
+            this.btnstock.TabIndex = 53;
+            this.btnstock.Text = "Stock";
+            this.btnstock.UseVisualStyleBackColor = true;
+            this.btnstock.Click += new System.EventHandler(this.btnstock_Click_1);
+            // 
             // Caja
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1177, 453);
+            this.Controls.Add(this.btnstock);
             this.Controls.Add(this.txtsdoinicial);
             this.Controls.Add(this.lblarqueo);
             this.Controls.Add(this.txtarqueo);
@@ -283,5 +296,6 @@
         private System.Windows.Forms.Label lblarqueo;
         private System.Windows.Forms.TextBox txtarqueo;
         private System.Windows.Forms.TextBox txtsdoinicial;
+        private System.Windows.Forms.Button btnstock;
     }
 }

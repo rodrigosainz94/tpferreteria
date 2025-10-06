@@ -268,6 +268,12 @@
       <DependentUpon>Roles.cs</DependentUpon>
     </Compile>
     <Compile Include="SesionUsuario.cs" />
+    <Compile Include="Stock Control.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Stock Control.Designer.cs">
+      <DependentUpon>Stock Control.cs</DependentUpon>
+    </Compile>
     <Compile Include="Usuarios.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -367,6 +373,9 @@
     </Compile>
     <EmbeddedResource Include="Roles.resx">
       <DependentUpon>Roles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Stock Control.resx">
+      <DependentUpon>Stock Control.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Usuarios.resx">
       <DependentUpon>Usuarios.cs</DependentUpon>

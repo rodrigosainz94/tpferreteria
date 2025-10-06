@@ -11,6 +11,11 @@ namespace FerreteriaElCosito
     {
         private ComprasDAL _dal = new ComprasDAL();
 
+        public DataTable ObtenerReporteDiarioStock(DateTime fecha)
+        {
+            return _dal.GetReporteDiarioStock(fecha);
+        }
+
         public DataTable ObtenerProveedores()
         {
             return _dal.GetProveedores();
@@ -51,7 +56,6 @@ namespace FerreteriaElCosito
             return _dal.GetProveedorPorNotaDePedido(idNotaDePedido);
         }
 
-        // --- MÉTODOS MODIFICADOS PARA ACEPTAR FECHA ---
         public decimal ObtenerSaldoInicialDelDia(DateTime fecha)
         {
             return _dal.GetSaldoInicialDelDia(fecha);
@@ -62,10 +66,6 @@ namespace FerreteriaElCosito
             return _dal.GetMovimientosDeCajaDiarios(fecha);
         }
 
-        public DataTable ObtenerReporteStock()
-        {
-            return _dal.GetReporteStock();
-        }
 
         public int GuardarFactura(Compra compra, List<DetalleCompra> detalles, int idFormaPago, decimal montoPagado, int idTipoEgreso, string concepto)
         {

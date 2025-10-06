@@ -651,72 +651,94 @@ namespace FerreteriaElCosito
 
         private void btnalta_Click(object sender, EventArgs e)
         {
+            // 1. Validaciones (estas ya las tenías y están perfectas)
+            if (string.IsNullOrWhiteSpace(cbnombre.Text) ||
+                string.IsNullOrWhiteSpace(cbapellido.Text) ||
+                string.IsNullOrWhiteSpace(txtmail.Text) ||
+                string.IsNullOrWhiteSpace(txttelefono.Text) ||
+                string.IsNullOrWhiteSpace(txtcuil.Text) ||
+                string.IsNullOrWhiteSpace(txtcallenro.Text) ||
+                cbprovincia.SelectedIndex < 0 ||
+                cblocalidad.SelectedIndex < 0 ||
+                cbcategoria.SelectedIndex < 0 ||
+                cbiddeposito.SelectedIndex < 0 ||
+                cbidrol.SelectedIndex < 0)
+            {
+                MessageBox.Show("Todos los campos son obligatorios. Por favor, completalos antes de continuar.", "Faltan datos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            MySqlConnection conn = null;
+            MySqlTransaction transaction = null;
+
             try
             {
-                // Validar que todos los campos estén completos
-                if (string.IsNullOrWhiteSpace(cbnombre.Text) ||
-                    string.IsNullOrWhiteSpace(cbapellido.Text) ||
-                    string.IsNullOrWhiteSpace(txtmail.Text) ||
-                    string.IsNullOrWhiteSpace(txttelefono.Text) ||
-                    string.IsNullOrWhiteSpace(txtcuil.Text) ||
-                    string.IsNullOrWhiteSpace(txtcallenro.Text) ||
-                    cbprovincia.SelectedIndex < 0 ||
-                    cblocalidad.SelectedIndex < 0 ||
-                    cbcategoria.SelectedIndex < 0 ||
-                    cbiddeposito.SelectedIndex < 0 ||
-                    cbidrol.SelectedIndex < 0)
+                conn = ConexionBD.ObtenerConexion();
+                transaction = conn.BeginTransaction(); // <-- Iniciamos la transacción
+
+                // --- PASO A: Crear el Empleado ---
+                string queryEmpleado = @"INSERT INTO empleado 
+                                (nombre, apellido, email, telefono, cuit_cuil, callenumero, idlocalidad, idprovincia, fechaalta, categoria, idDeposito, idRol) 
+                                VALUES 
+                                (@Nombre, @Apellido, @Email, @Telefono, @CUIL, @CalleNro, @Localidad, @Provincia, @FechaAlta, @Categoria, @Deposito, @Rol);
+                                SELECT LAST_INSERT_ID();"; // Obtenemos el ID del nuevo empleado
+
+                MySqlCommand cmdEmpleado = new MySqlCommand(queryEmpleado, conn, transaction); // Usamos la transacción
+                cmdEmpleado.Parameters.AddWithValue("@Nombre", cbnombre.Text.Trim());
+                cmdEmpleado.Parameters.AddWithValue("@Apellido", cbapellido.Text.Trim());
+                cmdEmpleado.Parameters.AddWithValue("@Email", txtmail.Text.Trim());
+                cmdEmpleado.Parameters.AddWithValue("@Telefono", txttelefono.Text.Trim());
+                cmdEmpleado.Parameters.AddWithValue("@CUIL", txtcuil.Text.Trim());
+                cmdEmpleado.Parameters.AddWithValue("@CalleNro", txtcallenro.Text.Trim());
+                cmdEmpleado.Parameters.AddWithValue("@Localidad", cblocalidad.SelectedValue);
+                cmdEmpleado.Parameters.AddWithValue("@Provincia", cbprovincia.SelectedValue);
+                cmdEmpleado.Parameters.AddWithValue("@FechaAlta", dtalta.Value.Date);
+                cmdEmpleado.Parameters.AddWithValue("@Categoria", cbcategoria.SelectedValue);
+                cmdEmpleado.Parameters.AddWithValue("@Deposito", cbiddeposito.SelectedValue);
+                cmdEmpleado.Parameters.AddWithValue("@Rol", cbidrol.SelectedValue);
+
+                // Ejecutamos y guardamos el nuevo ID de empleado
+                object newIdEmpleado = cmdEmpleado.ExecuteScalar();
+
+                if (newIdEmpleado == null)
                 {
-                    MessageBox.Show("Todos los campos son obligatorios. Por favor, completalos antes de continuar.", "Faltan datos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
+                    throw new Exception("No se pudo obtener el ID del nuevo empleado.");
                 }
 
-                using (MySqlConnection conn = ConexionBD.ObtenerConexion())
-                {
-                    string query = @"INSERT INTO empleado 
-            (nombre, apellido, email, telefono, cuit_cuil, callenumero, idlocalidad, idprovincia, fechaalta, categoria, idDeposito, idRol) 
-            VALUES 
-            (@Nombre, @Apellido, @Email, @Telefono, @CUIL, @CalleNro, @Localidad, @Provincia, @FechaAlta, @Categoria, @Deposito, @Rol);
-            SELECT LAST_INSERT_ID();"; // Obtiene el ID generado
+                // --- PASO B: Crear el Usuario asociado ---
+                string queryUsuario = @"INSERT INTO usuarios (NombreUsuario, Clave, IdEmpleado) 
+                                VALUES (@NombreUsuario, @Clave, @IdEmpleado)";
 
-                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@Nombre", cbnombre.Text.Trim());
-                        cmd.Parameters.AddWithValue("@Apellido", cbapellido.Text.Trim());
-                        cmd.Parameters.AddWithValue("@Email", txtmail.Text.Trim());
-                        cmd.Parameters.AddWithValue("@Telefono", txttelefono.Text.Trim());
-                        cmd.Parameters.AddWithValue("@CUIL", txtcuil.Text.Trim());
-                        cmd.Parameters.AddWithValue("@CalleNro", txtcallenro.Text.Trim());
-                        cmd.Parameters.AddWithValue("@Localidad", cblocalidad.SelectedValue);
-                        cmd.Parameters.AddWithValue("@Provincia", cbprovincia.SelectedValue);
-                        cmd.Parameters.AddWithValue("@FechaAlta", dtalta.Value.Date);
-                        cmd.Parameters.AddWithValue("@Categoria", cbcategoria.SelectedValue);
-                        cmd.Parameters.AddWithValue("@Deposito", cbiddeposito.SelectedValue);
-                        cmd.Parameters.AddWithValue("@Rol", cbidrol.SelectedValue);
+                MySqlCommand cmdUsuario = new MySqlCommand(queryUsuario, conn, transaction); // Usamos la misma transacción
+                cmdUsuario.Parameters.AddWithValue("@NombreUsuario", txtcuil.Text.Trim());
+                cmdUsuario.Parameters.AddWithValue("@Clave", txtcuil.Text.Trim()); // Usando CUIT como clave temporal
+                cmdUsuario.Parameters.AddWithValue("@IdEmpleado", newIdEmpleado);
+                cmdUsuario.ExecuteNonQuery();
 
-                        object newId = cmd.ExecuteScalar();
+                // Si todo salió bien, confirmamos todos los cambios en la base de datos
+                transaction.Commit(); // <-- Confirmamos la transacción
 
-                        if (newId != null)
-                        {
-                            MessageBox.Show("Empleado agregado correctamente. ID asignado: " + newId.ToString(), "Alta exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Empleado y usuario creados correctamente. ID de Empleado: " + newIdEmpleado.ToString(), "Alta Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                            cargandoCombos = true; // Evitar que se disparen eventos
-                            CargarIds();           // Refrescar lista de IDs
-                            cargandoCombos = false;
+                cargandoCombos = true;
+                CargarIds();
+                cargandoCombos = false;
 
-                            btnlimpiar_Click(null, null); // Limpiar el formulario para nueva carga
-                        }
-                        else
-                        {
-                            MessageBox.Show("No se pudo agregar el empleado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                }
+                btnlimpiar_Click(null, null);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al agregar empleado: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // Si algo falla, revertimos todos los cambios
+                transaction?.Rollback(); // <-- Revertimos la transacción
+                MessageBox.Show("Error al agregar empleado y usuario: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                // Cerramos la conexión
+                conn?.Close();
             }
         }
+
         private void btnatras_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -862,61 +884,5 @@ namespace FerreteriaElCosito
             dtfechabaja.Format = DateTimePickerFormat.Short;
             fechaBajaSeleccionada = true;
         }
-        private void dateTimePicker1_ValueChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click_2(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click_3(object sender, EventArgs e)
-        {
-
-        }
-
-
     }
 }

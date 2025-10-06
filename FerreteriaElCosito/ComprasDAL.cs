@@ -5,10 +5,70 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+
 namespace FerreteriaElCosito
 {
     public class ComprasDAL
     {
+        public DataTable GetReporteDiarioStock(DateTime fecha)
+        {
+            DataTable dt = new DataTable();
+            string query = @"
+                SELECT 
+                    p.IdProducto,
+                    p.NombreProducto,
+                    (
+                        SELECT IFNULL(SUM(CASE 
+                                WHEN tm.Descripcion = 'Ingreso' THEN ms2.Cantidad 
+                                WHEN tm.Descripcion = 'Egreso' THEN -ms2.Cantidad 
+                                ELSE 0 
+                            END), 0)
+                        FROM movimientostock ms2
+                        JOIN tipomovimiento tm ON ms2.IdTipoMovimiento = tm.IdTipoMovimiento
+                        WHERE ms2.IdProducto = p.IdProducto
+                        AND DATE(ms2.FechaMovimiento) < @fecha
+                    ) AS SaldoInicial,
+                    IFNULL(SUM(CASE 
+                        WHEN tm.Descripcion = 'Ingreso' THEN ms.Cantidad 
+                        ELSE 0 
+                    END), 0) AS Ingresos,
+                    IFNULL(SUM(CASE 
+                        WHEN tm.Descripcion = 'Egreso' THEN ms.Cantidad 
+                        ELSE 0 
+                    END), 0) AS Egresos,
+                    (
+                        (
+                            SELECT IFNULL(SUM(CASE 
+                                WHEN tm2.Descripcion = 'Ingreso' THEN ms3.Cantidad 
+                                WHEN tm2.Descripcion = 'Egreso' THEN -ms3.Cantidad 
+                                ELSE 0 
+                            END), 0)
+                            FROM movimientostock ms3
+                            JOIN tipomovimiento tm2 ON ms3.IdTipoMovimiento = tm2.IdTipoMovimiento
+                            WHERE ms3.IdProducto = p.IdProducto
+                            AND DATE(ms3.FechaMovimiento) <= @fecha
+                        )
+                    ) AS SaldoTeorico
+                FROM productos p
+                LEFT JOIN movimientostock ms ON p.IdProducto = ms.IdProducto AND DATE(ms.FechaMovimiento) = @fecha
+                LEFT JOIN tipomovimiento tm ON ms.IdTipoMovimiento = tm.IdTipoMovimiento
+                GROUP BY p.IdProducto
+                HAVING Ingresos > 0 OR Egresos > 0
+                ORDER BY p.NombreProducto;
+            ";
+
+            using (MySqlConnection conn = ConexionBD.ObtenerConexion())
+            {
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@fecha", fecha.Date);
+                    MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                    da.Fill(dt);
+                }
+            }
+            return dt;
+        }
         public DataTable GetProveedores()
         {
             DataTable dt = new DataTable();
@@ -84,64 +144,45 @@ namespace FerreteriaElCosito
             return dt;
         }
 
-        // --- MÉTODO CORREGIDO ---
         public DataTable GetMovimientosDeCajaDiarios(DateTime fecha)
         {
             DataTable dt = new DataTable();
-            string query = @"
-            SELECT
-                mc.IdMovimientoCaja,
-                DATE_FORMAT(mc.FechaHoraMovimiento, '%d/%m/%Y') AS Fecha,
-                tmc.Descripcion,
-                -- Usamos un CASE para determinar la forma de pago
-                CASE
-                    WHEN mc.IdCompra IS NOT NULL THEN (SELECT fp.Descripcion FROM pagocompra pc JOIN formapago fp ON pc.IdFormaPago = fp.IdFormaPago WHERE pc.IdCompra = mc.IdCompra)
-                    WHEN mc.IdVenta IS NOT NULL THEN (SELECT fp.Descripcion FROM pagoventa pv JOIN formapago fp ON pv.IdFormaPago = fp.IdFormaPago WHERE pv.IdVenta = mc.IdVenta)
-                    ELSE 'Efectivo' -- O cualquier valor por defecto para otros movimientos
-                END AS FormaDePago,
-                mc.Monto,
-                mc.Concepto,
-                COALESCE(mc.IdCompra, mc.IdVenta) AS IdComprobante
-            FROM movimientocaja mc
-            JOIN tipomovimientocaja tmc ON mc.IdTipoMovimientoCaja = tmc.IdTipoMovimientoCaja
-            WHERE DATE(mc.FechaHoraMovimiento) = @Fecha
-            ORDER BY mc.FechaHoraMovimiento DESC";
-
-            try
-            {
-                using (MySqlConnection conn = ConexionBD.ObtenerConexion())
-                {
-                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@Fecha", fecha.Date);
-                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                        da.Fill(dt);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                // Considera un manejo de errores más específico
-                throw new Exception("Error al obtener los movimientos de caja.", ex);
-            }
-
-            return dt;
-        }
-
-        public DataTable GetReporteStock()
-        {
-            DataTable dt = new DataTable();
-            string query = "SELECT IdProducto, NombreProducto, Cantidad FROM productos";
+            string query = "SELECT mc.IdMovimientoCaja, DATE_FORMAT(mc.FechaHoraMovimiento, '%d/%m/%Y') AS Fecha, tmc.Descripcion, mc.Monto, mc.Concepto, mc.IdCompra " +
+                           "FROM movimientocaja mc " +
+                           "JOIN tipomovimientocaja tmc ON mc.IdTipoMovimientoCaja = tmc.IdTipoMovimientoCaja " +
+                           "WHERE DATE(mc.FechaHoraMovimiento) = @fecha";
             using (MySqlConnection conn = ConexionBD.ObtenerConexion())
             {
                 using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 {
+                    cmd.Parameters.AddWithValue("@fecha", fecha.Date);
                     MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                     da.Fill(dt);
                 }
             }
             return dt;
         }
+
+        public decimal GetSaldoInicialDelDia(DateTime fecha)
+        {
+            decimal saldoInicial = 0;
+            string query = "SELECT SaldoFinal FROM caja WHERE DATE(Fecha) < @fecha ORDER BY Fecha DESC LIMIT 1";
+            using (var conn = ConexionBD.ObtenerConexion())
+            {
+                using (var cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@fecha", fecha.Date);
+                    object result = cmd.ExecuteScalar();
+                    if (result != DBNull.Value && result != null)
+                    {
+                        saldoInicial = Convert.ToDecimal(result);
+                    }
+                }
+            }
+            return saldoInicial;
+        }
+
+      
 
         public DataTable GetNotasDePedido()
         {
@@ -188,27 +229,6 @@ namespace FerreteriaElCosito
                 }
             }
             return dt;
-        }
-
-        // --- MÉTODO CORREGIDO ---
-        public decimal GetSaldoInicialDelDia(DateTime fecha)
-        {
-            decimal saldoInicial = 0;
-            // La consulta obtiene el último saldo final de la tabla 'caja' de un día anterior a la fecha seleccionada.
-            string query = "SELECT SaldoFinal FROM caja WHERE DATE(Fecha) < @Fecha ORDER BY Fecha DESC LIMIT 1";
-            using (var conn = ConexionBD.ObtenerConexion())
-            {
-                using (var cmd = new MySqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@Fecha", fecha.Date); // Agregamos el parámetro
-                    object result = cmd.ExecuteScalar();
-                    if (result != DBNull.Value && result != null)
-                    {
-                        saldoInicial = Convert.ToDecimal(result);
-                    }
-                }
-            }
-            return saldoInicial;
         }
 
         public int InsertarCompra(Compra compra, List<DetalleCompra> detalles, int idFormaPago, decimal montoPagado, int idTipoEgreso, string concepto)

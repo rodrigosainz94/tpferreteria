@@ -48,8 +48,8 @@ namespace FerreteriaElCosito
                 case 2: // Vendedor
                     btnempleados.Enabled = false;
                     btnempleados.BackColor = Color.Gray;
-                    btnusuarios.Enabled = false;
-                    btnusuarios.BackColor = Color.Gray;
+                    //btnusuarios.Enabled = false;
+                    //btnusuarios.BackColor = Color.Gray;
                     btnproveedores.Enabled = false;
                     btnproveedores.BackColor = Color.Gray;
                     btncompras.Enabled = false;
@@ -63,8 +63,8 @@ namespace FerreteriaElCosito
                     btnfacturar.BackColor = Color.Gray;
                     btnclientes.Enabled = false;
                     btnclientes.BackColor = Color.Gray;
-                    btnusuarios.Enabled = false;
-                    btnusuarios.BackColor = Color.Gray;
+                    //btnusuarios.Enabled = false;
+                    //btnusuarios.BackColor = Color.Gray;
                     btncaja.Enabled = false;
                     btncaja.BackColor = Color.Gray;
                     break;
