@@ -76,7 +76,6 @@
             this.lblfecha.Size = new System.Drawing.Size(108, 13);
             this.lblfecha.TabIndex = 1;
             this.lblfecha.Text = "hora y fecha : 1 2 3 4";
-            this.lblfecha.Click += new System.EventHandler(this.lblfecha_Click);
             // 
             // txtcodigo
             // 
@@ -85,7 +84,6 @@
             this.txtcodigo.Name = "txtcodigo";
             this.txtcodigo.Size = new System.Drawing.Size(139, 20);
             this.txtcodigo.TabIndex = 2;
-            this.txtcodigo.TextChanged += new System.EventHandler(this.txtcodigo_TextChanged);
             this.txtcodigo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtcodigo_KeyDown);
             // 
             // lblcodigo
@@ -96,7 +94,6 @@
             this.lblcodigo.Size = new System.Drawing.Size(55, 13);
             this.lblcodigo.TabIndex = 3;
             this.lblcodigo.Text = "CÓDIGO :";
-            this.lblcodigo.Click += new System.EventHandler(this.lblcodigo_Click);
             // 
             // lblnombre
             // 
@@ -156,7 +153,6 @@
             this.label1.Size = new System.Drawing.Size(134, 22);
             this.label1.TabIndex = 10;
             this.label1.Text = "FERRETERIA";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -168,7 +164,6 @@
             this.label2.Size = new System.Drawing.Size(140, 22);
             this.label2.TabIndex = 11;
             this.label2.Text = "\" EL COSITO \"";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // btnatras
             // 
