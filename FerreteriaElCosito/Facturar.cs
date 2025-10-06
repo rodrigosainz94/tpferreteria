@@ -35,10 +35,13 @@ namespace FerreteriaElCosito
             dtFacturaItems.Columns.Add("Cantidad", typeof(int));
             dtFacturaItems.Columns.Add("Medida", typeof(string));
             dtFacturaItems.Columns.Add("Precio unidad", typeof(decimal));
+
             dtFacturaItems.Columns.Add("Descuento", typeof(decimal));
             dtFacturaItems.Columns["Descuento"].DefaultValue = 0;
+
             dtFacturaItems.Columns.Add("Precio cantidad", typeof(decimal), "[Precio unidad] * Cantidad");
             dtFacturaItems.Columns.Add("Precio con descuento", typeof(decimal), "([Precio unidad] * Cantidad) * (1 - Descuento / 100)");
+
             dgvfacturacion.DataSource = dtFacturaItems;
 
             if (dgvfacturacion.Columns.Count == 0)
@@ -81,6 +84,18 @@ namespace FerreteriaElCosito
             }
         }
 
+        public void LimpiarParaNuevaVenta()
+        {
+            dtFacturaItems.Clear();
+            CalcularTotal();
+            txtdni.Clear();
+            lblnombrecliente.Text = "Nombre cliente";
+            this.idClienteSeleccionado = null;
+            cbconsumidorfinal.Checked = false;
+            CargarComboProductos();
+            txtcodigo.Focus();
+        }
+
         private void btnagregar_Click(object sender, EventArgs e)
         {
             int idProductoBuscado = 0;
@@ -113,14 +128,26 @@ namespace FerreteriaElCosito
                 {
                     using (MySqlConnection conn = ConexionBD.ObtenerConexion())
                     {
-                        string query = "SELECT NombreProducto, UnidadMedida, PrecioUnitario FROM productos WHERE IdProducto = @id";
+                        string query = "SELECT NombreProducto, UnidadMedida, PrecioUnitario, PorcentajeDto FROM productos WHERE IdProducto = @id";
                         MySqlCommand cmd = new MySqlCommand(query, conn);
                         cmd.Parameters.AddWithValue("@id", idProductoBuscado);
                         using (MySqlDataReader reader = cmd.ExecuteReader())
                         {
                             if (reader.Read())
                             {
-                                dtFacturaItems.Rows.Add(idProductoBuscado, reader["NombreProducto"].ToString(), 1, reader["UnidadMedida"].ToString(), Convert.ToDecimal(reader["PrecioUnitario"]));
+                                DataRow nuevaFila = dtFacturaItems.NewRow();
+                                nuevaFila["IdProducto"] = idProductoBuscado;
+                                nuevaFila["Nombre"] = reader["NombreProducto"].ToString();
+                                nuevaFila["Cantidad"] = 1;
+                                nuevaFila["Medida"] = reader["UnidadMedida"].ToString();
+                                nuevaFila["Precio unidad"] = Convert.ToDecimal(reader["PrecioUnitario"]);
+
+                                if (reader["PorcentajeDto"] != DBNull.Value)
+                                {
+                                    nuevaFila["Descuento"] = Convert.ToDecimal(reader["PorcentajeDto"]);
+                                }
+
+                                dtFacturaItems.Rows.Add(nuevaFila);
                             }
                             else
                             {
@@ -156,9 +183,7 @@ namespace FerreteriaElCosito
             }
 
             decimal total = Convert.ToDecimal(dtFacturaItems.Compute("SUM([Precio con descuento])", string.Empty));
-            // Le pasamos 'this' para que FacturaPreview sepa quién lo abrió
-            FacturaPreview formularioPreview = new FacturaPreview(this.idClienteSeleccionado, dtFacturaItems, total, this);
-            // Simplemente abrimos la ventana, la lógica de limpieza se hará desde el Preview
+            FacturaPreview formularioPreview = new FacturaPreview(this.idClienteSeleccionado, dtFacturaItems.Copy(), total, this);
             formularioPreview.ShowDialog();
         }
 
@@ -173,18 +198,6 @@ namespace FerreteriaElCosito
                     BuscarClientePorCuit();
                 }
             }
-        }
-
-        public void LimpiarParaNuevaVenta()
-        {
-            dtFacturaItems.Clear();
-            CalcularTotal();
-            txtdni.Clear();
-            lblnombrecliente.Text = "Nombre cliente";
-            this.idClienteSeleccionado = null;
-            cbconsumidorfinal.Checked = false;
-            CargarComboProductos();
-            txtcodigo.Focus();
         }
 
         private void BuscarClientePorCuit()
@@ -288,11 +301,29 @@ namespace FerreteriaElCosito
 
         private void dgvfacturacion_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgvfacturacion.CurrentRow != null)
+            if (dgvfacturacion.CurrentRow != null && dgvfacturacion.CurrentRow.DataBoundItem != null)
             {
                 _isCalculatingDiscount = true;
-                txtDescuento.Clear();
-                txtNuevoPrecio.Clear();
+
+                DataRowView drv = (DataRowView)dgvfacturacion.CurrentRow.DataBoundItem;
+
+                // --- INICIO DE CORRECCIÓN DBNull ---
+                decimal descuento = drv["Descuento"] != DBNull.Value ? Convert.ToDecimal(drv["Descuento"]) : 0;
+                decimal precioConDescuento = drv["Precio con descuento"] != DBNull.Value ? Convert.ToDecimal(drv["Precio con descuento"]) : 0;
+                int cantidad = drv["Cantidad"] != DBNull.Value ? Convert.ToInt32(drv["Cantidad"]) : 0;
+                // --- FIN DE CORRECCIÓN DBNull ---
+
+                txtDescuento.Text = descuento.ToString("F2");
+
+                if (cantidad > 0)
+                {
+                    txtNuevoPrecio.Text = (precioConDescuento / cantidad).ToString("F2");
+                }
+                else
+                {
+                    txtNuevoPrecio.Clear();
+                }
+
                 _isCalculatingDiscount = false;
             }
         }
@@ -301,9 +332,11 @@ namespace FerreteriaElCosito
         {
             if (_isCalculatingDiscount || dgvfacturacion.CurrentRow == null) return;
             _isCalculatingDiscount = true;
+
             if (decimal.TryParse(txtDescuento.Text, out decimal porcentaje) && porcentaje >= 0 && porcentaje <= 100)
             {
-                decimal precioOriginal = Convert.ToDecimal(dgvfacturacion.CurrentRow.Cells["PrecioUnidad"].Value);
+                DataRowView drv = (DataRowView)dgvfacturacion.CurrentRow.DataBoundItem;
+                decimal precioOriginal = Convert.ToDecimal(drv["Precio unidad"]);
                 decimal nuevoPrecio = precioOriginal * (1 - (porcentaje / 100));
                 txtNuevoPrecio.Text = nuevoPrecio.ToString("F2");
             }
@@ -318,9 +351,11 @@ namespace FerreteriaElCosito
         {
             if (_isCalculatingDiscount || dgvfacturacion.CurrentRow == null) return;
             _isCalculatingDiscount = true;
+
             if (decimal.TryParse(txtNuevoPrecio.Text, out decimal nuevoPrecio))
             {
-                decimal precioOriginal = Convert.ToDecimal(dgvfacturacion.CurrentRow.Cells["PrecioUnidad"].Value);
+                DataRowView drv = (DataRowView)dgvfacturacion.CurrentRow.DataBoundItem;
+                decimal precioOriginal = Convert.ToDecimal(drv["Precio unidad"]);
                 if (precioOriginal > 0 && nuevoPrecio <= precioOriginal)
                 {
                     decimal porcentaje = (1 - (nuevoPrecio / precioOriginal)) * 100;
@@ -352,6 +387,7 @@ namespace FerreteriaElCosito
             }
             DataRowView drv = (DataRowView)dgvfacturacion.CurrentRow.DataBoundItem;
             drv.Row["Descuento"] = porcentaje;
+
             txtDescuento.Clear();
             txtNuevoPrecio.Clear();
             CalcularTotal();
@@ -430,31 +466,6 @@ namespace FerreteriaElCosito
         private void btnatras_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblfecha_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtcodigo_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblcodigo_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
