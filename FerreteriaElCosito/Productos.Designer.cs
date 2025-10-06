@@ -56,7 +56,7 @@
             // 
             // btnatras
             // 
-            this.btnatras.Location = new System.Drawing.Point(38, 342);
+            this.btnatras.Location = new System.Drawing.Point(308, 427);
             this.btnatras.Name = "btnatras";
             this.btnatras.Size = new System.Drawing.Size(94, 32);
             this.btnatras.TabIndex = 30;
@@ -70,12 +70,12 @@
             this.dgvProductos.Location = new System.Drawing.Point(286, 8);
             this.dgvProductos.Name = "dgvProductos";
             this.dgvProductos.RowHeadersWidth = 51;
-            this.dgvProductos.Size = new System.Drawing.Size(422, 307);
+            this.dgvProductos.Size = new System.Drawing.Size(556, 400);
             this.dgvProductos.TabIndex = 29;
             // 
             // btnguardar
             // 
-            this.btnguardar.Location = new System.Drawing.Point(516, 342);
+            this.btnguardar.Location = new System.Drawing.Point(727, 427);
             this.btnguardar.Name = "btnguardar";
             this.btnguardar.Size = new System.Drawing.Size(115, 32);
             this.btnguardar.TabIndex = 28;
@@ -86,7 +86,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(69, 198);
+            this.label5.Location = new System.Drawing.Point(71, 248);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(40, 13);
             this.label5.TabIndex = 25;
@@ -94,15 +94,17 @@
             // 
             // txtprecio
             // 
-            this.txtprecio.Location = new System.Drawing.Point(112, 191);
+            this.txtprecio.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.txtprecio.Location = new System.Drawing.Point(114, 241);
             this.txtprecio.Name = "txtprecio";
             this.txtprecio.Size = new System.Drawing.Size(157, 20);
             this.txtprecio.TabIndex = 24;
             // 
             // cbproveedor
             // 
+            this.cbproveedor.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.cbproveedor.FormattingEnabled = true;
-            this.cbproveedor.Location = new System.Drawing.Point(112, 117);
+            this.cbproveedor.Location = new System.Drawing.Point(114, 167);
             this.cbproveedor.Name = "cbproveedor";
             this.cbproveedor.Size = new System.Drawing.Size(121, 21);
             this.cbproveedor.TabIndex = 23;
@@ -110,7 +112,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(45, 125);
+            this.label4.Location = new System.Drawing.Point(47, 175);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 13);
             this.label4.TabIndex = 22;
@@ -118,8 +120,9 @@
             // 
             // cbcategoria
             // 
+            this.cbcategoria.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.cbcategoria.FormattingEnabled = true;
-            this.cbcategoria.Location = new System.Drawing.Point(112, 83);
+            this.cbcategoria.Location = new System.Drawing.Point(114, 133);
             this.cbcategoria.Name = "cbcategoria";
             this.cbcategoria.Size = new System.Drawing.Size(121, 21);
             this.cbcategoria.TabIndex = 21;
@@ -127,7 +130,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(49, 91);
+            this.label3.Location = new System.Drawing.Point(51, 141);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(55, 13);
             this.label3.TabIndex = 20;
@@ -135,7 +138,8 @@
             // 
             // txtdescripcionprod
             // 
-            this.txtdescripcionprod.Location = new System.Drawing.Point(112, 47);
+            this.txtdescripcionprod.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.txtdescripcionprod.Location = new System.Drawing.Point(114, 97);
             this.txtdescripcionprod.Name = "txtdescripcionprod";
             this.txtdescripcionprod.Size = new System.Drawing.Size(157, 20);
             this.txtdescripcionprod.TabIndex = 19;
@@ -143,7 +147,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(39, 54);
+            this.label2.Location = new System.Drawing.Point(41, 104);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(66, 13);
             this.label2.TabIndex = 18;
@@ -152,7 +156,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 15);
+            this.label1.Location = new System.Drawing.Point(14, 65);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(93, 13);
             this.label1.TabIndex = 17;
@@ -160,14 +164,15 @@
             // 
             // txtnombreproducto
             // 
-            this.txtnombreproducto.Location = new System.Drawing.Point(112, 8);
+            this.txtnombreproducto.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.txtnombreproducto.Location = new System.Drawing.Point(114, 58);
             this.txtnombreproducto.Name = "txtnombreproducto";
             this.txtnombreproducto.Size = new System.Drawing.Size(157, 20);
             this.txtnombreproducto.TabIndex = 16;
             // 
             // btneditar
             // 
-            this.btneditar.Location = new System.Drawing.Point(366, 342);
+            this.btneditar.Location = new System.Drawing.Point(577, 427);
             this.btneditar.Name = "btneditar";
             this.btneditar.Size = new System.Drawing.Size(106, 32);
             this.btneditar.TabIndex = 31;
@@ -177,7 +182,7 @@
             // 
             // btneliminar
             // 
-            this.btneliminar.Location = new System.Drawing.Point(175, 342);
+            this.btneliminar.Location = new System.Drawing.Point(445, 427);
             this.btneliminar.Name = "btneliminar";
             this.btneliminar.Size = new System.Drawing.Size(95, 32);
             this.btneliminar.TabIndex = 32;
@@ -187,8 +192,9 @@
             // 
             // cbUnidadMedida
             // 
+            this.cbUnidadMedida.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.cbUnidadMedida.FormattingEnabled = true;
-            this.cbUnidadMedida.Location = new System.Drawing.Point(112, 154);
+            this.cbUnidadMedida.Location = new System.Drawing.Point(114, 204);
             this.cbUnidadMedida.Name = "cbUnidadMedida";
             this.cbUnidadMedida.Size = new System.Drawing.Size(121, 21);
             this.cbUnidadMedida.TabIndex = 34;
@@ -196,7 +202,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 162);
+            this.label6.Location = new System.Drawing.Point(14, 212);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(97, 13);
             this.label6.TabIndex = 33;
@@ -205,7 +211,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(53, 236);
+            this.label7.Location = new System.Drawing.Point(55, 286);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(52, 13);
             this.label7.TabIndex = 36;
@@ -213,7 +219,8 @@
             // 
             // txtcantidad
             // 
-            this.txtcantidad.Location = new System.Drawing.Point(113, 229);
+            this.txtcantidad.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.txtcantidad.Location = new System.Drawing.Point(115, 279);
             this.txtcantidad.Name = "txtcantidad";
             this.txtcantidad.Size = new System.Drawing.Size(157, 20);
             this.txtcantidad.TabIndex = 35;
@@ -221,7 +228,7 @@
             // lbldescuento
             // 
             this.lbldescuento.AutoSize = true;
-            this.lbldescuento.Location = new System.Drawing.Point(39, 312);
+            this.lbldescuento.Location = new System.Drawing.Point(41, 362);
             this.lbldescuento.Name = "lbldescuento";
             this.lbldescuento.Size = new System.Drawing.Size(62, 13);
             this.lbldescuento.TabIndex = 38;
@@ -229,7 +236,8 @@
             // 
             // txtdescuento
             // 
-            this.txtdescuento.Location = new System.Drawing.Point(113, 305);
+            this.txtdescuento.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.txtdescuento.Location = new System.Drawing.Point(115, 355);
             this.txtdescuento.Name = "txtdescuento";
             this.txtdescuento.Size = new System.Drawing.Size(157, 20);
             this.txtdescuento.TabIndex = 37;
@@ -237,7 +245,7 @@
             // lblstockcritico
             // 
             this.lblstockcritico.AutoSize = true;
-            this.lblstockcritico.Location = new System.Drawing.Point(35, 273);
+            this.lblstockcritico.Location = new System.Drawing.Point(37, 323);
             this.lblstockcritico.Name = "lblstockcritico";
             this.lblstockcritico.Size = new System.Drawing.Size(69, 13);
             this.lblstockcritico.TabIndex = 40;
@@ -245,7 +253,8 @@
             // 
             // txtstockcritico
             // 
-            this.txtstockcritico.Location = new System.Drawing.Point(113, 266);
+            this.txtstockcritico.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.txtstockcritico.Location = new System.Drawing.Point(115, 316);
             this.txtstockcritico.Name = "txtstockcritico";
             this.txtstockcritico.Size = new System.Drawing.Size(157, 20);
             this.txtstockcritico.TabIndex = 39;
@@ -254,7 +263,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(758, 386);
+            this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.ClientSize = new System.Drawing.Size(854, 484);
             this.Controls.Add(this.lblstockcritico);
             this.Controls.Add(this.txtstockcritico);
             this.Controls.Add(this.lbldescuento);

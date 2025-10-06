@@ -49,9 +49,10 @@
             // 
             // btnagregar
             // 
-            this.btnagregar.Location = new System.Drawing.Point(787, 67);
+            this.btnagregar.Location = new System.Drawing.Point(738, 82);
+            this.btnagregar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnagregar.Name = "btnagregar";
-            this.btnagregar.Size = new System.Drawing.Size(100, 28);
+            this.btnagregar.Size = new System.Drawing.Size(87, 32);
             this.btnagregar.TabIndex = 1;
             this.btnagregar.Text = "Agregar";
             this.btnagregar.UseVisualStyleBackColor = true;
@@ -60,28 +61,27 @@
             // lblproveedor
             // 
             this.lblproveedor.AutoSize = true;
-            this.lblproveedor.Location = new System.Drawing.Point(223, 108);
-            this.lblproveedor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblproveedor.Location = new System.Drawing.Point(320, 108);
             this.lblproveedor.Name = "lblproveedor";
-            this.lblproveedor.Size = new System.Drawing.Size(77, 16);
+            this.lblproveedor.Size = new System.Drawing.Size(62, 13);
             this.lblproveedor.TabIndex = 6;
             this.lblproveedor.Text = "Proveedor :";
             // 
             // lblfecha
             // 
             this.lblfecha.AutoSize = true;
-            this.lblfecha.Location = new System.Drawing.Point(629, 20);
-            this.lblfecha.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblfecha.Location = new System.Drawing.Point(626, 31);
             this.lblfecha.Name = "lblfecha";
-            this.lblfecha.Size = new System.Drawing.Size(51, 16);
+            this.lblfecha.Size = new System.Drawing.Size(43, 13);
             this.lblfecha.TabIndex = 7;
             this.lblfecha.Text = "Fecha: ";
             // 
             // btnhacerpedido
             // 
-            this.btnhacerpedido.Location = new System.Drawing.Point(712, 149);
+            this.btnhacerpedido.Location = new System.Drawing.Point(307, 429);
+            this.btnhacerpedido.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnhacerpedido.Name = "btnhacerpedido";
-            this.btnhacerpedido.Size = new System.Drawing.Size(187, 28);
+            this.btnhacerpedido.Size = new System.Drawing.Size(171, 23);
             this.btnhacerpedido.TabIndex = 9;
             this.btnhacerpedido.Text = "EMITIR NOTA DE PEDIDO";
             this.btnhacerpedido.UseVisualStyleBackColor = true;
@@ -89,9 +89,10 @@
             // 
             // btnquitar
             // 
-            this.btnquitar.Location = new System.Drawing.Point(787, 101);
+            this.btnquitar.Location = new System.Drawing.Point(738, 156);
+            this.btnquitar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnquitar.Name = "btnquitar";
-            this.btnquitar.Size = new System.Drawing.Size(100, 28);
+            this.btnquitar.Size = new System.Drawing.Size(87, 32);
             this.btnquitar.TabIndex = 10;
             this.btnquitar.Text = "Quitar";
             this.btnquitar.UseVisualStyleBackColor = true;
@@ -99,9 +100,10 @@
             // 
             // btnatras
             // 
-            this.btnatras.Location = new System.Drawing.Point(787, 508);
+            this.btnatras.Location = new System.Drawing.Point(738, 419);
+            this.btnatras.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnatras.Name = "btnatras";
-            this.btnatras.Size = new System.Drawing.Size(100, 28);
+            this.btnatras.Size = new System.Drawing.Size(94, 42);
             this.btnatras.TabIndex = 13;
             this.btnatras.Text = "Atras";
             this.btnatras.UseVisualStyleBackColor = true;
@@ -110,105 +112,109 @@
             // cbproveedor
             // 
             this.cbproveedor.FormattingEnabled = true;
-            this.cbproveedor.Location = new System.Drawing.Point(308, 105);
+            this.cbproveedor.Location = new System.Drawing.Point(384, 105);
+            this.cbproveedor.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbproveedor.Name = "cbproveedor";
-            this.cbproveedor.Size = new System.Drawing.Size(267, 24);
+            this.cbproveedor.Size = new System.Drawing.Size(201, 21);
             this.cbproveedor.TabIndex = 14;
             // 
             // cbidproveedor
             // 
             this.cbidproveedor.FormattingEnabled = true;
-            this.cbidproveedor.Location = new System.Drawing.Point(106, 106);
+            this.cbidproveedor.Location = new System.Drawing.Point(124, 110);
+            this.cbidproveedor.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbidproveedor.Name = "cbidproveedor";
-            this.cbidproveedor.Size = new System.Drawing.Size(97, 24);
+            this.cbidproveedor.Size = new System.Drawing.Size(104, 21);
             this.cbidproveedor.TabIndex = 16;
             // 
             // lblidproveedor
             // 
             this.lblidproveedor.AutoSize = true;
-            this.lblidproveedor.Location = new System.Drawing.Point(21, 109);
-            this.lblidproveedor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblidproveedor.Location = new System.Drawing.Point(43, 118);
             this.lblidproveedor.Name = "lblidproveedor";
-            this.lblidproveedor.Size = new System.Drawing.Size(93, 16);
+            this.lblidproveedor.Size = new System.Drawing.Size(76, 13);
             this.lblidproveedor.TabIndex = 15;
             this.lblidproveedor.Text = "ID Proveedor :";
             // 
             // dtpfecha
             // 
-            this.dtpfecha.Location = new System.Drawing.Point(687, 20);
+            this.dtpfecha.Location = new System.Drawing.Point(674, 29);
+            this.dtpfecha.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dtpfecha.Name = "dtpfecha";
-            this.dtpfecha.Size = new System.Drawing.Size(200, 22);
+            this.dtpfecha.Size = new System.Drawing.Size(151, 20);
             this.dtpfecha.TabIndex = 17;
             // 
             // cbtcomprobante
             // 
             this.cbtcomprobante.FormattingEnabled = true;
-            this.cbtcomprobante.Location = new System.Drawing.Point(119, 29);
+            this.cbtcomprobante.Location = new System.Drawing.Point(124, 31);
+            this.cbtcomprobante.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbtcomprobante.Name = "cbtcomprobante";
-            this.cbtcomprobante.Size = new System.Drawing.Size(84, 24);
+            this.cbtcomprobante.Size = new System.Drawing.Size(104, 21);
             this.cbtcomprobante.TabIndex = 20;
             // 
             // lbltcomprobante
             // 
             this.lbltcomprobante.AutoSize = true;
-            this.lbltcomprobante.Location = new System.Drawing.Point(21, 33);
-            this.lbltcomprobante.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbltcomprobante.Location = new System.Drawing.Point(40, 31);
             this.lbltcomprobante.Name = "lbltcomprobante";
-            this.lbltcomprobante.Size = new System.Drawing.Size(100, 16);
+            this.lbltcomprobante.Size = new System.Drawing.Size(79, 13);
             this.lbltcomprobante.TabIndex = 19;
             this.lbltcomprobante.Text = "Tipo Comprob :";
             // 
             // lblnrocomprobante
             // 
             this.lblnrocomprobante.AutoSize = true;
-            this.lblnrocomprobante.Location = new System.Drawing.Point(223, 29);
-            this.lblnrocomprobante.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblnrocomprobante.Location = new System.Drawing.Point(288, 35);
             this.lblnrocomprobante.Name = "lblnrocomprobante";
-            this.lblnrocomprobante.Size = new System.Drawing.Size(114, 16);
+            this.lblnrocomprobante.Size = new System.Drawing.Size(93, 13);
             this.lblnrocomprobante.TabIndex = 18;
-            this.lblnrocomprobante.Text = "Nro Comprobante";
+            this.lblnrocomprobante.Text = "Nro Comprobante:";
+            this.lblnrocomprobante.Click += new System.EventHandler(this.lblnrocomprobante_Click);
             // 
             // txtnrocomprobante
             // 
-            this.txtnrocomprobante.Location = new System.Drawing.Point(351, 23);
+            this.txtnrocomprobante.Location = new System.Drawing.Point(384, 35);
+            this.txtnrocomprobante.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtnrocomprobante.Name = "txtnrocomprobante";
-            this.txtnrocomprobante.Size = new System.Drawing.Size(124, 22);
+            this.txtnrocomprobante.Size = new System.Drawing.Size(94, 20);
             this.txtnrocomprobante.TabIndex = 21;
+            this.txtnrocomprobante.TextChanged += new System.EventHandler(this.txtnrocomprobante_TextChanged);
             // 
             // cbempleado
             // 
             this.cbempleado.FormattingEnabled = true;
-            this.cbempleado.Location = new System.Drawing.Point(308, 67);
+            this.cbempleado.Location = new System.Drawing.Point(384, 74);
+            this.cbempleado.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbempleado.Name = "cbempleado";
-            this.cbempleado.Size = new System.Drawing.Size(267, 24);
+            this.cbempleado.Size = new System.Drawing.Size(201, 21);
             this.cbempleado.TabIndex = 23;
             this.cbempleado.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // lblempleado
             // 
             this.lblempleado.AutoSize = true;
-            this.lblempleado.Location = new System.Drawing.Point(225, 67);
-            this.lblempleado.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblempleado.Location = new System.Drawing.Point(322, 74);
             this.lblempleado.Name = "lblempleado";
-            this.lblempleado.Size = new System.Drawing.Size(76, 16);
+            this.lblempleado.Size = new System.Drawing.Size(60, 13);
             this.lblempleado.TabIndex = 22;
             this.lblempleado.Text = "Empleado :";
             // 
             // cbproducto
             // 
             this.cbproducto.FormattingEnabled = true;
-            this.cbproducto.Location = new System.Drawing.Point(308, 151);
+            this.cbproducto.Location = new System.Drawing.Point(384, 143);
+            this.cbproducto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbproducto.Name = "cbproducto";
-            this.cbproducto.Size = new System.Drawing.Size(267, 24);
+            this.cbproducto.Size = new System.Drawing.Size(201, 21);
             this.cbproducto.TabIndex = 27;
             // 
             // lblproducto
             // 
             this.lblproducto.AutoSize = true;
-            this.lblproducto.Location = new System.Drawing.Point(225, 156);
-            this.lblproducto.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblproducto.Location = new System.Drawing.Point(322, 147);
             this.lblproducto.Name = "lblproducto";
-            this.lblproducto.Size = new System.Drawing.Size(67, 16);
+            this.lblproducto.Size = new System.Drawing.Size(56, 13);
             this.lblproducto.TabIndex = 26;
             this.lblproducto.Text = "Producto :";
             this.lblproducto.Click += new System.EventHandler(this.label1_Click);
@@ -216,55 +222,57 @@
             // cbidproducto
             // 
             this.cbidproducto.FormattingEnabled = true;
-            this.cbidproducto.Location = new System.Drawing.Point(106, 152);
+            this.cbidproducto.Location = new System.Drawing.Point(124, 148);
+            this.cbidproducto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbidproducto.Name = "cbidproducto";
-            this.cbidproducto.Size = new System.Drawing.Size(97, 24);
+            this.cbidproducto.Size = new System.Drawing.Size(104, 21);
             this.cbidproducto.TabIndex = 25;
             // 
             // lblidproducto
             // 
             this.lblidproducto.AutoSize = true;
-            this.lblidproducto.Location = new System.Drawing.Point(21, 155);
-            this.lblidproducto.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblidproducto.Location = new System.Drawing.Point(49, 151);
             this.lblidproducto.Name = "lblidproducto";
-            this.lblidproducto.Size = new System.Drawing.Size(83, 16);
+            this.lblidproducto.Size = new System.Drawing.Size(70, 13);
             this.lblidproducto.TabIndex = 24;
             this.lblidproducto.Text = "ID Producto :";
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(24, 193);
+            this.dataGridView1.Location = new System.Drawing.Point(18, 203);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(863, 309);
+            this.dataGridView1.Size = new System.Drawing.Size(814, 205);
             this.dataGridView1.TabIndex = 28;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // cbidempleado
             // 
             this.cbidempleado.FormattingEnabled = true;
-            this.cbidempleado.Location = new System.Drawing.Point(106, 64);
+            this.cbidempleado.Location = new System.Drawing.Point(124, 76);
+            this.cbidempleado.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbidempleado.Name = "cbidempleado";
-            this.cbidempleado.Size = new System.Drawing.Size(97, 24);
+            this.cbidempleado.Size = new System.Drawing.Size(104, 21);
             this.cbidempleado.TabIndex = 30;
             // 
             // lblidempl
             // 
             this.lblidempl.AutoSize = true;
-            this.lblidempl.Location = new System.Drawing.Point(23, 71);
-            this.lblidempl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblidempl.Location = new System.Drawing.Point(50, 82);
             this.lblidempl.Name = "lblidempl";
-            this.lblidempl.Size = new System.Drawing.Size(90, 16);
+            this.lblidempl.Size = new System.Drawing.Size(72, 13);
             this.lblidempl.TabIndex = 29;
             this.lblidempl.Text = "Id Empleado :";
             // 
             // btnlimpiar
             // 
-            this.btnlimpiar.Location = new System.Drawing.Point(667, 508);
+            this.btnlimpiar.Location = new System.Drawing.Point(738, 118);
+            this.btnlimpiar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnlimpiar.Name = "btnlimpiar";
-            this.btnlimpiar.Size = new System.Drawing.Size(100, 28);
+            this.btnlimpiar.Size = new System.Drawing.Size(87, 34);
             this.btnlimpiar.TabIndex = 31;
             this.btnlimpiar.Text = "Limpiar";
             this.btnlimpiar.UseVisualStyleBackColor = true;
@@ -272,9 +280,10 @@
             // 
             // btnconsultanp
             // 
-            this.btnconsultanp.Location = new System.Drawing.Point(481, 23);
+            this.btnconsultanp.Location = new System.Drawing.Point(482, 35);
+            this.btnconsultanp.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnconsultanp.Name = "btnconsultanp";
-            this.btnconsultanp.Size = new System.Drawing.Size(141, 23);
+            this.btnconsultanp.Size = new System.Drawing.Size(106, 19);
             this.btnconsultanp.TabIndex = 32;
             this.btnconsultanp.Text = "Consulta NP";
             this.btnconsultanp.UseVisualStyleBackColor = true;
@@ -282,9 +291,10 @@
             // 
             // btnconsultaproveedor
             // 
-            this.btnconsultaproveedor.Location = new System.Drawing.Point(581, 109);
+            this.btnconsultaproveedor.Location = new System.Drawing.Point(589, 105);
+            this.btnconsultaproveedor.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnconsultaproveedor.Name = "btnconsultaproveedor";
-            this.btnconsultaproveedor.Size = new System.Drawing.Size(113, 23);
+            this.btnconsultaproveedor.Size = new System.Drawing.Size(85, 19);
             this.btnconsultaproveedor.TabIndex = 33;
             this.btnconsultaproveedor.Text = "Consulta Prov.";
             this.btnconsultaproveedor.UseVisualStyleBackColor = true;
@@ -292,9 +302,10 @@
             // 
             // btnconsultaproducto
             // 
-            this.btnconsultaproducto.Location = new System.Drawing.Point(581, 156);
+            this.btnconsultaproducto.Location = new System.Drawing.Point(589, 143);
+            this.btnconsultaproducto.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnconsultaproducto.Name = "btnconsultaproducto";
-            this.btnconsultaproducto.Size = new System.Drawing.Size(113, 23);
+            this.btnconsultaproducto.Size = new System.Drawing.Size(85, 19);
             this.btnconsultaproducto.TabIndex = 34;
             this.btnconsultaproducto.Text = "Consulta Prod.";
             this.btnconsultaproducto.UseVisualStyleBackColor = true;
@@ -302,10 +313,10 @@
             // 
             // Compras
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.ClientSize = new System.Drawing.Size(938, 562);
+            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.ClientSize = new System.Drawing.Size(857, 481);
             this.Controls.Add(this.btnconsultaproducto);
             this.Controls.Add(this.btnconsultaproveedor);
             this.Controls.Add(this.btnconsultanp);
@@ -333,7 +344,7 @@
             this.Controls.Add(this.lblfecha);
             this.Controls.Add(this.lblproveedor);
             this.Controls.Add(this.btnagregar);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Compras";
             this.Text = "Compras";
             this.Load += new System.EventHandler(this.Compras_Load);

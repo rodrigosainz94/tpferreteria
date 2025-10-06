@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmnotadepedido));
             this.btnlimpiar = new System.Windows.Forms.Button();
             this.lblidempl = new System.Windows.Forms.Label();
             this.lblempleado = new System.Windows.Forms.Label();
@@ -53,7 +54,7 @@
             // btnlimpiar
             // 
             this.btnlimpiar.Location = new System.Drawing.Point(643, 441);
-            this.btnlimpiar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnlimpiar.Margin = new System.Windows.Forms.Padding(2);
             this.btnlimpiar.Name = "btnlimpiar";
             this.btnlimpiar.Size = new System.Drawing.Size(75, 23);
             this.btnlimpiar.TabIndex = 55;
@@ -82,7 +83,7 @@
             // 
             this.txtnrocomprobante.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.txtnrocomprobante.Location = new System.Drawing.Point(438, 33);
-            this.txtnrocomprobante.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtnrocomprobante.Margin = new System.Windows.Forms.Padding(2);
             this.txtnrocomprobante.Name = "txtnrocomprobante";
             this.txtnrocomprobante.Size = new System.Drawing.Size(119, 20);
             this.txtnrocomprobante.TabIndex = 45;
@@ -118,7 +119,7 @@
             // btnatras
             // 
             this.btnatras.Location = new System.Drawing.Point(734, 441);
-            this.btnatras.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnatras.Margin = new System.Windows.Forms.Padding(2);
             this.btnatras.Name = "btnatras";
             this.btnatras.Size = new System.Drawing.Size(75, 23);
             this.btnatras.TabIndex = 37;
@@ -129,7 +130,7 @@
             // btnimprimirpedido
             // 
             this.btnimprimirpedido.Location = new System.Drawing.Point(433, 441);
-            this.btnimprimirpedido.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnimprimirpedido.Margin = new System.Windows.Forms.Padding(2);
             this.btnimprimirpedido.Name = "btnimprimirpedido";
             this.btnimprimirpedido.Size = new System.Drawing.Size(193, 23);
             this.btnimprimirpedido.TabIndex = 35;
@@ -168,7 +169,7 @@
             // 
             this.txttipocomprobante.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.txttipocomprobante.Location = new System.Drawing.Point(193, 34);
-            this.txttipocomprobante.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txttipocomprobante.Margin = new System.Windows.Forms.Padding(2);
             this.txttipocomprobante.Name = "txttipocomprobante";
             this.txttipocomprobante.Size = new System.Drawing.Size(76, 20);
             this.txttipocomprobante.TabIndex = 57;
@@ -177,7 +178,7 @@
             // 
             this.txtidempleado.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.txtidempleado.Location = new System.Drawing.Point(193, 109);
-            this.txtidempleado.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtidempleado.Margin = new System.Windows.Forms.Padding(2);
             this.txtidempleado.Name = "txtidempleado";
             this.txtidempleado.Size = new System.Drawing.Size(76, 20);
             this.txtidempleado.TabIndex = 59;
@@ -186,7 +187,7 @@
             // 
             this.txtidproveedor.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.txtidproveedor.Location = new System.Drawing.Point(193, 73);
-            this.txtidproveedor.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtidproveedor.Margin = new System.Windows.Forms.Padding(2);
             this.txtidproveedor.Name = "txtidproveedor";
             this.txtidproveedor.Size = new System.Drawing.Size(76, 20);
             this.txtidproveedor.TabIndex = 60;
@@ -195,7 +196,7 @@
             // 
             this.txtfecha.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.txtfecha.Location = new System.Drawing.Point(631, 30);
-            this.txtfecha.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtfecha.Margin = new System.Windows.Forms.Padding(2);
             this.txtfecha.Name = "txtfecha";
             this.txtfecha.Size = new System.Drawing.Size(119, 20);
             this.txtfecha.TabIndex = 61;
@@ -204,7 +205,7 @@
             // 
             this.txtempleado.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.txtempleado.Location = new System.Drawing.Point(438, 111);
-            this.txtempleado.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtempleado.Margin = new System.Windows.Forms.Padding(2);
             this.txtempleado.Name = "txtempleado";
             this.txtempleado.Size = new System.Drawing.Size(119, 20);
             this.txtempleado.TabIndex = 63;
@@ -213,7 +214,7 @@
             // 
             this.txtproveedor.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.txtproveedor.Location = new System.Drawing.Point(438, 71);
-            this.txtproveedor.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtproveedor.Margin = new System.Windows.Forms.Padding(2);
             this.txtproveedor.Name = "txtproveedor";
             this.txtproveedor.Size = new System.Drawing.Size(119, 20);
             this.txtproveedor.TabIndex = 64;
@@ -221,12 +222,12 @@
             // dgvdetalleprod
             // 
             this.dgvdetalleprod.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvdetalleprod.Location = new System.Drawing.Point(223, 199);
-            this.dgvdetalleprod.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvdetalleprod.Location = new System.Drawing.Point(27, 160);
+            this.dgvdetalleprod.Margin = new System.Windows.Forms.Padding(2);
             this.dgvdetalleprod.Name = "dgvdetalleprod";
             this.dgvdetalleprod.RowHeadersWidth = 51;
             this.dgvdetalleprod.RowTemplate.Height = 24;
-            this.dgvdetalleprod.Size = new System.Drawing.Size(616, 228);
+            this.dgvdetalleprod.Size = new System.Drawing.Size(812, 267);
             this.dgvdetalleprod.TabIndex = 52;
             // 
             // frmnotadepedido
@@ -234,7 +235,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(1066, 516);
+            this.ClientSize = new System.Drawing.Size(856, 480);
             this.Controls.Add(this.txtproveedor);
             this.Controls.Add(this.txtempleado);
             this.Controls.Add(this.txtfecha);
@@ -254,7 +255,8 @@
             this.Controls.Add(this.btnimprimirpedido);
             this.Controls.Add(this.lblfecha);
             this.Controls.Add(this.lblproveedor);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmnotadepedido";
             this.Text = "Nota de Pedido";
             this.Load += new System.EventHandler(this.frmnotadepedido_Load);

@@ -566,5 +566,15 @@ namespace FerreteriaElCosito
                 cbproducto.SelectedValue = idSeleccionado;
             }
         }
+
+        private void lblnrocomprobante_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtnrocomprobante_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
