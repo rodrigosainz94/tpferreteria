@@ -884,5 +884,10 @@ namespace FerreteriaElCosito
             dtfechabaja.Format = DateTimePickerFormat.Short;
             fechaBajaSeleccionada = true;
         }
+
+        private void txttelefono_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

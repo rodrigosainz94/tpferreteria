@@ -67,12 +67,13 @@
             this.btneditarrol = new System.Windows.Forms.Button();
             this.btneditarloc = new System.Windows.Forms.Button();
             this.btneditardeposito = new System.Windows.Forms.Button();
+            this.lbldatos = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblidempleado
             // 
             this.lblidempleado.AutoSize = true;
-            this.lblidempleado.Location = new System.Drawing.Point(13, 13);
+            this.lblidempleado.Location = new System.Drawing.Point(16, 61);
             this.lblidempleado.Name = "lblidempleado";
             this.lblidempleado.Size = new System.Drawing.Size(84, 16);
             this.lblidempleado.TabIndex = 0;
@@ -81,7 +82,7 @@
             // lblapellido
             // 
             this.lblapellido.AutoSize = true;
-            this.lblapellido.Location = new System.Drawing.Point(365, 45);
+            this.lblapellido.Location = new System.Drawing.Point(456, 58);
             this.lblapellido.Name = "lblapellido";
             this.lblapellido.Size = new System.Drawing.Size(57, 16);
             this.lblapellido.TabIndex = 2;
@@ -90,7 +91,7 @@
             // lblnombre
             // 
             this.lblnombre.AutoSize = true;
-            this.lblnombre.Location = new System.Drawing.Point(13, 45);
+            this.lblnombre.Location = new System.Drawing.Point(16, 96);
             this.lblnombre.Name = "lblnombre";
             this.lblnombre.Size = new System.Drawing.Size(56, 16);
             this.lblnombre.TabIndex = 4;
@@ -98,15 +99,15 @@
             // 
             // txtmail
             // 
-            this.txtmail.Location = new System.Drawing.Point(75, 79);
+            this.txtmail.Location = new System.Drawing.Point(126, 129);
             this.txtmail.Name = "txtmail";
-            this.txtmail.Size = new System.Drawing.Size(250, 22);
+            this.txtmail.Size = new System.Drawing.Size(201, 22);
             this.txtmail.TabIndex = 9;
             // 
             // lblmail
             // 
             this.lblmail.AutoSize = true;
-            this.lblmail.Location = new System.Drawing.Point(13, 85);
+            this.lblmail.Location = new System.Drawing.Point(16, 132);
             this.lblmail.Name = "lblmail";
             this.lblmail.Size = new System.Drawing.Size(32, 16);
             this.lblmail.TabIndex = 8;
@@ -114,15 +115,16 @@
             // 
             // txttelefono
             // 
-            this.txttelefono.Location = new System.Drawing.Point(438, 85);
+            this.txttelefono.Location = new System.Drawing.Point(529, 93);
             this.txttelefono.Name = "txttelefono";
-            this.txttelefono.Size = new System.Drawing.Size(279, 22);
+            this.txttelefono.Size = new System.Drawing.Size(202, 22);
             this.txttelefono.TabIndex = 7;
+            this.txttelefono.TextChanged += new System.EventHandler(this.txttelefono_TextChanged);
             // 
             // lbltelefono
             // 
             this.lbltelefono.AutoSize = true;
-            this.lbltelefono.Location = new System.Drawing.Point(365, 85);
+            this.lbltelefono.Location = new System.Drawing.Point(456, 96);
             this.lbltelefono.Name = "lbltelefono";
             this.lbltelefono.Size = new System.Drawing.Size(61, 16);
             this.lbltelefono.TabIndex = 6;
@@ -130,15 +132,15 @@
             // 
             // txtcuil
             // 
-            this.txtcuil.Location = new System.Drawing.Point(75, 123);
+            this.txtcuil.Location = new System.Drawing.Point(127, 167);
             this.txtcuil.Name = "txtcuil";
-            this.txtcuil.Size = new System.Drawing.Size(250, 22);
+            this.txtcuil.Size = new System.Drawing.Size(201, 22);
             this.txtcuil.TabIndex = 13;
             // 
             // lblcuit
             // 
             this.lblcuit.AutoSize = true;
-            this.lblcuit.Location = new System.Drawing.Point(13, 129);
+            this.lblcuit.Location = new System.Drawing.Point(16, 170);
             this.lblcuit.Name = "lblcuit";
             this.lblcuit.Size = new System.Drawing.Size(38, 16);
             this.lblcuit.TabIndex = 12;
@@ -146,15 +148,15 @@
             // 
             // txtcallenro
             // 
-            this.txtcallenro.Location = new System.Drawing.Point(438, 123);
+            this.txtcallenro.Location = new System.Drawing.Point(529, 129);
             this.txtcallenro.Name = "txtcallenro";
-            this.txtcallenro.Size = new System.Drawing.Size(279, 22);
+            this.txtcallenro.Size = new System.Drawing.Size(202, 22);
             this.txtcallenro.TabIndex = 11;
             // 
             // lblcallenro
             // 
             this.lblcallenro.AutoSize = true;
-            this.lblcallenro.Location = new System.Drawing.Point(365, 129);
+            this.lblcallenro.Location = new System.Drawing.Point(460, 132);
             this.lblcallenro.Name = "lblcallenro";
             this.lblcallenro.Size = new System.Drawing.Size(63, 16);
             this.lblcallenro.TabIndex = 10;
@@ -163,7 +165,7 @@
             // lbllocalidad
             // 
             this.lbllocalidad.AutoSize = true;
-            this.lbllocalidad.Location = new System.Drawing.Point(13, 167);
+            this.lbllocalidad.Location = new System.Drawing.Point(16, 209);
             this.lbllocalidad.Name = "lbllocalidad";
             this.lbllocalidad.Size = new System.Drawing.Size(67, 16);
             this.lbllocalidad.TabIndex = 14;
@@ -172,7 +174,7 @@
             // cblocalidad
             // 
             this.cblocalidad.FormattingEnabled = true;
-            this.cblocalidad.Location = new System.Drawing.Point(85, 159);
+            this.cblocalidad.Location = new System.Drawing.Point(127, 206);
             this.cblocalidad.Name = "cblocalidad";
             this.cblocalidad.Size = new System.Drawing.Size(201, 24);
             this.cblocalidad.TabIndex = 15;
@@ -180,15 +182,15 @@
             // cbprovincia
             // 
             this.cbprovincia.FormattingEnabled = true;
-            this.cbprovincia.Location = new System.Drawing.Point(468, 163);
+            this.cbprovincia.Location = new System.Drawing.Point(529, 167);
             this.cbprovincia.Name = "cbprovincia";
-            this.cbprovincia.Size = new System.Drawing.Size(239, 24);
+            this.cbprovincia.Size = new System.Drawing.Size(202, 24);
             this.cbprovincia.TabIndex = 17;
             // 
             // lblprovincia
             // 
             this.lblprovincia.AutoSize = true;
-            this.lblprovincia.Location = new System.Drawing.Point(386, 171);
+            this.lblprovincia.Location = new System.Drawing.Point(456, 175);
             this.lblprovincia.Name = "lblprovincia";
             this.lblprovincia.Size = new System.Drawing.Size(63, 16);
             this.lblprovincia.TabIndex = 16;
@@ -197,7 +199,7 @@
             // lblcategoria
             // 
             this.lblcategoria.AutoSize = true;
-            this.lblcategoria.Location = new System.Drawing.Point(10, 214);
+            this.lblcategoria.Location = new System.Drawing.Point(13, 250);
             this.lblcategoria.Name = "lblcategoria";
             this.lblcategoria.Size = new System.Drawing.Size(66, 16);
             this.lblcategoria.TabIndex = 18;
@@ -206,7 +208,7 @@
             // lblfechaalta
             // 
             this.lblfechaalta.AutoSize = true;
-            this.lblfechaalta.Location = new System.Drawing.Point(7, 298);
+            this.lblfechaalta.Location = new System.Drawing.Point(433, 251);
             this.lblfechaalta.Name = "lblfechaalta";
             this.lblfechaalta.Size = new System.Drawing.Size(90, 16);
             this.lblfechaalta.TabIndex = 19;
@@ -215,31 +217,31 @@
             // cbcategoria
             // 
             this.cbcategoria.FormattingEnabled = true;
-            this.cbcategoria.Location = new System.Drawing.Point(85, 205);
+            this.cbcategoria.Location = new System.Drawing.Point(127, 247);
             this.cbcategoria.Name = "cbcategoria";
             this.cbcategoria.Size = new System.Drawing.Size(201, 24);
             this.cbcategoria.TabIndex = 20;
             // 
             // dtalta
             // 
-            this.dtalta.Location = new System.Drawing.Point(108, 290);
+            this.dtalta.Location = new System.Drawing.Point(529, 245);
             this.dtalta.Name = "dtalta";
-            this.dtalta.Size = new System.Drawing.Size(200, 22);
+            this.dtalta.Size = new System.Drawing.Size(283, 22);
             this.dtalta.TabIndex = 21;
             this.dtalta.ValueChanged += new System.EventHandler(this.dtalta_ValueChanged);
             // 
             // cbidrol
             // 
             this.cbidrol.FormattingEnabled = true;
-            this.cbidrol.Location = new System.Drawing.Point(468, 210);
+            this.cbidrol.Location = new System.Drawing.Point(529, 206);
             this.cbidrol.Name = "cbidrol";
-            this.cbidrol.Size = new System.Drawing.Size(239, 24);
+            this.cbidrol.Size = new System.Drawing.Size(202, 24);
             this.cbidrol.TabIndex = 25;
             // 
             // lbliderol
             // 
             this.lbliderol.AutoSize = true;
-            this.lbliderol.Location = new System.Drawing.Point(407, 213);
+            this.lbliderol.Location = new System.Drawing.Point(481, 209);
             this.lbliderol.Name = "lbliderol";
             this.lbliderol.Size = new System.Drawing.Size(42, 16);
             this.lbliderol.TabIndex = 24;
@@ -248,15 +250,15 @@
             // cbiddeposito
             // 
             this.cbiddeposito.FormattingEnabled = true;
-            this.cbiddeposito.Location = new System.Drawing.Point(85, 246);
+            this.cbiddeposito.Location = new System.Drawing.Point(127, 287);
             this.cbiddeposito.Name = "cbiddeposito";
-            this.cbiddeposito.Size = new System.Drawing.Size(239, 24);
+            this.cbiddeposito.Size = new System.Drawing.Size(201, 24);
             this.cbiddeposito.TabIndex = 23;
             // 
             // lbliddeposito
             // 
             this.lbliddeposito.AutoSize = true;
-            this.lbliddeposito.Location = new System.Drawing.Point(10, 254);
+            this.lbliddeposito.Location = new System.Drawing.Point(13, 290);
             this.lbliddeposito.Name = "lbliddeposito";
             this.lbliddeposito.Size = new System.Drawing.Size(76, 16);
             this.lbliddeposito.TabIndex = 22;
@@ -264,10 +266,10 @@
             // 
             // btnatras
             // 
-            this.btnatras.Location = new System.Drawing.Point(665, 397);
+            this.btnatras.Location = new System.Drawing.Point(16, 374);
             this.btnatras.Margin = new System.Windows.Forms.Padding(4);
             this.btnatras.Name = "btnatras";
-            this.btnatras.Size = new System.Drawing.Size(100, 28);
+            this.btnatras.Size = new System.Drawing.Size(100, 32);
             this.btnatras.TabIndex = 65;
             this.btnatras.Text = "ATRAS";
             this.btnatras.UseVisualStyleBackColor = true;
@@ -275,10 +277,10 @@
             // 
             // btnconsulta
             // 
-            this.btnconsulta.Location = new System.Drawing.Point(13, 397);
+            this.btnconsulta.Location = new System.Drawing.Point(228, 336);
             this.btnconsulta.Margin = new System.Windows.Forms.Padding(4);
             this.btnconsulta.Name = "btnconsulta";
-            this.btnconsulta.Size = new System.Drawing.Size(100, 28);
+            this.btnconsulta.Size = new System.Drawing.Size(100, 32);
             this.btnconsulta.TabIndex = 74;
             this.btnconsulta.Text = "Consulta";
             this.btnconsulta.UseVisualStyleBackColor = true;
@@ -286,10 +288,10 @@
             // 
             // btnalta
             // 
-            this.btnalta.Location = new System.Drawing.Point(124, 397);
+            this.btnalta.Location = new System.Drawing.Point(474, 337);
             this.btnalta.Margin = new System.Windows.Forms.Padding(4);
             this.btnalta.Name = "btnalta";
-            this.btnalta.Size = new System.Drawing.Size(100, 28);
+            this.btnalta.Size = new System.Drawing.Size(100, 69);
             this.btnalta.TabIndex = 73;
             this.btnalta.Text = "Alta";
             this.btnalta.UseVisualStyleBackColor = true;
@@ -297,10 +299,10 @@
             // 
             // btnbaja
             // 
-            this.btnbaja.Location = new System.Drawing.Point(232, 397);
+            this.btnbaja.Location = new System.Drawing.Point(712, 337);
             this.btnbaja.Margin = new System.Windows.Forms.Padding(4);
             this.btnbaja.Name = "btnbaja";
-            this.btnbaja.Size = new System.Drawing.Size(100, 28);
+            this.btnbaja.Size = new System.Drawing.Size(100, 69);
             this.btnbaja.TabIndex = 72;
             this.btnbaja.Text = "Baja";
             this.btnbaja.UseVisualStyleBackColor = true;
@@ -308,10 +310,10 @@
             // 
             // btnmodificacion
             // 
-            this.btnmodificacion.Location = new System.Drawing.Point(349, 397);
+            this.btnmodificacion.Location = new System.Drawing.Point(594, 337);
             this.btnmodificacion.Margin = new System.Windows.Forms.Padding(4);
             this.btnmodificacion.Name = "btnmodificacion";
-            this.btnmodificacion.Size = new System.Drawing.Size(100, 28);
+            this.btnmodificacion.Size = new System.Drawing.Size(100, 69);
             this.btnmodificacion.TabIndex = 71;
             this.btnmodificacion.Text = "Modificacion";
             this.btnmodificacion.UseVisualStyleBackColor = true;
@@ -320,23 +322,23 @@
             // cbnombre
             // 
             this.cbnombre.FormattingEnabled = true;
-            this.cbnombre.Location = new System.Drawing.Point(74, 42);
+            this.cbnombre.Location = new System.Drawing.Point(126, 93);
             this.cbnombre.Name = "cbnombre";
-            this.cbnombre.Size = new System.Drawing.Size(250, 24);
+            this.cbnombre.Size = new System.Drawing.Size(200, 24);
             this.cbnombre.TabIndex = 75;
             // 
             // cbapellido
             // 
             this.cbapellido.FormattingEnabled = true;
-            this.cbapellido.Location = new System.Drawing.Point(439, 42);
+            this.cbapellido.Location = new System.Drawing.Point(529, 55);
             this.cbapellido.Name = "cbapellido";
-            this.cbapellido.Size = new System.Drawing.Size(278, 24);
+            this.cbapellido.Size = new System.Drawing.Size(202, 24);
             this.cbapellido.TabIndex = 76;
             // 
             // cbidempleado
             // 
             this.cbidempleado.FormattingEnabled = true;
-            this.cbidempleado.Location = new System.Drawing.Point(124, 5);
+            this.cbidempleado.Location = new System.Drawing.Point(126, 58);
             this.cbidempleado.Name = "cbidempleado";
             this.cbidempleado.Size = new System.Drawing.Size(200, 24);
             this.cbidempleado.TabIndex = 77;
@@ -344,9 +346,9 @@
             // 
             // btnlimpiar
             // 
-            this.btnlimpiar.Location = new System.Drawing.Point(665, 354);
+            this.btnlimpiar.Location = new System.Drawing.Point(227, 374);
             this.btnlimpiar.Name = "btnlimpiar";
-            this.btnlimpiar.Size = new System.Drawing.Size(100, 27);
+            this.btnlimpiar.Size = new System.Drawing.Size(100, 31);
             this.btnlimpiar.TabIndex = 78;
             this.btnlimpiar.Text = "Limpiar";
             this.btnlimpiar.UseVisualStyleBackColor = true;
@@ -354,15 +356,15 @@
             // 
             // dtfechabaja
             // 
-            this.dtfechabaja.Location = new System.Drawing.Point(478, 298);
+            this.dtfechabaja.Location = new System.Drawing.Point(529, 285);
             this.dtfechabaja.Name = "dtfechabaja";
-            this.dtfechabaja.Size = new System.Drawing.Size(200, 22);
+            this.dtfechabaja.Size = new System.Drawing.Size(283, 22);
             this.dtfechabaja.TabIndex = 80;
             // 
             // lblfechabaja
             // 
             this.lblfechabaja.AutoSize = true;
-            this.lblfechabaja.Location = new System.Drawing.Point(346, 304);
+            this.lblfechabaja.Location = new System.Drawing.Point(427, 290);
             this.lblfechabaja.Name = "lblfechabaja";
             this.lblfechabaja.Size = new System.Drawing.Size(95, 16);
             this.lblfechabaja.TabIndex = 79;
@@ -370,7 +372,7 @@
             // 
             // btneditarprov
             // 
-            this.btneditarprov.Location = new System.Drawing.Point(713, 164);
+            this.btneditarprov.Location = new System.Drawing.Point(737, 167);
             this.btneditarprov.Name = "btneditarprov";
             this.btneditarprov.Size = new System.Drawing.Size(75, 23);
             this.btneditarprov.TabIndex = 81;
@@ -380,7 +382,7 @@
             // 
             // btneditarcat
             // 
-            this.btneditarcat.Location = new System.Drawing.Point(292, 205);
+            this.btneditarcat.Location = new System.Drawing.Point(334, 246);
             this.btneditarcat.Name = "btneditarcat";
             this.btneditarcat.Size = new System.Drawing.Size(75, 23);
             this.btneditarcat.TabIndex = 82;
@@ -390,7 +392,7 @@
             // 
             // btneditarrol
             // 
-            this.btneditarrol.Location = new System.Drawing.Point(713, 211);
+            this.btneditarrol.Location = new System.Drawing.Point(737, 206);
             this.btneditarrol.Name = "btneditarrol";
             this.btneditarrol.Size = new System.Drawing.Size(75, 23);
             this.btneditarrol.TabIndex = 83;
@@ -400,7 +402,7 @@
             // 
             // btneditarloc
             // 
-            this.btneditarloc.Location = new System.Drawing.Point(292, 159);
+            this.btneditarloc.Location = new System.Drawing.Point(334, 205);
             this.btneditarloc.Name = "btneditarloc";
             this.btneditarloc.Size = new System.Drawing.Size(75, 23);
             this.btneditarloc.TabIndex = 84;
@@ -410,7 +412,7 @@
             // 
             // btneditardeposito
             // 
-            this.btneditardeposito.Location = new System.Drawing.Point(330, 247);
+            this.btneditardeposito.Location = new System.Drawing.Point(334, 283);
             this.btneditardeposito.Name = "btneditardeposito";
             this.btneditardeposito.Size = new System.Drawing.Size(75, 23);
             this.btneditardeposito.TabIndex = 85;
@@ -418,11 +420,22 @@
             this.btneditardeposito.UseVisualStyleBackColor = true;
             this.btneditardeposito.Click += new System.EventHandler(this.button2_Click);
             // 
+            // lbldatos
+            // 
+            this.lbldatos.AutoSize = true;
+            this.lbldatos.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbldatos.Location = new System.Drawing.Point(12, 9);
+            this.lbldatos.Name = "lbldatos";
+            this.lbldatos.Size = new System.Drawing.Size(239, 25);
+            this.lbldatos.TabIndex = 94;
+            this.lbldatos.Text = "DATOS PERSONALES";
+            // 
             // Empleados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(838, 422);
+            this.Controls.Add(this.lbldatos);
             this.Controls.Add(this.btneditardeposito);
             this.Controls.Add(this.btneditarloc);
             this.Controls.Add(this.btneditarrol);
@@ -511,5 +524,6 @@
         private System.Windows.Forms.Button btneditarrol;
         private System.Windows.Forms.Button btneditarloc;
         private System.Windows.Forms.Button btneditardeposito;
+        private System.Windows.Forms.Label lbldatos;
     }
 }
