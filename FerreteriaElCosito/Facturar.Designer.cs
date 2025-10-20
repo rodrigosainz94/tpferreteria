@@ -61,10 +61,10 @@
             // 
             this.dgvfacturacion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvfacturacion.Location = new System.Drawing.Point(393, 57);
-            this.dgvfacturacion.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvfacturacion.Margin = new System.Windows.Forms.Padding(4);
             this.dgvfacturacion.Name = "dgvfacturacion";
             this.dgvfacturacion.RowHeadersWidth = 51;
-            this.dgvfacturacion.Size = new System.Drawing.Size(1168, 547);
+            this.dgvfacturacion.Size = new System.Drawing.Size(1021, 547);
             this.dgvfacturacion.TabIndex = 0;
             this.dgvfacturacion.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvfacturacion_CellEndEdit);
             this.dgvfacturacion.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvfacturacion_KeyDown);
@@ -72,7 +72,7 @@
             // lblfecha
             // 
             this.lblfecha.AutoSize = true;
-            this.lblfecha.Location = new System.Drawing.Point(1417, 30);
+            this.lblfecha.Location = new System.Drawing.Point(1256, 31);
             this.lblfecha.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblfecha.Name = "lblfecha";
             this.lblfecha.Size = new System.Drawing.Size(126, 16);
@@ -83,7 +83,7 @@
             // 
             this.txtcodigo.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.txtcodigo.Location = new System.Drawing.Point(124, 334);
-            this.txtcodigo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtcodigo.Margin = new System.Windows.Forms.Padding(4);
             this.txtcodigo.Name = "txtcodigo";
             this.txtcodigo.Size = new System.Drawing.Size(202, 22);
             this.txtcodigo.TabIndex = 2;
@@ -113,7 +113,7 @@
             // 
             this.btnagregar.BackColor = System.Drawing.Color.GreenYellow;
             this.btnagregar.Location = new System.Drawing.Point(49, 413);
-            this.btnagregar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnagregar.Margin = new System.Windows.Forms.Padding(4);
             this.btnagregar.Name = "btnagregar";
             this.btnagregar.Size = new System.Drawing.Size(117, 50);
             this.btnagregar.TabIndex = 6;
@@ -125,7 +125,7 @@
             // 
             this.btneliminar.BackColor = System.Drawing.Color.Salmon;
             this.btneliminar.Location = new System.Drawing.Point(211, 413);
-            this.btneliminar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btneliminar.Margin = new System.Windows.Forms.Padding(4);
             this.btneliminar.Name = "btneliminar";
             this.btneliminar.Size = new System.Drawing.Size(115, 50);
             this.btneliminar.TabIndex = 7;
@@ -136,8 +136,8 @@
             // txttotal
             // 
             this.txttotal.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.txttotal.Location = new System.Drawing.Point(1429, 642);
-            this.txttotal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txttotal.Location = new System.Drawing.Point(1282, 642);
+            this.txttotal.Margin = new System.Windows.Forms.Padding(4);
             this.txttotal.Name = "txttotal";
             this.txttotal.Size = new System.Drawing.Size(132, 22);
             this.txttotal.TabIndex = 8;
@@ -145,7 +145,7 @@
             // lbltotal
             // 
             this.lbltotal.AutoSize = true;
-            this.lbltotal.Location = new System.Drawing.Point(1357, 646);
+            this.lbltotal.Location = new System.Drawing.Point(1210, 646);
             this.lbltotal.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbltotal.Name = "lbltotal";
             this.lbltotal.Size = new System.Drawing.Size(57, 16);
@@ -180,7 +180,7 @@
             // 
             this.btnatras.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnatras.Location = new System.Drawing.Point(42, 614);
-            this.btnatras.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnatras.Margin = new System.Windows.Forms.Padding(4);
             this.btnatras.Name = "btnatras";
             this.btnatras.Size = new System.Drawing.Size(100, 50);
             this.btnatras.TabIndex = 12;
@@ -202,7 +202,7 @@
             // 
             this.cbconsumidorfinal.AutoSize = true;
             this.cbconsumidorfinal.Location = new System.Drawing.Point(51, 195);
-            this.cbconsumidorfinal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbconsumidorfinal.Margin = new System.Windows.Forms.Padding(4);
             this.cbconsumidorfinal.Name = "cbconsumidorfinal";
             this.cbconsumidorfinal.Size = new System.Drawing.Size(161, 20);
             this.cbconsumidorfinal.TabIndex = 15;
@@ -224,7 +224,7 @@
             // btnfacturar
             // 
             this.btnfacturar.Location = new System.Drawing.Point(169, 614);
-            this.btnfacturar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnfacturar.Margin = new System.Windows.Forms.Padding(4);
             this.btnfacturar.Name = "btnfacturar";
             this.btnfacturar.Size = new System.Drawing.Size(157, 50);
             this.btnfacturar.TabIndex = 17;
@@ -246,7 +246,7 @@
             // btncliente
             // 
             this.btncliente.Location = new System.Drawing.Point(50, 223);
-            this.btncliente.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btncliente.Margin = new System.Windows.Forms.Padding(4);
             this.btncliente.Name = "btncliente";
             this.btncliente.Size = new System.Drawing.Size(276, 57);
             this.btncliente.TabIndex = 19;
@@ -327,7 +327,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.ClientSize = new System.Drawing.Size(1617, 688);
+            this.ClientSize = new System.Drawing.Size(1430, 688);
             this.Controls.Add(this.txtNuevoPrecio);
             this.Controls.Add(this.lblNuevoPrecio);
             this.Controls.Add(this.lblDescuento);
@@ -353,7 +353,7 @@
             this.Controls.Add(this.lblfecha);
             this.Controls.Add(this.dgvfacturacion);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Facturar";
             this.Text = "Facturar";
             this.Load += new System.EventHandler(this.Facturar_Load);
