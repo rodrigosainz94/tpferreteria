@@ -174,20 +174,77 @@ namespace FerreteriaElCosito
         {
             if (dgvProductos.CurrentRow != null)
             {
-                int idProducto = Convert.ToInt32(dgvProductos.CurrentRow.Cells["IdProducto"].Value);
-
-                // Abrimos el form de edición pasando el ID
-                ProductosEdicion frm = new ProductosEdicion(idProducto);
-                if (frm.ShowDialog() == DialogResult.OK)
+                try
                 {
-                    CargarProductos(); // refresca el grid después de guardar
+                    int idProducto = Convert.ToInt32(dgvProductos.CurrentRow.Cells["IdProducto"].Value);
+
+                    // Validar campos básicos antes de actualizar
+                    if (string.IsNullOrWhiteSpace(txtnombreproducto.Text) ||
+                        string.IsNullOrWhiteSpace(txtdescripcionprod.Text) ||
+                        cbcategoria.SelectedIndex == -1 ||
+                        cbproveedor.SelectedIndex == -1 ||
+                        cbUnidadMedida.SelectedIndex == -1 ||
+                        string.IsNullOrWhiteSpace(txtprecio.Text) ||
+                        string.IsNullOrWhiteSpace(txtcantidad.Text) ||
+                        string.IsNullOrWhiteSpace(txtstockcritico.Text))
+                    {
+                        MessageBox.Show("⚠️ Complete todos los campos antes de actualizar.");
+                        return;
+                    }
+
+                    using (var conexion = ConexionBD.ObtenerConexion())
+                    {
+                        string query = @"UPDATE productos SET 
+                                NombreProducto = @NombreProducto,
+                                Descripcion = @Descripcion,
+                                idCategoria = @idCategoria,
+                                idProveedor = @idProveedor,
+                                UnidadMedida = @UnidadMedida,
+                                PrecioUnitario = @Precio,
+                                Cantidad = @Cantidad,
+                                StockCritico = @StockCritico,
+                                PorcentajeDto = @PorcentajeDto
+                                WHERE IdProducto = @IdProducto";
+
+                        using (var cmd = new MySqlCommand(query, conexion))
+                        {
+                            cmd.Parameters.AddWithValue("@NombreProducto", txtnombreproducto.Text);
+                            cmd.Parameters.AddWithValue("@Descripcion", txtdescripcionprod.Text);
+                            cmd.Parameters.AddWithValue("@idCategoria", cbcategoria.SelectedValue);
+                            cmd.Parameters.AddWithValue("@idProveedor", cbproveedor.SelectedValue);
+                            cmd.Parameters.AddWithValue("@UnidadMedida", cbUnidadMedida.SelectedValue);
+                            cmd.Parameters.AddWithValue("@Precio", Convert.ToDecimal(txtprecio.Text));
+                            cmd.Parameters.AddWithValue("@Cantidad", Convert.ToInt32(txtcantidad.Text));
+                            cmd.Parameters.AddWithValue("@StockCritico", Convert.ToInt32(txtstockcritico.Text));
+
+                            // Si el campo descuento está vacío, se guarda 0
+                            decimal descuento = 0;
+                            if (!string.IsNullOrWhiteSpace(txtdescuento.Text))
+                                descuento = Convert.ToDecimal(txtdescuento.Text);
+
+                            cmd.Parameters.AddWithValue("@PorcentajeDto", descuento);
+                            cmd.Parameters.AddWithValue("@IdProducto", idProducto);
+
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+
+                    MessageBox.Show("✅ Producto actualizado correctamente.");
+
+                    // Refrescar la grilla
+                    CargarProductos();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al actualizar: " + ex.Message);
                 }
             }
             else
             {
-                MessageBox.Show("Seleccione un producto para editar.");
+                MessageBox.Show("Seleccione un producto de la lista para editar.");
             }
         }
+
 
         private void btnguardar_Click(object sender, EventArgs e)
         {
@@ -200,7 +257,8 @@ namespace FerreteriaElCosito
                     cbproveedor.SelectedIndex == -1 ||
                     cbUnidadMedida.SelectedIndex == -1 ||
                     string.IsNullOrWhiteSpace(txtprecio.Text) ||
-                    string.IsNullOrWhiteSpace(txtcantidad.Text))
+                    string.IsNullOrWhiteSpace(txtcantidad.Text) ||
+                    string.IsNullOrWhiteSpace(txtstockcritico.Text))
                 {
                     MessageBox.Show("⚠️ Complete todos los campos antes de guardar.");
                     return;
@@ -209,8 +267,8 @@ namespace FerreteriaElCosito
                 using (var conexion = ConexionBD.ObtenerConexion())
                 {
                     string query = @"INSERT INTO productos 
-                             (NombreProducto, Descripcion, idCategoria, idProveedor, UnidadMedida, PrecioUnitario, Cantidad)
-                             VALUES (@NombreProducto, @Descripcion, @idCategoria, @idProveedor, @UnidadMedida, @Precio, @Cantidad)";
+                             (NombreProducto, Descripcion, idCategoria, idProveedor, UnidadMedida, PrecioUnitario, Cantidad, StockCritico, PorcentajeDto)
+                             VALUES (@NombreProducto, @Descripcion, @idCategoria, @idProveedor, @UnidadMedida, @Precio, @Cantidad, @StockCritico, @PorcentajeDto)";
 
                     using (var cmd = new MySqlCommand(query, conexion))
                     {
@@ -221,6 +279,8 @@ namespace FerreteriaElCosito
                         cmd.Parameters.AddWithValue("@UnidadMedida", cbUnidadMedida.SelectedValue);
                         cmd.Parameters.AddWithValue("@Precio", Convert.ToDecimal(txtprecio.Text));
                         cmd.Parameters.AddWithValue("@Cantidad", Convert.ToInt32(txtcantidad.Text));
+                        cmd.Parameters.AddWithValue("@StockCritico", Convert.ToInt32(txtstockcritico.Text));
+                        cmd.Parameters.AddWithValue("@PorcentajeDto", string.IsNullOrWhiteSpace(txtdescuento.Text) ? 0 : Convert.ToDecimal(txtdescuento.Text));
 
                         cmd.ExecuteNonQuery();
                     }
@@ -236,6 +296,8 @@ namespace FerreteriaElCosito
                 txtdescripcionprod.Clear();
                 txtprecio.Clear();
                 txtcantidad.Clear();
+                txtstockcritico.Clear();
+                txtdescuento.Clear();
                 cbcategoria.SelectedIndex = -1;
                 cbproveedor.SelectedIndex = -1;
                 cbUnidadMedida.SelectedIndex = -1;
@@ -246,6 +308,56 @@ namespace FerreteriaElCosito
             }
         }
 
+        private void dgvProductos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow fila = dgvProductos.Rows[e.RowIndex];
+
+                txtnombreproducto.Text = fila.Cells["NombreProducto"].Value.ToString();
+                txtdescripcionprod.Text = fila.Cells["Descripcion"].Value.ToString();
+                txtprecio.Text = fila.Cells["PrecioUnitario"].Value.ToString();
+                txtcantidad.Text = fila.Cells["Cantidad"].Value.ToString();
+                txtstockcritico.Text = fila.Cells["StockCritico"].Value.ToString();
+                txtdescuento.Text = fila.Cells["PorcentajeDto"].Value.ToString();
+
+                // Si querés también seleccionar los combos correspondientes
+                if (fila.Cells["idCategoria"].Value != DBNull.Value)
+                    cbcategoria.SelectedValue = fila.Cells["idCategoria"].Value;
+
+                if (fila.Cells["idProveedor"].Value != DBNull.Value)
+                    cbproveedor.SelectedValue = fila.Cells["idProveedor"].Value;
+
+                if (fila.Cells["UnidadMedida"].Value != DBNull.Value)
+                    cbUnidadMedida.SelectedValue = fila.Cells["UnidadMedida"].Value;
+            }
+        }
+
+        private void btnlimpiar_Click(object sender, EventArgs e)
+        {
+            // Recorre todos los controles del formulario
+            foreach (Control control in this.Controls)
+            {
+                if (control is TextBox)
+                {
+                    // Limpia el texto de los TextBox
+                    control.Text = string.Empty;
+                }
+                else if (control is ComboBox combo)
+                {
+                    // Limpia la selección de los ComboBox
+                    combo.SelectedIndex = -1;
+                    combo.Text = string.Empty;
+                }
+            }
+
+            // Limpia la selección del DataGridView (opcional)
+            dgvProductos.ClearSelection();
+        }
 
     }
 }
+
+
+
+

@@ -51,6 +51,7 @@
             this.txtdescuento = new System.Windows.Forms.TextBox();
             this.lblstockcritico = new System.Windows.Forms.Label();
             this.txtstockcritico = new System.Windows.Forms.TextBox();
+            this.btnlimpiar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,6 +73,7 @@
             this.dgvProductos.RowHeadersWidth = 51;
             this.dgvProductos.Size = new System.Drawing.Size(556, 400);
             this.dgvProductos.TabIndex = 29;
+            this.dgvProductos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductos_CellClick);
             // 
             // btnguardar
             // 
@@ -106,7 +108,7 @@
             this.cbproveedor.FormattingEnabled = true;
             this.cbproveedor.Location = new System.Drawing.Point(114, 167);
             this.cbproveedor.Name = "cbproveedor";
-            this.cbproveedor.Size = new System.Drawing.Size(121, 21);
+            this.cbproveedor.Size = new System.Drawing.Size(157, 21);
             this.cbproveedor.TabIndex = 23;
             // 
             // label4
@@ -124,7 +126,7 @@
             this.cbcategoria.FormattingEnabled = true;
             this.cbcategoria.Location = new System.Drawing.Point(114, 133);
             this.cbcategoria.Name = "cbcategoria";
-            this.cbcategoria.Size = new System.Drawing.Size(121, 21);
+            this.cbcategoria.Size = new System.Drawing.Size(157, 21);
             this.cbcategoria.TabIndex = 21;
             // 
             // label3
@@ -196,7 +198,7 @@
             this.cbUnidadMedida.FormattingEnabled = true;
             this.cbUnidadMedida.Location = new System.Drawing.Point(114, 204);
             this.cbUnidadMedida.Name = "cbUnidadMedida";
-            this.cbUnidadMedida.Size = new System.Drawing.Size(121, 21);
+            this.cbUnidadMedida.Size = new System.Drawing.Size(157, 21);
             this.cbUnidadMedida.TabIndex = 34;
             // 
             // label6
@@ -259,12 +261,23 @@
             this.txtstockcritico.Size = new System.Drawing.Size(157, 20);
             this.txtstockcritico.TabIndex = 39;
             // 
+            // btnlimpiar
+            // 
+            this.btnlimpiar.Location = new System.Drawing.Point(151, 385);
+            this.btnlimpiar.Name = "btnlimpiar";
+            this.btnlimpiar.Size = new System.Drawing.Size(75, 23);
+            this.btnlimpiar.TabIndex = 41;
+            this.btnlimpiar.Text = "LIMPIAR";
+            this.btnlimpiar.UseVisualStyleBackColor = true;
+            this.btnlimpiar.Click += new System.EventHandler(this.btnlimpiar_Click);
+            // 
             // Productos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(854, 484);
+            this.Controls.Add(this.btnlimpiar);
             this.Controls.Add(this.lblstockcritico);
             this.Controls.Add(this.txtstockcritico);
             this.Controls.Add(this.lbldescuento);
@@ -322,5 +335,6 @@
         private System.Windows.Forms.TextBox txtdescuento;
         private System.Windows.Forms.Label lblstockcritico;
         private System.Windows.Forms.TextBox txtstockcritico;
+        private System.Windows.Forms.Button btnlimpiar;
     }
 }
