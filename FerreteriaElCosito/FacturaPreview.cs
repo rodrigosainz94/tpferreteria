@@ -142,26 +142,50 @@ namespace FerreteriaElCosito
                 // --- 1. Verificación de Stock ---
                 foreach (DataRow fila in this.itemsFactura.Rows)
                 {
-                    string queryStock = "SELECT Cantidad, NombreProducto FROM productos WHERE IdProducto = @IdProducto FOR UPDATE";
+                    string queryStock = "SELECT Cantidad, NombreProducto, StockCritico FROM productos WHERE IdProducto = @IdProducto FOR UPDATE";
                     MySqlCommand cmdStock = new MySqlCommand(queryStock, conn);
                     cmdStock.Parameters.AddWithValue("@IdProducto", fila["IdProducto"]);
+
                     string nombreProd = "";
                     int stockActual = 0;
+                    int stockCritico = 0;
+
                     using (var reader = cmdStock.ExecuteReader())
                     {
                         if (reader.Read())
                         {
                             stockActual = reader.GetInt32("Cantidad");
                             nombreProd = reader.GetString("NombreProducto");
+                            stockCritico = reader.GetInt32("StockCritico");
                         }
                     }
+
                     int cantidadPedida = Convert.ToInt32(fila["Cantidad"]);
+
+                    // 🔹 Verificar stock insuficiente
                     if (stockActual < cantidadPedida)
                     {
-                        MessageBox.Show($"Stock insuficiente para el producto '{nombreProd}'.\nStock disponible: {stockActual} | Cantidad solicitada: {cantidadPedida}", "Error de Stock", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show($"Stock insuficiente para el producto '{nombreProd}'.\nStock disponible: {stockActual} | Cantidad solicitada: {cantidadPedida}",
+                            "Error de Stock", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return false;
                     }
+
+                    // 🔹 Calcular el nuevo stock luego de la venta
+                    int nuevoStock = stockActual - cantidadPedida;
+
+                    // 🔹 Mostrar advertencia si queda bajo de stock
+                    if (nuevoStock <= stockCritico)
+                    {
+                        MessageBox.Show($"⚠ El producto '{nombreProd}' está BAJO DE STOCK.\n" +
+                                        $"Stock actual: {stockActual}\n" +
+                                        $"Stock crítico: {stockCritico}\n" +
+                                        $"Debería reponerse pronto.",
+                                        "Advertencia de Stock Bajo",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Warning);
+                    }
                 }
+
 
                 // --- 2. Si hay stock, iniciamos la transacción ---
                 transaction = conn.BeginTransaction();
