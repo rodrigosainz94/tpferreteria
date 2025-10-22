@@ -93,20 +93,52 @@ namespace FerreteriaElCosito
             return numero;
         }
 
+        // Métodos auxiliares para la carga de comprobantes (utilizan una conexión abierta)
+        private int ObtenerIdTipoComprobanteConexion(string denominacion, MySqlConnection conn)
+        {
+            int idTipo = 0;
+            string query = "SELECT IdTipoComprobante FROM tipocomprobante WHERE DenominacionComprobante = @denominacion";
+            using (var cmd = new MySqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@denominacion", denominacion);
+                object result = cmd.ExecuteScalar();
+                if (result != null) idTipo = Convert.ToInt32(result);
+            }
+            return idTipo;
+        }
+
+        private int GenerarNumeroComprobanteConexion(int idTipoComprobante, MySqlConnection conn)
+        {
+            int numero = 0;
+            string query = "SELECT IFNULL(MAX(NroComprobante),0) FROM compras WHERE IdTipoComprobante=@idTipoComprobante";
+            using (var cmd = new MySqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@idTipoComprobante", idTipoComprobante);
+                object result = cmd.ExecuteScalar();
+                if (result != null && result != DBNull.Value)
+                {
+                    numero = Convert.ToInt32(result) + 1;
+                }
+                else
+                {
+                    numero = 1;
+                }
+            }
+            return numero;
+        }
+
         // ================= CARGAR COMBOS (con gestión de conexión propia) =================
         private void CargarProveedores()
         {
             cargandoCombos = true;
             using (var conn = ConexionBD.ObtenerConexion())
             {
-                // Consulta modificada para concatenar Nombre y Apellido
                 string query = "SELECT IdProveedor, CONCAT(Nombre, ' ', Apellido) AS NombreCompleto FROM proveedores";
                 MySqlDataAdapter da = new MySqlDataAdapter(query, conn);
                 dtProveedores = new DataTable();
                 da.Fill(dtProveedores);
 
                 cbproveedor.DataSource = dtProveedores;
-                // El campo a mostrar ahora es 'NombreCompleto'
                 cbproveedor.DisplayMember = "NombreCompleto";
                 cbproveedor.ValueMember = "IdProveedor";
                 cbproveedor.SelectedIndex = -1;
@@ -124,14 +156,12 @@ namespace FerreteriaElCosito
             cargandoCombos = true;
             using (var conn = ConexionBD.ObtenerConexion())
             {
-                // Consulta modificada para concatenar Nombre y Apellido
                 string query = "SELECT IdEmpleado, CONCAT(Nombre, ' ', Apellido) AS NombreCompleto FROM empleado";
                 MySqlDataAdapter da = new MySqlDataAdapter(query, conn);
                 dtEmpleados = new DataTable();
                 da.Fill(dtEmpleados);
 
                 cbempleado.DataSource = dtEmpleados;
-                // El campo a mostrar ahora es 'NombreCompleto'
                 cbempleado.DisplayMember = "NombreCompleto";
                 cbempleado.ValueMember = "IdEmpleado";
                 cbempleado.SelectedIndex = -1;
@@ -322,7 +352,7 @@ namespace FerreteriaElCosito
             }
         }
 
-        // ================= GUARDAR COMPRA =================
+        // ================= GUARDAR COMPRA (AHORA NOTA DE PEDIDO) =================
         private void btnhacerpedido_Click(object sender, EventArgs e)
         {
             if (dataGridView1.Rows.Count == 0 || (dataGridView1.Rows.Count == 1 && dataGridView1.Rows[0].IsNewRow))
@@ -343,149 +373,110 @@ namespace FerreteriaElCosito
                 return;
             }
 
+            int idCompra = 0;
+            MySqlConnection conn = null;
+            MySqlTransaction transaction = null;
+
             try
             {
-                int idCompra = 0;
+                conn = ConexionBD.ObtenerConexion();
 
-                using (MySqlConnection conn = ConexionBD.ObtenerConexion())
+                // Usamos el objeto de conexión devuelto que ya está abierto
+                transaction = conn.BeginTransaction();
+
+                int idTipoComprobante = Convert.ToInt32(cbtcomprobante.SelectedValue);
+                string nombreTipoComprobante = cbtcomprobante.Text;
+                int nuevoNumero = GenerarNumeroComprobanteConexion(idTipoComprobante, conn);
+                txtnrocomprobante.Text = nuevoNumero.ToString();
+
+                // --- CONSULTA CORREGIDA: Incluye explícitamente la columna ESTADO como 'Pendiente' ---
+                string queryInsert = @"INSERT INTO compras 
+                    (IdProveedor, IdEmpleado, IdTipoComprobante, TipoComprobante, NroComprobante, NumeroComprobante, FechaCompra, Total, Estado) 
+                    VALUES (@IdProveedor, @IdEmpleado, @IdTipoComprobante, @TipoComprobante, @NroComprobante, @NumeroComprobante, @FechaCompra, @Total, 'Pendiente');
+                    SELECT LAST_INSERT_ID();";
+
+                using (MySqlCommand cmdCompra = new MySqlCommand(queryInsert, conn, transaction))
                 {
-                    int idTipoComprobante = Convert.ToInt32(cbtcomprobante.SelectedValue);
-                    string nombreTipoComprobante = cbtcomprobante.Text;
-                    int nuevoNumero = GenerarNumeroComprobanteConexion(idTipoComprobante, conn);
-                    txtnrocomprobante.Text = nuevoNumero.ToString();
+                    cmdCompra.Parameters.AddWithValue("@IdProveedor", cbidproveedor.SelectedValue);
+                    cmdCompra.Parameters.AddWithValue("@IdEmpleado", cbidempleado.SelectedValue);
+                    cmdCompra.Parameters.AddWithValue("@IdTipoComprobante", idTipoComprobante);
+                    cmdCompra.Parameters.AddWithValue("@TipoComprobante", nombreTipoComprobante);
+                    cmdCompra.Parameters.AddWithValue("@NroComprobante", nuevoNumero);
+                    cmdCompra.Parameters.AddWithValue("@NumeroComprobante", nuevoNumero.ToString());
+                    cmdCompra.Parameters.AddWithValue("@FechaCompra", dtpfecha.Value);
 
-                    string queryInsert = @"INSERT INTO compras 
-                (IdProveedor, IdEmpleado, IdTipoComprobante, TipoComprobante, NroComprobante, NumeroComprobante, FechaCompra, Total) 
-                VALUES (@IdProveedor, @IdEmpleado, @IdTipoComprobante, @TipoComprobante, @NroComprobante, @NumeroComprobante, @FechaCompra, @Total)";
-
-                    using (MySqlCommand cmdCompra = new MySqlCommand(queryInsert, conn))
+                    decimal total = 0;
+                    foreach (DataGridViewRow row in dataGridView1.Rows)
                     {
-                        cmdCompra.Parameters.AddWithValue("@IdProveedor", cbidproveedor.SelectedValue);
-                        cmdCompra.Parameters.AddWithValue("@IdEmpleado", cbidempleado.SelectedValue);
-                        cmdCompra.Parameters.AddWithValue("@IdTipoComprobante", idTipoComprobante);
-                        cmdCompra.Parameters.AddWithValue("@TipoComprobante", nombreTipoComprobante);
-                        cmdCompra.Parameters.AddWithValue("@NroComprobante", nuevoNumero);
-                        cmdCompra.Parameters.AddWithValue("@NumeroComprobante", nuevoNumero.ToString());
-                        cmdCompra.Parameters.AddWithValue("@FechaCompra", dtpfecha.Value);
-
-                        decimal total = 0;
-                        foreach (DataGridViewRow row in dataGridView1.Rows)
+                        if (!row.IsNewRow && row.Cells["Subtotal"].Value != null && decimal.TryParse(row.Cells["Subtotal"].Value.ToString(), out decimal subtotal))
                         {
-                            if (!row.IsNewRow)
-                            {
-                                object subtotalValue = row.Cells["Subtotal"].Value;
-                                if (subtotalValue != null && decimal.TryParse(subtotalValue.ToString(), out decimal subtotal))
-                                {
-                                    total += subtotal;
-                                }
-                                else
-                                {
-                                    MessageBox.Show("Error de dato en el subtotal. Verifique los productos en la grilla.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                    return;
-                                }
-                            }
+                            total += subtotal;
                         }
-                        cmdCompra.Parameters.AddWithValue("@Total", total);
-                        cmdCompra.ExecuteNonQuery();
                     }
+                    cmdCompra.Parameters.AddWithValue("@Total", total);
 
-                    object result = new MySqlCommand("SELECT LAST_INSERT_ID()", conn).ExecuteScalar();
-                    if (result != null && result != DBNull.Value && long.TryParse(result.ToString(), out long lastInsertedId))
+                    object result = cmdCompra.ExecuteScalar();
+                    if (result != null && result != DBNull.Value && int.TryParse(result.ToString(), out idCompra))
                     {
-                        idCompra = (int)lastInsertedId;
+                        // Inserción de la cabecera exitosa
                     }
                     else
                     {
-                        MessageBox.Show("No se pudo obtener el ID de la compra. La inserción falló.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
+                        throw new Exception("No se pudo obtener el ID de la compra. La inserción de cabecera falló.");
                     }
+                }
 
-                    // La corrección está aquí: el nombre de la columna y el parámetro coinciden ahora
-                    string queryDetalle = @"INSERT INTO detallecompra 
-                (IdCompra, IdProducto, Cantidad, PrecioUnitario, Subtotal) 
-                VALUES (@IdCompra, @IdProducto, @Cantidad, @PrecioUnitario, @Subtotal)";
+                // Inserción del detalle de la compra
+                string queryDetalle = @"INSERT INTO detallecompra 
+                    (IdCompra, IdProducto, Cantidad, PrecioUnitario, Subtotal) 
+                    VALUES (@IdCompra, @IdProducto, @Cantidad, @PrecioUnitario, @Subtotal)";
 
-                    foreach (DataGridViewRow row in dataGridView1.Rows)
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    if (!row.IsNewRow)
                     {
-                        if (!row.IsNewRow)
+                        using (MySqlCommand cmdDetalle = new MySqlCommand(queryDetalle, conn, transaction))
                         {
-                            using (MySqlCommand cmdDetalle = new MySqlCommand(queryDetalle, conn))
+                            if (row.Cells["IdProducto"].Value == null || !int.TryParse(row.Cells["IdProducto"].Value.ToString(), out int idProducto) ||
+                                row.Cells["Cantidad"].Value == null || !int.TryParse(row.Cells["Cantidad"].Value.ToString(), out int cantidad) ||
+                                row.Cells["PrecioUnitario"].Value == null || !decimal.TryParse(row.Cells["PrecioUnitario"].Value.ToString(), out decimal precio) ||
+                                row.Cells["Subtotal"].Value == null || !decimal.TryParse(row.Cells["Subtotal"].Value.ToString(), out decimal subtotalValue))
                             {
-                                if (row.Cells["IdProducto"].Value == null ||
-                                    row.Cells["Cantidad"].Value == null ||
-                                    row.Cells["PrecioUnitario"].Value == null ||
-                                    row.Cells["Subtotal"].Value == null)
-                                {
-                                    MessageBox.Show("Fila incompleta en la grilla. No se pudo guardar el detalle.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                    return;
-                                }
-
-                                if (!int.TryParse(row.Cells["IdProducto"].Value.ToString(), out int idProducto) ||
-                                    !int.TryParse(row.Cells["Cantidad"].Value.ToString(), out int cantidad) ||
-                                    !decimal.TryParse(row.Cells["PrecioUnitario"].Value.ToString(), out decimal precio) ||
-                                    !decimal.TryParse(row.Cells["Subtotal"].Value.ToString(), out decimal subtotalValue)) // Cambié el nombre de la variable aquí
-                                {
-                                    MessageBox.Show("Error de conversión en una de las filas de la grilla. Los datos no son numéricos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                    return;
-                                }
-
-                                cmdDetalle.Parameters.AddWithValue("@IdCompra", idCompra);
-                                cmdDetalle.Parameters.AddWithValue("@IdProducto", idProducto);
-                                cmdDetalle.Parameters.AddWithValue("@Cantidad", cantidad);
-                                cmdDetalle.Parameters.AddWithValue("@PrecioUnitario", precio);
-                                cmdDetalle.Parameters.AddWithValue("@Subtotal", subtotalValue); // El parámetro y el valor coinciden
-                                cmdDetalle.ExecuteNonQuery();
+                                throw new Exception("Error de dato en el detalle: Verifique que todos los campos sean válidos.");
                             }
+
+                            cmdDetalle.Parameters.AddWithValue("@IdCompra", idCompra);
+                            cmdDetalle.Parameters.AddWithValue("@IdProducto", idProducto);
+                            cmdDetalle.Parameters.AddWithValue("@Cantidad", cantidad);
+                            cmdDetalle.Parameters.AddWithValue("@PrecioUnitario", precio);
+                            cmdDetalle.Parameters.AddWithValue("@Subtotal", subtotalValue);
+                            cmdDetalle.ExecuteNonQuery();
                         }
                     }
-
-                    MessageBox.Show("Nota de pedido generada correctamente con número: " + nuevoNumero, "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    frmnotadepedido frm = new frmnotadepedido(idCompra);
-                    frm.Show();
-
-                    tablaDetalle.Clear();
-                    txtnrocomprobante.Text = GenerarNumeroComprobante(idTipoComprobante).ToString();
                 }
+
+                transaction.Commit();
+
+                MessageBox.Show("Nota de pedido generada correctamente con número: " + nuevoNumero, "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Abrir el formulario de visualización de NP
+                frmnotadepedido frm = new frmnotadepedido(idCompra);
+                frm.Show();
+
+                // Limpiar y preparar para una nueva NP
+                tablaDetalle.Clear();
+                int idTipoRefresh = ObtenerIdTipoComprobante("Nota de pedido");
+                txtnrocomprobante.Text = GenerarNumeroComprobante(idTipoRefresh).ToString();
             }
             catch (Exception ex)
             {
+                transaction?.Rollback();
                 MessageBox.Show("Error al generar la nota de pedido: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        // Métodos que reciben una conexión ya abierta
-        private int ObtenerIdTipoComprobanteConexion(string denominacion, MySqlConnection conn)
-        {
-            int idTipo = 0;
-            string query = "SELECT IdTipoComprobante FROM tipocomprobante WHERE DenominacionComprobante = @denominacion";
-            using (var cmd = new MySqlCommand(query, conn))
+            finally
             {
-                cmd.Parameters.AddWithValue("@denominacion", denominacion);
-                object result = cmd.ExecuteScalar();
-                if (result != null) idTipo = Convert.ToInt32(result);
+                conn?.Close();
             }
-            return idTipo;
-        }
-
-        private int GenerarNumeroComprobanteConexion(int idTipoComprobante, MySqlConnection conn)
-        {
-            int numero = 0;
-            string query = "SELECT IFNULL(MAX(NroComprobante),0) FROM compras WHERE IdTipoComprobante=@idTipoComprobante";
-            using (var cmd = new MySqlCommand(query, conn))
-            {
-                cmd.Parameters.AddWithValue("@idTipoComprobante", idTipoComprobante);
-                object result = cmd.ExecuteScalar();
-                if (result != null && result != DBNull.Value)
-                {
-                    numero = Convert.ToInt32(result) + 1;
-                }
-                else
-                {
-                    numero = 1;
-                }
-            }
-            return numero;
         }
 
         // ================= LIMPIAR FORMULARIO =================
@@ -512,69 +503,14 @@ namespace FerreteriaElCosito
             this.Close();
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // Puedes dejarlo vacío o cargar datos según tu necesidad
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-            // Normalmente no se usa el Click de una etiqueta
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            // Captura clic en DataGridView si necesitas
-        }
-
-        private void btnconsultanp_Click(object sender, EventArgs e)
-        {
-            ConsultaNotadePedido frmConsulta = new ConsultaNotadePedido();
-            frmConsulta.ShowDialog();
-        }
-
-        private void btnconsultaproveedor_Click(object sender, EventArgs e)
-        {
-            // Instancia el formulario de consulta de proveedores
-            frmcosultaproveedor frmConsultaProv = new frmcosultaproveedor();
-
-            // Muestra el formulario como un diálogo modal
-            if (frmConsultaProv.ShowDialog() == DialogResult.OK)
-            {
-                // Si el usuario seleccionó un proveedor, actualiza los combos
-                int idSeleccionado = frmConsultaProv.IdProveedorSeleccionado;
-                string nombreSeleccionado = frmConsultaProv.NombreProveedorSeleccionado;
-
-                cbidproveedor.SelectedValue = idSeleccionado;
-                cbproveedor.SelectedValue = idSeleccionado;
-            }
-        }
-
-        private void btnconsultaproducto_Click(object sender, EventArgs e)
-        {
-            // Instancia el formulario de consulta de productos
-            ConsultaProducto frmConsultaProd = new ConsultaProducto();
-
-            // Muestra el formulario como un diálogo modal
-            if (frmConsultaProd.ShowDialog() == DialogResult.OK)
-            {
-                // Si el usuario seleccionó un producto, actualiza los combos
-                int idSeleccionado = frmConsultaProd.IdProductoSeleccionado;
-                string nombreSeleccionado = frmConsultaProd.NombreProductoSeleccionado;
-
-                cbidproducto.SelectedValue = idSeleccionado;
-                cbproducto.SelectedValue = idSeleccionado;
-            }
-        }
-
-        private void lblnrocomprobante_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtnrocomprobante_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        // ================= OTROS EVENTOS Y LÓGICA =================
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e) { }
+        private void label1_Click(object sender, EventArgs e) { }
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
+        private void btnconsultanp_Click(object sender, EventArgs e) { }
+        private void btnconsultaproveedor_Click(object sender, EventArgs e) { }
+        private void btnconsultaproducto_Click(object sender, EventArgs e) { }
+        private void lblnrocomprobante_Click(object sender, EventArgs e) { }
+        private void txtnrocomprobante_TextChanged(object sender, EventArgs e) { }
     }
 }

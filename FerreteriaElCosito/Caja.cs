@@ -23,6 +23,10 @@ namespace FerreteriaElCosito
 
         private void Caja_Load(object sender, EventArgs e)
         {
+            // Establecer el formato de fecha para la visualización
+            dtpfecha.Format = DateTimePickerFormat.Custom;
+            dtpfecha.CustomFormat = "dd/MM/yyyy";
+
             CargarDatosParaFecha(dtpfecha.Value);
             if (txtarqueo != null)
             {
@@ -32,14 +36,59 @@ namespace FerreteriaElCosito
             {
                 txtsdoinicial.TextChanged += txtsdoinicial_TextChanged;
             }
+            // Conexión del evento Click para el botón de Cierre de Caja
+            this.btncierrecaja.Click += new System.EventHandler(this.btnCerrarCaja_Click);
+        }
+
+        private void VerificarEstadoDeCaja(DateTime fecha)
+        {
+            bool cajaCerrada = _comprasManager.VerificarCajaCerrada(fecha);
+            if (cajaCerrada)
+            {
+                MessageBox.Show("La caja para esta fecha ya fue cerrada. Los datos no son editables.", "Caja Cerrada", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                btncierrecaja.Enabled = false;
+                txtsdoinicial.ReadOnly = true;
+                txtarqueo.ReadOnly = true;
+            }
+            else
+            {
+                btncierrecaja.Enabled = true;
+                txtsdoinicial.ReadOnly = false;
+                txtarqueo.ReadOnly = false;
+            }
         }
 
         private void CargarDatosParaFecha(DateTime fecha)
         {
             try
             {
-                _saldoInicial = _comprasManager.ObtenerSaldoInicialDelDia(fecha);
-                txtsdoinicial.Text = _saldoInicial.ToString("N2");
+                VerificarEstadoDeCaja(fecha);
+
+                // Si la caja ya está cerrada, cargamos los valores históricos guardados
+                if (_comprasManager.VerificarCajaCerrada(fecha))
+                {
+                    DataTable dtCajaCerrada = _comprasManager.ObtenerDatosCajaCerrada(fecha);
+                    if (dtCajaCerrada.Rows.Count > 0)
+                    {
+                        DataRow row = dtCajaCerrada.Rows[0];
+                        // Muestra el Saldo Inicial guardado para ese día
+                        _saldoInicial = Convert.ToDecimal(row["SaldoInicial"]);
+                        txtsdoinicial.Text = _saldoInicial.ToString("N2");
+                        // Muestra el Saldo Final guardado como el Arqueo
+                        txtarqueo.Text = Convert.ToDecimal(row["SaldoFinal"]).ToString("N2");
+                    }
+                }
+                // Si la caja está abierta o no tiene registro para hoy, cargamos el saldo inicial del día anterior
+                else
+                {
+                    // Si el usuario ya lo modificó manualmente, lo conservamos. Si no, se trae de la BD.
+                    if (!decimal.TryParse(txtsdoinicial.Text, out _saldoInicial))
+                    {
+                        _saldoInicial = _comprasManager.ObtenerSaldoInicialDelDia(fecha);
+                        txtsdoinicial.Text = _saldoInicial.ToString("N2");
+                    }
+                    txtarqueo.Text = "0.00"; // Borrar el arqueo si está abierto
+                }
 
                 _movimientosDiarios = _comprasManager.ObtenerMovimientosDeCajaDiarios(fecha);
                 dgvmovimientoscaja.DataSource = _movimientosDiarios;
@@ -57,6 +106,10 @@ namespace FerreteriaElCosito
             if (decimal.TryParse(txtsdoinicial.Text, out decimal saldoInicialManual))
             {
                 _saldoInicial = saldoInicialManual;
+            }
+            else
+            {
+                _saldoInicial = 0;
             }
 
             if (_movimientosDiarios == null) return;
@@ -96,6 +149,45 @@ namespace FerreteriaElCosito
             }
         }
 
+        private void btnCerrarCaja_Click(object sender, EventArgs e)
+        {
+            if (decimal.TryParse(txtsdofinalteorico.Text, out decimal saldoFinalTeorico) &&
+                decimal.TryParse(txtarqueo.Text, out decimal saldoFinalContado) &&
+                decimal.TryParse(txtsdoinicial.Text, out decimal saldoInicialCargado))
+            {
+                if (_comprasManager.VerificarCajaCerrada(dtpfecha.Value))
+                {
+                    MessageBox.Show("La caja para esta fecha ya fue cerrada.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                CierreDeCaja cierre = new CierreDeCaja
+                {
+                    Fecha = dtpfecha.Value,
+                    SaldoInicial = saldoInicialCargado,
+                    SaldoFinal = saldoFinalContado,
+                    Observaciones = $"Arqueo del día con Sdo Teórico: {saldoFinalTeorico:N2}. Diferencia: {saldoFinalContado - saldoFinalTeorico:N2}",
+                    IdEmpleado = 1
+                };
+
+                try
+                {
+                    _comprasManager.GuardarCierreDeCaja(cierre);
+                    MessageBox.Show("Caja del día cerrada y registrada con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // Actualiza la interfaz después del cierre
+                    VerificarEstadoDeCaja(dtpfecha.Value);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al cerrar la caja: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Por favor, verifique que los campos 'Saldo Inicial' y 'Arqueo' contengan valores numéricos válidos.", "Error de Validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void btnatras_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -127,20 +219,17 @@ namespace FerreteriaElCosito
             CargarDatosParaFecha(dtpfecha.Value);
         }
 
-
-        private void lblsaldoinicial_Click(object sender, EventArgs e) { }
-        private void textBox2_TextChanged(object sender, EventArgs e) { }
-        private void cbsaldoinicial_SelectedIndexChanged(object sender, EventArgs e) { }
-        private void cbtotalingresos_SelectedIndexChanged(object sender, EventArgs e) { }
-        private void cbtotalegresos_SelectedIndexChanged(object sender, EventArgs e) { }
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
-        private void txtsdofinalteorico_TextChanged(object sender, EventArgs e) { }
-
         private void btnstock_Click_1(object sender, EventArgs e)
         {
             frmControlStock stockForm = new frmControlStock();
             stockForm.ShowDialog();
-
         }
+
+        // Métodos de eventos que no necesitan código adicional
+        private void lblsaldoinicial_Click(object sender, EventArgs e) { }
+        private void cbtotalingresos_SelectedIndexChanged(object sender, EventArgs e) { }
+        private void cbtotalegresos_SelectedIndexChanged(object sender, EventArgs e) { }
+        private void dgvmovimientoscaja_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
+        private void txtsdofinalteorico_TextChanged(object sender, EventArgs e) { }
     }
 }

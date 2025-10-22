@@ -48,6 +48,7 @@
             this.txtarqueo = new System.Windows.Forms.TextBox();
             this.txtsdoinicial = new System.Windows.Forms.TextBox();
             this.btnstock = new System.Windows.Forms.Button();
+            this.btncierrecaja = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvmovimientoscaja)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,7 +61,7 @@
             this.dgvmovimientoscaja.RowHeadersWidth = 51;
             this.dgvmovimientoscaja.Size = new System.Drawing.Size(1107, 298);
             this.dgvmovimientoscaja.TabIndex = 0;
-            this.dgvmovimientoscaja.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            //this.dgvmovimientoscaja.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // btnatras
             // 
@@ -91,7 +92,7 @@
             this.txtsdofinalteorico.Name = "txtsdofinalteorico";
             this.txtsdofinalteorico.Size = new System.Drawing.Size(132, 22);
             this.txtsdofinalteorico.TabIndex = 3;
-            this.txtsdofinalteorico.TextChanged += new System.EventHandler(this.txtsdofinalteorico_TextChanged);
+            //this.txtsdofinalteorico.TextChanged += new System.EventHandler(this.txtsdofinalteorico_TextChanged);
             // 
             // lblsdoteorico
             // 
@@ -202,7 +203,7 @@
             this.txtdiferencia.Name = "txtdiferencia";
             this.txtdiferencia.Size = new System.Drawing.Size(132, 22);
             this.txtdiferencia.TabIndex = 48;
-            this.txtdiferencia.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            //this.txtdiferencia.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // lblarqueo
             // 
@@ -241,11 +242,22 @@
             this.btnstock.UseVisualStyleBackColor = true;
             this.btnstock.Click += new System.EventHandler(this.btnstock_Click_1);
             // 
+            // btncierrecaja
+            // 
+            this.btncierrecaja.Location = new System.Drawing.Point(603, 412);
+            this.btncierrecaja.Margin = new System.Windows.Forms.Padding(4);
+            this.btncierrecaja.Name = "btncierrecaja";
+            this.btncierrecaja.Size = new System.Drawing.Size(159, 28);
+            this.btncierrecaja.TabIndex = 54;
+            this.btncierrecaja.Text = "Cierre de Caja";
+            this.btncierrecaja.UseVisualStyleBackColor = true;
+            // 
             // Caja
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1177, 453);
+            this.Controls.Add(this.btncierrecaja);
             this.Controls.Add(this.btnstock);
             this.Controls.Add(this.txtsdoinicial);
             this.Controls.Add(this.lblarqueo);
@@ -297,5 +309,6 @@
         private System.Windows.Forms.TextBox txtarqueo;
         private System.Windows.Forms.TextBox txtsdoinicial;
         private System.Windows.Forms.Button btnstock;
+        private System.Windows.Forms.Button btncierrecaja;
     }
 }

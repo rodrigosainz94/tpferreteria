@@ -18,7 +18,6 @@ namespace FerreteriaElCosito
         public frmControlStock()
         {
             InitializeComponent();
-            // Asignar el evento para calcular la diferencia
             dgvmovimientosstock.CellEndEdit += dgvStock_CellEndEdit;
         }
 
@@ -42,7 +41,6 @@ namespace FerreteriaElCosito
             dgvmovimientosstock.Columns.Add("Egresos", "Egresos");
             dgvmovimientosstock.Columns.Add("SaldoTeorico", "Saldo Teórico");
 
-            // Columnas para el arqueo manual
             DataGridViewTextBoxColumn arqueoColumn = new DataGridViewTextBoxColumn();
             arqueoColumn.Name = "Arqueo";
             arqueoColumn.HeaderText = "Arqueo";
@@ -54,7 +52,6 @@ namespace FerreteriaElCosito
             diferenciaColumn.ReadOnly = true;
             dgvmovimientosstock.Columns.Add(diferenciaColumn);
 
-            // Hacer columnas de datos de solo lectura
             foreach (DataGridViewColumn col in dgvmovimientosstock.Columns)
             {
                 if (col.Name != "Arqueo")
@@ -96,25 +93,26 @@ namespace FerreteriaElCosito
             }
         }
 
-        private void dtpfecha_ValueChanged(object sender, EventArgs e)
+
+        private void btnimprimir_Click_1(object sender, EventArgs e)
         {
-            CargarReporteStock(dtpfecha.Value);
+            MessageBox.Show("Reporte de stock listo para imprimir.", "Imprimir", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void btnLimpiar_Click(object sender, EventArgs e)
+        private void btnatras_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnlimpiar_Click_1(object sender, EventArgs e)
         {
             dtpfecha.Value = DateTime.Now;
             CargarReporteStock(dtpfecha.Value);
         }
 
-        private void btnAtras_Click(object sender, EventArgs e)
+        private void dtpfecha_ValueChanged_1(object sender, EventArgs e)
         {
-            this.Close();
-        }
-
-        private void btnImprimir_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Reporte de stock listo para imprimir.", "Imprimir", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            CargarReporteStock(dtpfecha.Value);
         }
     }
 }

@@ -1,74 +1,16 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace FerreteriaElCosito
 {
     public class ComprasDAL
     {
-        public DataTable GetReporteDiarioStock(DateTime fecha)
-        {
-            DataTable dt = new DataTable();
-            string query = @"
-                SELECT 
-                    p.IdProducto,
-                    p.NombreProducto,
-                    (
-                        SELECT IFNULL(SUM(CASE 
-                                WHEN tm.Descripcion = 'Ingreso' THEN ms2.Cantidad 
-                                WHEN tm.Descripcion = 'Egreso' THEN -ms2.Cantidad 
-                                ELSE 0 
-                            END), 0)
-                        FROM movimientostock ms2
-                        JOIN tipomovimiento tm ON ms2.IdTipoMovimiento = tm.IdTipoMovimiento
-                        WHERE ms2.IdProducto = p.IdProducto
-                        AND DATE(ms2.FechaMovimiento) < @fecha
-                    ) AS SaldoInicial,
-                    IFNULL(SUM(CASE 
-                        WHEN tm.Descripcion = 'Ingreso' THEN ms.Cantidad 
-                        ELSE 0 
-                    END), 0) AS Ingresos,
-                    IFNULL(SUM(CASE 
-                        WHEN tm.Descripcion = 'Egreso' THEN ms.Cantidad 
-                        ELSE 0 
-                    END), 0) AS Egresos,
-                    (
-                        (
-                            SELECT IFNULL(SUM(CASE 
-                                WHEN tm2.Descripcion = 'Ingreso' THEN ms3.Cantidad 
-                                WHEN tm2.Descripcion = 'Egreso' THEN -ms3.Cantidad 
-                                ELSE 0 
-                            END), 0)
-                            FROM movimientostock ms3
-                            JOIN tipomovimiento tm2 ON ms3.IdTipoMovimiento = tm2.IdTipoMovimiento
-                            WHERE ms3.IdProducto = p.IdProducto
-                            AND DATE(ms3.FechaMovimiento) <= @fecha
-                        )
-                    ) AS SaldoTeorico
-                FROM productos p
-                LEFT JOIN movimientostock ms ON p.IdProducto = ms.IdProducto AND DATE(ms.FechaMovimiento) = @fecha
-                LEFT JOIN tipomovimiento tm ON ms.IdTipoMovimiento = tm.IdTipoMovimiento
-                GROUP BY p.IdProducto
-                HAVING Ingresos > 0 OR Egresos > 0
-                ORDER BY p.NombreProducto;
-            ";
-
-            using (MySqlConnection conn = ConexionBD.ObtenerConexion())
-            {
-                using (MySqlCommand cmd = new MySqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@fecha", fecha.Date);
-                    MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                    da.Fill(dt);
-                }
-            }
-            return dt;
-        }
         public DataTable GetProveedores()
         {
             DataTable dt = new DataTable();
@@ -162,6 +104,22 @@ namespace FerreteriaElCosito
             }
             return dt;
         }
+        // Nuevo método para obtener el Saldo Final de un día ya cerrado
+        public decimal GetSaldoFinalCerrado(DateTime fecha)
+        {
+            string query = "SELECT SaldoFinal FROM caja WHERE DATE(Fecha) = @fecha ORDER BY Fecha DESC LIMIT 1";
+            using (var conn = ConexionBD.ObtenerConexion())
+            using (var cmd = new MySqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@fecha", fecha.Date);
+                object result = cmd.ExecuteScalar();
+                if (result != DBNull.Value && result != null)
+                {
+                    return Convert.ToDecimal(result);
+                }
+            }
+            return 0; // Si no hay registro, devuelve 0
+        }
 
         public decimal GetSaldoInicialDelDia(DateTime fecha)
         {
@@ -182,7 +140,81 @@ namespace FerreteriaElCosito
             return saldoInicial;
         }
 
-      
+        // MÉTODO CLAVE: Obtiene el Saldo Inicial y Final (Arqueo) de un día ya cerrado
+        public DataTable GetDatosCajaCerrada(DateTime fecha)
+        {
+            DataTable dt = new DataTable();
+            string query = "SELECT SaldoInicial, SaldoFinal FROM caja WHERE DATE(Fecha) = @fecha";
+            using (var conn = ConexionBD.ObtenerConexion())
+            {
+                using (var cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@fecha", fecha.Date);
+                    MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                    da.Fill(dt);
+                }
+            }
+            return dt;
+        }
+
+        public DataTable GetReporteDiarioStock(DateTime fecha)
+        {
+            DataTable dt = new DataTable();
+            string query = @"
+                SELECT 
+                    p.IdProducto,
+                    p.NombreProducto,
+                    (
+                        SELECT IFNULL(SUM(CASE 
+                                WHEN tm.Descripcion = 'Ingreso' THEN ms2.Cantidad 
+                                WHEN tm.Descripcion = 'Egreso' THEN -ms2.Cantidad 
+                                ELSE 0 
+                            END), 0)
+                        FROM movimientostock ms2
+                        JOIN tipomovimiento tm ON ms2.IdTipoMovimiento = tm.IdTipoMovimiento
+                        WHERE ms2.IdProducto = p.IdProducto
+                        AND DATE(ms2.FechaMovimiento) < @fecha
+                    ) AS SaldoInicial,
+                    IFNULL(SUM(CASE 
+                        WHEN tm.Descripcion = 'Ingreso' THEN ms.Cantidad 
+                        ELSE 0 
+                    END), 0) AS Ingresos,
+                    IFNULL(SUM(CASE 
+                        WHEN tm.Descripcion = 'Egreso' THEN ms.Cantidad 
+                        ELSE 0 
+                    END), 0) AS Egresos,
+                    (
+                        (
+                            SELECT IFNULL(SUM(CASE 
+                                WHEN tm2.Descripcion = 'Ingreso' THEN ms3.Cantidad 
+                                WHEN tm2.Descripcion = 'Egreso' THEN -ms3.Cantidad 
+                                ELSE 0 
+                            END), 0)
+                            FROM movimientostock ms3
+                            JOIN tipomovimiento tm2 ON ms3.IdTipoMovimiento = tm2.IdTipoMovimiento
+                            WHERE ms3.IdProducto = p.IdProducto
+                            AND DATE(ms3.FechaMovimiento) <= @fecha
+                        )
+                    ) AS SaldoTeorico
+                FROM productos p
+                LEFT JOIN movimientostock ms ON p.IdProducto = ms.IdProducto AND DATE(ms.FechaMovimiento) = @fecha
+                LEFT JOIN tipomovimiento tm ON ms.IdTipoMovimiento = tm.IdTipoMovimiento
+                GROUP BY p.IdProducto
+                HAVING Ingresos > 0 OR Egresos > 0
+                ORDER BY p.NombreProducto;
+            ";
+
+            using (MySqlConnection conn = ConexionBD.ObtenerConexion())
+            {
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@fecha", fecha.Date);
+                    MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                    da.Fill(dt);
+                }
+            }
+            return dt;
+        }
 
         public DataTable GetNotasDePedido()
         {
@@ -229,6 +261,82 @@ namespace FerreteriaElCosito
                 }
             }
             return dt;
+        }
+
+        public bool CajaYaCerrada(DateTime fecha)
+        {
+            string query = "SELECT COUNT(*) FROM caja WHERE DATE(Fecha) = @fecha";
+            using (var conn = ConexionBD.ObtenerConexion())
+            using (var cmd = new MySqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@fecha", fecha.Date);
+                long count = (long)cmd.ExecuteScalar();
+                return count > 0;
+            }
+        }
+
+        public void InsertarCierreDeCaja(CierreDeCaja cierre)
+        {
+            string query = "INSERT INTO caja (Fecha, SaldoInicial, SaldoFinal, Observaciones, IdEmpleado) VALUES (@fecha, @sdoInicial, @sdoFinal, @obs, @idEmp)";
+            using (var conn = ConexionBD.ObtenerConexion())
+            using (var cmd = new MySqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@fecha", cierre.Fecha.Date);
+                cmd.Parameters.AddWithValue("@sdoInicial", cierre.SaldoInicial);
+                cmd.Parameters.AddWithValue("@sdoFinal", cierre.SaldoFinal);
+                cmd.Parameters.AddWithValue("@obs", cierre.Observaciones);
+                cmd.Parameters.AddWithValue("@idEmp", cierre.IdEmpleado);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        // --- Método para la inserción de Nota de Pedido ---
+        public int InsertarNotaDePedido(Compra compra, List<DetalleCompra> detalles)
+        {
+            int idCompra = 0;
+            using (MySqlConnection conn = ConexionBD.ObtenerConexion())
+            {
+                MySqlTransaction transaction = conn.BeginTransaction();
+                try
+                {
+                    // La consulta de inserción ahora incluye el campo Estado
+                    string compraQuery = "INSERT INTO compras (FechaCompra, IdTipoComprobante, NumeroComprobante, IdProveedor, IdEmpleado, Total, Estado) VALUES (@fecha, @idTipo, @nro, @idProveedor, @idEmpleado, @total, @estado); SELECT LAST_INSERT_ID();";
+                    using (MySqlCommand cmdCompra = new MySqlCommand(compraQuery, conn, transaction))
+                    {
+                        cmdCompra.Parameters.AddWithValue("@fecha", compra.FechaCompra);
+                        cmdCompra.Parameters.AddWithValue("@idTipo", compra.IdTipoComprobante);
+                        cmdCompra.Parameters.AddWithValue("@nro", compra.NumeroComprobante);
+                        cmdCompra.Parameters.AddWithValue("@idProveedor", compra.IdProveedor);
+                        cmdCompra.Parameters.AddWithValue("@idEmpleado", compra.IdEmpleado);
+                        cmdCompra.Parameters.AddWithValue("@total", compra.Total);
+                        cmdCompra.Parameters.AddWithValue("@estado", compra.Estado); // Debería ser "Pendiente"
+                        idCompra = Convert.ToInt32(cmdCompra.ExecuteScalar());
+                    }
+
+                    // Insertar detalles de la compra (Nota de Pedido)
+                    foreach (var detalle in detalles)
+                    {
+                        string detalleQuery = "INSERT INTO detallecompra (IdCompra, IdProducto, Cantidad, PrecioUnitario, Subtotal) VALUES (@idCompra, @idProducto, @cantidad, @precio, @subtotal)";
+                        using (MySqlCommand cmdDetalle = new MySqlCommand(detalleQuery, conn, transaction))
+                        {
+                            cmdDetalle.Parameters.AddWithValue("@idCompra", idCompra);
+                            cmdDetalle.Parameters.AddWithValue("@idProducto", detalle.IdProducto);
+                            cmdDetalle.Parameters.AddWithValue("@cantidad", detalle.Cantidad);
+                            cmdDetalle.Parameters.AddWithValue("@precio", detalle.PrecioUnitario);
+                            cmdDetalle.Parameters.AddWithValue("@subtotal", detalle.Subtotal);
+                            cmdDetalle.ExecuteNonQuery();
+                        }
+                    }
+
+                    transaction.Commit();
+                    return idCompra;
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
         }
 
         public int InsertarCompra(Compra compra, List<DetalleCompra> detalles, int idFormaPago, decimal montoPagado, int idTipoEgreso, string concepto)

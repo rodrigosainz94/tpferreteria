@@ -46,6 +46,7 @@
             this.btnlimpiar.TabIndex = 66;
             this.btnlimpiar.Text = "Limpiar";
             this.btnlimpiar.UseVisualStyleBackColor = true;
+            this.btnlimpiar.Click += new System.EventHandler(this.btnlimpiar_Click_1);
             // 
             // dtpfecha
             // 
@@ -53,6 +54,7 @@
             this.dtpfecha.Name = "dtpfecha";
             this.dtpfecha.Size = new System.Drawing.Size(167, 22);
             this.dtpfecha.TabIndex = 65;
+            this.dtpfecha.ValueChanged += new System.EventHandler(this.dtpfecha_ValueChanged_1);
             // 
             // lblfecha
             // 
@@ -73,6 +75,7 @@
             this.btnimprimir.TabIndex = 56;
             this.btnimprimir.Text = "Imprimir";
             this.btnimprimir.UseVisualStyleBackColor = true;
+            this.btnimprimir.Click += new System.EventHandler(this.btnimprimir_Click_1);
             // 
             // btnatras
             // 
@@ -83,6 +86,7 @@
             this.btnatras.TabIndex = 55;
             this.btnatras.Text = "Atras";
             this.btnatras.UseVisualStyleBackColor = true;
+            this.btnatras.Click += new System.EventHandler(this.btnatras_Click_1);
             // 
             // dgvmovimientosstock
             // 
