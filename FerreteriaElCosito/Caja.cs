@@ -219,11 +219,7 @@ namespace FerreteriaElCosito
             CargarDatosParaFecha(dtpfecha.Value);
         }
 
-        private void btnstock_Click_1(object sender, EventArgs e)
-        {
-            frmControlStock stockForm = new frmControlStock();
-            stockForm.ShowDialog();
-        }
+        
 
         // Métodos de eventos que no necesitan código adicional
         private void lblsaldoinicial_Click(object sender, EventArgs e) { }
