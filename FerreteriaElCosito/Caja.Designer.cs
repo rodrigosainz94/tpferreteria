@@ -53,6 +53,7 @@
             // 
             // dgvmovimientoscaja
             // 
+            this.dgvmovimientoscaja.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvmovimientoscaja.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvmovimientoscaja.Location = new System.Drawing.Point(16, 46);
             this.dgvmovimientoscaja.Margin = new System.Windows.Forms.Padding(4);

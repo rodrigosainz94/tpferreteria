@@ -59,6 +59,7 @@
             // 
             // dgvfacturacion
             // 
+            this.dgvfacturacion.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvfacturacion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvfacturacion.Location = new System.Drawing.Point(393, 57);
             this.dgvfacturacion.Margin = new System.Windows.Forms.Padding(4);

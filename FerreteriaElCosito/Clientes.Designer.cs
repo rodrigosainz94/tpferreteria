@@ -38,18 +38,19 @@
             // 
             // dgvClientes
             // 
+            this.dgvClientes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvClientes.Location = new System.Drawing.Point(16, 15);
-            this.dgvClientes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvClientes.Margin = new System.Windows.Forms.Padding(4);
             this.dgvClientes.Name = "dgvClientes";
             this.dgvClientes.RowHeadersWidth = 51;
-            this.dgvClientes.Size = new System.Drawing.Size(1035, 270);
+            this.dgvClientes.Size = new System.Drawing.Size(1374, 270);
             this.dgvClientes.TabIndex = 0;
             // 
             // btnagregar
             // 
-            this.btnagregar.Location = new System.Drawing.Point(792, 305);
-            this.btnagregar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnagregar.Location = new System.Drawing.Point(1131, 305);
+            this.btnagregar.Margin = new System.Windows.Forms.Padding(4);
             this.btnagregar.Name = "btnagregar";
             this.btnagregar.Size = new System.Drawing.Size(259, 28);
             this.btnagregar.TabIndex = 2;
@@ -59,8 +60,8 @@
             // 
             // btneditar
             // 
-            this.btneditar.Location = new System.Drawing.Point(509, 305);
-            this.btneditar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btneditar.Location = new System.Drawing.Point(848, 305);
+            this.btneditar.Margin = new System.Windows.Forms.Padding(4);
             this.btneditar.Name = "btneditar";
             this.btneditar.Size = new System.Drawing.Size(259, 28);
             this.btneditar.TabIndex = 3;
@@ -71,7 +72,7 @@
             // btnatras
             // 
             this.btnatras.Location = new System.Drawing.Point(16, 305);
-            this.btnatras.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnatras.Margin = new System.Windows.Forms.Padding(4);
             this.btnatras.Name = "btnatras";
             this.btnatras.Size = new System.Drawing.Size(100, 28);
             this.btnatras.TabIndex = 4;
@@ -81,7 +82,7 @@
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(229, 305);
+            this.btnEliminar.Location = new System.Drawing.Point(568, 305);
             this.btnEliminar.Margin = new System.Windows.Forms.Padding(4);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(259, 28);
@@ -94,13 +95,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 348);
+            this.ClientSize = new System.Drawing.Size(1403, 348);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.btnatras);
             this.Controls.Add(this.btneditar);
             this.Controls.Add(this.btnagregar);
             this.Controls.Add(this.dgvClientes);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Clientes";
             this.Text = "Clientes";
             this.Load += new System.EventHandler(this.Clientes_Load);
